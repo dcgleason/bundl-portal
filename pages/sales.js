@@ -3,6 +3,9 @@ import { closestCenter, DndContext, PointerSensor, useSensor } from '@dnd-kit/co
 import { arrayMove, SortableContext, verticalListSortingStrategy } from '@dnd-kit/sortable';
 import UserComponent from '../components/UserComponent';
 
+
+
+
 function DragApp() {
 
     const [items, setItems] = useState([
@@ -34,9 +37,6 @@ function DragApp() {
           .then((data) => setItems(data));
       }, []);
 
-
-  
-
   const sensors = [useSensor(PointerSensor)];
 
   const handleDragEnd = ({active, over}) => {
@@ -54,8 +54,9 @@ function DragApp() {
     <div
       style={{
         margin: 'auto',
-        width: 200,
-        textAlign: 'center'
+        width: 1000,
+        textAlign: 'center',
+
       }}
     >
       <DndContext

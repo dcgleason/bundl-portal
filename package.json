@@ -11,6 +11,7 @@
   "dependencies": {
     "@dnd-kit/core": "^6.0.6",
     "@dnd-kit/sortable": "^7.0.1",
+    "@material-ui/core": "^4.12.4",
     "caniuse-lite": "^1.0.30001439",
     "next": "^13.0.7",
     "postcss-100vh-fix": "^1.0.2",
