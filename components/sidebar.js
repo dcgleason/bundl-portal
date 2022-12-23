@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Router from "next/router";
+import Image from "next/image";
 export default function Home() {
     const [sidebar, Setsidebar] = useState(false);
     const [sidebarMobile, SetsidebarMobile] = useState(false);
@@ -43,7 +44,7 @@ export default function Home() {
                     <div className="px-7">
                         <div className="flex items-center justify-between">
                             <div className="w-32">
-                                <img className="w-full" src="https://cdn.tuk.dev/assets/templates/virtual-event-management/logo.png" alt="logo" />
+                                <Image className="w-full" src="https://ibb.co/bNZ9ms6" width="300" height="100" alt="logo" />
                             </div>
                             <div onClick={() => Setsidebar(!sidebar)} className="text-gray-700 ml-8 cursor-pointer">
                                 <svg xmlns="http://www.w3.org/2000/svg" width={20} height={20} viewBox="0 0 20 20" fill="none">
@@ -53,7 +54,7 @@ export default function Home() {
                             </div>
                         </div>
                         <div className="mt-16">
-                            <a href="/events">
+                            <a href="/contributors">
                                 <div className={checkActive() === "events" ? "flex items-center cursor-pointer font-normal text-sm text-red-400 duration-150 ease-in" : "flex items-center cursor-pointer font-normal text-sm text-gray hover:text-red-400 duration-150 ease-in"}>
                                     <div className={checkActive() === "events" ? "px-1 py-1 rounded-sm bg-red-400" : "px-1 py-1 rounded-sm hover:bg-red-400"}>
                                         <svg xmlns="http://www.w3.org/2000/svg" width={20} height={20} viewBox="0 0 20 20" fill="none">
@@ -61,10 +62,10 @@ export default function Home() {
                                             <rect x="11.6666" y="3.3335" width={5} height="8.33333" rx="1.66667" stroke="white" strokeWidth="1.25" strokeLinecap="round" strokeLinejoin="round" />
                                         </svg>
                                     </div>
-                                    <p className="ml-2">Events</p>
+                                    <p className="ml-2">My Contributors</p>
                                 </div>
                             </a>
-                            <a href="/sales">
+                            <a href="/contributions">
                                 <div className={checkActive() === "sales" ? "flex items-center cursor-pointer font-normal text-sm text-red-400 duration-150 ease-in mt-5" : "flex items-center cursor-pointer font-normal text-sm text-gray hover:text-red-400 duration-150 ease-in mt-5"}>
                                     <div className={checkActive() === "sales" ? "px-1 py-1 rounded-sm bg-red-400" : "px-1 py-1 rounded-sm hover:bg-red-400"}>
                                         <svg xmlns="http://www.w3.org/2000/svg" width={20} height={20} viewBox="0 0 20 20" fill="none">
@@ -74,10 +75,10 @@ export default function Home() {
                                             <path d="M4.16667 4.1665H15.8333C16.7538 4.1665 17.5 4.9127 17.5 5.83317V8.33317C16.5795 8.33317 15.8333 9.07936 15.8333 9.99984C15.8333 10.9203 16.5795 11.6665 17.5 11.6665V14.1665C17.5 15.087 16.7538 15.8332 15.8333 15.8332H4.16667C3.24619 15.8332 2.5 15.087 2.5 14.1665V11.6665C3.42047 11.6665 4.16667 10.9203 4.16667 9.99984C4.16667 9.07936 3.42047 8.33317 2.5 8.33317V5.83317C2.5 4.9127 3.24619 4.1665 4.16667 4.1665" stroke="#CBD5E0" strokeWidth="1.25" strokeLinecap="round" strokeLinejoin="round" />
                                         </svg>
                                     </div>
-                                    <p className="ml-2">Sales</p>
+                                    <p className="ml-2">My Contributions</p>
                                 </div>
                             </a>
-                            <a href="./analytics">
+                            <a href="./edit">
                                 <div className={checkActive() === "analytics" ? "flex items-center cursor-pointer font-normal text-sm text-red-400 duration-150 ease-in mt-5" : "flex items-center cursor-pointer font-normal text-sm text-gray hover:text-red-400 duration-150 ease-in mt-5"}>
                                     <div className={checkActive() === "analytics" ? "px-1 py-1 rounded-sm bg-red-400" : "px-1 py-1 rounded-sm hover:bg-red-400"}>
                                         <svg xmlns="http://www.w3.org/2000/svg" width={20} height={20} viewBox="0 0 20 20" fill="none">
@@ -85,10 +86,10 @@ export default function Home() {
                                             <path d="M3.33337 12.5L6.66671 7.5L10 9.16667L13.3334 5L16.6667 8.33333" stroke="#CBD5E0" strokeWidth="1.25" strokeLinecap="round" strokeLinejoin="round" />
                                         </svg>
                                     </div>
-                                    <p className="ml-2">Analytics</p>
+                                    <p className="ml-2">Edit My Bundle</p>
                                 </div>
                             </a>
-                            <a href="/calender-month-view">
+                            <a href="/submit">
                                 <div className={checkActive() === "calender-month-view" ? "flex items-center cursor-pointer font-normal text-sm text-red-400 duration-150 ease-in mt-5" : "flex items-center cursor-pointer font-normal text-sm text-gray hover:text-red-400 duration-150 ease-in mt-5"}>
                                     <div className={checkActive() === "calender-month-view" ? "px-1 py-1 rounded-sm bg-red-400" : "px-1 py-1 rounded-sm hover:bg-red-400"}>
                                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
@@ -99,7 +100,7 @@ export default function Home() {
                                             <rect x="6.66663" y="12.5" width="1.66667" height="1.66667" stroke="#CBD5E0" strokeWidth="1.25" strokeLinecap="round" strokeLinejoin="round" />
                                         </svg>
                                     </div>
-                                    <p className="ml-2">Calendar</p>
+                                    <p className="ml-2">Submit My Bundle</p>
                                 </div>
                             </a>
                         </div>
@@ -122,7 +123,7 @@ export default function Home() {
                             </div>
                         </div>
                         <div className="mt-16">
-                            <a href="/events">
+                            <a href="/contributors">
                                 <div className={checkActive() === "events" ? "flex items-center cursor-pointer font-normal text-sm text-red-400 duration-150 ease-in" : "flex items-center cursor-pointer font-normal text-sm text-gray hover:text-red-400 duration-150 ease-in"}>
                                     <div className={checkActive() === "events" ? "px-1 py-1 rounded-sm bg-red-400" : "px-1 py-1 rounded-sm hover:bg-red-400"}>
                                         <svg xmlns="http://www.w3.org/2000/svg" width={20} height={20} viewBox="0 0 20 20" fill="none">
@@ -130,10 +131,10 @@ export default function Home() {
                                             <rect x="11.6666" y="3.3335" width={5} height="8.33333" rx="1.66667" stroke="white" strokeWidth="1.25" strokeLinecap="round" strokeLinejoin="round" />
                                         </svg>
                                     </div>
-                                    <p className="ml-2">Events</p>
+                                    <p className="ml-2">My Contributors</p>
                                 </div>
                             </a>
-                            <a href="/sales">
+                            <a href="/contributions">
                                 <div className={checkActive() === "sales" ? "flex items-center cursor-pointer font-normal text-sm text-red-400 duration-150 ease-in mt-5" : "flex items-center cursor-pointer font-normal text-sm text-gray hover:text-red-400 duration-150 ease-in mt-5"}>
                                     <div className={checkActive() === "sales" ? "px-1 py-1 rounded-sm bg-red-400" : "px-1 py-1 rounded-sm hover:bg-red-400"}>
                                         <svg xmlns="http://www.w3.org/2000/svg" width={20} height={20} viewBox="0 0 20 20" fill="none">
@@ -143,10 +144,10 @@ export default function Home() {
                                             <path d="M4.16667 4.1665H15.8333C16.7538 4.1665 17.5 4.9127 17.5 5.83317V8.33317C16.5795 8.33317 15.8333 9.07936 15.8333 9.99984C15.8333 10.9203 16.5795 11.6665 17.5 11.6665V14.1665C17.5 15.087 16.7538 15.8332 15.8333 15.8332H4.16667C3.24619 15.8332 2.5 15.087 2.5 14.1665V11.6665C3.42047 11.6665 4.16667 10.9203 4.16667 9.99984C4.16667 9.07936 3.42047 8.33317 2.5 8.33317V5.83317C2.5 4.9127 3.24619 4.1665 4.16667 4.1665" stroke="#CBD5E0" strokeWidth="1.25" strokeLinecap="round" strokeLinejoin="round" />
                                         </svg>
                                     </div>
-                                    <p className="ml-2">Sales</p>
+                                    <p className="ml-2">My Contributions</p>
                                 </div>
                             </a>
-                            <a href="./analytics">
+                            <a href="./edit">
                                 <div className={checkActive() === "analytics" ? "flex items-center cursor-pointer font-normal text-sm text-red-400 duration-150 ease-in mt-5" : "flex items-center cursor-pointer font-normal text-sm text-gray hover:text-red-400 duration-150 ease-in mt-5"}>
                                     <div className={checkActive() === "analytics" ? "px-1 py-1 rounded-sm bg-red-400" : "px-1 py-1 rounded-sm hover:bg-red-400"}>
                                         <svg xmlns="http://www.w3.org/2000/svg" width={20} height={20} viewBox="0 0 20 20" fill="none">
@@ -154,10 +155,10 @@ export default function Home() {
                                             <path d="M3.33337 12.5L6.66671 7.5L10 9.16667L13.3334 5L16.6667 8.33333" stroke="#CBD5E0" strokeWidth="1.25" strokeLinecap="round" strokeLinejoin="round" />
                                         </svg>
                                     </div>
-                                    <p className="ml-2">Analytics</p>
+                                    <p className="ml-2">Edit My Bundle</p>
                                 </div>
                             </a>
-                            <a href="/calender-month-view">
+                            <a href="/submit">
                                 <div className={checkActive() === "calender-month-view" ? "flex items-center cursor-pointer font-normal text-sm text-red-400 duration-150 ease-in mt-5" : "flex items-center cursor-pointer font-normal text-sm text-gray hover:text-red-400 duration-150 ease-in mt-5"}>
                                     <div className={checkActive() === "calender-month-view" ? "px-1 py-1 rounded-sm bg-red-400" : "px-1 py-1 rounded-sm hover:bg-red-400"}>
                                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
@@ -168,7 +169,7 @@ export default function Home() {
                                             <rect x="6.66663" y="12.5" width="1.66667" height="1.66667" stroke="#CBD5E0" strokeWidth="1.25" strokeLinecap="round" strokeLinejoin="round" />
                                         </svg>
                                     </div>
-                                    <p className="ml-2">Calendar</p>
+                                    <p className="ml-2">Submit My Bundle</p>
                                 </div>
                             </a>
                         </div>
