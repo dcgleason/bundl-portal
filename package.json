@@ -17,6 +17,7 @@
     "@material-ui/core": "^4.12.4",
     "@mui/material": "^5.11.1",
     "antd": "^5.1.0",
+    "axios": "^1.2.1",
     "caniuse-lite": "^1.0.30001439",
     "next": "^13.0.7",
     "papa": "^0.0.0",
@@ -34,6 +35,7 @@
     "react-dnd-html5-backend": "^16.0.1",
     "react-dom": "^18",
     "react-modal": "^3.16.1",
+    "react-router-dom": "^6.6.1",
     "react-table": "^7.8.0"
   },
   "devDependencies": {

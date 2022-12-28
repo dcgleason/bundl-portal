@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 
-function SignUpPage() {
+function LoginSignupForm() {
   const [formData, setFormData] = useState({
     username: '',
     password: '',
@@ -25,9 +25,10 @@ function SignUpPage() {
     const body = JSON.stringify({ username, password });
 
     try {
-      // Use axios to send a POST request to the /signup route
+      // Use axios to send a POST request to the /login or /signup route
+      // depending on whether the user is trying to login or sign up
       const res = await axios.post(
-        '/register',
+        '/login',
         body,
         config
       );
@@ -39,7 +40,15 @@ function SignUpPage() {
   };
 
   return (
+    <>
+    {/*
+      This example requires updating your template:
 
+      ```
+      <html class="h-full bg-gray-50">
+      <body class="h-full">
+      ```
+    */}
     <div className="flex min-h-full flex-col justify-center py-12 sm:px-6 lg:px-8">
       <div className="sm:mx-auto sm:w-full sm:max-w-md">
         <img
@@ -120,7 +129,7 @@ function SignUpPage() {
                 type="submit"
                 className="flex w-full justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
               >
-                Sign up
+                Sign in
               </button>
             </div>
           </form>
@@ -184,8 +193,9 @@ function SignUpPage() {
         </div>
       </div>
     </div>
+  </>
    
   );
 }
 
-export default SignUpPage;
+export default LoginSignupForm;
