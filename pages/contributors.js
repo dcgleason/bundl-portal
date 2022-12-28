@@ -3,75 +3,25 @@
 import { Button, Table, Modal, Input } from "antd";
 import { useState } from "react";
 import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
-
 import Papa from "papaparse";
 import React from "react";
 
 const CSV = () => {
 
+
+  const [isModalVisible, setIsModalVisible] = useState(false);
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [submitted, setSubmitted] = useState("");
+  const [newStudent, setNewStudent] = useState(null);
        // State to store parsed data
   const [parsedData, setParsedData] = useState([]);
-  const [dataBool, setDataBool] = useState(false);
 
   //State to store table Column name
   const [tableRows, setTableRows] = useState([]);
 
   //State to store the values
   const [values, setValues] = useState([]);
-
-  const csvData = [];
-
-
-  const addtoList = () => {
-
-    console.log('values = '+ values);
-
-    let objects = [];
-
-     const firstValue = dataSource[dataSource.length - 1].id;
-      for (let i = 0; i < values.length; i ++) {
-        objects.push({
-          id: firstValue + 1 + i,
-          name: values[i][1],
-          email: values[i][2],
-          address: values[i][3]
-        });
-       
-      }
-      console.log('objects = '+ JSON.stringify(objects))
-
-  setDataSource([...dataSource, ...objects]);
-
-  }
-
-  const changeHandler = (event) => {
-    // Passing file data (event.target.files[0]) to parse using Papa.parse
-    Papa.parse(event.target.files[0], {
-      header: true,
-      skipEmptyLines: true,
-      complete: function (results) {
-        const rowsArray = [];
-        const valuesArray = [];
-
-        // Iterating data to get column name and their values
-        results.data.map((d) => {
-          rowsArray.push(Object.keys(d));
-          valuesArray.push(Object.values(d));
-        });
-
-        // Parsed Data Response in array format
-        setParsedData(results.data);
-
-        // Filtered Column Names
-        setTableRows(rowsArray[0]);
-
-        // Filtered Values
-        setValues(valuesArray);
-        console.log('values = '+ values)
-      },
-    });
-  };
-
 
   const [isEditing, setIsEditing] = useState(false);
   const [editingStudent, setEditingStudent] = useState(null);
@@ -146,14 +96,66 @@ const CSV = () => {
   ];
 
 
+  const addtoList = () => {
 
+    console.log('values = '+ values);
+
+    let objects = [];
+
+     const firstValue = dataSource[dataSource.length - 1].id;
+      for (let i = 0; i < values.length; i ++) {
+        objects.push({
+          id: firstValue + 1 + i,
+          name: values[i][1],
+          email: values[i][2],
+          address: values[i][3]
+        });
+       
+      }
+      console.log('objects = '+ JSON.stringify(objects))
+
+  setDataSource([...dataSource, ...objects]);
+
+  }
+
+  const changeHandler = (event) => {
+    // Passing file data (event.target.files[0]) to parse using Papa.parse
+    Papa.parse(event.target.files[0], {
+      header: true,
+      skipEmptyLines: true,
+      complete: function (results) {
+        const rowsArray = [];
+        const valuesArray = [];
+
+        // Iterating data to get column name and their values
+        results.data.map((d) => {
+          rowsArray.push(Object.keys(d));
+          valuesArray.push(Object.values(d));
+        });
+
+        // Parsed Data Response in array format
+        setParsedData(results.data);
+
+        // Filtered Column Names
+        setTableRows(rowsArray[0]);
+
+        // Filtered Values
+        setValues(valuesArray);
+        console.log('values = '+ values)
+      },
+    });
+  };
+
+
+  
   const onAddStudent = () => {
-    const randomNumber = parseInt(Math.random() * 1000);
+    setIsModalVisible(true);
+
     const newStudent = {
       id: dataSource[dataSource.length - 1].id + 1,
-      name: "Name " + randomNumber,
-      email: randomNumber + "@gmail.com",
-      address: "Address " + randomNumber,
+      name: "Name",
+      email:  "test@gmail.com",
+      submitted: "Yes",
     };
     setDataSource((pre) => {
       return [...pre, newStudent];
@@ -180,12 +182,24 @@ const CSV = () => {
     setEditingStudent(null);
   };
 
+  const handleOk = () => {
+    setIsModalVisible(false);
+
+
+  }
+
+  const handleCancel = () => {
+    setIsModalVisible(false);
+  };
+
+
+ 
     return (
 <>
 
       <div className="App">
       <header className="App-header">
-        <Button onClick={onAddStudent}>Add a new Student</Button>
+        <Button onClick={onAddStudent}>Add a new Contributor</Button>
         <Table columns={columns} dataSource={dataSource}></Table>
         <Modal
           title="Edit Student"
@@ -232,6 +246,17 @@ const CSV = () => {
             }}
           />
         </Modal>
+
+        <Modal
+        title="Add a new contributor"
+        visible={isModalVisible}
+        onOk={handleOk}
+        onCancel={handleCancel}
+      >
+        <Input placeholder="Name" value={name} onChange={(e) => setName(e.target.value)}/>
+        <Input placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)}/>
+        <Input placeholder="Submitted" value={submitted} onChange={(e) => setSubmitted(e.target.value)} />
+      </Modal>
       </header>
     </div>
 
