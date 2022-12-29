@@ -26,7 +26,7 @@ const onSubmit = async e => {
       console.log("body: ", body);
       // Use fetch to send a POST request to the /signup route
       const res = await fetch(
-        'http://localhost:3001/login/signup',
+        'http://localhost:3001/login/signin',
         {
           method: 'POST',
           body: body,
@@ -79,10 +79,10 @@ const onSubmit = async e => {
                   id="email"
                   name="username"
                   type="email"
-                  autoComplete="email"
-                  required
                   value={username}
-                  onChange={e => setUsername(e)}
+                  onChange={e => setUsername(e.target.value)}
+                  required
+                 // autoComplete="email"
                   className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                 />
               </div>
