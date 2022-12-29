@@ -28,7 +28,7 @@ function LoginSignupForm() {
       // Use axios to send a POST request to the /login or /signup route
       // depending on whether the user is trying to login or sign up
       const res = await axios.post(
-        '/login',
+        'http://localhost:3000/login/signin',
         body,
         config
       );
