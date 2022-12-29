@@ -1,38 +1,44 @@
 import React, { useState } from 'react';
-import axios from 'axios';
-import { Link } from 'react-router-dom';
 
 function SignUpPage() {
+
 const [username, setUsername] = useState("");
 const [password, setPassword] = useState("");
 
 
 
-  const onSubmit = async e => {
+const onSubmit = async e => {
     e.preventDefault();
-
+  
     const config = {
       headers: {
         'Content-Type': 'application/json',
       },
     };
-
-    const body = JSON.stringify({ username, password });
-
+  
+    const body = JSON.stringify({ 
+        username: username,
+        password: password 
+    });
+  
     try {
-    console.log("body: ", body);
-      // Use axios to send a POST request to the /signup route
-      const res = await axios.post(
+      console.log("body: ", body);
+      // Use fetch to send a POST request to the /signup route
+      const res = await fetch(
         'http://localhost:3001/login/signup',
-        body,
-        config
+        {
+          method: 'POST',
+          body: body,
+          headers: config.headers,
+        }
       );
-
-      console.log(res.data);
+  
+      console.log(await res.json());
     } catch (err) {
-      console.error(err.response);
+      console.error(err);
     }
   };
+  
 
   return (
 

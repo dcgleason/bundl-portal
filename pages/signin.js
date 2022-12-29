@@ -3,41 +3,43 @@ import axios from 'axios';
 import { Link } from 'react-router-dom';
 
 function LoginSignupForm() {
-  const [formData, setFormData] = useState({
-    username: '',
-    password: '',
-  });
+  const [username, setUsername] = useState("");
+const [password, setPassword] = useState("");
 
-  const { username, password } = formData;
 
-  const onChange = e =>
-    setFormData({ ...formData, [e.target.name]: e.target.value });
 
-  const onSubmit = async e => {
+const onSubmit = async e => {
     e.preventDefault();
-
+  
     const config = {
       headers: {
         'Content-Type': 'application/json',
       },
     };
-
-    const body = JSON.stringify({ username, password });
-
+  
+    const body = JSON.stringify({ 
+        username: username,
+        password: password 
+    });
+  
     try {
-      // Use axios to send a POST request to the /login or /signup route
-      // depending on whether the user is trying to login or sign up
-      const res = await axios.post(
-        'http://localhost:3000/login/signin',
-        body,
-        config
+      console.log("body: ", body);
+      // Use fetch to send a POST request to the /signup route
+      const res = await fetch(
+        'http://localhost:3001/login/signup',
+        {
+          method: 'POST',
+          body: body,
+          headers: config.headers,
+        }
       );
-
-      console.log(res.data);
+  
+      console.log(await res.json());
     } catch (err) {
-      console.error(err.response.data);
+      console.error(err);
     }
   };
+  
 
   return (
     <>
@@ -67,7 +69,7 @@ function LoginSignupForm() {
 
       <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
         <div className="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
-          <form className="space-y-6" onSubmit={e => onSubmit(e)}>
+          <form className="space-y-6" >
             <div>
               <label htmlFor="email" className="block text-sm font-medium text-gray-700">
                 Email address
@@ -75,12 +77,12 @@ function LoginSignupForm() {
               <div className="mt-1">
                 <input
                   id="email"
-                  name="email"
+                  name="username"
                   type="email"
                   autoComplete="email"
                   required
                   value={username}
-                  onChange={e => onChange(e)}
+                  onChange={e => setUsername(e)}
                   className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                 />
               </div>
@@ -96,7 +98,7 @@ function LoginSignupForm() {
                   name="password"
                   type="password"
                   value={password}
-                  onChange={e => onChange(e)}
+                  onChange={e => setPassword(e.target.value)}
                   autoComplete="current-password"
                   required
                   className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
@@ -127,6 +129,7 @@ function LoginSignupForm() {
             <div>
               <button
                 type="submit"
+                onClick={e => onSubmit(e)}
                 className="flex w-full justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
               >
                 Sign in
