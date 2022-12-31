@@ -151,11 +151,12 @@ const CSV = () => {
   const onAddStudent = () => {
     setIsModalVisible(true);
 
+    const randomNumber = parseInt(Math.random() * 1000);
     const newStudent = {
       id: dataSource[dataSource.length - 1].id + 1,
-      name: "Name",
-      email:  "test@gmail.com",
-      submitted: "Yes",
+      name: "Name " + randomNumber,
+      email: randomNumber + "@gmail.com",
+      address: "Address " + randomNumber,
     };
     setDataSource((pre) => {
       return [...pre, newStudent];
@@ -248,7 +249,7 @@ const CSV = () => {
         </Modal>
 
         <Modal
-        title="Add a new contributor"
+        title="Add a new student"
         visible={isModalVisible}
         onOk={handleOk}
         onCancel={handleCancel}

@@ -19,8 +19,8 @@ export default function Header() {
                                 <img src="https://cdn.tuk.dev/assets/templates/virtual-event-management/profile.png" alt="profile" />
                             </div>
                             <div className="ml-2">
-                                <p className="text-sm text-gray-700">Dan Gleason</p>
-                                <p className="text-xs  text-gray-600">Bundle Gifter</p>
+                                <p className="text-sm text-gray-700">Dan Gleason</p>  { /* get the user name from the database    */}
+                                <p className="text-xs  text-gray-600">Bundle Owner</p>
                             </div>
                             <div className="ml-3 -mt-2 relative">
                                 <div className={dropdown ? "hidden" : "mt-10 absolute right-0  shadow-md z-30 w-40"}>

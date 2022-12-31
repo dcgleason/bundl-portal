@@ -65,19 +65,6 @@ export default function Home() {
                                     <p className="ml-2">My Contributors</p>
                                 </div>
                             </a>
-                            <a href="/contributions">
-                                <div className={checkActive() === "sales" ? "flex items-center cursor-pointer font-normal text-sm text-red-400 duration-150 ease-in mt-5" : "flex items-center cursor-pointer font-normal text-sm text-gray hover:text-red-400 duration-150 ease-in mt-5"}>
-                                    <div className={checkActive() === "sales" ? "px-1 py-1 rounded-sm bg-red-400" : "px-1 py-1 rounded-sm hover:bg-red-400"}>
-                                        <svg xmlns="http://www.w3.org/2000/svg" width={20} height={20} viewBox="0 0 20 20" fill="none">
-                                            <path d="M12.5 4.1665V5.83317" stroke="#CBD5E0" strokeWidth="1.25" strokeLinecap="round" strokeLinejoin="round" />
-                                            <path d="M12.5 9.1665V10.8332" stroke="#CBD5E0" strokeWidth="1.25" strokeLinecap="round" strokeLinejoin="round" />
-                                            <path d="M12.5 14.1665V15.8332" stroke="#CBD5E0" strokeWidth="1.25" strokeLinecap="round" strokeLinejoin="round" />
-                                            <path d="M4.16667 4.1665H15.8333C16.7538 4.1665 17.5 4.9127 17.5 5.83317V8.33317C16.5795 8.33317 15.8333 9.07936 15.8333 9.99984C15.8333 10.9203 16.5795 11.6665 17.5 11.6665V14.1665C17.5 15.087 16.7538 15.8332 15.8333 15.8332H4.16667C3.24619 15.8332 2.5 15.087 2.5 14.1665V11.6665C3.42047 11.6665 4.16667 10.9203 4.16667 9.99984C4.16667 9.07936 3.42047 8.33317 2.5 8.33317V5.83317C2.5 4.9127 3.24619 4.1665 4.16667 4.1665" stroke="#CBD5E0" strokeWidth="1.25" strokeLinecap="round" strokeLinejoin="round" />
-                                        </svg>
-                                    </div>
-                                    <p className="ml-2">My Contributions</p>
-                                </div>
-                            </a>
                             <a href="./edit">
                                 <div className={checkActive() === "analytics" ? "flex items-center cursor-pointer font-normal text-sm text-red-400 duration-150 ease-in mt-5" : "flex items-center cursor-pointer font-normal text-sm text-gray hover:text-red-400 duration-150 ease-in mt-5"}>
                                     <div className={checkActive() === "analytics" ? "px-1 py-1 rounded-sm bg-red-400" : "px-1 py-1 rounded-sm hover:bg-red-400"}>
