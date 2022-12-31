@@ -21,7 +21,7 @@ export default function Home() {
         } else if (query.indexOf("calender-month-view") !== -1) {
             return "calender-month-view";
         }
-        return "events";
+        return "dashboard";
     };
     return (
         <>

@@ -1,723 +1,313 @@
-import React from "react";
-export default function IndexPage() {
-    return (
-        <>
-            <div className="mt-6 md:mt-14">
-                <div className="grid sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-                    <a href="/events-inner">
-                        <div className="bg-white pb-6 shadow-xl max-w-md">
-                            <img className="w-full" src="https://cdn.tuk.dev/assets/templates/virtual-event-management/events-1.png" alt="costume-party" />
-                            <div className="mt-4 pl-4">
-                                <p className="w-2/4 text-base font-bold leading-normal text-gray-800">New Years Costume Party - INDEX</p>
-                            </div>
-                            <div className="mt-4 flex items-center pl-4">
-                                <svg xmlns="http://www.w3.org/2000/svg" width={20} height={20} viewBox="0 0 20 20" fill="none">
-                                    <rect x="3.33337" y="4.16699" width="13.3333" height="13.3333" rx={2} stroke="#718096" strokeWidth="1.25" strokeLinecap="round" strokeLinejoin="round" />
-                                    <path d="M13.3333 2.5V5.83333" stroke="#718096" strokeWidth="1.25" strokeLinecap="round" strokeLinejoin="round" />
-                                    <path d="M6.66667 2.5V5.83333" stroke="#718096" strokeWidth="1.25" strokeLinecap="round" strokeLinejoin="round" />
-                                    <path d="M3.33337 9.16667H16.6667" stroke="#718096" strokeWidth="1.25" strokeLinecap="round" strokeLinejoin="round" />
-                                    <path d="M9.16663 12.4997H9.99996" stroke="#718096" strokeWidth="1.25" strokeLinecap="round" strokeLinejoin="round" />
-                                    <path d="M10 12.5V15" stroke="#718096" strokeWidth="1.25" strokeLinecap="round" strokeLinejoin="round" />
-                                </svg>
-                                <p className="text-sm leading-none text-gray-700 ml-2">14th September 2020</p>
-                            </div>
-                            <div className="mt-4 pl-4 flex items-center">
-                                <svg xmlns="http://www.w3.org/2000/svg" width={20} height={20} viewBox="0 0 20 20" fill="none">
-                                    <circle cx={10} cy={10} r="7.5" stroke="#718096" strokeWidth="1.25" strokeLinecap="round" strokeLinejoin="round" />
-                                    <path d="M10 5.83301V9.99967L12.5 12.4997" stroke="#718096" strokeWidth="1.25" strokeLinecap="round" strokeLinejoin="round" />
-                                </svg>
-                                <p className="text-sm leading-none text-gray-700 ml-2">Tuesday, 9:00 pm - 11:00 pm</p>
-                            </div>
-                            <div className="mt-4 pl-4">
-                                <p className="text-xs leading-3 text-gray-700">Attended by</p>
-                            </div>
-                            <div className="mt-3 pl-4 flex w-full items-center justify-between">
-                                <div className="flex items-center relative">
-                                    <div className="w-6 h-6 rounded-full flex justify-center items-center">
-                                        <img className="object-cover object-center h-full w-full" src="https://cdn.tuk.dev/assets/templates/virtual-event-management/events-5.png" alt="profile" />
-                                    </div>
-                                    <div className="w-6 h-6  rounded-full flex justify-center items-center -ml-2">
-                                        <img className="object-cover object-center h-full w-full" src="https://cdn.tuk.dev/assets/templates/virtual-event-management/events-6.png" alt="profile" />
-                                    </div>
-                                    <div className="w-6 h-6  rounded-full flex justify-center items-center -ml-2">
-                                        <img className="object-cover object-center h-full w-full" src="https://cdn.tuk.dev/assets/templates/virtual-event-management/events-7.png" alt="profile" />
-                                    </div>
-                                    <div className="w-6 h-6  rounded-full flex justify-center border-2 border-white bg-red-400 items-center -ml-2">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width={8} height={8} viewBox="0 0 8 8" fill="none">
-                                            <path d="M4.557 0.838V3.827H7.406V4.772H4.557V7.782H3.535V4.772H0.7V3.827H3.535V0.838H4.557Z" fill="white" />
-                                        </svg>
-                                    </div>
-                                </div>
-                                <div className="py-2 px-5 flex justify-center items-center bg-gray-800">
-                                    <p className="text-sm font-bold leading-none text-white">$ 45</p>
-                                </div>
-                            </div>
-                            <div className="mt-5 pl-4">
-                                <div className="flex items-center">
-                                    <p className="text-xs leading-3 text-green-500 mr-2">Available</p>
-                                    <div className="pl-2 border-l-2 border-gray-100">
-                                        <p className="text-xs leading-3 text-green-500">86/90 seats booked</p>
-                                    </div>
-                                </div>
-                                <div className="mt-4 flex items-center">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width={16} height={16} viewBox="0 0 16 16" fill="none">
-                                        <path d="M6.66663 9.33342C7.1055 9.78135 7.7062 10.0338 8.33329 10.0338C8.96039 10.0338 9.56109 9.78135 9.99996 9.33342L12.6666 6.66676C13.5871 5.74628 13.5871 4.2539 12.6666 3.33342C11.7462 2.41295 10.2538 2.41295 9.33329 3.33342L8.99996 3.66676" stroke="#718096" strokeWidth="1.25" strokeLinecap="round" strokeLinejoin="round" />
-                                        <path d="M9.3333 6.66665C8.89443 6.21872 8.29373 5.96631 7.66663 5.96631C7.03954 5.96631 6.43884 6.21872 5.99997 6.66665L3.3333 9.33332C2.41283 10.2538 2.41283 11.7462 3.3333 12.6666C4.25377 13.5871 5.74616 13.5871 6.66663 12.6666L6.99997 12.3333" stroke="#718096" strokeWidth="1.25" strokeLinecap="round" strokeLinejoin="round" />
-                                    </svg>
-                                    <p className="ml-2 text-xs leading-3 text-gray-600">Veevents.com/cosutmeparty</p>
-                                    <svg className="ml-3.5 cursor-pointer" xmlns="http://www.w3.org/2000/svg" width={16} height={16} viewBox="0 0 16 16" fill="none">
-                                        <rect x="5.33331" y="5.33301" width={8} height={8} rx="1.33333" stroke="#718096" strokeLinecap="round" strokeLinejoin="round" />
-                                        <path d="M10.6667 5.33366V4.00033C10.6667 3.26395 10.0697 2.66699 9.33335 2.66699H4.00002C3.26364 2.66699 2.66669 3.26395 2.66669 4.00033V9.33366C2.66669 10.07 3.26364 10.667 4.00002 10.667H5.33335" stroke="#718096" strokeLinecap="round" strokeLinejoin="round" />
-                                    </svg>
-                                </div>
-                                <div className="flex items-center mt-4">
-                                    <button className="py-2 px-3 bg-gradient-to-br  from-red-400 to-red-500 hover:from-red-500 hover:to-red-400 rounded-sm flex items-center">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width={12} height={12} viewBox="0 0 12 12" fill="none">
-                                            <circle cx="4.5" cy="3.5" r={2} stroke="white" strokeWidth="0.75" strokeLinecap="round" strokeLinejoin="round" />
-                                            <path d="M1.5 10.5V9.5C1.5 8.39543 2.39543 7.5 3.5 7.5H5.5C6.60457 7.5 7.5 8.39543 7.5 9.5V10.5" stroke="white" strokeWidth="0.75" strokeLinecap="round" strokeLinejoin="round" />
-                                            <path d="M8 5.125C7.79289 5.125 7.625 5.29289 7.625 5.5C7.625 5.70711 7.79289 5.875 8 5.875V5.125ZM11 5.875C11.2071 5.875 11.375 5.70711 11.375 5.5C11.375 5.29289 11.2071 5.125 11 5.125V5.875ZM9.875 4C9.875 3.79289 9.70711 3.625 9.5 3.625C9.29289 3.625 9.125 3.79289 9.125 4H9.875ZM9.125 7C9.125 7.20711 9.29289 7.375 9.5 7.375C9.70711 7.375 9.875 7.20711 9.875 7H9.125ZM8 5.875H11V5.125H8V5.875ZM9.125 4V7H9.875V4H9.125Z" fill="white" />
-                                        </svg>
-                                        <p className="text-xs leading-3 text-white ml-1">Book a Seat</p>
-                                    </button>
-                                    <button className="py-2 ml-3 px-3 bg-gray-700 hover:bg-gray-600 ease-in duration-150 rounded-sm flex items-center">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width={12} height={12} viewBox="0 0 12 12" fill="none">
-                                            <circle cx={3} cy={6} r="1.5" stroke="white" strokeWidth="0.75" strokeLinecap="round" strokeLinejoin="round" />
-                                            <circle cx={9} cy={3} r="1.5" stroke="white" strokeWidth="0.75" strokeLinecap="round" strokeLinejoin="round" />
-                                            <circle cx={9} cy={9} r="1.5" stroke="white" strokeWidth="0.75" strokeLinecap="round" strokeLinejoin="round" />
-                                            <path d="M4.34998 5.3499L7.64998 3.6499" stroke="white" strokeWidth="0.75" strokeLinecap="round" strokeLinejoin="round" />
-                                            <path d="M4.34998 6.6499L7.64998 8.3499" stroke="white" strokeWidth="0.75" strokeLinecap="round" strokeLinejoin="round" />
-                                        </svg>
-                                        <p className="text-xs leading-3 text-white ml-1">Share Event</p>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </a>
-                    <a href="/events-inner">
-                        <div className="bg-white pb-6 shadow-xl max-w-md">
-                            <img className="w-full" src="https://cdn.tuk.dev/assets/templates/virtual-event-management/events-2.png" alt="costume-party" />
-                            <div className="mt-4 pl-4">
-                                <p className="w-2/4 text-base font-bold leading-normal text-gray-800">New Years Costume Party</p>
-                            </div>
-                            <div className="mt-4 flex items-center pl-4">
-                                <svg xmlns="http://www.w3.org/2000/svg" width={20} height={20} viewBox="0 0 20 20" fill="none">
-                                    <rect x="3.33337" y="4.16699" width="13.3333" height="13.3333" rx={2} stroke="#718096" strokeWidth="1.25" strokeLinecap="round" strokeLinejoin="round" />
-                                    <path d="M13.3333 2.5V5.83333" stroke="#718096" strokeWidth="1.25" strokeLinecap="round" strokeLinejoin="round" />
-                                    <path d="M6.66667 2.5V5.83333" stroke="#718096" strokeWidth="1.25" strokeLinecap="round" strokeLinejoin="round" />
-                                    <path d="M3.33337 9.16667H16.6667" stroke="#718096" strokeWidth="1.25" strokeLinecap="round" strokeLinejoin="round" />
-                                    <path d="M9.16663 12.4997H9.99996" stroke="#718096" strokeWidth="1.25" strokeLinecap="round" strokeLinejoin="round" />
-                                    <path d="M10 12.5V15" stroke="#718096" strokeWidth="1.25" strokeLinecap="round" strokeLinejoin="round" />
-                                </svg>
-                                <p className="text-sm leading-none text-gray-700 ml-2">14th September 2020</p>
-                            </div>
-                            <div className="mt-4 pl-4 flex items-center">
-                                <svg xmlns="http://www.w3.org/2000/svg" width={20} height={20} viewBox="0 0 20 20" fill="none">
-                                    <circle cx={10} cy={10} r="7.5" stroke="#718096" strokeWidth="1.25" strokeLinecap="round" strokeLinejoin="round" />
-                                    <path d="M10 5.83301V9.99967L12.5 12.4997" stroke="#718096" strokeWidth="1.25" strokeLinecap="round" strokeLinejoin="round" />
-                                </svg>
-                                <p className="text-sm leading-none text-gray-700 ml-2">Tuesday, 9:00 pm - 11:00 pm</p>
-                            </div>
-                            <div className="mt-4 pl-4">
-                                <p className="text-xs leading-3 text-gray-700">Attended by</p>
-                            </div>
-                            <div className="mt-3 pl-4 flex w-full items-center justify-between">
-                                <div className="flex items-center relative">
-                                    <div className="w-6 h-6 rounded-full flex justify-center items-center">
-                                        <img className="object-cover object-center h-full w-full" src="https://cdn.tuk.dev/assets/templates/virtual-event-management/events-5.png" alt="profile" />
-                                    </div>
-                                    <div className="w-6 h-6  rounded-full flex justify-center items-center -ml-2">
-                                        <img className="object-cover object-center h-full w-full" src="https://cdn.tuk.dev/assets/templates/virtual-event-management/events-6.png" alt="profile" />
-                                    </div>
-                                    <div className="w-6 h-6  rounded-full flex justify-center items-center -ml-2">
-                                        <img className="object-cover object-center h-full w-full" src="https://cdn.tuk.dev/assets/templates/virtual-event-management/events-7.png" alt="profile" />
-                                    </div>
-                                    <div className="w-6 h-6  rounded-full flex justify-center border-2 border-white bg-red-400 items-center -ml-2">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width={8} height={8} viewBox="0 0 8 8" fill="none">
-                                            <path d="M4.557 0.838V3.827H7.406V4.772H4.557V7.782H3.535V4.772H0.7V3.827H3.535V0.838H4.557Z" fill="white" />
-                                        </svg>
-                                    </div>
-                                </div>
-                                <div className="py-2 px-5 flex justify-center items-center bg-gray-800">
-                                    <p className="text-sm font-bold leading-none text-white">$ 45</p>
-                                </div>
-                            </div>
-                            <div className="mt-5 pl-4">
-                                <div className="flex items-center">
-                                    <p className="text-xs leading-3 text-green-500 mr-2">Available</p>
-                                    <div className="pl-2 border-l-2 border-gray-100">
-                                        <p className="text-xs leading-3 text-green-500">86/90 seats booked</p>
-                                    </div>
-                                </div>
-                                <div className="mt-4 flex items-center">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width={16} height={16} viewBox="0 0 16 16" fill="none">
-                                        <path d="M6.66663 9.33342C7.1055 9.78135 7.7062 10.0338 8.33329 10.0338C8.96039 10.0338 9.56109 9.78135 9.99996 9.33342L12.6666 6.66676C13.5871 5.74628 13.5871 4.2539 12.6666 3.33342C11.7462 2.41295 10.2538 2.41295 9.33329 3.33342L8.99996 3.66676" stroke="#718096" strokeWidth="1.25" strokeLinecap="round" strokeLinejoin="round" />
-                                        <path d="M9.3333 6.66665C8.89443 6.21872 8.29373 5.96631 7.66663 5.96631C7.03954 5.96631 6.43884 6.21872 5.99997 6.66665L3.3333 9.33332C2.41283 10.2538 2.41283 11.7462 3.3333 12.6666C4.25377 13.5871 5.74616 13.5871 6.66663 12.6666L6.99997 12.3333" stroke="#718096" strokeWidth="1.25" strokeLinecap="round" strokeLinejoin="round" />
-                                    </svg>
-                                    <p className="ml-2 text-xs leading-3 text-gray-600">Veevents.com/cosutmeparty</p>
-                                    <svg className="ml-3.5 cursor-pointer" xmlns="http://www.w3.org/2000/svg" width={16} height={16} viewBox="0 0 16 16" fill="none">
-                                        <rect x="5.33331" y="5.33301" width={8} height={8} rx="1.33333" stroke="#718096" strokeLinecap="round" strokeLinejoin="round" />
-                                        <path d="M10.6667 5.33366V4.00033C10.6667 3.26395 10.0697 2.66699 9.33335 2.66699H4.00002C3.26364 2.66699 2.66669 3.26395 2.66669 4.00033V9.33366C2.66669 10.07 3.26364 10.667 4.00002 10.667H5.33335" stroke="#718096" strokeLinecap="round" strokeLinejoin="round" />
-                                    </svg>
-                                </div>
-                                <div className="flex items-center mt-4">
-                                    <button className="py-2 px-3 bg-gradient-to-br  from-red-400 to-red-500 hover:from-red-500 hover:to-red-400 rounded-sm flex items-center">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width={12} height={12} viewBox="0 0 12 12" fill="none">
-                                            <circle cx="4.5" cy="3.5" r={2} stroke="white" strokeWidth="0.75" strokeLinecap="round" strokeLinejoin="round" />
-                                            <path d="M1.5 10.5V9.5C1.5 8.39543 2.39543 7.5 3.5 7.5H5.5C6.60457 7.5 7.5 8.39543 7.5 9.5V10.5" stroke="white" strokeWidth="0.75" strokeLinecap="round" strokeLinejoin="round" />
-                                            <path d="M8 5.125C7.79289 5.125 7.625 5.29289 7.625 5.5C7.625 5.70711 7.79289 5.875 8 5.875V5.125ZM11 5.875C11.2071 5.875 11.375 5.70711 11.375 5.5C11.375 5.29289 11.2071 5.125 11 5.125V5.875ZM9.875 4C9.875 3.79289 9.70711 3.625 9.5 3.625C9.29289 3.625 9.125 3.79289 9.125 4H9.875ZM9.125 7C9.125 7.20711 9.29289 7.375 9.5 7.375C9.70711 7.375 9.875 7.20711 9.875 7H9.125ZM8 5.875H11V5.125H8V5.875ZM9.125 4V7H9.875V4H9.125Z" fill="white" />
-                                        </svg>
-                                        <p className="text-xs leading-3 text-white ml-1">Book a Seat</p>
-                                    </button>
-                                    <button className="py-2 ml-3 px-3 bg-gray-700 hover:bg-gray-600 ease-in duration-150 rounded-sm flex items-center">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width={12} height={12} viewBox="0 0 12 12" fill="none">
-                                            <circle cx={3} cy={6} r="1.5" stroke="white" strokeWidth="0.75" strokeLinecap="round" strokeLinejoin="round" />
-                                            <circle cx={9} cy={3} r="1.5" stroke="white" strokeWidth="0.75" strokeLinecap="round" strokeLinejoin="round" />
-                                            <circle cx={9} cy={9} r="1.5" stroke="white" strokeWidth="0.75" strokeLinecap="round" strokeLinejoin="round" />
-                                            <path d="M4.34998 5.3499L7.64998 3.6499" stroke="white" strokeWidth="0.75" strokeLinecap="round" strokeLinejoin="round" />
-                                            <path d="M4.34998 6.6499L7.64998 8.3499" stroke="white" strokeWidth="0.75" strokeLinecap="round" strokeLinejoin="round" />
-                                        </svg>
-                                        <p className="text-xs leading-3 text-white ml-1">Share Event</p>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </a>
-                    <a href="/events-inner">
-                        <div className="bg-white pb-6 shadow-xl max-w-md">
-                            <img className="w-full" src="https://cdn.tuk.dev/assets/templates/virtual-event-management/events-3.png" alt="costume-party" />
-                            <div className="mt-4 pl-4">
-                                <p className="w-2/4 text-base font-bold leading-normal text-gray-800">New Years Costume Party</p>
-                            </div>
-                            <div className="mt-4 flex items-center pl-4">
-                                <svg xmlns="http://www.w3.org/2000/svg" width={20} height={20} viewBox="0 0 20 20" fill="none">
-                                    <rect x="3.33337" y="4.16699" width="13.3333" height="13.3333" rx={2} stroke="#718096" strokeWidth="1.25" strokeLinecap="round" strokeLinejoin="round" />
-                                    <path d="M13.3333 2.5V5.83333" stroke="#718096" strokeWidth="1.25" strokeLinecap="round" strokeLinejoin="round" />
-                                    <path d="M6.66667 2.5V5.83333" stroke="#718096" strokeWidth="1.25" strokeLinecap="round" strokeLinejoin="round" />
-                                    <path d="M3.33337 9.16667H16.6667" stroke="#718096" strokeWidth="1.25" strokeLinecap="round" strokeLinejoin="round" />
-                                    <path d="M9.16663 12.4997H9.99996" stroke="#718096" strokeWidth="1.25" strokeLinecap="round" strokeLinejoin="round" />
-                                    <path d="M10 12.5V15" stroke="#718096" strokeWidth="1.25" strokeLinecap="round" strokeLinejoin="round" />
-                                </svg>
-                                <p className="text-sm leading-none text-gray-700 ml-2">14th September 2020</p>
-                            </div>
-                            <div className="mt-4 pl-4 flex items-center">
-                                <svg xmlns="http://www.w3.org/2000/svg" width={20} height={20} viewBox="0 0 20 20" fill="none">
-                                    <circle cx={10} cy={10} r="7.5" stroke="#718096" strokeWidth="1.25" strokeLinecap="round" strokeLinejoin="round" />
-                                    <path d="M10 5.83301V9.99967L12.5 12.4997" stroke="#718096" strokeWidth="1.25" strokeLinecap="round" strokeLinejoin="round" />
-                                </svg>
-                                <p className="text-sm leading-none text-gray-700 ml-2">Tuesday, 9:00 pm - 11:00 pm</p>
-                            </div>
-                            <div className="mt-4 pl-4">
-                                <p className="text-xs leading-3 text-gray-700">Attended by</p>
-                            </div>
-                            <div className="mt-3 pl-4 flex w-full items-center justify-between">
-                                <div className="flex items-center relative">
-                                    <div className="w-6 h-6 rounded-full flex justify-center items-center">
-                                        <img className="object-cover object-center h-full w-full" src="https://cdn.tuk.dev/assets/templates/virtual-event-management/events-5.png" alt="profile" />
-                                    </div>
-                                    <div className="w-6 h-6  rounded-full flex justify-center items-center -ml-2">
-                                        <img className="object-cover object-center h-full w-full" src="https://cdn.tuk.dev/assets/templates/virtual-event-management/events-6.png" alt="profile" />
-                                    </div>
-                                    <div className="w-6 h-6  rounded-full flex justify-center items-center -ml-2">
-                                        <img className="object-cover object-center h-full w-full" src="https://cdn.tuk.dev/assets/templates/virtual-event-management/events-7.png" alt="profile" />
-                                    </div>
-                                    <div className="w-6 h-6  rounded-full flex justify-center border-2 border-white bg-red-400 items-center -ml-2">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width={8} height={8} viewBox="0 0 8 8" fill="none">
-                                            <path d="M4.557 0.838V3.827H7.406V4.772H4.557V7.782H3.535V4.772H0.7V3.827H3.535V0.838H4.557Z" fill="white" />
-                                        </svg>
-                                    </div>
-                                </div>
-                                <div className="py-2 px-5 flex justify-center items-center bg-gray-800">
-                                    <p className="text-sm font-bold leading-none text-white">$ 45</p>
-                                </div>
-                            </div>
-                            <div className="mt-5 pl-4">
-                                <div className="flex items-center">
-                                    <p className="text-xs leading-3 text-green-500 mr-2">Available</p>
-                                    <div className="pl-2 border-l-2 border-gray-100">
-                                        <p className="text-xs leading-3 text-green-500">86/90 seats booked</p>
-                                    </div>
-                                </div>
-                                <div className="mt-4 flex items-center">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width={16} height={16} viewBox="0 0 16 16" fill="none">
-                                        <path d="M6.66663 9.33342C7.1055 9.78135 7.7062 10.0338 8.33329 10.0338C8.96039 10.0338 9.56109 9.78135 9.99996 9.33342L12.6666 6.66676C13.5871 5.74628 13.5871 4.2539 12.6666 3.33342C11.7462 2.41295 10.2538 2.41295 9.33329 3.33342L8.99996 3.66676" stroke="#718096" strokeWidth="1.25" strokeLinecap="round" strokeLinejoin="round" />
-                                        <path d="M9.3333 6.66665C8.89443 6.21872 8.29373 5.96631 7.66663 5.96631C7.03954 5.96631 6.43884 6.21872 5.99997 6.66665L3.3333 9.33332C2.41283 10.2538 2.41283 11.7462 3.3333 12.6666C4.25377 13.5871 5.74616 13.5871 6.66663 12.6666L6.99997 12.3333" stroke="#718096" strokeWidth="1.25" strokeLinecap="round" strokeLinejoin="round" />
-                                    </svg>
-                                    <p className="ml-2 text-xs leading-3 text-gray-600">Veevents.com/cosutmeparty</p>
-                                    <svg className="ml-3.5 cursor-pointer" xmlns="http://www.w3.org/2000/svg" width={16} height={16} viewBox="0 0 16 16" fill="none">
-                                        <rect x="5.33331" y="5.33301" width={8} height={8} rx="1.33333" stroke="#718096" strokeLinecap="round" strokeLinejoin="round" />
-                                        <path d="M10.6667 5.33366V4.00033C10.6667 3.26395 10.0697 2.66699 9.33335 2.66699H4.00002C3.26364 2.66699 2.66669 3.26395 2.66669 4.00033V9.33366C2.66669 10.07 3.26364 10.667 4.00002 10.667H5.33335" stroke="#718096" strokeLinecap="round" strokeLinejoin="round" />
-                                    </svg>
-                                </div>
-                                <div className="flex items-center mt-4">
-                                    <button className="py-2 px-3 bg-gradient-to-br  from-red-400 to-red-500 hover:from-red-500 hover:to-red-400 rounded-sm flex items-center">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width={12} height={12} viewBox="0 0 12 12" fill="none">
-                                            <circle cx="4.5" cy="3.5" r={2} stroke="white" strokeWidth="0.75" strokeLinecap="round" strokeLinejoin="round" />
-                                            <path d="M1.5 10.5V9.5C1.5 8.39543 2.39543 7.5 3.5 7.5H5.5C6.60457 7.5 7.5 8.39543 7.5 9.5V10.5" stroke="white" strokeWidth="0.75" strokeLinecap="round" strokeLinejoin="round" />
-                                            <path d="M8 5.125C7.79289 5.125 7.625 5.29289 7.625 5.5C7.625 5.70711 7.79289 5.875 8 5.875V5.125ZM11 5.875C11.2071 5.875 11.375 5.70711 11.375 5.5C11.375 5.29289 11.2071 5.125 11 5.125V5.875ZM9.875 4C9.875 3.79289 9.70711 3.625 9.5 3.625C9.29289 3.625 9.125 3.79289 9.125 4H9.875ZM9.125 7C9.125 7.20711 9.29289 7.375 9.5 7.375C9.70711 7.375 9.875 7.20711 9.875 7H9.125ZM8 5.875H11V5.125H8V5.875ZM9.125 4V7H9.875V4H9.125Z" fill="white" />
-                                        </svg>
-                                        <p className="text-xs leading-3 text-white ml-1">Book a Seat</p>
-                                    </button>
-                                    <button className="py-2 ml-3 px-3 bg-gray-700 hover:bg-gray-600 ease-in duration-150 rounded-sm flex items-center">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width={12} height={12} viewBox="0 0 12 12" fill="none">
-                                            <circle cx={3} cy={6} r="1.5" stroke="white" strokeWidth="0.75" strokeLinecap="round" strokeLinejoin="round" />
-                                            <circle cx={9} cy={3} r="1.5" stroke="white" strokeWidth="0.75" strokeLinecap="round" strokeLinejoin="round" />
-                                            <circle cx={9} cy={9} r="1.5" stroke="white" strokeWidth="0.75" strokeLinecap="round" strokeLinejoin="round" />
-                                            <path d="M4.34998 5.3499L7.64998 3.6499" stroke="white" strokeWidth="0.75" strokeLinecap="round" strokeLinejoin="round" />
-                                            <path d="M4.34998 6.6499L7.64998 8.3499" stroke="white" strokeWidth="0.75" strokeLinecap="round" strokeLinejoin="round" />
-                                        </svg>
-                                        <p className="text-xs leading-3 text-white ml-1">Share Event</p>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </a>
-                    <a href="/events-inner">
-                        <div className="bg-white pb-6 shadow-xl max-w-md">
-                            <img className="w-full" src="https://cdn.tuk.dev/assets/templates/virtual-event-management/events-4.png" alt="costume-party" />
-                            <div className="mt-4 pl-4">
-                                <p className="w-2/4 text-base font-bold leading-normal text-gray-800">New Years Costume Party</p>
-                            </div>
-                            <div className="mt-4 flex items-center pl-4">
-                                <svg xmlns="http://www.w3.org/2000/svg" width={20} height={20} viewBox="0 0 20 20" fill="none">
-                                    <rect x="3.33337" y="4.16699" width="13.3333" height="13.3333" rx={2} stroke="#718096" strokeWidth="1.25" strokeLinecap="round" strokeLinejoin="round" />
-                                    <path d="M13.3333 2.5V5.83333" stroke="#718096" strokeWidth="1.25" strokeLinecap="round" strokeLinejoin="round" />
-                                    <path d="M6.66667 2.5V5.83333" stroke="#718096" strokeWidth="1.25" strokeLinecap="round" strokeLinejoin="round" />
-                                    <path d="M3.33337 9.16667H16.6667" stroke="#718096" strokeWidth="1.25" strokeLinecap="round" strokeLinejoin="round" />
-                                    <path d="M9.16663 12.4997H9.99996" stroke="#718096" strokeWidth="1.25" strokeLinecap="round" strokeLinejoin="round" />
-                                    <path d="M10 12.5V15" stroke="#718096" strokeWidth="1.25" strokeLinecap="round" strokeLinejoin="round" />
-                                </svg>
-                                <p className="text-sm leading-none text-gray-700 ml-2">14th September 2020</p>
-                            </div>
-                            <div className="mt-4 pl-4 flex items-center">
-                                <svg xmlns="http://www.w3.org/2000/svg" width={20} height={20} viewBox="0 0 20 20" fill="none">
-                                    <circle cx={10} cy={10} r="7.5" stroke="#718096" strokeWidth="1.25" strokeLinecap="round" strokeLinejoin="round" />
-                                    <path d="M10 5.83301V9.99967L12.5 12.4997" stroke="#718096" strokeWidth="1.25" strokeLinecap="round" strokeLinejoin="round" />
-                                </svg>
-                                <p className="text-sm leading-none text-gray-700 ml-2">Tuesday, 9:00 pm - 11:00 pm</p>
-                            </div>
-                            <div className="mt-4 pl-4">
-                                <p className="text-xs leading-3 text-gray-700">Attended by</p>
-                            </div>
-                            <div className="mt-3 pl-4 flex w-full items-center justify-between">
-                                <div className="flex items-center relative">
-                                    <div className="w-6 h-6 rounded-full flex justify-center items-center">
-                                        <img className="object-cover object-center h-full w-full" src="https://cdn.tuk.dev/assets/templates/virtual-event-management/events-5.png" alt="profile" />
-                                    </div>
-                                    <div className="w-6 h-6  rounded-full flex justify-center items-center -ml-2">
-                                        <img className="object-cover object-center h-full w-full" src="https://cdn.tuk.dev/assets/templates/virtual-event-management/events-6.png" alt="profile" />
-                                    </div>
-                                    <div className="w-6 h-6  rounded-full flex justify-center items-center -ml-2">
-                                        <img className="object-cover object-center h-full w-full" src="https://cdn.tuk.dev/assets/templates/virtual-event-management/events-7.png" alt="profile" />
-                                    </div>
-                                    <div className="w-6 h-6  rounded-full flex justify-center border-2 border-white bg-red-400 items-center -ml-2">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width={8} height={8} viewBox="0 0 8 8" fill="none">
-                                            <path d="M4.557 0.838V3.827H7.406V4.772H4.557V7.782H3.535V4.772H0.7V3.827H3.535V0.838H4.557Z" fill="white" />
-                                        </svg>
-                                    </div>
-                                </div>
-                                <div className="py-2 px-5 flex justify-center items-center bg-gray-800">
-                                    <p className="text-sm font-bold leading-none text-white">$ 45</p>
-                                </div>
-                            </div>
-                            <div className="mt-5 pl-4">
-                                <div className="flex items-center">
-                                    <p className="text-xs leading-3 text-green-500 mr-2">Available</p>
-                                    <div className="pl-2 border-l-2 border-gray-100">
-                                        <p className="text-xs leading-3 text-green-500">86/90 seats booked</p>
-                                    </div>
-                                </div>
-                                <div className="mt-4 flex items-center">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width={16} height={16} viewBox="0 0 16 16" fill="none">
-                                        <path d="M6.66663 9.33342C7.1055 9.78135 7.7062 10.0338 8.33329 10.0338C8.96039 10.0338 9.56109 9.78135 9.99996 9.33342L12.6666 6.66676C13.5871 5.74628 13.5871 4.2539 12.6666 3.33342C11.7462 2.41295 10.2538 2.41295 9.33329 3.33342L8.99996 3.66676" stroke="#718096" strokeWidth="1.25" strokeLinecap="round" strokeLinejoin="round" />
-                                        <path d="M9.3333 6.66665C8.89443 6.21872 8.29373 5.96631 7.66663 5.96631C7.03954 5.96631 6.43884 6.21872 5.99997 6.66665L3.3333 9.33332C2.41283 10.2538 2.41283 11.7462 3.3333 12.6666C4.25377 13.5871 5.74616 13.5871 6.66663 12.6666L6.99997 12.3333" stroke="#718096" strokeWidth="1.25" strokeLinecap="round" strokeLinejoin="round" />
-                                    </svg>
-                                    <p className="ml-2 text-xs leading-3 text-gray-600">Veevents.com/cosutmeparty</p>
-                                    <svg className="ml-3.5 cursor-pointer" xmlns="http://www.w3.org/2000/svg" width={16} height={16} viewBox="0 0 16 16" fill="none">
-                                        <rect x="5.33331" y="5.33301" width={8} height={8} rx="1.33333" stroke="#718096" strokeLinecap="round" strokeLinejoin="round" />
-                                        <path d="M10.6667 5.33366V4.00033C10.6667 3.26395 10.0697 2.66699 9.33335 2.66699H4.00002C3.26364 2.66699 2.66669 3.26395 2.66669 4.00033V9.33366C2.66669 10.07 3.26364 10.667 4.00002 10.667H5.33335" stroke="#718096" strokeLinecap="round" strokeLinejoin="round" />
-                                    </svg>
-                                </div>
-                                <div className="flex items-center mt-4">
-                                    <button className="py-2 px-3 bg-gradient-to-br  from-red-400 to-red-500 hover:from-red-500 hover:to-red-400 rounded-sm flex items-center">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width={12} height={12} viewBox="0 0 12 12" fill="none">
-                                            <circle cx="4.5" cy="3.5" r={2} stroke="white" strokeWidth="0.75" strokeLinecap="round" strokeLinejoin="round" />
-                                            <path d="M1.5 10.5V9.5C1.5 8.39543 2.39543 7.5 3.5 7.5H5.5C6.60457 7.5 7.5 8.39543 7.5 9.5V10.5" stroke="white" strokeWidth="0.75" strokeLinecap="round" strokeLinejoin="round" />
-                                            <path d="M8 5.125C7.79289 5.125 7.625 5.29289 7.625 5.5C7.625 5.70711 7.79289 5.875 8 5.875V5.125ZM11 5.875C11.2071 5.875 11.375 5.70711 11.375 5.5C11.375 5.29289 11.2071 5.125 11 5.125V5.875ZM9.875 4C9.875 3.79289 9.70711 3.625 9.5 3.625C9.29289 3.625 9.125 3.79289 9.125 4H9.875ZM9.125 7C9.125 7.20711 9.29289 7.375 9.5 7.375C9.70711 7.375 9.875 7.20711 9.875 7H9.125ZM8 5.875H11V5.125H8V5.875ZM9.125 4V7H9.875V4H9.125Z" fill="white" />
-                                        </svg>
-                                        <p className="text-xs leading-3 text-white ml-1">Book a Seat</p>
-                                    </button>
-                                    <button className="py-2 ml-3 px-3 bg-gray-700 hover:bg-gray-600 ease-in duration-150 rounded-sm flex items-center">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width={12} height={12} viewBox="0 0 12 12" fill="none">
-                                            <circle cx={3} cy={6} r="1.5" stroke="white" strokeWidth="0.75" strokeLinecap="round" strokeLinejoin="round" />
-                                            <circle cx={9} cy={3} r="1.5" stroke="white" strokeWidth="0.75" strokeLinecap="round" strokeLinejoin="round" />
-                                            <circle cx={9} cy={9} r="1.5" stroke="white" strokeWidth="0.75" strokeLinecap="round" strokeLinejoin="round" />
-                                            <path d="M4.34998 5.3499L7.64998 3.6499" stroke="white" strokeWidth="0.75" strokeLinecap="round" strokeLinejoin="round" />
-                                            <path d="M4.34998 6.6499L7.64998 8.3499" stroke="white" strokeWidth="0.75" strokeLinecap="round" strokeLinejoin="round" />
-                                        </svg>
-                                        <p className="text-xs leading-3 text-white ml-1">Share Event</p>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </a>
-                    <a href="/events-inner">
-                        <div className="bg-white pb-6 shadow-xl max-w-md">
-                            <img className="w-full" src="https://cdn.tuk.dev/assets/templates/virtual-event-management/events-8.png" alt="costume-party" />
-                            <div className="mt-4 pl-4">
-                                <p className="w-2/4 text-base font-bold leading-normal text-gray-800">New Years Costume Party</p>
-                            </div>
-                            <div className="mt-4 flex items-center pl-4">
-                                <svg xmlns="http://www.w3.org/2000/svg" width={20} height={20} viewBox="0 0 20 20" fill="none">
-                                    <rect x="3.33337" y="4.16699" width="13.3333" height="13.3333" rx={2} stroke="#718096" strokeWidth="1.25" strokeLinecap="round" strokeLinejoin="round" />
-                                    <path d="M13.3333 2.5V5.83333" stroke="#718096" strokeWidth="1.25" strokeLinecap="round" strokeLinejoin="round" />
-                                    <path d="M6.66667 2.5V5.83333" stroke="#718096" strokeWidth="1.25" strokeLinecap="round" strokeLinejoin="round" />
-                                    <path d="M3.33337 9.16667H16.6667" stroke="#718096" strokeWidth="1.25" strokeLinecap="round" strokeLinejoin="round" />
-                                    <path d="M9.16663 12.4997H9.99996" stroke="#718096" strokeWidth="1.25" strokeLinecap="round" strokeLinejoin="round" />
-                                    <path d="M10 12.5V15" stroke="#718096" strokeWidth="1.25" strokeLinecap="round" strokeLinejoin="round" />
-                                </svg>
-                                <p className="text-sm leading-none text-gray-700 ml-2">14th September 2020</p>
-                            </div>
-                            <div className="mt-4 pl-4 flex items-center">
-                                <svg xmlns="http://www.w3.org/2000/svg" width={20} height={20} viewBox="0 0 20 20" fill="none">
-                                    <circle cx={10} cy={10} r="7.5" stroke="#718096" strokeWidth="1.25" strokeLinecap="round" strokeLinejoin="round" />
-                                    <path d="M10 5.83301V9.99967L12.5 12.4997" stroke="#718096" strokeWidth="1.25" strokeLinecap="round" strokeLinejoin="round" />
-                                </svg>
-                                <p className="text-sm leading-none text-gray-700 ml-2">Tuesday, 9:00 pm - 11:00 pm</p>
-                            </div>
-                            <div className="mt-4 pl-4">
-                                <p className="text-xs leading-3 text-gray-700">Attended by</p>
-                            </div>
-                            <div className="mt-3 pl-4 flex w-full items-center justify-between">
-                                <div className="flex items-center relative">
-                                    <div className="w-6 h-6 rounded-full flex justify-center items-center">
-                                        <img className="object-cover object-center h-full w-full" src="https://cdn.tuk.dev/assets/templates/virtual-event-management/events-5.png" alt="profile" />
-                                    </div>
-                                    <div className="w-6 h-6  rounded-full flex justify-center items-center -ml-2">
-                                        <img className="object-cover object-center h-full w-full" src="https://cdn.tuk.dev/assets/templates/virtual-event-management/events-6.png" alt="profile" />
-                                    </div>
-                                    <div className="w-6 h-6  rounded-full flex justify-center items-center -ml-2">
-                                        <img className="object-cover object-center h-full w-full" src="https://cdn.tuk.dev/assets/templates/virtual-event-management/events-7.png" alt="profile" />
-                                    </div>
-                                    <div className="w-6 h-6  rounded-full flex justify-center border-2 border-white bg-red-400 items-center -ml-2">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width={8} height={8} viewBox="0 0 8 8" fill="none">
-                                            <path d="M4.557 0.838V3.827H7.406V4.772H4.557V7.782H3.535V4.772H0.7V3.827H3.535V0.838H4.557Z" fill="white" />
-                                        </svg>
-                                    </div>
-                                </div>
-                                <div className="py-2 px-5 flex justify-center items-center bg-gray-800">
-                                    <p className="text-sm font-bold leading-none text-white">$ 45</p>
-                                </div>
-                            </div>
-                            <div className="mt-5 pl-4">
-                                <div className="flex items-center">
-                                    <p className="text-xs leading-3 text-green-500 mr-2">Available</p>
-                                    <div className="pl-2 border-l-2 border-gray-100">
-                                        <p className="text-xs leading-3 text-green-500">86/90 seats booked</p>
-                                    </div>
-                                </div>
-                                <div className="mt-4 flex items-center">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width={16} height={16} viewBox="0 0 16 16" fill="none">
-                                        <path d="M6.66663 9.33342C7.1055 9.78135 7.7062 10.0338 8.33329 10.0338C8.96039 10.0338 9.56109 9.78135 9.99996 9.33342L12.6666 6.66676C13.5871 5.74628 13.5871 4.2539 12.6666 3.33342C11.7462 2.41295 10.2538 2.41295 9.33329 3.33342L8.99996 3.66676" stroke="#718096" strokeWidth="1.25" strokeLinecap="round" strokeLinejoin="round" />
-                                        <path d="M9.3333 6.66665C8.89443 6.21872 8.29373 5.96631 7.66663 5.96631C7.03954 5.96631 6.43884 6.21872 5.99997 6.66665L3.3333 9.33332C2.41283 10.2538 2.41283 11.7462 3.3333 12.6666C4.25377 13.5871 5.74616 13.5871 6.66663 12.6666L6.99997 12.3333" stroke="#718096" strokeWidth="1.25" strokeLinecap="round" strokeLinejoin="round" />
-                                    </svg>
-                                    <p className="ml-2 text-xs leading-3 text-gray-600">Veevents.com/cosutmeparty</p>
-                                    <svg className="ml-3.5 cursor-pointer" xmlns="http://www.w3.org/2000/svg" width={16} height={16} viewBox="0 0 16 16" fill="none">
-                                        <rect x="5.33331" y="5.33301" width={8} height={8} rx="1.33333" stroke="#718096" strokeLinecap="round" strokeLinejoin="round" />
-                                        <path d="M10.6667 5.33366V4.00033C10.6667 3.26395 10.0697 2.66699 9.33335 2.66699H4.00002C3.26364 2.66699 2.66669 3.26395 2.66669 4.00033V9.33366C2.66669 10.07 3.26364 10.667 4.00002 10.667H5.33335" stroke="#718096" strokeLinecap="round" strokeLinejoin="round" />
-                                    </svg>
-                                </div>
-                                <div className="flex items-center mt-4">
-                                    <button className="py-2 px-3 bg-gradient-to-br  from-red-400 to-red-500 hover:from-red-500 hover:to-red-400 rounded-sm flex items-center">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width={12} height={12} viewBox="0 0 12 12" fill="none">
-                                            <circle cx="4.5" cy="3.5" r={2} stroke="white" strokeWidth="0.75" strokeLinecap="round" strokeLinejoin="round" />
-                                            <path d="M1.5 10.5V9.5C1.5 8.39543 2.39543 7.5 3.5 7.5H5.5C6.60457 7.5 7.5 8.39543 7.5 9.5V10.5" stroke="white" strokeWidth="0.75" strokeLinecap="round" strokeLinejoin="round" />
-                                            <path d="M8 5.125C7.79289 5.125 7.625 5.29289 7.625 5.5C7.625 5.70711 7.79289 5.875 8 5.875V5.125ZM11 5.875C11.2071 5.875 11.375 5.70711 11.375 5.5C11.375 5.29289 11.2071 5.125 11 5.125V5.875ZM9.875 4C9.875 3.79289 9.70711 3.625 9.5 3.625C9.29289 3.625 9.125 3.79289 9.125 4H9.875ZM9.125 7C9.125 7.20711 9.29289 7.375 9.5 7.375C9.70711 7.375 9.875 7.20711 9.875 7H9.125ZM8 5.875H11V5.125H8V5.875ZM9.125 4V7H9.875V4H9.125Z" fill="white" />
-                                        </svg>
-                                        <p className="text-xs leading-3 text-white ml-1">Book a Seat</p>
-                                    </button>
-                                    <button className="py-2 ml-3 px-3 bg-gray-700 hover:bg-gray-600 ease-in duration-150 rounded-sm flex items-center">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width={12} height={12} viewBox="0 0 12 12" fill="none">
-                                            <circle cx={3} cy={6} r="1.5" stroke="white" strokeWidth="0.75" strokeLinecap="round" strokeLinejoin="round" />
-                                            <circle cx={9} cy={3} r="1.5" stroke="white" strokeWidth="0.75" strokeLinecap="round" strokeLinejoin="round" />
-                                            <circle cx={9} cy={9} r="1.5" stroke="white" strokeWidth="0.75" strokeLinecap="round" strokeLinejoin="round" />
-                                            <path d="M4.34998 5.3499L7.64998 3.6499" stroke="white" strokeWidth="0.75" strokeLinecap="round" strokeLinejoin="round" />
-                                            <path d="M4.34998 6.6499L7.64998 8.3499" stroke="white" strokeWidth="0.75" strokeLinecap="round" strokeLinejoin="round" />
-                                        </svg>
-                                        <p className="text-xs leading-3 text-white ml-1">Share Event</p>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </a>
-                    <a href="/events-inner">
-                        <div className="bg-white pb-6 shadow-xl max-w-md">
-                            <img className="w-full" src="https://cdn.tuk.dev/assets/templates/virtual-event-management/events-9.png" alt="costume-party" />
-                            <div className="mt-4 pl-4">
-                                <p className="w-2/4 text-base font-bold leading-normal text-gray-800">New Years Costume Party</p>
-                            </div>
-                            <div className="mt-4 flex items-center pl-4">
-                                <svg xmlns="http://www.w3.org/2000/svg" width={20} height={20} viewBox="0 0 20 20" fill="none">
-                                    <rect x="3.33337" y="4.16699" width="13.3333" height="13.3333" rx={2} stroke="#718096" strokeWidth="1.25" strokeLinecap="round" strokeLinejoin="round" />
-                                    <path d="M13.3333 2.5V5.83333" stroke="#718096" strokeWidth="1.25" strokeLinecap="round" strokeLinejoin="round" />
-                                    <path d="M6.66667 2.5V5.83333" stroke="#718096" strokeWidth="1.25" strokeLinecap="round" strokeLinejoin="round" />
-                                    <path d="M3.33337 9.16667H16.6667" stroke="#718096" strokeWidth="1.25" strokeLinecap="round" strokeLinejoin="round" />
-                                    <path d="M9.16663 12.4997H9.99996" stroke="#718096" strokeWidth="1.25" strokeLinecap="round" strokeLinejoin="round" />
-                                    <path d="M10 12.5V15" stroke="#718096" strokeWidth="1.25" strokeLinecap="round" strokeLinejoin="round" />
-                                </svg>
-                                <p className="text-sm leading-none text-gray-700 ml-2">14th September 2020</p>
-                            </div>
-                            <div className="mt-4 pl-4 flex items-center">
-                                <svg xmlns="http://www.w3.org/2000/svg" width={20} height={20} viewBox="0 0 20 20" fill="none">
-                                    <circle cx={10} cy={10} r="7.5" stroke="#718096" strokeWidth="1.25" strokeLinecap="round" strokeLinejoin="round" />
-                                    <path d="M10 5.83301V9.99967L12.5 12.4997" stroke="#718096" strokeWidth="1.25" strokeLinecap="round" strokeLinejoin="round" />
-                                </svg>
-                                <p className="text-sm leading-none text-gray-700 ml-2">Tuesday, 9:00 pm - 11:00 pm</p>
-                            </div>
-                            <div className="mt-4 pl-4">
-                                <p className="text-xs leading-3 text-gray-700">Attended by</p>
-                            </div>
-                            <div className="mt-3 pl-4 flex w-full items-center justify-between">
-                                <div className="flex items-center relative">
-                                    <div className="w-6 h-6 rounded-full flex justify-center items-center">
-                                        <img className="object-cover object-center h-full w-full" src="https://cdn.tuk.dev/assets/templates/virtual-event-management/events-5.png" alt="profile" />
-                                    </div>
-                                    <div className="w-6 h-6  rounded-full flex justify-center items-center -ml-2">
-                                        <img className="object-cover object-center h-full w-full" src="https://cdn.tuk.dev/assets/templates/virtual-event-management/events-6.png" alt="profile" />
-                                    </div>
-                                    <div className="w-6 h-6  rounded-full flex justify-center items-center -ml-2">
-                                        <img className="object-cover object-center h-full w-full" src="https://cdn.tuk.dev/assets/templates/virtual-event-management/events-7.png" alt="profile" />
-                                    </div>
-                                    <div className="w-6 h-6  rounded-full flex justify-center border-2 border-white bg-red-400 items-center -ml-2">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width={8} height={8} viewBox="0 0 8 8" fill="none">
-                                            <path d="M4.557 0.838V3.827H7.406V4.772H4.557V7.782H3.535V4.772H0.7V3.827H3.535V0.838H4.557Z" fill="white" />
-                                        </svg>
-                                    </div>
-                                </div>
-                                <div className="py-2 px-5 flex justify-center items-center bg-gray-800">
-                                    <p className="text-sm font-bold leading-none text-white">$ 45</p>
-                                </div>
-                            </div>
-                            <div className="mt-5 pl-4">
-                                <div className="flex items-center">
-                                    <p className="text-xs leading-3 text-green-500 mr-2">Available</p>
-                                    <div className="pl-2 border-l-2 border-gray-100">
-                                        <p className="text-xs leading-3 text-green-500">86/90 seats booked</p>
-                                    </div>
-                                </div>
-                                <div className="mt-4 flex items-center">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width={16} height={16} viewBox="0 0 16 16" fill="none">
-                                        <path d="M6.66663 9.33342C7.1055 9.78135 7.7062 10.0338 8.33329 10.0338C8.96039 10.0338 9.56109 9.78135 9.99996 9.33342L12.6666 6.66676C13.5871 5.74628 13.5871 4.2539 12.6666 3.33342C11.7462 2.41295 10.2538 2.41295 9.33329 3.33342L8.99996 3.66676" stroke="#718096" strokeWidth="1.25" strokeLinecap="round" strokeLinejoin="round" />
-                                        <path d="M9.3333 6.66665C8.89443 6.21872 8.29373 5.96631 7.66663 5.96631C7.03954 5.96631 6.43884 6.21872 5.99997 6.66665L3.3333 9.33332C2.41283 10.2538 2.41283 11.7462 3.3333 12.6666C4.25377 13.5871 5.74616 13.5871 6.66663 12.6666L6.99997 12.3333" stroke="#718096" strokeWidth="1.25" strokeLinecap="round" strokeLinejoin="round" />
-                                    </svg>
-                                    <p className="ml-2 text-xs leading-3 text-gray-600">Veevents.com/cosutmeparty</p>
-                                    <svg className="ml-3.5 cursor-pointer" xmlns="http://www.w3.org/2000/svg" width={16} height={16} viewBox="0 0 16 16" fill="none">
-                                        <rect x="5.33331" y="5.33301" width={8} height={8} rx="1.33333" stroke="#718096" strokeLinecap="round" strokeLinejoin="round" />
-                                        <path d="M10.6667 5.33366V4.00033C10.6667 3.26395 10.0697 2.66699 9.33335 2.66699H4.00002C3.26364 2.66699 2.66669 3.26395 2.66669 4.00033V9.33366C2.66669 10.07 3.26364 10.667 4.00002 10.667H5.33335" stroke="#718096" strokeLinecap="round" strokeLinejoin="round" />
-                                    </svg>
-                                </div>
-                                <div className="flex items-center mt-4">
-                                    <button className="py-2 px-3 bg-gradient-to-br  from-red-400 to-red-500 hover:from-red-500 hover:to-red-400 rounded-sm flex items-center">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width={12} height={12} viewBox="0 0 12 12" fill="none">
-                                            <circle cx="4.5" cy="3.5" r={2} stroke="white" strokeWidth="0.75" strokeLinecap="round" strokeLinejoin="round" />
-                                            <path d="M1.5 10.5V9.5C1.5 8.39543 2.39543 7.5 3.5 7.5H5.5C6.60457 7.5 7.5 8.39543 7.5 9.5V10.5" stroke="white" strokeWidth="0.75" strokeLinecap="round" strokeLinejoin="round" />
-                                            <path d="M8 5.125C7.79289 5.125 7.625 5.29289 7.625 5.5C7.625 5.70711 7.79289 5.875 8 5.875V5.125ZM11 5.875C11.2071 5.875 11.375 5.70711 11.375 5.5C11.375 5.29289 11.2071 5.125 11 5.125V5.875ZM9.875 4C9.875 3.79289 9.70711 3.625 9.5 3.625C9.29289 3.625 9.125 3.79289 9.125 4H9.875ZM9.125 7C9.125 7.20711 9.29289 7.375 9.5 7.375C9.70711 7.375 9.875 7.20711 9.875 7H9.125ZM8 5.875H11V5.125H8V5.875ZM9.125 4V7H9.875V4H9.125Z" fill="white" />
-                                        </svg>
-                                        <p className="text-xs leading-3 text-white ml-1">Book a Seat</p>
-                                    </button>
-                                    <button className="py-2 ml-3 px-3 bg-gray-700 hover:bg-gray-600 ease-in duration-150 rounded-sm flex items-center">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width={12} height={12} viewBox="0 0 12 12" fill="none">
-                                            <circle cx={3} cy={6} r="1.5" stroke="white" strokeWidth="0.75" strokeLinecap="round" strokeLinejoin="round" />
-                                            <circle cx={9} cy={3} r="1.5" stroke="white" strokeWidth="0.75" strokeLinecap="round" strokeLinejoin="round" />
-                                            <circle cx={9} cy={9} r="1.5" stroke="white" strokeWidth="0.75" strokeLinecap="round" strokeLinejoin="round" />
-                                            <path d="M4.34998 5.3499L7.64998 3.6499" stroke="white" strokeWidth="0.75" strokeLinecap="round" strokeLinejoin="round" />
-                                            <path d="M4.34998 6.6499L7.64998 8.3499" stroke="white" strokeWidth="0.75" strokeLinecap="round" strokeLinejoin="round" />
-                                        </svg>
-                                        <p className="text-xs leading-3 text-white ml-1">Share Event</p>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </a>
-                    <a href="/events-inner">
-                        <div className="bg-white pb-6 shadow-xl max-w-md">
-                            <img className="w-full" src="https://cdn.tuk.dev/assets/templates/virtual-event-management/events-10.png" alt="costume-party" />
-                            <div className="mt-4 pl-4">
-                                <p className="w-2/4 text-base font-bold leading-normal text-gray-800">New Years Costume Party</p>
-                            </div>
-                            <div className="mt-4 flex items-center pl-4">
-                                <svg xmlns="http://www.w3.org/2000/svg" width={20} height={20} viewBox="0 0 20 20" fill="none">
-                                    <rect x="3.33337" y="4.16699" width="13.3333" height="13.3333" rx={2} stroke="#718096" strokeWidth="1.25" strokeLinecap="round" strokeLinejoin="round" />
-                                    <path d="M13.3333 2.5V5.83333" stroke="#718096" strokeWidth="1.25" strokeLinecap="round" strokeLinejoin="round" />
-                                    <path d="M6.66667 2.5V5.83333" stroke="#718096" strokeWidth="1.25" strokeLinecap="round" strokeLinejoin="round" />
-                                    <path d="M3.33337 9.16667H16.6667" stroke="#718096" strokeWidth="1.25" strokeLinecap="round" strokeLinejoin="round" />
-                                    <path d="M9.16663 12.4997H9.99996" stroke="#718096" strokeWidth="1.25" strokeLinecap="round" strokeLinejoin="round" />
-                                    <path d="M10 12.5V15" stroke="#718096" strokeWidth="1.25" strokeLinecap="round" strokeLinejoin="round" />
-                                </svg>
-                                <p className="text-sm leading-none text-gray-700 ml-2">14th September 2020</p>
-                            </div>
-                            <div className="mt-4 pl-4 flex items-center">
-                                <svg xmlns="http://www.w3.org/2000/svg" width={20} height={20} viewBox="0 0 20 20" fill="none">
-                                    <circle cx={10} cy={10} r="7.5" stroke="#718096" strokeWidth="1.25" strokeLinecap="round" strokeLinejoin="round" />
-                                    <path d="M10 5.83301V9.99967L12.5 12.4997" stroke="#718096" strokeWidth="1.25" strokeLinecap="round" strokeLinejoin="round" />
-                                </svg>
-                                <p className="text-sm leading-none text-gray-700 ml-2">Tuesday, 9:00 pm - 11:00 pm</p>
-                            </div>
-                            <div className="mt-4 pl-4">
-                                <p className="text-xs leading-3 text-gray-700">Attended by</p>
-                            </div>
-                            <div className="mt-3 pl-4 flex w-full items-center justify-between">
-                                <div className="flex items-center relative">
-                                    <div className="w-6 h-6 rounded-full flex justify-center items-center">
-                                        <img className="object-cover object-center h-full w-full" src="https://cdn.tuk.dev/assets/templates/virtual-event-management/events-5.png" alt="profile" />
-                                    </div>
-                                    <div className="w-6 h-6  rounded-full flex justify-center items-center -ml-2">
-                                        <img className="object-cover object-center h-full w-full" src="https://cdn.tuk.dev/assets/templates/virtual-event-management/events-6.png" alt="profile" />
-                                    </div>
-                                    <div className="w-6 h-6  rounded-full flex justify-center items-center -ml-2">
-                                        <img className="object-cover object-center h-full w-full" src="https://cdn.tuk.dev/assets/templates/virtual-event-management/events-7.png" alt="profile" />
-                                    </div>
-                                    <div className="w-6 h-6  rounded-full flex justify-center border-2 border-white bg-red-400 items-center -ml-2">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width={8} height={8} viewBox="0 0 8 8" fill="none">
-                                            <path d="M4.557 0.838V3.827H7.406V4.772H4.557V7.782H3.535V4.772H0.7V3.827H3.535V0.838H4.557Z" fill="white" />
-                                        </svg>
-                                    </div>
-                                </div>
-                                <div className="py-2 px-5 flex justify-center items-center bg-gray-800">
-                                    <p className="text-sm font-bold leading-none text-white">$ 45</p>
-                                </div>
-                            </div>
-                            <div className="mt-5 pl-4">
-                                <div className="flex items-center">
-                                    <p className="text-xs leading-3 text-green-500 mr-2">Available</p>
-                                    <div className="pl-2 border-l-2 border-gray-100">
-                                        <p className="text-xs leading-3 text-green-500">86/90 seats booked</p>
-                                    </div>
-                                </div>
-                                <div className="mt-4 flex items-center">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width={16} height={16} viewBox="0 0 16 16" fill="none">
-                                        <path d="M6.66663 9.33342C7.1055 9.78135 7.7062 10.0338 8.33329 10.0338C8.96039 10.0338 9.56109 9.78135 9.99996 9.33342L12.6666 6.66676C13.5871 5.74628 13.5871 4.2539 12.6666 3.33342C11.7462 2.41295 10.2538 2.41295 9.33329 3.33342L8.99996 3.66676" stroke="#718096" strokeWidth="1.25" strokeLinecap="round" strokeLinejoin="round" />
-                                        <path d="M9.3333 6.66665C8.89443 6.21872 8.29373 5.96631 7.66663 5.96631C7.03954 5.96631 6.43884 6.21872 5.99997 6.66665L3.3333 9.33332C2.41283 10.2538 2.41283 11.7462 3.3333 12.6666C4.25377 13.5871 5.74616 13.5871 6.66663 12.6666L6.99997 12.3333" stroke="#718096" strokeWidth="1.25" strokeLinecap="round" strokeLinejoin="round" />
-                                    </svg>
-                                    <p className="ml-2 text-xs leading-3 text-gray-600">Veevents.com/cosutmeparty</p>
-                                    <svg className="ml-3.5 cursor-pointer" xmlns="http://www.w3.org/2000/svg" width={16} height={16} viewBox="0 0 16 16" fill="none">
-                                        <rect x="5.33331" y="5.33301" width={8} height={8} rx="1.33333" stroke="#718096" strokeLinecap="round" strokeLinejoin="round" />
-                                        <path d="M10.6667 5.33366V4.00033C10.6667 3.26395 10.0697 2.66699 9.33335 2.66699H4.00002C3.26364 2.66699 2.66669 3.26395 2.66669 4.00033V9.33366C2.66669 10.07 3.26364 10.667 4.00002 10.667H5.33335" stroke="#718096" strokeLinecap="round" strokeLinejoin="round" />
-                                    </svg>
-                                </div>
-                                <div className="flex items-center mt-4">
-                                    <button className="py-2 px-3 bg-gradient-to-br  from-red-400 to-red-500 hover:from-red-500 hover:to-red-400 rounded-sm flex items-center">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width={12} height={12} viewBox="0 0 12 12" fill="none">
-                                            <circle cx="4.5" cy="3.5" r={2} stroke="white" strokeWidth="0.75" strokeLinecap="round" strokeLinejoin="round" />
-                                            <path d="M1.5 10.5V9.5C1.5 8.39543 2.39543 7.5 3.5 7.5H5.5C6.60457 7.5 7.5 8.39543 7.5 9.5V10.5" stroke="white" strokeWidth="0.75" strokeLinecap="round" strokeLinejoin="round" />
-                                            <path d="M8 5.125C7.79289 5.125 7.625 5.29289 7.625 5.5C7.625 5.70711 7.79289 5.875 8 5.875V5.125ZM11 5.875C11.2071 5.875 11.375 5.70711 11.375 5.5C11.375 5.29289 11.2071 5.125 11 5.125V5.875ZM9.875 4C9.875 3.79289 9.70711 3.625 9.5 3.625C9.29289 3.625 9.125 3.79289 9.125 4H9.875ZM9.125 7C9.125 7.20711 9.29289 7.375 9.5 7.375C9.70711 7.375 9.875 7.20711 9.875 7H9.125ZM8 5.875H11V5.125H8V5.875ZM9.125 4V7H9.875V4H9.125Z" fill="white" />
-                                        </svg>
-                                        <p className="text-xs leading-3 text-white ml-1">Book a Seat</p>
-                                    </button>
-                                    <button className="py-2 ml-3 px-3 bg-gray-700 hover:bg-gray-600 ease-in duration-150 rounded-sm flex items-center">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width={12} height={12} viewBox="0 0 12 12" fill="none">
-                                            <circle cx={3} cy={6} r="1.5" stroke="white" strokeWidth="0.75" strokeLinecap="round" strokeLinejoin="round" />
-                                            <circle cx={9} cy={3} r="1.5" stroke="white" strokeWidth="0.75" strokeLinecap="round" strokeLinejoin="round" />
-                                            <circle cx={9} cy={9} r="1.5" stroke="white" strokeWidth="0.75" strokeLinecap="round" strokeLinejoin="round" />
-                                            <path d="M4.34998 5.3499L7.64998 3.6499" stroke="white" strokeWidth="0.75" strokeLinecap="round" strokeLinejoin="round" />
-                                            <path d="M4.34998 6.6499L7.64998 8.3499" stroke="white" strokeWidth="0.75" strokeLinecap="round" strokeLinejoin="round" />
-                                        </svg>
-                                        <p className="text-xs leading-3 text-white ml-1">Share Event</p>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </a>
-                    <a href="/events-inner">
-                        <div className="bg-white pb-6 shadow-xl max-w-md">
-                            <img className="w-full" src="https://cdn.tuk.dev/assets/templates/virtual-event-management/events-11.png" alt="costume-party" />
-                            <div className="mt-4 pl-4">
-                                <p className="w-2/4 text-base font-bold leading-normal text-gray-800">New Years Costume Party</p>
-                            </div>
-                            <div className="mt-4 flex items-center pl-4">
-                                <svg xmlns="http://www.w3.org/2000/svg" width={20} height={20} viewBox="0 0 20 20" fill="none">
-                                    <rect x="3.33337" y="4.16699" width="13.3333" height="13.3333" rx={2} stroke="#718096" strokeWidth="1.25" strokeLinecap="round" strokeLinejoin="round" />
-                                    <path d="M13.3333 2.5V5.83333" stroke="#718096" strokeWidth="1.25" strokeLinecap="round" strokeLinejoin="round" />
-                                    <path d="M6.66667 2.5V5.83333" stroke="#718096" strokeWidth="1.25" strokeLinecap="round" strokeLinejoin="round" />
-                                    <path d="M3.33337 9.16667H16.6667" stroke="#718096" strokeWidth="1.25" strokeLinecap="round" strokeLinejoin="round" />
-                                    <path d="M9.16663 12.4997H9.99996" stroke="#718096" strokeWidth="1.25" strokeLinecap="round" strokeLinejoin="round" />
-                                    <path d="M10 12.5V15" stroke="#718096" strokeWidth="1.25" strokeLinecap="round" strokeLinejoin="round" />
-                                </svg>
-                                <p className="text-sm leading-none text-gray-700 ml-2">14th September 2020</p>
-                            </div>
-                            <div className="mt-4 pl-4 flex items-center">
-                                <svg xmlns="http://www.w3.org/2000/svg" width={20} height={20} viewBox="0 0 20 20" fill="none">
-                                    <circle cx={10} cy={10} r="7.5" stroke="#718096" strokeWidth="1.25" strokeLinecap="round" strokeLinejoin="round" />
-                                    <path d="M10 5.83301V9.99967L12.5 12.4997" stroke="#718096" strokeWidth="1.25" strokeLinecap="round" strokeLinejoin="round" />
-                                </svg>
-                                <p className="text-sm leading-none text-gray-700 ml-2">Tuesday, 9:00 pm - 11:00 pm</p>
-                            </div>
-                            <div className="mt-4 pl-4">
-                                <p className="text-xs leading-3 text-gray-700">Attended by</p>
-                            </div>
-                            <div className="mt-3 pl-4 flex w-full items-center justify-between">
-                                <div className="flex items-center relative">
-                                    <div className="w-6 h-6 rounded-full flex justify-center items-center">
-                                        <img className="object-cover object-center h-full w-full" src="https://cdn.tuk.dev/assets/templates/virtual-event-management/events-5.png" alt="profile" />
-                                    </div>
-                                    <div className="w-6 h-6  rounded-full flex justify-center items-center -ml-2">
-                                        <img className="object-cover object-center h-full w-full" src="https://cdn.tuk.dev/assets/templates/virtual-event-management/events-6.png" alt="profile" />
-                                    </div>
-                                    <div className="w-6 h-6  rounded-full flex justify-center items-center -ml-2">
-                                        <img className="object-cover object-center h-full w-full" src="https://cdn.tuk.dev/assets/templates/virtual-event-management/events-7.png" alt="profile" />
-                                    </div>
-                                    <div className="w-6 h-6  rounded-full flex justify-center border-2 border-white bg-red-400 items-center -ml-2">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width={8} height={8} viewBox="0 0 8 8" fill="none">
-                                            <path d="M4.557 0.838V3.827H7.406V4.772H4.557V7.782H3.535V4.772H0.7V3.827H3.535V0.838H4.557Z" fill="white" />
-                                        </svg>
-                                    </div>
-                                </div>
-                                <div className="py-2 px-5 flex justify-center items-center bg-gray-800">
-                                    <p className="text-sm font-bold leading-none text-white">$ 45</p>
-                                </div>
-                            </div>
-                            <div className="mt-5 pl-4">
-                                <div className="flex items-center">
-                                    <p className="text-xs leading-3 text-green-500 mr-2">Available</p>
-                                    <div className="pl-2 border-l-2 border-gray-100">
-                                        <p className="text-xs leading-3 text-green-500">86/90 seats booked</p>
-                                    </div>
-                                </div>
-                                <div className="mt-4 flex items-center">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width={16} height={16} viewBox="0 0 16 16" fill="none">
-                                        <path d="M6.66663 9.33342C7.1055 9.78135 7.7062 10.0338 8.33329 10.0338C8.96039 10.0338 9.56109 9.78135 9.99996 9.33342L12.6666 6.66676C13.5871 5.74628 13.5871 4.2539 12.6666 3.33342C11.7462 2.41295 10.2538 2.41295 9.33329 3.33342L8.99996 3.66676" stroke="#718096" strokeWidth="1.25" strokeLinecap="round" strokeLinejoin="round" />
-                                        <path d="M9.3333 6.66665C8.89443 6.21872 8.29373 5.96631 7.66663 5.96631C7.03954 5.96631 6.43884 6.21872 5.99997 6.66665L3.3333 9.33332C2.41283 10.2538 2.41283 11.7462 3.3333 12.6666C4.25377 13.5871 5.74616 13.5871 6.66663 12.6666L6.99997 12.3333" stroke="#718096" strokeWidth="1.25" strokeLinecap="round" strokeLinejoin="round" />
-                                    </svg>
-                                    <p className="ml-2 text-xs leading-3 text-gray-600">Veevents.com/cosutmeparty</p>
-                                    <svg className="ml-3.5 cursor-pointer" xmlns="http://www.w3.org/2000/svg" width={16} height={16} viewBox="0 0 16 16" fill="none">
-                                        <rect x="5.33331" y="5.33301" width={8} height={8} rx="1.33333" stroke="#718096" strokeLinecap="round" strokeLinejoin="round" />
-                                        <path d="M10.6667 5.33366V4.00033C10.6667 3.26395 10.0697 2.66699 9.33335 2.66699H4.00002C3.26364 2.66699 2.66669 3.26395 2.66669 4.00033V9.33366C2.66669 10.07 3.26364 10.667 4.00002 10.667H5.33335" stroke="#718096" strokeLinecap="round" strokeLinejoin="round" />
-                                    </svg>
-                                </div>
-                                <div className="flex items-center mt-4">
-                                    <button className="py-2 px-3 bg-gradient-to-br  from-red-400 to-red-500 hover:from-red-500 hover:to-red-400 rounded-sm flex items-center">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width={12} height={12} viewBox="0 0 12 12" fill="none">
-                                            <circle cx="4.5" cy="3.5" r={2} stroke="white" strokeWidth="0.75" strokeLinecap="round" strokeLinejoin="round" />
-                                            <path d="M1.5 10.5V9.5C1.5 8.39543 2.39543 7.5 3.5 7.5H5.5C6.60457 7.5 7.5 8.39543 7.5 9.5V10.5" stroke="white" strokeWidth="0.75" strokeLinecap="round" strokeLinejoin="round" />
-                                            <path d="M8 5.125C7.79289 5.125 7.625 5.29289 7.625 5.5C7.625 5.70711 7.79289 5.875 8 5.875V5.125ZM11 5.875C11.2071 5.875 11.375 5.70711 11.375 5.5C11.375 5.29289 11.2071 5.125 11 5.125V5.875ZM9.875 4C9.875 3.79289 9.70711 3.625 9.5 3.625C9.29289 3.625 9.125 3.79289 9.125 4H9.875ZM9.125 7C9.125 7.20711 9.29289 7.375 9.5 7.375C9.70711 7.375 9.875 7.20711 9.875 7H9.125ZM8 5.875H11V5.125H8V5.875ZM9.125 4V7H9.875V4H9.125Z" fill="white" />
-                                        </svg>
-                                        <p className="text-xs leading-3 text-white ml-1">Book a Seat</p>
-                                    </button>
-                                    <button className="py-2 ml-3 px-3 bg-gray-700 hover:bg-gray-600 ease-in duration-150 rounded-sm flex items-center">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width={12} height={12} viewBox="0 0 12 12" fill="none">
-                                            <circle cx={3} cy={6} r="1.5" stroke="white" strokeWidth="0.75" strokeLinecap="round" strokeLinejoin="round" />
-                                            <circle cx={9} cy={3} r="1.5" stroke="white" strokeWidth="0.75" strokeLinecap="round" strokeLinejoin="round" />
-                                            <circle cx={9} cy={9} r="1.5" stroke="white" strokeWidth="0.75" strokeLinecap="round" strokeLinejoin="round" />
-                                            <path d="M4.34998 5.3499L7.64998 3.6499" stroke="white" strokeWidth="0.75" strokeLinecap="round" strokeLinejoin="round" />
-                                            <path d="M4.34998 6.6499L7.64998 8.3499" stroke="white" strokeWidth="0.75" strokeLinecap="round" strokeLinejoin="round" />
-                                        </svg>
-                                        <p className="text-xs leading-3 text-white ml-1">Share Event</p>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </a>
+import { useState } from 'react'
+import { StarIcon } from '@heroicons/react/20/solid'
+import { RadioGroup } from '@headlessui/react'
+
+const product = {
+  name: 'Basic Tee 6-Pack',
+  price: '$192',
+  href: '#',
+  breadcrumbs: [
+    { id: 1, name: 'Men', href: '#' },
+    { id: 2, name: 'Clothing', href: '#' },
+  ],
+  images: [
+    {
+      src: 'https://tailwindui.com/img/ecommerce-images/product-page-02-secondary-product-shot.jpg',
+      alt: 'Two each of gray, white, and black shirts laying flat.',
+    },
+    {
+      src: 'https://tailwindui.com/img/ecommerce-images/product-page-02-tertiary-product-shot-01.jpg',
+      alt: 'Model wearing plain black basic tee.',
+    },
+    {
+      src: 'https://tailwindui.com/img/ecommerce-images/product-page-02-tertiary-product-shot-02.jpg',
+      alt: 'Model wearing plain gray basic tee.',
+    },
+    {
+      src: 'https://tailwindui.com/img/ecommerce-images/product-page-02-featured-product-shot.jpg',
+      alt: 'Model wearing plain white basic tee.',
+    },
+  ],
+  colors: [
+    { name: 'White', class: 'bg-white', selectedClass: 'ring-gray-400' },
+    { name: 'Gray', class: 'bg-gray-200', selectedClass: 'ring-gray-400' },
+    { name: 'Black', class: 'bg-gray-900', selectedClass: 'ring-gray-900' },
+  ],
+  sizes: [
+    { name: 'XXS', inStock: false },
+    { name: 'XS', inStock: true },
+    { name: 'S', inStock: true },
+    { name: 'M', inStock: true },
+    { name: 'L', inStock: true },
+    { name: 'XL', inStock: true },
+    { name: '2XL', inStock: true },
+    { name: '3XL', inStock: true },
+  ],
+  description:
+    'The Basic Tee 6-Pack allows you to fully express your vibrant personality with three grayscale options. Feeling adventurous? Put on a heather gray tee. Want to be a trendsetter? Try our exclusive colorway: "Black". Need to add an extra pop of color to your outfit? Our white tee has you covered.',
+  highlights: [
+    'Hand cut and sewn locally',
+    'Dyed with our proprietary colors',
+    'Pre-washed & pre-shrunk',
+    'Ultra-soft 100% cotton',
+  ],
+  details:
+    'The 6-Pack includes two black, two white, and two heather gray Basic Tees. Sign up for our subscription service and be the first to get new, exciting colors, like our upcoming "Charcoal Gray" limited release.',
+}
+const reviews = { href: '#', average: 4, totalCount: 117 }
+
+function classNames(...classes) {
+  return classes.filter(Boolean).join(' ')
+}
+
+export default function Example() {
+  const [selectedColor, setSelectedColor] = useState(product.colors[0])
+  const [selectedSize, setSelectedSize] = useState(product.sizes[2])
+
+  return (
+    <div className="bg-white">
+      <div className="pt-6">
+        <nav aria-label="Breadcrumb">
+          <ol role="list" className="mx-auto flex max-w-2xl items-center space-x-2 px-4 sm:px-6 lg:max-w-7xl lg:px-8">
+            {product.breadcrumbs.map((breadcrumb) => (
+              <li key={breadcrumb.id}>
+                <div className="flex items-center">
+                  <a href={breadcrumb.href} className="mr-2 text-sm font-medium text-gray-900">
+                    {breadcrumb.name}
+                  </a>
+                  <svg
+                    width={16}
+                    height={20}
+                    viewBox="0 0 16 20"
+                    fill="currentColor"
+                    xmlns="http://www.w3.org/2000/svg"
+                    aria-hidden="true"
+                    className="h-5 w-4 text-gray-300"
+                  >
+                    <path d="M5.697 4.34L8.98 16.532h1.327L7.025 4.341H5.697z" />
+                  </svg>
                 </div>
+              </li>
+            ))}
+            <li className="text-sm">
+              <a href={product.href} aria-current="page" className="font-medium text-gray-500 hover:text-gray-600">
+                {product.name}
+              </a>
+            </li>
+          </ol>
+        </nav>
+
+        {/* Image gallery */}
+        <div className="mx-auto mt-6 max-w-2xl sm:px-6 lg:grid lg:max-w-7xl lg:grid-cols-3 lg:gap-x-8 lg:px-8">
+          <div className="aspect-w-3 aspect-h-4 hidden overflow-hidden rounded-lg lg:block">
+            <img
+              src={product.images[0].src}
+              alt={product.images[0].alt}
+              className="h-full w-full object-cover object-center"
+            />
+          </div>
+          <div className="hidden lg:grid lg:grid-cols-1 lg:gap-y-8">
+            <div className="aspect-w-3 aspect-h-2 overflow-hidden rounded-lg">
+              <img
+                src={product.images[1].src}
+                alt={product.images[1].alt}
+                className="h-full w-full object-cover object-center"
+              />
             </div>
-        </>
-    );
+            <div className="aspect-w-3 aspect-h-2 overflow-hidden rounded-lg">
+              <img
+                src={product.images[2].src}
+                alt={product.images[2].alt}
+                className="h-full w-full object-cover object-center"
+              />
+            </div>
+          </div>
+          <div className="aspect-w-4 aspect-h-5 sm:overflow-hidden sm:rounded-lg lg:aspect-w-3 lg:aspect-h-4">
+            <img
+              src={product.images[3].src}
+              alt={product.images[3].alt}
+              className="h-full w-full object-cover object-center"
+            />
+          </div>
+        </div>
+
+        {/* Product info */}
+        <div className="mx-auto max-w-2xl px-4 pt-10 pb-16 sm:px-6 lg:grid lg:max-w-7xl lg:grid-cols-3 lg:grid-rows-[auto,auto,1fr] lg:gap-x-8 lg:px-8 lg:pt-16 lg:pb-24">
+          <div className="lg:col-span-2 lg:border-r lg:border-gray-200 lg:pr-8">
+            <h1 className="text-2xl font-bold tracking-tight text-gray-900 sm:text-3xl">{product.name}</h1>
+          </div>
+
+          {/* Options */}
+          <div className="mt-4 lg:row-span-3 lg:mt-0">
+            <h2 className="sr-only">Product information</h2>
+            <p className="text-3xl tracking-tight text-gray-900">{product.price}</p>
+
+            {/* Reviews */}
+            <div className="mt-6">
+              <h3 className="sr-only">Reviews</h3>
+              <div className="flex items-center">
+                <div className="flex items-center">
+                  {[0, 1, 2, 3, 4].map((rating) => (
+                    <StarIcon
+                      key={rating}
+                      className={classNames(
+                        reviews.average > rating ? 'text-gray-900' : 'text-gray-200',
+                        'h-5 w-5 flex-shrink-0'
+                      )}
+                      aria-hidden="true"
+                    />
+                  ))}
+                </div>
+                <p className="sr-only">{reviews.average} out of 5 stars</p>
+                <a href={reviews.href} className="ml-3 text-sm font-medium text-indigo-600 hover:text-indigo-500">
+                  {reviews.totalCount} reviews
+                </a>
+              </div>
+            </div>
+
+            <form className="mt-10">
+              {/* Colors */}
+              <div>
+                <h3 className="text-sm font-medium text-gray-900">Color</h3>
+
+                <RadioGroup value={selectedColor} onChange={setSelectedColor} className="mt-4">
+                  <RadioGroup.Label className="sr-only"> Choose a color </RadioGroup.Label>
+                  <div className="flex items-center space-x-3">
+                    {product.colors.map((color) => (
+                      <RadioGroup.Option
+                        key={color.name}
+                        value={color}
+                        className={({ active, checked }) =>
+                          classNames(
+                            color.selectedClass,
+                            active && checked ? 'ring ring-offset-1' : '',
+                            !active && checked ? 'ring-2' : '',
+                            '-m-0.5 relative p-0.5 rounded-full flex items-center justify-center cursor-pointer focus:outline-none'
+                          )
+                        }
+                      >
+                        <RadioGroup.Label as="span" className="sr-only">
+                          {' '}
+                          {color.name}{' '}
+                        </RadioGroup.Label>
+                        <span
+                          aria-hidden="true"
+                          className={classNames(
+                            color.class,
+                            'h-8 w-8 border border-black border-opacity-10 rounded-full'
+                          )}
+                        />
+                      </RadioGroup.Option>
+                    ))}
+                  </div>
+                </RadioGroup>
+              </div>
+
+              {/* Sizes */}
+              <div className="mt-10">
+                <div className="flex items-center justify-between">
+                  <h3 className="text-sm font-medium text-gray-900">Size</h3>
+                  <a href="#" className="text-sm font-medium text-indigo-600 hover:text-indigo-500">
+                    Size guide
+                  </a>
+                </div>
+
+                <RadioGroup value={selectedSize} onChange={setSelectedSize} className="mt-4">
+                  <RadioGroup.Label className="sr-only"> Choose a size </RadioGroup.Label>
+                  <div className="grid grid-cols-4 gap-4 sm:grid-cols-8 lg:grid-cols-4">
+                    {product.sizes.map((size) => (
+                      <RadioGroup.Option
+                        key={size.name}
+                        value={size}
+                        disabled={!size.inStock}
+                        className={({ active }) =>
+                          classNames(
+                            size.inStock
+                              ? 'bg-white shadow-sm text-gray-900 cursor-pointer'
+                              : 'bg-gray-50 text-gray-200 cursor-not-allowed',
+                            active ? 'ring-2 ring-indigo-500' : '',
+                            'group relative border rounded-md py-3 px-4 flex items-center justify-center text-sm font-medium uppercase hover:bg-gray-50 focus:outline-none sm:flex-1 sm:py-6'
+                          )
+                        }
+                      >
+                        {({ active, checked }) => (
+                          <>
+                            <RadioGroup.Label as="span">{size.name}</RadioGroup.Label>
+                            {size.inStock ? (
+                              <span
+                                className={classNames(
+                                  active ? 'border' : 'border-2',
+                                  checked ? 'border-indigo-500' : 'border-transparent',
+                                  'pointer-events-none absolute -inset-px rounded-md'
+                                )}
+                                aria-hidden="true"
+                              />
+                            ) : (
+                              <span
+                                aria-hidden="true"
+                                className="pointer-events-none absolute -inset-px rounded-md border-2 border-gray-200"
+                              >
+                                <svg
+                                  className="absolute inset-0 h-full w-full stroke-2 text-gray-200"
+                                  viewBox="0 0 100 100"
+                                  preserveAspectRatio="none"
+                                  stroke="currentColor"
+                                >
+                                  <line x1={0} y1={100} x2={100} y2={0} vectorEffect="non-scaling-stroke" />
+                                </svg>
+                              </span>
+                            )}
+                          </>
+                        )}
+                      </RadioGroup.Option>
+                    ))}
+                  </div>
+                </RadioGroup>
+              </div>
+
+              <button
+                type="submit"
+                className="mt-10 flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-600 py-3 px-8 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+              >
+                Add to bag
+              </button>
+            </form>
+          </div>
+
+          <div className="py-10 lg:col-span-2 lg:col-start-1 lg:border-r lg:border-gray-200 lg:pt-6 lg:pb-16 lg:pr-8">
+            {/* Description and details */}
+            <div>
+              <h3 className="sr-only">Description</h3>
+
+              <div className="space-y-6">
+                <p className="text-base text-gray-900">{product.description}</p>
+              </div>
+            </div>
+
+            <div className="mt-10">
+              <h3 className="text-sm font-medium text-gray-900">Highlights</h3>
+
+              <div className="mt-4">
+                <ul role="list" className="list-disc space-y-2 pl-4 text-sm">
+                  {product.highlights.map((highlight) => (
+                    <li key={highlight} className="text-gray-400">
+                      <span className="text-gray-600">{highlight}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+
+            <div className="mt-10">
+              <h2 className="text-sm font-medium text-gray-900">Details</h2>
+
+              <div className="mt-4 space-y-6">
+                <p className="text-sm text-gray-600">{product.details}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  )
 }
