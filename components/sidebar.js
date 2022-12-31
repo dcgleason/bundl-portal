@@ -62,7 +62,7 @@ export default function Home() {
                                             <rect x="11.6666" y="3.3335" width={5} height="8.33333" rx="1.66667" stroke="white" strokeWidth="1.25" strokeLinecap="round" strokeLinejoin="round" />
                                         </svg>
                                     </div>
-                                    <p className="ml-2">My Contributors</p>
+                                    <p className="ml-2">Add Contributors</p>
                                 </div>
                             </a>
                             <a href="./edit">
@@ -73,7 +73,7 @@ export default function Home() {
                                             <path d="M3.33337 12.5L6.66671 7.5L10 9.16667L13.3334 5L16.6667 8.33333" stroke="#CBD5E0" strokeWidth="1.25" strokeLinecap="round" strokeLinejoin="round" />
                                         </svg>
                                     </div>
-                                    <p className="ml-2">Edit My Bundle</p>
+                                    <p className="ml-2">Add/edit Contributions</p>
                                 </div>
                             </a>
                             <a href="/submit">
@@ -142,7 +142,7 @@ export default function Home() {
                                             <path d="M3.33337 12.5L6.66671 7.5L10 9.16667L13.3334 5L16.6667 8.33333" stroke="#CBD5E0" strokeWidth="1.25" strokeLinecap="round" strokeLinejoin="round" />
                                         </svg>
                                     </div>
-                                    <p className="ml-2">Edit My Bundle</p>
+                                    <p className="ml-2">Edit Contributions</p>
                                 </div>
                             </a>
                             <a href="/submit">

@@ -3,7 +3,7 @@ import { StarIcon } from '@heroicons/react/20/solid'
 import { RadioGroup } from '@headlessui/react'
 
 const product = {
-  name: 'Basic Tee 6-Pack',
+  name: 'Choose your Bundle book style',
   price: '$192',
   href: '#',
   breadcrumbs: [
@@ -34,14 +34,14 @@ const product = {
     { name: 'Black', class: 'bg-gray-900', selectedClass: 'ring-gray-900' },
   ],
   sizes: [
-    { name: 'XXS', inStock: false },
-    { name: 'XS', inStock: true },
-    { name: 'S', inStock: true },
-    { name: 'M', inStock: true },
-    { name: 'L', inStock: true },
-    { name: 'XL', inStock: true },
-    { name: '2XL', inStock: true },
-    { name: '3XL', inStock: true },
+    { name: 'Classic White', inStock: true },
+    { name: 'Red/ White spine', inStock: true },
+    { name: 'White/ Red spine', inStock: true },
+    { name: 'White/ Cream spine', inStock: true },
+    { name: 'All Red', inStock: true },
+    { name: 'All Cream', inStock: true },
+    { name: 'Red Back', inStock: true },
+    { name: 'Green back', inStock: true },
   ],
   description:
     'The Basic Tee 6-Pack allows you to fully express your vibrant personality with three grayscale options. Feeling adventurous? Put on a heather gray tee. Want to be a trendsetter? Try our exclusive colorway: "Black". Need to add an extra pop of color to your outfit? Our white tee has you covered.',
@@ -166,12 +166,12 @@ export default function Example() {
             </div>
 
             <form className="mt-10">
-              {/* Colors */}
+              {/* Colors
               <div>
-                <h3 className="text-sm font-medium text-gray-900">Color</h3>
+                <h3 className="text-sm font-medium text-gray-900">Style</h3>
 
                 <RadioGroup value={selectedColor} onChange={setSelectedColor} className="mt-4">
-                  <RadioGroup.Label className="sr-only"> Choose a color </RadioGroup.Label>
+                  <RadioGroup.Label className="sr-only"> Choose a book style </RadioGroup.Label>
                   <div className="flex items-center space-x-3">
                     {product.colors.map((color) => (
                       <RadioGroup.Option
@@ -201,19 +201,17 @@ export default function Example() {
                     ))}
                   </div>
                 </RadioGroup>
-              </div>
+              </div> */}
 
               {/* Sizes */}
               <div className="mt-10">
                 <div className="flex items-center justify-between">
-                  <h3 className="text-sm font-medium text-gray-900">Size</h3>
-                  <a href="#" className="text-sm font-medium text-indigo-600 hover:text-indigo-500">
-                    Size guide
-                  </a>
+                  <h3 className="text-sm font-medium text-gray-900">Style</h3>
+            
                 </div>
 
                 <RadioGroup value={selectedSize} onChange={setSelectedSize} className="mt-4">
-                  <RadioGroup.Label className="sr-only"> Choose a size </RadioGroup.Label>
+                  <RadioGroup.Label className="sr-only"> Choose a style </RadioGroup.Label>
                   <div className="grid grid-cols-4 gap-4 sm:grid-cols-8 lg:grid-cols-4">
                     {product.sizes.map((size) => (
                       <RadioGroup.Option
