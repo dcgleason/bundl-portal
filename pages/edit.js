@@ -5,6 +5,7 @@ import { useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
 
 
+
 const UserComponent = ({
   id,
   body
@@ -38,7 +39,7 @@ const UserComponent = ({
           {...listeners}
           style={style}
       >
-      {body}
+     {body}
   
          
       </div>
@@ -47,57 +48,14 @@ const UserComponent = ({
   )
 }
 
-function DragApp() {
-
-    const [items, setItems] = useState([
-        {
-          id: "1",
-          name: "Manoj"
-        },
-        {
-          id: "2",
-          name: "John"
-        },
-        {
-          id: "3",
-          name: "Ronaldo"
-        },
-        {
-          id: "4",
-          name: "Harry"
-        },
-        {
-          id: "5",
-          name: "Jamie"
-        }
-      ])
-
-    useEffect(() => {
-        fetch('https://jsonplaceholder.typicode.com/posts')
-          .then((response) => response.json())
-          .then((data) => setItems(data));
-      }, []);
+function InputForm() {
 
   const [ questionOne, setQuestionOne] = useState('');
   const [selectedImage, setSelectedImage] = useState(null);
 
-  const sensors = [useSensor(PointerSensor)];
-
-  const handleDragEnd = ({active, over}) => {
-    if (active.id !== over.id) {
-      setItems((items) => {
-        const oldIndex = items.findIndex(item => item.id === active.id)
-        const newIndex = items.findIndex(item => item.id === over.id)
-
-        return arrayMove(items, oldIndex, newIndex)
-      })
-    }
-  }
-
   return (
-
-<>
-<form className="space-y-8 divide-y divide-gray-200" action="#" method="POST">
+    <>
+    <form className="space-y-8 divide-y divide-gray-200" action="#" method="POST">
 <div className="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
               <label htmlFor="username" className="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2">
               <em>Upload a note manually: </em>
@@ -165,10 +123,87 @@ function DragApp() {
         </div>
       </div>
     </form>
+    </>
+  
+  )
 
-    <div className="flex flex-col items-center justify-center min-h-screen py-2">
+}
+
+function DragApp() {
+
+    const [items, setItems] = useState([
+        {
+          id: "1",
+          name: "Manoj"
+        },
+        {
+          id: "2",
+          name: "John"
+        },
+        {
+          id: "3",
+          name: "Ronaldo"
+        },
+        {
+          id: "4",
+          name: "Harry"
+        },
+        {
+          id: "5",
+          name: "Jamie"
+        }
+      ])
+
+    useEffect(() => {
+        fetch('https://jsonplaceholder.typicode.com/posts')
+          .then((response) => response.json())
+          .then((data) => setItems(data));
+      }, []);
+
+
+
+  const sensors = [useSensor(PointerSensor)];
+
+
+  const saveOrder = () => {
+
+    console.log("order" + items.map(item => item.id))
+    // Send the current order of the items to a database via a POST route
+    fetch('/api/save-order', { // create this route in our API
+      method: 'POST',
+      body: JSON.stringify({
+        order: items.map(item => item.id)
+      })
+    })
+  }
+
+  const handleDragEnd = ({active, over}) => {
+    if (active.id !== over.id) {
+      setItems((items) => {
+        const oldIndex = items.findIndex(item => item.id === active.id)
+        const newIndex = items.findIndex(item => item.id === over.id)
+
+        return arrayMove(items, oldIndex, newIndex)
+      })
+    }
+  }
+
+  return (
+
+<>
+
+<div className="grid grid-cols-2 divide-x-2 divide-gray-400">
+  <div className="col-span-1 p-6">
+
+  <InputForm/>
+
+  </div>
+
+
+  <div className="col-span-1 p-6 mx-10">
+  <div className="flex flex-col items-center justify-center min-h-screen py-2">
     <label  className="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2">
-              <em>Drag and Drop to reorder your notes: </em>
+              <em>Drag and Drop to reorder your notes (this is the order that your contributions will appear in your Bundle): </em>
      </label>
     <div
       style={{
@@ -195,7 +230,11 @@ function DragApp() {
         </SortableContext>
       </DndContext>
     </div>
+    <button onClick={saveOrder} className="inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-base font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2" >Save Order</button>
   </div>
+
+  </div>
+</div>
     </>
   );
 
