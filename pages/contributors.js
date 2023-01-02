@@ -1,6 +1,6 @@
 
 
-import { Button, Table, Modal, Input } from "antd";
+import { Button, Table, Modal, Input, Select } from "antd";
 import { useState } from "react";
 import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
 import Papa from "papaparse";
@@ -12,6 +12,7 @@ const CSV = () => {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
+  const [notes, setNotes] = useState("");
   const [submitted, setSubmitted] = useState("");
   const [newStudent, setNewStudent] = useState(null);
        // State to store parsed data
@@ -31,24 +32,28 @@ const CSV = () => {
       name: "John",
       email: "john@gmail.com",
       submitted: "Yes",
+      notes: "",
     },
     {
       id: 2,
       name: "David",
       email: "david@gmail.com",
       submitted: "No",
+      notes: "",
     },
     {
       id: 3,
       name: "James",
       email: "james@gmail.com",
       submitted: "No",
+      notes: "",
     },
     {
       id: 4,
       name: "Sam",
       email: "sam@gmail.com",
       submitted: "Yes",
+      notes: "",
     },
   ]);
   const columns = [
@@ -74,6 +79,11 @@ const CSV = () => {
     },
     {
       key: "5",
+      title: "Notes",
+      dataIndex: "notes",
+    },
+    {
+      key: "6",
       title: "Actions",
       render: (record) => {
         return (
@@ -93,6 +103,7 @@ const CSV = () => {
         );
       },
     },
+
   ];
 
 
@@ -151,16 +162,16 @@ const CSV = () => {
   const onAddStudent = () => {
     setIsModalVisible(true);
 
-    const randomNumber = parseInt(Math.random() * 1000);
-    const newStudent = {
-      id: dataSource[dataSource.length - 1].id + 1,
-      name: "Name " + randomNumber,
-      email: randomNumber + "@gmail.com",
-      address: "Address " + randomNumber,
-    };
-    setDataSource((pre) => {
-      return [...pre, newStudent];
-    });
+    // const randomNumber = parseInt(Math.random() * 1000);
+    // const newStudent = {
+    //   id: dataSource[dataSource.length - 1].id + 1,
+    //   name: "Name " + randomNumber,
+    //   email: randomNumber + "@gmail.com",
+    //   address: "Address " + randomNumber,
+    // };
+    // setDataSource((pre) => {
+    //   return [...pre, newStudent];
+    // });
   };
   const onDeleteStudent = (record) => {
     Modal.confirm({
@@ -176,6 +187,7 @@ const CSV = () => {
   };
   const onEditStudent = (record) => {
     setIsEditing(true);
+    console.log("record", record)
     setEditingStudent({ ...record });
   };
   const resetEditing = () => {
@@ -185,9 +197,17 @@ const CSV = () => {
 
   const handleOk = () => {
     setIsModalVisible(false);
-
-
-  }
+  
+    const newStudent = {
+      id: dataSource.length + 1,
+      name: name,
+      email: email,
+      submitted: submitted,
+      notes: notes,
+    };
+  
+    setDataSource([...dataSource, newStudent]);
+  };
 
   const handleCancel = () => {
     setIsModalVisible(false);
@@ -238,11 +258,30 @@ const CSV = () => {
               });
             }}
           />
-          <Input
-            value={editingStudent?.address}
+          <Select
+            value={editingStudent?.submitted}
+            onChange={(value) => {
+              console.log("editingStudent", editingStudent);
+              setEditingStudent((pre) => {
+                return { ...pre, submitted: value };
+              });
+            }}
+            options={[
+              {
+                value: 'Yes',
+                label: 'Yes',
+              },
+              {
+                value: 'No',
+                label: 'No',
+              }
+            ]}
+          />
+           <Input
+            value={editingStudent?.notes}
             onChange={(e) => {
               setEditingStudent((pre) => {
-                return { ...pre, address: e.target.value };
+                return { ...pre, notes: e.target.value };
               });
             }}
           />
@@ -256,7 +295,23 @@ const CSV = () => {
       >
         <Input placeholder="Name" value={name} onChange={(e) => setName(e.target.value)}/>
         <Input placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)}/>
-        <Input placeholder="Submitted" value={submitted} onChange={(e) => setSubmitted(e.target.value)} />
+        <Select
+          defaultValue="Yes"
+          style={{ width: 120 }}
+          onChange={(value) => setSubmitted(value)}
+          allowClear
+          options={[
+            {
+              value: 'yes',
+              label: 'Yes',
+            },
+            {
+              value: 'no',
+              label: 'No',
+            }
+          ]}
+        />
+        <Input placeholder="Notes" value={notes} onChange={(e) => setNotes(e.target.value)} />
       </Modal>
       </header>
     </div>
