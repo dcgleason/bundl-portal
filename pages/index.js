@@ -1,6 +1,16 @@
 import { useState } from 'react'
 import { StarIcon } from '@heroicons/react/20/solid'
 import { RadioGroup } from '@headlessui/react'
+import allWhite from '../images/white.jpeg'
+import allRed from '../images/red.jpeg'
+import cream from '../images/cream.jpeg'
+import green from '../images/green.jpeg'
+import redWhite from '../images/redwhite.jpeg'
+import redWhiteSpine from '../images/redwhitespine.jpeg'
+import whiteCream from '../images/whitecream.jpeg'
+import whiteRedSpine from '../images/whiteredspine.jpeg'
+import allWhiteOpen from '../images/whitewhite.jpeg'
+import Image from 'next/image'
 
 const product = {
   name: 'Choose your Bundle book style',
@@ -12,21 +22,41 @@ const product = {
   ],
   images: [
     {
-      src: 'https://tailwindui.com/img/ecommerce-images/product-page-02-secondary-product-shot.jpg',
-      alt: 'Two each of gray, white, and black shirts laying flat.',
+      src: allWhite,
+      alt: 'All white book',
     },
     {
-      src: 'https://tailwindui.com/img/ecommerce-images/product-page-02-tertiary-product-shot-01.jpg',
-      alt: 'Model wearing plain black basic tee.',
+      src: allRed,
+      alt: 'Red book',
     },
     {
-      src: 'https://tailwindui.com/img/ecommerce-images/product-page-02-tertiary-product-shot-02.jpg',
-      alt: 'Model wearing plain gray basic tee.',
+      src: cream,
+      alt: 'Cream book',
     },
     {
-      src: 'https://tailwindui.com/img/ecommerce-images/product-page-02-featured-product-shot.jpg',
-      alt: 'Model wearing plain white basic tee.',
+      src: green,
+      alt: 'Green book',
     },
+    {
+        src: redWhite,
+        alt: 'Red and white book',
+      },
+      {
+        src: redWhiteSpine,
+        alt: 'Red book white spine book',
+      },
+      {
+        src: whiteCream,
+        alt: 'White cream book',
+      },
+      {
+        src: whiteRedSpine,
+        alt: 'Red book white spine book',
+      },
+      {
+        src: allWhiteOpen,
+        alt: 'All white book open',
+      },
   ],
   colors: [
     { name: 'White', class: 'bg-white', selectedClass: 'ring-gray-400' },
@@ -34,14 +64,14 @@ const product = {
     { name: 'Black', class: 'bg-gray-900', selectedClass: 'ring-gray-900' },
   ],
   sizes: [
-    { name: 'Classic White', inStock: true },
-    { name: 'Red/ White spine', inStock: true },
-    { name: 'White/ Red spine', inStock: true },
-    { name: 'White/ Cream spine', inStock: true },
-    { name: 'All Red', inStock: true },
-    { name: 'All Cream', inStock: true },
-    { name: 'Red Back', inStock: true },
-    { name: 'Green back', inStock: true },
+    { name: 'Classic White', inStock: true, code: 'classic-white' },
+    { name: 'Red/ White spine', inStock: true, code: 'red-white-spine' },
+    { name: 'White/ Red spine', inStock: true, code: 'white-red-spine' },
+    { name: 'White/ Cream spine', inStock: true, code: 'white-cream-spine' },
+    { name: 'All Red', inStock: true, code: 'all-red' },
+    { name: 'All Cream', inStock: true, code: 'all-cream' },
+    { name: 'Red Back', inStock: true, code: 'red-back'},
+    { name: 'Green back', inStock: true, code: 'green-back'},
   ],
   description:
     'The Basic Tee 6-Pack allows you to fully express your vibrant personality with three grayscale options. Feeling adventurous? Put on a heather gray tee. Want to be a trendsetter? Try our exclusive colorway: "Black". Need to add an extra pop of color to your outfit? Our white tee has you covered.',
@@ -60,9 +90,13 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
 }
 
-export default function Example() {
+export default function ChooseBook() {
   const [selectedColor, setSelectedColor] = useState(product.colors[0])
   const [selectedSize, setSelectedSize] = useState(product.sizes[2])
+  const [chooseStyle, setChooseStyle] = useState(null);
+
+
+  
 
   return (
     <div className="bg-white">
@@ -98,38 +132,39 @@ export default function Example() {
         </nav>
 
         {/* Image gallery */}
-        <div className="mx-auto mt-6 max-w-2xl sm:px-6 lg:grid lg:max-w-7xl lg:grid-cols-3 lg:gap-x-8 lg:px-8">
-          <div className="aspect-w-3 aspect-h-4 hidden overflow-hidden rounded-lg lg:block">
-            <img
-              src={product.images[0].src}
-              alt={product.images[0].alt}
-              className="h-full w-full object-cover object-center"
-            />
-          </div>
-          <div className="hidden lg:grid lg:grid-cols-1 lg:gap-y-8">
-            <div className="aspect-w-3 aspect-h-2 overflow-hidden rounded-lg">
-              <img
-                src={product.images[1].src}
-                alt={product.images[1].alt}
+        <div className="mx-auto mt-6 max-w-2xl">
+            <Image
+               src={(() => {
+                switch(chooseStyle) {
+                  case null:
+                    return allWhite;
+                  case 'classic-white':
+                    return allWhite;
+                  case 'red-white-spine':
+                    return redWhiteSpine;
+                  case 'white-red-spine':
+                    return whiteRedSpine;
+                  case 'white-cream-spine':
+                    return whiteCream;
+                  case 'all-red':
+                    return allRed;
+                  case 'all-cream':
+                    return cream;
+                  case 'red-back':
+                    return redWhite;
+                  case 'green-back':
+                    return green;
+                  default:
+                    return allWhite;
+                }
+              })()}
+                height={100}
+                width={400}
+                alt="Book style image"
                 className="h-full w-full object-cover object-center"
-              />
+             /> 
             </div>
-            <div className="aspect-w-3 aspect-h-2 overflow-hidden rounded-lg">
-              <img
-                src={product.images[2].src}
-                alt={product.images[2].alt}
-                className="h-full w-full object-cover object-center"
-              />
-            </div>
-          </div>
-          <div className="aspect-w-4 aspect-h-5 sm:overflow-hidden sm:rounded-lg lg:aspect-w-3 lg:aspect-h-4">
-            <img
-              src={product.images[3].src}
-              alt={product.images[3].alt}
-              className="h-full w-full object-cover object-center"
-            />
-          </div>
-        </div>
+    
 
         {/* Product info */}
         <div className="mx-auto max-w-2xl px-4 pt-10 pb-16 sm:px-6 lg:grid lg:max-w-7xl lg:grid-cols-3 lg:grid-rows-[auto,auto,1fr] lg:gap-x-8 lg:px-8 lg:pt-16 lg:pb-24">
@@ -230,7 +265,9 @@ export default function Example() {
                       >
                         {({ active, checked }) => (
                           <>
-                            <RadioGroup.Label as="span">{size.name}</RadioGroup.Label>
+                            <RadioGroup.Label as="span" onClick={() => {
+                                setChooseStyle(size.code)
+                            }} value={size.name}>{size.name}</RadioGroup.Label>
                             {size.inStock ? (
                               <span
                                 className={classNames(
