@@ -7,11 +7,11 @@ export default function Header() {
             <div className="w-full mt-8 md:mt-0">
                 <div className="flex flex-col flex-col-reverse md:flex-row w-full justify-between">
                     <div className="bg-gray-50 rounded-2xl flex items-center py-2 pl-3 mt-4 md:mt-0">
-                        <svg className="cursor-pointer" xmlns="http://www.w3.org/2000/svg" width={16} height={16} viewBox="0 0 16 16" fill="none">
+                        {/* <svg className="cursor-pointer" xmlns="http://www.w3.org/2000/svg" width={16} height={16} viewBox="0 0 16 16" fill="none">
                             <circle cx="6.66667" cy="6.66667" r="4.66667" stroke="#718096" strokeLinecap="round" strokeLinejoin="round" />
                             <path d="M14 14L10 10" stroke="#718096" strokeLinecap="round" strokeLinejoin="round" />
-                        </svg>
-                        <input placeholder="Search…" className="placeholder-gray-500 text-sm text-gray-700 w-52 pl-3 bg-transparent  focus:outline-none" type="text" />
+                        </svg> */}
+                        {/* <input placeholder="Search…" className="placeholder-gray-500 text-sm text-gray-700 w-52 pl-3 bg-transparent  focus:outline-none" type="text" /> */}
                     </div>
                     <div className="flex justify-between md:justify-start items-center">
                         <div className="flex items-center">

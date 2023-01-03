@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, createContext } from 'react'
 import { StarIcon } from '@heroicons/react/20/solid'
 import { RadioGroup } from '@headlessui/react'
 import allWhite from '../images/white.jpeg'
@@ -12,13 +12,14 @@ import whiteRedSpine from '../images/whiteredspine.jpeg'
 import allWhiteOpen from '../images/whitewhite.jpeg'
 import Image from 'next/image'
 
+const imageContext = createContext(null);
+
 const product = {
   name: 'Choose your Bundle book style',
   price: '$192',
   href: '#',
   breadcrumbs: [
-    { id: 1, name: 'Men', href: '#' },
-    { id: 2, name: 'Clothing', href: '#' },
+    { id: 1, name: 'Book', href: '#' }
   ],
   images: [
     {
@@ -73,8 +74,7 @@ const product = {
     { name: 'Red Back', inStock: true, code: 'red-back'},
     { name: 'Green back', inStock: true, code: 'green-back'},
   ],
-  description:
-    'The Basic Tee 6-Pack allows you to fully express your vibrant personality with three grayscale options. Feeling adventurous? Put on a heather gray tee. Want to be a trendsetter? Try our exclusive colorway: "Black". Need to add an extra pop of color to your outfit? Our white tee has you covered.',
+  description: 'Choose the style of your recipient\'s book.',
   highlights: [
     'Hand cut and sewn locally',
     'Dyed with our proprietary colors',
@@ -174,11 +174,11 @@ export default function ChooseBook() {
 
           {/* Options */}
           <div className="mt-4 lg:row-span-3 lg:mt-0">
-            <h2 className="sr-only">Product information</h2>
-            <p className="text-3xl tracking-tight text-gray-900">{product.price}</p>
+            {/* <h2 className="sr-only">Product information</h2>
+            <p className="text-3xl tracking-tight text-gray-900">{product.price}</p> */}
 
             {/* Reviews */}
-            <div className="mt-6">
+            {/* <div className="mt-6">
               <h3 className="sr-only">Reviews</h3>
               <div className="flex items-center">
                 <div className="flex items-center">
@@ -198,7 +198,7 @@ export default function ChooseBook() {
                   {reviews.totalCount} reviews
                 </a>
               </div>
-            </div>
+            </div> */}
 
             <form className="mt-10">
               {/* Colors
@@ -302,10 +302,10 @@ export default function ChooseBook() {
 
               <button
                 type="submit"
-                className="mt-10 flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-600 py-3 px-8 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                className="mt-10 flex w-full items-center justify-center rounded-md border border-transparent bg-red-600 py-3 px-8 text-base font-medium text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2"
               >
-                Add to bag
-              </button>
+                Select             
+                </button>
             </form>
           </div>
 
@@ -319,7 +319,7 @@ export default function ChooseBook() {
               </div>
             </div>
 
-            <div className="mt-10">
+            {/* <div className="mt-10">
               <h3 className="text-sm font-medium text-gray-900">Highlights</h3>
 
               <div className="mt-4">
@@ -331,14 +331,14 @@ export default function ChooseBook() {
                   ))}
                 </ul>
               </div>
-            </div>
+            </div> */}
 
             <div className="mt-10">
-              <h2 className="text-sm font-medium text-gray-900">Details</h2>
+              {/* <h2 className="text-sm font-medium text-gray-900">Details</h2> */}
 
-              <div className="mt-4 space-y-6">
+              {/* <div className="mt-4 space-y-6">
                 <p className="text-sm text-gray-600">{product.details}</p>
-              </div>
+              </div> */}
             </div>
           </div>
         </div>

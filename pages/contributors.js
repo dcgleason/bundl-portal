@@ -224,7 +224,7 @@ const CSV = () => {
         <Table columns={columns} dataSource={dataSource}></Table>
         <Modal
           title="Edit Student"
-          visible={isEditing}
+          open={isEditing}
           okText="Save"
           onCancel={() => {
             resetEditing();
@@ -288,8 +288,8 @@ const CSV = () => {
         </Modal>
 
         <Modal
-        title="Add a new student"
-        visible={isModalVisible}
+        title="Add a new contributor manually"
+        open={isModalVisible}
         onOk={handleOk}
         onCancel={handleCancel}
       >

@@ -1,14 +1,16 @@
 import { useState } from 'react'
 import { RadioGroup } from '@headlessui/react'
 import { CheckCircleIcon, TrashIcon } from '@heroicons/react/20/solid'
+import green from '../images/green.jpeg'
+import Image from 'next/image';
 
 const products = [
   {
     id: 1,
-    title: 'Basic Tee',
+    title: 'Green Back Bundle',
     href: '#',
-    price: '$32.00',
-    color: 'Black',
+    price: '$79.00 USD (paid)',
+    color: 'Green and White',
     size: 'Large',
     imageSrc: 'https://tailwindui.com/img/ecommerce-images/checkout-page-02-product-01.jpg',
     imageAlt: "Front of men's Basic Tee in black.",
@@ -29,7 +31,8 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
 }
 
-export default function Example() {
+export default function SubmitBOok() {
+  const [chosenStyle, setChosenStyle] = useState('')
   const [selectedDeliveryMethod, setSelectedDeliveryMethod] = useState(deliveryMethods[0])
 
   return (
@@ -51,8 +54,9 @@ export default function Example() {
                     type="email"
                     id="email-address"
                     name="email-address"
+                    style={{ height: '36px' }}
                     autoComplete="email"
-                    className="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                    className="block w-full rounded-md border-gray-300 shadow-sm focus:border-red-500 focus:ring-red-500 sm:text-sm"
                   />
                 </div>
               </div>
@@ -69,10 +73,11 @@ export default function Example() {
                   <div className="mt-1">
                     <input
                       type="text"
+                      style={{ height: '36px' }}
                       id="first-name"
                       name="first-name"
                       autoComplete="given-name"
-                      className="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                      className="block w-full rounded-md border-gray-300 shadow-sm focus:border-red-500 focus:ring-red-500 sm:text-sm"
                     />
                   </div>
                 </div>
@@ -85,9 +90,10 @@ export default function Example() {
                     <input
                       type="text"
                       id="last-name"
+                      style={{ height: '36px' }}
                       name="last-name"
                       autoComplete="family-name"
-                      className="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                      className="block w-full rounded-md border-gray-300 shadow-sm focus:border-red-500 focus:ring-red-500 sm:text-sm"
                     />
                   </div>
                 </div>
@@ -100,8 +106,9 @@ export default function Example() {
                     <input
                       type="text"
                       name="company"
+                      style={{ height: '36px' }}
                       id="company"
-                      className="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                      className="block w-full rounded-md border-gray-300 shadow-sm focus:border-red-500 focus:ring-red-500 sm:text-sm"
                     />
                   </div>
                 </div>
@@ -114,9 +121,10 @@ export default function Example() {
                     <input
                       type="text"
                       name="address"
+                      style={{ height: '36px' }}
                       id="address"
                       autoComplete="street-address"
-                      className="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                      className="block w-full rounded-md border-gray-300 shadow-sm focus:border-red-500 focus:ring-red-500 sm:text-sm"
                     />
                   </div>
                 </div>
@@ -129,8 +137,9 @@ export default function Example() {
                     <input
                       type="text"
                       name="apartment"
+                      style={{ height: '36px' }}
                       id="apartment"
-                      className="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                      className="block w-full rounded-md border-gray-300 shadow-sm focus:border-red-500 focus:ring-red-500 sm:text-sm"
                     />
                   </div>
                 </div>
@@ -143,9 +152,10 @@ export default function Example() {
                     <input
                       type="text"
                       name="city"
+                      style={{ height: '36px' }}
                       id="city"
                       autoComplete="address-level2"
-                      className="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                      className="block w-full rounded-md border-gray-300 shadow-sm focus:border-red-500 focus:ring-red-500 sm:text-sm"
                     />
                   </div>
                 </div>
@@ -158,8 +168,9 @@ export default function Example() {
                     <select
                       id="country"
                       name="country"
+                      style={{ height: '36px' }}
                       autoComplete="country-name"
-                      className="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                      className="block w-full rounded-md border-gray-300 shadow-sm focus:border-red-500 focus:ring-red-500 sm:text-sm"
                     >
                       <option>United States</option>
                       <option>Canada</option>
@@ -177,8 +188,9 @@ export default function Example() {
                       type="text"
                       name="region"
                       id="region"
+                      style={{ height: '36px' }}
                       autoComplete="address-level1"
-                      className="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                      className="block w-full rounded-md border-gray-300 shadow-sm focus:border-red-500 focus:ring-red-500 sm:text-sm"
                     />
                   </div>
                 </div>
@@ -192,8 +204,9 @@ export default function Example() {
                       type="text"
                       name="postal-code"
                       id="postal-code"
+                      style={{ height: '36px' }}
                       autoComplete="postal-code"
-                      className="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                      className="block w-full rounded-md border-gray-300 shadow-sm focus:border-red-500 focus:ring-red-500 sm:text-sm"
                     />
                   </div>
                 </div>
@@ -207,8 +220,9 @@ export default function Example() {
                       type="text"
                       name="phone"
                       id="phone"
+                      style={{ height: '36px' }}
                       autoComplete="tel"
-                      className="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                      className="block w-full rounded-md border-gray-300 shadow-sm focus:border-red-500 focus:ring-red-500 sm:text-sm"
                     />
                   </div>
                 </div>
@@ -227,7 +241,7 @@ export default function Example() {
                       className={({ checked, active }) =>
                         classNames(
                           checked ? 'border-transparent' : 'border-gray-300',
-                          active ? 'ring-2 ring-indigo-500' : '',
+                          active ? 'ring-2 ring-red-500' : '',
                           'relative flex cursor-pointer rounded-lg border bg-white p-4 shadow-sm focus:outline-none'
                         )
                       }
@@ -250,11 +264,11 @@ export default function Example() {
                               </RadioGroup.Description>
                             </span>
                           </span>
-                          {checked ? <CheckCircleIcon className="h-5 w-5 text-indigo-600" aria-hidden="true" /> : null}
+                          {checked ? <CheckCircleIcon className="h-5 w-5 text-red-600" aria-hidden="true" /> : null}
                           <span
                             className={classNames(
                               active ? 'border' : 'border-2',
-                              checked ? 'border-indigo-500' : 'border-transparent',
+                              checked ? 'border-red-500' : 'border-transparent',
                               'pointer-events-none absolute -inset-px rounded-lg'
                             )}
                             aria-hidden="true"
@@ -282,14 +296,14 @@ export default function Example() {
                           name="payment-type"
                           type="radio"
                           defaultChecked
-                          className="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-500"
+                          className="h-4 w-4 border-gray-300 text-red-600 focus:ring-red-500"
                         />
                       ) : (
                         <input
                           id={paymentMethod.id}
                           name="payment-type"
                           type="radio"
-                          className="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-500"
+                          className="h-4 w-4 border-gray-300 text-red-600 focus:ring-red-500"
                         />
                       )}
 
@@ -312,7 +326,7 @@ export default function Example() {
                       id="card-number"
                       name="card-number"
                       autoComplete="cc-number"
-                      className="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                      className="block w-full rounded-md border-gray-300 shadow-sm focus:border-red-500 focus:ring-red-500 sm:text-sm"
                     />
                   </div>
                 </div>
@@ -327,7 +341,7 @@ export default function Example() {
                       id="name-on-card"
                       name="name-on-card"
                       autoComplete="cc-name"
-                      className="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                      className="block w-full rounded-md border-gray-300 shadow-sm focus:border-red-500 focus:ring-red-500 sm:text-sm"
                     />
                   </div>
                 </div>
@@ -342,7 +356,7 @@ export default function Example() {
                       name="expiration-date"
                       id="expiration-date"
                       autoComplete="cc-exp"
-                      className="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                      className="block w-full rounded-md border-gray-300 shadow-sm focus:border-red-500 focus:ring-red-500 sm:text-sm"
                     />
                   </div>
                 </div>
@@ -357,7 +371,7 @@ export default function Example() {
                       name="cvc"
                       id="cvc"
                       autoComplete="csc"
-                      className="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                      className="block w-full rounded-md border-gray-300 shadow-sm focus:border-red-500 focus:ring-red-500 sm:text-sm"
                     />
                   </div>
                 </div>
@@ -375,7 +389,7 @@ export default function Example() {
                 {products.map((product) => (
                   <li key={product.id} className="flex py-6 px-4 sm:px-6">
                     <div className="flex-shrink-0">
-                      <img src={product.imageSrc} alt={product.imageAlt} className="w-20 rounded-md" />
+                      <Image src={green} alt={product.imageAlt} height={50} width={50} className="w-20 rounded-md" />
                     </div>
 
                     <div className="ml-6 flex flex-1 flex-col">
@@ -387,7 +401,7 @@ export default function Example() {
                             </a>
                           </h4>
                           <p className="mt-1 text-sm text-gray-500">{product.color}</p>
-                          <p className="mt-1 text-sm text-gray-500">{product.size}</p>
+                          {/* <p className="mt-1 text-sm text-gray-500">{product.size}</p> */}
                         </div>
 
                         <div className="ml-4 flow-root flex-shrink-0">
@@ -411,7 +425,7 @@ export default function Example() {
                           <select
                             id="quantity"
                             name="quantity"
-                            className="rounded-md border border-gray-300 text-left text-base font-medium text-gray-700 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500 sm:text-sm"
+                            className="rounded-md border border-gray-300 text-left text-base font-medium text-gray-700 shadow-sm focus:border-red-500 focus:outline-none focus:ring-1 focus:ring-red-500 sm:text-sm"
                           >
                             <option value={1}>1</option>
                             <option value={2}>2</option>
@@ -429,13 +443,13 @@ export default function Example() {
                 ))}
               </ul>
               <dl className="space-y-6 border-t border-gray-200 py-6 px-4 sm:px-6">
-                <div className="flex items-center justify-between">
+                {/* <div className="flex items-center justify-between">
                   <dt className="text-sm">Subtotal</dt>
-                  <dd className="text-sm font-medium text-gray-900">$64.00</dd>
-                </div>
+                  <dd className="text-sm font-medium text-gray-900">$16.00</dd>
+                </div> */}
                 <div className="flex items-center justify-between">
                   <dt className="text-sm">Shipping</dt>
-                  <dd className="text-sm font-medium text-gray-900">$5.00</dd>
+                  <dd className="text-sm font-medium text-gray-900">$16.00</dd>
                 </div>
                 <div className="flex items-center justify-between">
                   <dt className="text-sm">Taxes</dt>
@@ -443,16 +457,16 @@ export default function Example() {
                 </div>
                 <div className="flex items-center justify-between border-t border-gray-200 pt-6">
                   <dt className="text-base font-medium">Total</dt>
-                  <dd className="text-base font-medium text-gray-900">$75.52</dd>
+                  <dd className="text-base font-medium text-gray-900">$21.52</dd>
                 </div>
               </dl>
 
               <div className="border-t border-gray-200 py-6 px-4 sm:px-6">
                 <button
                   type="submit"
-                  className="w-full rounded-md border border-transparent bg-indigo-600 py-3 px-4 text-base font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-50"
+                  className="w-full rounded-md border border-transparent bg-red-600 py-3 px-4 text-base font-medium text-white shadow-sm hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 focus:ring-offset-gray-50"
                 >
-                  Submit Bundle 
+                  Submit Your Bundle 
                 </button>
               </div>
             </div>

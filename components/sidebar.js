@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Router from "next/router";
 import Image from "next/image";
+import bundleLogo from "../images/bundlelogo.png";
 export default function Home() {
     const [sidebar, Setsidebar] = useState(false);
     const [sidebarMobile, SetsidebarMobile] = useState(false);
@@ -44,7 +45,7 @@ export default function Home() {
                     <div className="px-7">
                         <div className="flex items-center justify-between">
                             <div className="w-32">
-                                <Image className="w-full" src="https://ibb.co/bNZ9ms6" width="300" height="100" alt="logo" />
+                                <Image className="w-full" src={bundleLogo} width="100" height="20" alt="logo" />
                             </div>
                             <div onClick={() => Setsidebar(!sidebar)} className="text-gray-700 ml-8 cursor-pointer">
                                 <svg xmlns="http://www.w3.org/2000/svg" width={20} height={20} viewBox="0 0 20 20" fill="none">
@@ -62,7 +63,7 @@ export default function Home() {
                                             <rect x="11.6666" y="3.3335" width={5} height="8.33333" rx="1.66667" stroke="white" strokeWidth="1.25" strokeLinecap="round" strokeLinejoin="round" />
                                         </svg>
                                     </div>
-                                    <p className="ml-2">Add Contributors</p>
+                                    <p className="ml-2">Add/Edit Contributors</p>
                                 </div>
                             </a>
                             <a href="./edit">
@@ -73,7 +74,7 @@ export default function Home() {
                                             <path d="M3.33337 12.5L6.66671 7.5L10 9.16667L13.3334 5L16.6667 8.33333" stroke="#CBD5E0" strokeWidth="1.25" strokeLinecap="round" strokeLinejoin="round" />
                                         </svg>
                                     </div>
-                                    <p className="ml-2">Add/edit Contributions</p>
+                                    <p className="ml-2">Add/Edit Contributions</p>
                                 </div>
                             </a>
                             <a href="/submit">
