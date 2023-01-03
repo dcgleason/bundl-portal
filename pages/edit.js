@@ -49,14 +49,85 @@ const UserComponent = ({
   )
 }
 
-function InputForm() {
+
+function DragApp() {
 
   const [ questionOne, setQuestionOne] = useState('');
   const [selectedImage, setSelectedImage] = useState(null);
 
+    const [items, setItems] = useState([
+        {
+          id: "1",
+          note: "Manoj"
+        },
+        {
+          id: "2",
+          note: "John"
+        },
+        {
+          id: "3",
+          note: "Ronaldo"
+        },
+        {
+          id: "4",
+          note: "Harry"
+        },
+        {
+          id: "5",
+          note: "Jamie"
+        }
+      ])
+    const [renderTrigger, setRenderTrigger] = useState(false);
+
+    useEffect(() => {
+        setRenderTrigger(!renderTrigger);
+      }, [items]);
+
+    useEffect(() => {
+        fetch('https://jsonplaceholder.typicode.com/posts')
+          .then((response) => response.json())
+          .then((data) => setItems(data));
+          console.log('items', items)
+      }, []);
+
+
+
+  const sensors = [useSensor(PointerSensor)];
+
+
+  const saveOrder = () => {
+
+    console.log("order" + items.map(item => item.id))
+    // Send the current order of the items to a database via a POST route
+    fetch('/api/save-order', { // create this route in our API
+      method: 'POST',
+      body: JSON.stringify({
+        order: items.map(item => item.id)
+      })
+    })
+  }
+
+  const handleDragEnd = ({active, over}) => {
+    if (active.id !== over.id) {
+      setItems((items) => {
+        const oldIndex = items.findIndex(item => item.id === active.id)
+        const newIndex = items.findIndex(item => item.id === over.id)
+
+        return arrayMove(items, oldIndex, newIndex)
+      })
+    }
+  }
+
   return (
-    <>
-    <form className="space-y-8 divide-y divide-gray-200" action="#" method="POST">
+
+<>
+
+<div >
+
+<div className="grid grid-cols-2 divide-x-2 divide-gray-400">
+  <div className="col-span-1 p-6">
+
+  <form className="space-y-8 divide-y divide-gray-200" action="#" method="POST">
 <div className="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start sm:border-t sm:border-gray-200 sm:pt-5">
               <label htmlFor="username" className="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2">
               <em>Upload a note manually: </em>
@@ -116,7 +187,11 @@ function InputForm() {
         <div className="flex justify-end">
          
           <button
-            type="submit"
+            type="button"
+            onClick = {() => {
+              setItems([...items, { id: items.length + 1, title: "testing" , body: questionOne}]);
+            
+            }}
             className="ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500"
           >
             Upload
@@ -124,81 +199,6 @@ function InputForm() {
         </div>
       </div>
     </form>
-    </>
-  
-  )
-
-}
-
-function DragApp() {
-
-    const [items, setItems] = useState([
-        {
-          id: "1",
-          name: "Manoj"
-        },
-        {
-          id: "2",
-          name: "John"
-        },
-        {
-          id: "3",
-          name: "Ronaldo"
-        },
-        {
-          id: "4",
-          name: "Harry"
-        },
-        {
-          id: "5",
-          name: "Jamie"
-        }
-      ])
-
-    useEffect(() => {
-        fetch('https://jsonplaceholder.typicode.com/posts')
-          .then((response) => response.json())
-          .then((data) => setItems(data));
-      }, []);
-
-
-
-  const sensors = [useSensor(PointerSensor)];
-
-
-  const saveOrder = () => {
-
-    console.log("order" + items.map(item => item.id))
-    // Send the current order of the items to a database via a POST route
-    fetch('/api/save-order', { // create this route in our API
-      method: 'POST',
-      body: JSON.stringify({
-        order: items.map(item => item.id)
-      })
-    })
-  }
-
-  const handleDragEnd = ({active, over}) => {
-    if (active.id !== over.id) {
-      setItems((items) => {
-        const oldIndex = items.findIndex(item => item.id === active.id)
-        const newIndex = items.findIndex(item => item.id === over.id)
-
-        return arrayMove(items, oldIndex, newIndex)
-      })
-    }
-  }
-
-  return (
-
-<>
-
-<div >
-
-<div className="grid grid-cols-2 divide-x-2 divide-gray-400">
-  <div className="col-span-1 p-6">
-
-  <InputForm/>
 
   </div>
 
