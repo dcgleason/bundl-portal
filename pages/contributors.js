@@ -6,6 +6,8 @@ import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
 import Papa from "papaparse";
 import React from "react";
 
+const { TextArea } = Input;
+
 const CSV = () => {
 
 
@@ -333,8 +335,10 @@ const CSV = () => {
             ]}
           />
            <label>Submission</label>
-          <Input
-            rows={4}
+          <TextArea
+            rows={10}
+            type="textarea"
+            maxLength={650}
             value={editingStudent?.submission}
             onChange={(e) => {
               setEditingStudent((pre) => {
@@ -380,7 +384,7 @@ const CSV = () => {
             }
           ]}
         />
-        <label>Submission</label> <Input rows={10} maxLength={650} placeholder="Submission" value={submission} onChange={(e) => setSubmission(e.target.value)}/>
+        <label>Submission</label> <TextArea type='textarea' rows={10} maxLength={650} placeholder="Submission" value={submission} onChange={(e) => setSubmission(e.target.value)}/>
        <label>Notes</label> <Input placeholder="Notes" value={notes} onChange={(e) => setNotes(e.target.value)} />
       </Modal>
       </header>
