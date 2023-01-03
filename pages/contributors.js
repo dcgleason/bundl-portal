@@ -282,7 +282,7 @@ const CSV = () => {
       email: email,
       submitted: submitted,
       submission: submission,
-      picture: picture, // starts as an empty string
+      picture: pictureSubmitted, // starts as an empty string
       notes: notes,
     };
   
@@ -392,7 +392,12 @@ const CSV = () => {
               listType="picture"
               className="avatar-uploader"
               showUploadList={false}
-              action='api/upload'  // POST request to this api endpoint for picture
+              action='api/upload'  // POST request to this api endpoint for picture upload --> need to make pictureSubmitted == true in the new record created 
+              /* via --> 
+              setEditingStudent((pre) => {
+                return { ...pre, picture: true };
+              });
+              */
               onChange={handleChangeUpload}
             >
               <div>
