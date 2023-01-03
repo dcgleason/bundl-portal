@@ -25,7 +25,7 @@ const CSV = () => {
   const [values, setValues] = useState([]);
   const [modalData, setModalData] = useState("");
   const [showModal, setShowModal] = useState(false);
-
+  const [ submission, setSubmission ] = useState("");
   const [isEditing, setIsEditing] = useState(false);
   const [editingStudent, setEditingStudent] = useState(null);
   const [dataSource, setDataSource] = useState([
@@ -90,7 +90,7 @@ const CSV = () => {
       render: (record) => { 
         return (
           <>
-          {record !== ""?
+          {record !== "" ?
           <a className="underline" onClick={ () => handleModalOpen(record)}>View Submission</a>
           :
           "No Submission"
@@ -135,7 +135,7 @@ const CSV = () => {
 
   const handleModalOpen = (data) => {
     setModalData(data);
-    console.log("data", data)
+    console.log("data is", data)
     setShowModal(true);
   };
 
@@ -240,6 +240,7 @@ const CSV = () => {
       name: name,
       email: email,
       submitted: submitted,
+      submission: submission, // starts as an empty string
       notes: notes,
     };
   
@@ -274,7 +275,7 @@ const CSV = () => {
         <Button onClick={onAddStudent}>Add a new Contributor</Button>
         <Table columns={columns} dataSource={dataSource}></Table>
         <Modal
-          title="Edit Student"
+          title="Add a contributor"
           open={isEditing}
           okText="Save"
           onCancel={() => {
@@ -293,6 +294,7 @@ const CSV = () => {
             resetEditing();
           }}
         >
+          <label>Name</label>
           <Input
             value={editingStudent?.name}
             onChange={(e) => {
@@ -301,6 +303,7 @@ const CSV = () => {
               });
             }}
           />
+          <label>Email</label>
           <Input
             value={editingStudent?.email}
             onChange={(e) => {
@@ -309,6 +312,7 @@ const CSV = () => {
               });
             }}
           />
+          <label>Submitted</label>
           <Select
             value={editingStudent?.submitted}
             onChange={(value) => {
@@ -328,6 +332,17 @@ const CSV = () => {
               }
             ]}
           />
+           <label>Submission</label>
+          <Input
+            rows={4}
+            value={editingStudent?.submission}
+            onChange={(e) => {
+              setEditingStudent((pre) => {
+                return { ...pre, submission: e.target.value };
+              });
+            }}
+          />
+          <label>Notes</label>
            <Input
             value={editingStudent?.notes}
             onChange={(e) => {
@@ -336,6 +351,9 @@ const CSV = () => {
               });
             }}
           />
+
+
+
         </Modal>
 
         <Modal
@@ -344,9 +362,9 @@ const CSV = () => {
         onOk={handleOk}
         onCancel={handleCancel}
       >
-        <Input placeholder="Name" value={name} onChange={(e) => setName(e.target.value)}/>
-        <Input placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)}/>
-        <Select
+       <label>Name</label> <Input placeholder="Name" value={name} onChange={(e) => setName(e.target.value)}/>
+       <label>Email</label> <Input placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)}/>
+       <label>Submitted</label> <Select
           defaultValue="Yes"
           style={{ width: 120 }}
           onChange={(value) => setSubmitted(value)}
@@ -362,7 +380,8 @@ const CSV = () => {
             }
           ]}
         />
-        <Input placeholder="Notes" value={notes} onChange={(e) => setNotes(e.target.value)} />
+        <label>Submission</label> <Input rows={10} maxLength={650} placeholder="Submission" value={submission} onChange={(e) => setSubmission(e.target.value)}/>
+       <label>Notes</label> <Input placeholder="Notes" value={notes} onChange={(e) => setNotes(e.target.value)} />
       </Modal>
       </header>
     </div>
