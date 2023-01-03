@@ -1,8 +1,8 @@
 
 
-import { Button, Table, Modal, Input, Select } from "antd";
+import { Button, Table, Modal, Input, Select, Upload, message } from "antd";
 import { useState } from "react";
-import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
+import { EditOutlined, DeleteOutlined, InboxOutlined  } from "@ant-design/icons";
 import Papa from "papaparse";
 import React from "react";
 
@@ -17,6 +17,7 @@ const CSV = () => {
   const [notes, setNotes] = useState("");
   const [submitted, setSubmitted] = useState("");
   const [newStudent, setNewStudent] = useState(null);
+  const [pictureSubmitted, setPictureSubmitted ] = useState(false);
        // State to store parsed data
   const [parsedData, setParsedData] = useState([]);
 
@@ -28,6 +29,7 @@ const CSV = () => {
   const [modalData, setModalData] = useState("");
   const [showModal, setShowModal] = useState(false);
   const [ submission, setSubmission ] = useState("");
+
   const [isEditing, setIsEditing] = useState(false);
   const [editingStudent, setEditingStudent] = useState(null);
   const [dataSource, setDataSource] = useState([
@@ -38,6 +40,7 @@ const CSV = () => {
       submitted: "Yes",
       notes: "",
       submission: "Dear Person, I love you! You're great. Much love, Dan",
+      picture: true
     },
     {
       id: 2,
@@ -45,7 +48,8 @@ const CSV = () => {
       email: "david@gmail.com",
       submitted: "No",
       notes: "",
-      submission:  "Dear Person, I love you! You're awesome. Much love, Dan"
+      submission:  "Dear Person, I love you! You're awesome. Much love, Dan",
+      picture: false
     },
     {
       id: 3,
@@ -54,6 +58,7 @@ const CSV = () => {
       submitted: "No",
       notes: "",
       submission:  "",
+      picture: false
     },
     {
       id: 4,
@@ -61,7 +66,8 @@ const CSV = () => {
       email: "sam@gmail.com",
       submitted: "Yes",
       notes: "",
-      submission:  "Dear Person, I love you! You're sweet. Much love, Dan"
+      submission:  "Dear Person, I love you! You're sweet. Much love, Dan",
+      picture: false
     },
   ]);
   const columns = [
@@ -103,6 +109,22 @@ const CSV = () => {
     },
     {
       key: "6",
+      title: "Picture",
+      dataIndex: "picture",
+      render: (record) => { 
+        return (
+          <>
+          {record !== false ?
+          <a className="underline" onClick={ () => handleViewPicture(record)}>View Picture</a>
+          :
+          "No Picture Uploaded"
+          }
+          </>
+        )
+      }
+    },
+    {
+      key: "7",
       title: "Notes",
       dataIndex: "notes",
     },
@@ -131,6 +153,19 @@ const CSV = () => {
   ];
 
 
+  const handleChangeUpload = (info) => {
+    if (info.file.status !== "uploading") {
+      console.log(info.file, info.fileList);
+
+    }
+    if (info.file.status === "done") {
+      message.success(`${info.file.name} file uploaded successfully`);
+      setPictureSubmitted(true);
+    } else if (info.file.status === "error") {
+      message.error(`${info.file.name} file upload failed.`);
+    }
+  };
+
   const handleModalClose = () => {
     setShowModal(false);
   };
@@ -145,7 +180,11 @@ const CSV = () => {
     return data ? data : "No message available";
   };
 
-
+  const handleViewPicture = (record) => { // dont need the dataSource record, just the pictureUrl
+   // get the public url of the image
+   var pictureUrl;
+    window.open(pictureUrl, '_blank');
+  }
   const addtoList = () => {
 
     console.log('values = '+ values);
@@ -242,7 +281,8 @@ const CSV = () => {
       name: name,
       email: email,
       submitted: submitted,
-      submission: submission, // starts as an empty string
+      submission: submission,
+      picture: picture, // starts as an empty string
       notes: notes,
     };
   
@@ -346,6 +386,19 @@ const CSV = () => {
               });
             }}
           />
+           <label>Picture Upload</label>
+           <Upload
+              name="avatar"
+              listType="picture"
+              className="avatar-uploader"
+              showUploadList={false}
+              action='api/upload'  // POST request to this api endpoint for picture
+              onChange={handleChangeUpload}
+            >
+              <div>
+              <InboxOutlined />
+            </div>
+          </Upload>
           <label>Notes</label>
            <Input
             value={editingStudent?.notes}
@@ -385,6 +438,19 @@ const CSV = () => {
           ]}
         />
         <label>Submission</label> <TextArea type='textarea' rows={10} maxLength={650} placeholder="Submission" value={submission} onChange={(e) => setSubmission(e.target.value)}/>
+        <label>Picture Upload</label>
+           <Upload
+              name="avatar"
+              listType="picture"
+              className="avatar-uploader"
+              showUploadList={false}
+              action='api/upload' // POST request to this api endpoint for picture
+              onChange={handleChangeUpload}
+            >
+              <div>
+              <InboxOutlined />
+            </div>
+          </Upload>
        <label>Notes</label> <Input placeholder="Notes" value={notes} onChange={(e) => setNotes(e.target.value)} />
       </Modal>
       </header>
