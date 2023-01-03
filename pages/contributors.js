@@ -23,6 +23,8 @@ const CSV = () => {
 
   //State to store the values
   const [values, setValues] = useState([]);
+  const [modalData, setModalData] = useState("");
+  const [showModal, setShowModal] = useState(false);
 
   const [isEditing, setIsEditing] = useState(false);
   const [editingStudent, setEditingStudent] = useState(null);
@@ -33,6 +35,7 @@ const CSV = () => {
       email: "john@gmail.com",
       submitted: "Yes",
       notes: "",
+      submission: "Dear Person, I love you! You're great. Much love, Dan",
     },
     {
       id: 2,
@@ -40,6 +43,7 @@ const CSV = () => {
       email: "david@gmail.com",
       submitted: "No",
       notes: "",
+      submission:  "Dear Person, I love you! You're awesome. Much love, Dan"
     },
     {
       id: 3,
@@ -47,6 +51,7 @@ const CSV = () => {
       email: "james@gmail.com",
       submitted: "No",
       notes: "",
+      submission:  "",
     },
     {
       id: 4,
@@ -54,6 +59,7 @@ const CSV = () => {
       email: "sam@gmail.com",
       submitted: "Yes",
       notes: "",
+      submission:  "Dear Person, I love you! You're sweet. Much love, Dan"
     },
   ]);
   const columns = [
@@ -79,11 +85,27 @@ const CSV = () => {
     },
     {
       key: "5",
+      title: "Submission",
+      dataIndex: "submission",
+      render: (record) => { 
+        return (
+          <>
+          {record !== ""?
+          <a className="underline" onClick={ () => handleModalOpen(record)}>View Submission</a>
+          :
+          "No Submission"
+          }
+          </>
+        )
+      }
+    },
+    {
+      key: "6",
       title: "Notes",
       dataIndex: "notes",
     },
     {
-      key: "6",
+      key: "7",
       title: "Actions",
       render: (record) => {
         return (
@@ -105,6 +127,21 @@ const CSV = () => {
     },
 
   ];
+
+
+  const handleModalClose = () => {
+    setShowModal(false);
+  };
+
+  const handleModalOpen = (data) => {
+    setModalData(data);
+    console.log("data", data)
+    setShowModal(true);
+  };
+
+  const displaySubmission = (data) => {
+    return data ? data : "No message available";
+  };
 
 
   const addtoList = () => {
@@ -217,6 +254,20 @@ const CSV = () => {
  
     return (
 <>
+
+      <Modal
+        open={showModal}
+        onCancel={handleModalClose}
+        title="Submission"
+        props={{ data: modalData }}
+        footer={[
+          <Button key="ok" type="primary" onClick={handleModalClose}>
+            OK
+          </Button>,
+        ]}
+      >
+       { displaySubmission( modalData)}
+      </Modal>
 
       <div className="App">
       <header className="App-header">

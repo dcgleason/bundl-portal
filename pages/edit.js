@@ -4,8 +4,6 @@ import { arrayMove, SortableContext, verticalListSortingStrategy } from '@dnd-ki
 import { useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
 
-
-
 const UserComponent = ({
   id,
   body
@@ -47,7 +45,7 @@ const UserComponent = ({
       
      </>
   )
-}
+} 
 
 
 function DragApp() {
