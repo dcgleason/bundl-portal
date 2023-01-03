@@ -1,6 +1,6 @@
 
 
-import { Button, Table, Modal, Input, Select, Upload, message } from "antd";
+import { Button, Table, Modal, Input, Select, Upload, message, notification } from "antd";
 import { useState } from "react";
 import { EditOutlined, DeleteOutlined, InboxOutlined  } from "@ant-design/icons";
 import Papa from "papaparse";
@@ -160,6 +160,10 @@ const CSV = () => {
     }
     if (info.file.status === "done") {
       message.success(`${info.file.name} file uploaded successfully`);
+      notification.success({
+        message: 'Picture successfully uploaded',
+        duration: 2,
+      });
       setPictureSubmitted(true);
     } else if (info.file.status === "error") {
       message.error(`${info.file.name} file upload failed.`);
