@@ -25,16 +25,16 @@ const onSubmit = async e => {
     try {
       console.log("body: ", body);
       // Use fetch to send a POST request to the /signup route
-      const res = await fetch(
-        'http://localhost:3001/login/signin',
-        {
-          method: 'POST',
-          body: body,
-          headers: config.headers,
-        }
-      );
+      const res = await fetch('http://localhost:3001/login/signin', {
+        method: 'POST',
+        body: body,
+        headers: config.headers,
+        redirect: 'follow',
+        credentials: 'include'
+});
   
-      console.log(await res.json());
+      console.log("res: ", res);
+      console.log('res.location' + res.location);
     } catch (err) {
       console.error(err);
     }
