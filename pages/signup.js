@@ -41,7 +41,15 @@ const onSubmit = async e => {
   
 
   return (
+    <>
+    {/*
+      This example requires updating your template:
 
+      ```
+      <html class="h-full bg-gray-50">
+      <body class="h-full">
+      ```
+    */}
     <div className="flex min-h-full flex-col justify-center py-12 sm:px-6 lg:px-8">
       <div className="sm:mx-auto sm:w-full sm:max-w-md">
         <img
@@ -49,7 +57,7 @@ const onSubmit = async e => {
           src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
           alt="Your Company"
         />
-        <h2 className="mt-6 text-center text-3xl font-bold tracking-tight text-gray-900">Sign up for your account</h2>
+        <h2 className="mt-6 text-center text-3xl font-bold tracking-tight text-gray-900">Sign in to your account</h2>
         <p className="mt-2 text-center text-sm text-gray-600">
           Or{' '}
           <a href="#" className="font-medium text-indigo-600 hover:text-indigo-500">
@@ -61,6 +69,58 @@ const onSubmit = async e => {
       <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
         <div className="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
           <form className="space-y-6" >
+      <div className="space-y-8 divide-y divide-gray-200 sm:space-y-5">
+        <div className="space-y-6 sm:space-y-5">
+          <div>
+            <h3 className="text-lg font-medium leading-6 text-gray-900">Registration</h3>
+            <p className="mt-1 max-w-2xl text-sm text-gray-500">
+              Tell us a bit about you.
+            </p>
+          </div>
+
+        </div>
+
+        <div>
+              <label className="block text-sm font-medium text-gray-700">
+                First name
+              </label>
+              <div className="mt-1">
+                <input
+                  id="firstname"
+                  name="firstname"
+                  type="text"
+                  value={username}
+                  onChange={e => setUsername(e.target.value)}
+                  required
+                 // autoComplete="email"
+                  className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                />
+              </div>
+            </div>
+
+            <div>
+              <label  className="block text-sm font-medium text-gray-700">
+              Last name
+              </label>
+              <div className="mt-1">
+                <input
+                  id="lastname"
+                  name="lastname"
+                  type="text"
+                  value={password}
+                  onChange={e => setPassword(e.target.value)}
+                  autoComplete="current-password"
+                  required
+                  className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                />
+              </div>
+            </div>
+
+
+       
+      </div>
+
+ 
             <div>
               <label htmlFor="email" className="block text-sm font-medium text-gray-700">
                 Email address
@@ -81,7 +141,7 @@ const onSubmit = async e => {
 
             <div>
               <label htmlFor="password" className="block text-sm font-medium text-gray-700">
-                Password
+                Set Your Password
               </label>
               <div className="mt-1">
                 <input
@@ -123,7 +183,7 @@ const onSubmit = async e => {
                 onClick={e => onSubmit(e)}
                 className="flex w-full justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
               >
-                Sign up
+                Sign in
               </button>
             </div>
           </form>
@@ -187,6 +247,7 @@ const onSubmit = async e => {
         </div>
       </div>
     </div>
+  </>
    
   );
 }
