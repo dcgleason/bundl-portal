@@ -55,7 +55,7 @@ export default function Home() {
                             </div>
                         </div>
                         <div className="mt-16">
-                            <a href="/contributors">
+                            <a href="/">
                                 <div className={checkActive() === "events" ? "flex items-center cursor-pointer font-normal text-sm text-red-400 duration-150 ease-in" : "flex items-center cursor-pointer font-normal text-sm text-gray hover:text-red-400 duration-150 ease-in"}>
                                     <div className={checkActive() === "events" ? "px-1 py-1 rounded-sm bg-red-400" : "px-1 py-1 rounded-sm hover:bg-red-400"}>
                                         <svg xmlns="http://www.w3.org/2000/svg" width={20} height={20} viewBox="0 0 20 20" fill="none">
@@ -66,7 +66,7 @@ export default function Home() {
                                     <p className="ml-2">Control Panel</p>
                                 </div>
                             </a>
-                            <a href="./edit">
+                            <a href="./cover">
                                 <div className={checkActive() === "analytics" ? "flex items-center cursor-pointer font-normal text-sm text-red-400 duration-150 ease-in mt-5" : "flex items-center cursor-pointer font-normal text-sm text-gray hover:text-red-400 duration-150 ease-in mt-5"}>
                                     <div className={checkActive() === "analytics" ? "px-1 py-1 rounded-sm bg-red-400" : "px-1 py-1 rounded-sm hover:bg-red-400"}>
                                         <svg xmlns="http://www.w3.org/2000/svg" width={20} height={20} viewBox="0 0 20 20" fill="none">
@@ -74,7 +74,7 @@ export default function Home() {
                                             <path d="M3.33337 12.5L6.66671 7.5L10 9.16667L13.3334 5L16.6667 8.33333" stroke="#CBD5E0" strokeWidth="1.25" strokeLinecap="round" strokeLinejoin="round" />
                                         </svg>
                                     </div>
-                                    <p className="ml-2">Edit Order</p>
+                                    <p className="ml-2">Choose My Cover</p>
                                 </div>
                             </a>
                             <a href="/submit">

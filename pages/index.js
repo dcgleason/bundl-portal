@@ -1,348 +1,560 @@
-import { useState, createContext } from 'react'
-import { StarIcon } from '@heroicons/react/20/solid'
-import { RadioGroup } from '@headlessui/react'
-import allWhite from '../images/white.jpeg'
-import allRed from '../images/red.jpeg'
-import cream from '../images/cream.jpeg'
-import green from '../images/green.jpeg'
-import redWhite from '../images/redwhite.jpeg'
-import redWhiteSpine from '../images/redwhitespine.jpeg'
-import whiteCream from '../images/whitecream.jpeg'
-import whiteRedSpine from '../images/whiteredspine.jpeg'
-import allWhiteOpen from '../images/whitewhite.jpeg'
-import Image from 'next/image'
 
-const imageContext = createContext(null);
 
-const product = {
-  name: 'Choose your Bundle book style',
-  price: '$192',
-  href: '#',
-  breadcrumbs: [
-    { id: 1, name: 'Book', href: '#' }
-  ],
-  images: [
+import { Button, Table, Modal, Input, Select, Upload, message, notification } from "antd";
+import { useState } from "react";
+import { EditOutlined, DeleteOutlined, InboxOutlined  } from "@ant-design/icons";
+import Papa from "papaparse";
+import React from "react";
+
+const { TextArea } = Input;
+
+const CSV = () => {
+
+
+  const [isModalVisible, setIsModalVisible] = useState(false);
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [notes, setNotes] = useState("");
+  const [submitted, setSubmitted] = useState("");
+  const [newStudent, setNewStudent] = useState(null);
+  const [pictureSubmitted, setPictureSubmitted ] = useState(false);
+       // State to store parsed data
+  const [parsedData, setParsedData] = useState([]);
+
+  //State to store table Column name
+  const [tableRows, setTableRows] = useState([]);
+  const [hover, setHover] = useState(false);
+
+  //State to store the values
+  const [values, setValues] = useState([]);
+  const [modalData, setModalData] = useState("");
+  const [showModal, setShowModal] = useState(false);
+  const [ submission, setSubmission ] = useState("");
+
+  const [isEditing, setIsEditing] = useState(false);
+  const [editingStudent, setEditingStudent] = useState(null);
+  const [dataSource, setDataSource] = useState([
     {
-      src: allWhite,
-      alt: 'All white book',
+      id: 1,
+      name: "John",
+      email: "john@gmail.com",
+      submitted: "Yes",
+      notes: "",
+      submission: "Dear Person, I love you! You're great. Much love, Dan",
+      picture: true
     },
     {
-      src: allRed,
-      alt: 'Red book',
+      id: 2,
+      name: "David",
+      email: "david@gmail.com",
+      submitted: "No",
+      notes: "",
+      submission:  "Dear Person, I love you! You're awesome. Much love, Dan",
+      picture: false
     },
     {
-      src: cream,
-      alt: 'Cream book',
+      id: 3,
+      name: "James",
+      email: "james@gmail.com",
+      submitted: "No",
+      notes: "",
+      submission:  "",
+      picture: false
     },
     {
-      src: green,
-      alt: 'Green book',
+      id: 4,
+      name: "Sam",
+      email: "sam@gmail.com",
+      submitted: "Yes",
+      notes: "",
+      submission:  "Dear Person, I love you! You're sweet. Much love, Dan",
+      picture: false
+    },
+  ]);
+  const columns = [
+    {
+      key: "1",
+      title: "ID",
+      dataIndex: "id",
     },
     {
-        src: redWhite,
-        alt: 'Red and white book',
+      key: "2",
+      title: "Name",
+      dataIndex: "name",
+    },
+    {
+      key: "3",
+      title: "Email",
+      dataIndex: "email",
+    },
+    {
+      key: "4",
+      title: "Submitted",
+      dataIndex: "submitted",
+    },
+    {
+      key: "5",
+      title: "Submission",
+      dataIndex: "submission",
+      render: (record) => { 
+        return (
+          <>
+          {record !== "" ?
+          <a className="underline" onClick={ () => handleModalOpen(record)}>View Submission</a>
+          :
+          "No Submission"
+          }
+          </>
+        )
+      }
+    },
+    {
+      key: "6",
+      title: "Picture",
+      dataIndex: "picture",
+      render: (record) => { 
+        return (
+          <>
+          {record !== false ?
+          <a className="underline" onClick={ () => handleViewPicture(record)}>View Picture</a>
+          :
+          "No Picture Uploaded"
+          }
+          </>
+        )
+      }
+    },
+    {
+      key: "7",
+      title: "Notes",
+      dataIndex: "notes",
+    },
+    {
+      key: "7",
+      title: "Actions",
+      render: (record) => {
+        return (
+          <>
+            <EditOutlined
+              onClick={() => {
+                onEditStudent(record);
+              }}
+            />
+            <DeleteOutlined
+              onClick={() => {
+                onDeleteStudent(record);
+              }}
+              style={{ color: "red", marginLeft: 12 }}
+            />
+          </>
+        );
       },
-      {
-        src: redWhiteSpine,
-        alt: 'Red book white spine book',
-      },
-      {
-        src: whiteCream,
-        alt: 'White cream book',
-      },
-      {
-        src: whiteRedSpine,
-        alt: 'Red book white spine book',
-      },
-      {
-        src: allWhiteOpen,
-        alt: 'All white book open',
-      },
-  ],
-  colors: [
-    { name: 'White', class: 'bg-white', selectedClass: 'ring-gray-400' },
-    { name: 'Gray', class: 'bg-gray-200', selectedClass: 'ring-gray-400' },
-    { name: 'Black', class: 'bg-gray-900', selectedClass: 'ring-gray-900' },
-  ],
-  sizes: [
-    { name: 'Classic White', inStock: true, code: 'classic-white' },
-    { name: 'Red/ White spine', inStock: true, code: 'red-white-spine' },
-    { name: 'White/ Red spine', inStock: true, code: 'white-red-spine' },
-    { name: 'White/ Cream spine', inStock: true, code: 'white-cream-spine' },
-    { name: 'All Red', inStock: true, code: 'all-red' },
-    { name: 'All Cream', inStock: true, code: 'all-cream' },
-    { name: 'Red Back', inStock: true, code: 'red-back'},
-    { name: 'Green back', inStock: true, code: 'green-back'},
-  ],
-  description: 'Choose the style of your recipient\'s book.',
-  highlights: [
-    'Hand cut and sewn locally',
-    'Dyed with our proprietary colors',
-    'Pre-washed & pre-shrunk',
-    'Ultra-soft 100% cotton',
-  ],
-  details:
-    'The 6-Pack includes two black, two white, and two heather gray Basic Tees. Sign up for our subscription service and be the first to get new, exciting colors, like our upcoming "Charcoal Gray" limited release.',
-}
-const reviews = { href: '#', average: 4, totalCount: 117 }
+    },
 
-function classNames(...classes) {
-  return classes.filter(Boolean).join(' ')
-}
-
-export default function ChooseBook() {
-  const [selectedColor, setSelectedColor] = useState(product.colors[0])
-  const [selectedSize, setSelectedSize] = useState(product.sizes[2])
-  const [chooseStyle, setChooseStyle] = useState(null);
+  ];
 
 
+  const handleChangeUpload = (info) => {
+    if (info.file.status !== "uploading") {
+      console.log(info.file, info.fileList);
+
+    }
+    if (info.file.status === "done") {
+      message.success(`${info.file.name} file uploaded successfully`);
+      notification.success({
+        message: 'Picture successfully uploaded',
+        duration: 2,
+      });
+      setPictureSubmitted(true);
+    } else if (info.file.status === "error") {
+      message.error(`${info.file.name} file upload failed.`);
+    }
+  };
+
+  const handleModalClose = () => {
+    setShowModal(false);
+  };
+
+  const handleModalOpen = (data) => {
+    setModalData(data);
+    console.log("data is", data)
+    setShowModal(true);
+  };
+
+  const displaySubmission = (data) => {
+    return data ? data : "No message available";
+  };
+
+  const handleViewPicture = (record) => { // dont need the dataSource record, just the pictureUrl
+   // get the public url of the image
+   var pictureUrl;
+    window.open(pictureUrl, '_blank');
+  }
+  const addtoList = () => {
+
+    console.log('values = '+ values);
+
+    let objects = [];
+
+     const firstValue = dataSource[dataSource.length - 1].id;
+      for (let i = 0; i < values.length; i ++) {
+        objects.push({
+          id: firstValue + 1 + i,
+          name: values[i][1],
+          email: values[i][2],
+          address: values[i][3]
+        });
+       
+      }
+      console.log('objects = '+ JSON.stringify(objects))
+
+  setDataSource([...dataSource, ...objects]);
+
+  }
+
+  const changeHandler = (event) => {
+    // Passing file data (event.target.files[0]) to parse using Papa.parse
+    Papa.parse(event.target.files[0], {
+      header: true,
+      skipEmptyLines: true,
+      complete: function (results) {
+        const rowsArray = [];
+        const valuesArray = [];
+
+        // Iterating data to get column name and their values
+        results.data.map((d) => {
+          rowsArray.push(Object.keys(d));
+          valuesArray.push(Object.values(d));
+        });
+
+        // Parsed Data Response in array format
+        setParsedData(results.data);
+
+        // Filtered Column Names
+        setTableRows(rowsArray[0]);
+
+        // Filtered Values
+        setValues(valuesArray);
+        console.log('values = '+ values)
+      },
+    });
+  };
+
+  const handleDownloadCSV = () => {
+    window.location = 'https://drive.google.com/file/d/1tmguV7yzHlKNc7vULFBrfKvkK6Tmw8WU/view?usp=sharing';
+  }
+
+  const handleHoverOn = () => {
+    setHover(true);
+  }
   
+const handleHoverOff = () => {
+    setHover(false);
+  }
+  
+  const onAddStudent = () => {
+    setIsModalVisible(true);
 
-  return (
-    <div className="bg-white">
-      <div className="pt-6">
-        <nav aria-label="Breadcrumb">
-          <ol role="list" className="mx-auto flex max-w-2xl items-center space-x-2 px-4 sm:px-6 lg:max-w-7xl lg:px-8">
-            {product.breadcrumbs.map((breadcrumb) => (
-              <li key={breadcrumb.id}>
-                <div className="flex items-center">
-                  <a href={breadcrumb.href} className="mr-2 text-sm font-medium text-gray-900">
-                    {breadcrumb.name}
-                  </a>
-                  <svg
-                    width={16}
-                    height={20}
-                    viewBox="0 0 16 20"
-                    fill="currentColor"
-                    xmlns="http://www.w3.org/2000/svg"
-                    aria-hidden="true"
-                    className="h-5 w-4 text-gray-300"
-                  >
-                    <path d="M5.697 4.34L8.98 16.532h1.327L7.025 4.341H5.697z" />
-                  </svg>
-                </div>
-              </li>
-            ))}
-            <li className="text-sm">
-              <a href={product.href} aria-current="page" className="font-medium text-gray-500 hover:text-gray-600">
-                {product.name}
-              </a>
-            </li>
-          </ol>
-        </nav>
+    // const randomNumber = parseInt(Math.random() * 1000);
+    // const newStudent = {
+    //   id: dataSource[dataSource.length - 1].id + 1,
+    //   name: "Name " + randomNumber,
+    //   email: randomNumber + "@gmail.com",
+    //   address: "Address " + randomNumber,
+    // };
+    // setDataSource((pre) => {
+    //   return [...pre, newStudent];
+    // });
+  };
+  const onDeleteStudent = (record) => {
+    Modal.confirm({
+      title: "Are you sure, you want to delete this student record?",
+      okText: "Yes",
+      okType: "danger",
+      onOk: () => {
+        setDataSource((pre) => {
+          return pre.filter((student) => student.id !== record.id);
+        });
+      },
+    });
+  };
+  const onEditStudent = (record) => {
+    setIsEditing(true);
+    console.log("record", record)
+    setEditingStudent({ ...record });
+  };
+  const resetEditing = () => {
+    setIsEditing(false);
+    setEditingStudent(null);
+  };
 
-        {/* Image gallery */}
-        <div className="mx-auto mt-6 max-w-2xl">
-            <Image
-               src={(() => {
-                switch(chooseStyle) {
-                  case null:
-                    return allWhite;
-                  case 'classic-white':
-                    return allWhite;
-                  case 'red-white-spine':
-                    return redWhiteSpine;
-                  case 'white-red-spine':
-                    return whiteRedSpine;
-                  case 'white-cream-spine':
-                    return whiteCream;
-                  case 'all-red':
-                    return allRed;
-                  case 'all-cream':
-                    return cream;
-                  case 'red-back':
-                    return redWhite;
-                  case 'green-back':
-                    return green;
-                  default:
-                    return allWhite;
+  const handleOk = () => {
+    setIsModalVisible(false);
+  
+    const newStudent = {
+      id: dataSource.length + 1,
+      name: name,
+      email: email,
+      submitted: submitted,
+      submission: submission,
+      picture: pictureSubmitted, // starts as an empty string
+      notes: notes,
+    };
+  
+    setDataSource([...dataSource, newStudent]);
+  };
+
+  const handleCancel = () => {
+    setIsModalVisible(false);
+  };
+
+
+ 
+    return (
+<>
+
+      <Modal
+        open={showModal}
+        onCancel={handleModalClose}
+        title="Submission"
+        props={{ data: modalData }}
+        footer={[
+          <Button key="ok" type="primary" onClick={handleModalClose}>
+            OK
+          </Button>,
+        ]}
+      >
+       { displaySubmission( modalData)}
+      </Modal>
+
+      <div className="App">
+      <header className="App-header">
+        <Button onClick={onAddStudent}>Add a new contributor</Button>
+        <Table columns={columns} dataSource={dataSource}></Table>
+        <Modal
+          title="Add a contributor"
+          open={isEditing}
+          okText="Save"
+          onCancel={() => {
+            resetEditing();
+          }}
+          onOk={() => {
+            setDataSource((pre) => {
+              return pre.map((student) => {
+                if (student.id === editingStudent.id) {
+                  return editingStudent;
+                } else {
+                  return student;
                 }
-              })()}
-                height={100}
-                width={400}
-                alt="Book style image"
-                className="h-full w-full object-cover object-center"
-             /> 
-            </div>
-    
-
-        {/* Product info */}
-        <div className="mx-auto max-w-2xl px-4 pt-10 pb-16 sm:px-6 lg:grid lg:max-w-7xl lg:grid-cols-3 lg:grid-rows-[auto,auto,1fr] lg:gap-x-8 lg:px-8 lg:pt-16 lg:pb-24">
-          <div className="lg:col-span-2 lg:border-r lg:border-gray-200 lg:pr-8">
-            <h1 className="text-2xl font-bold tracking-tight text-gray-900 sm:text-3xl">{product.name}</h1>
-          </div>
-
-          {/* Options */}
-          <div className="mt-4 lg:row-span-3 lg:mt-0">
-            {/* <h2 className="sr-only">Product information</h2>
-            <p className="text-3xl tracking-tight text-gray-900">{product.price}</p> */}
-
-            {/* Reviews */}
-            {/* <div className="mt-6">
-              <h3 className="sr-only">Reviews</h3>
-              <div className="flex items-center">
-                <div className="flex items-center">
-                  {[0, 1, 2, 3, 4].map((rating) => (
-                    <StarIcon
-                      key={rating}
-                      className={classNames(
-                        reviews.average > rating ? 'text-gray-900' : 'text-gray-200',
-                        'h-5 w-5 flex-shrink-0'
-                      )}
-                      aria-hidden="true"
-                    />
-                  ))}
-                </div>
-                <p className="sr-only">{reviews.average} out of 5 stars</p>
-                <a href={reviews.href} className="ml-3 text-sm font-medium text-indigo-600 hover:text-indigo-500">
-                  {reviews.totalCount} reviews
-                </a>
-              </div>
-            </div> */}
-
-            <form className="mt-10">
-              {/* Colors
+              });
+            });
+            resetEditing();
+          }}
+        >
+          <label>Name</label>
+          <Input
+            value={editingStudent?.name}
+            onChange={(e) => {
+              setEditingStudent((pre) => {
+                return { ...pre, name: e.target.value };
+              });
+            }}
+          />
+          <label>Email</label>
+          <Input
+            value={editingStudent?.email}
+            onChange={(e) => {
+              setEditingStudent((pre) => {
+                return { ...pre, email: e.target.value };
+              });
+            }}
+          />
+          <label>Submitted</label>
+          <Select
+            value={editingStudent?.submitted}
+            onChange={(value) => {
+              console.log("editingStudent", editingStudent);
+              setEditingStudent((pre) => {
+                return { ...pre, submitted: value };
+              });
+            }}
+            options={[
+              {
+                value: 'Yes',
+                label: 'Yes',
+              },
+              {
+                value: 'No',
+                label: 'No',
+              }
+            ]}
+          />
+           <label>Submission</label>
+          <TextArea
+            rows={10}
+            type="textarea"
+            maxLength={650}
+            value={editingStudent?.submission}
+            onChange={(e) => {
+              setEditingStudent((pre) => {
+                return { ...pre, submission: e.target.value };
+              });
+            }}
+          />
+           <label>Picture Upload</label>
+           <Upload
+              name="avatar"
+              listType="picture"
+              className="avatar-uploader"
+              showUploadList={false}
+              action='api/upload'  // POST request to this api endpoint for picture upload --> need to make pictureSubmitted == true in the new record created 
+              /* via --> 
+              setEditingStudent((pre) => {
+                return { ...pre, picture: true };
+              });
+              */
+              onChange={handleChangeUpload}
+            >
               <div>
-                <h3 className="text-sm font-medium text-gray-900">Style</h3>
-
-                <RadioGroup value={selectedColor} onChange={setSelectedColor} className="mt-4">
-                  <RadioGroup.Label className="sr-only"> Choose a book style </RadioGroup.Label>
-                  <div className="flex items-center space-x-3">
-                    {product.colors.map((color) => (
-                      <RadioGroup.Option
-                        key={color.name}
-                        value={color}
-                        className={({ active, checked }) =>
-                          classNames(
-                            color.selectedClass,
-                            active && checked ? 'ring ring-offset-1' : '',
-                            !active && checked ? 'ring-2' : '',
-                            '-m-0.5 relative p-0.5 rounded-full flex items-center justify-center cursor-pointer focus:outline-none'
-                          )
-                        }
-                      >
-                        <RadioGroup.Label as="span" className="sr-only">
-                          {' '}
-                          {color.name}{' '}
-                        </RadioGroup.Label>
-                        <span
-                          aria-hidden="true"
-                          className={classNames(
-                            color.class,
-                            'h-8 w-8 border border-black border-opacity-10 rounded-full'
-                          )}
-                        />
-                      </RadioGroup.Option>
-                    ))}
-                  </div>
-                </RadioGroup>
-              </div> */}
-
-              {/* Sizes */}
-              <div className="mt-10">
-                <div className="flex items-center justify-between">
-                  <h3 className="text-sm font-medium text-gray-900">Style</h3>
-            
-                </div>
-
-                <RadioGroup value={selectedSize} onChange={setSelectedSize} className="mt-4">
-                  <RadioGroup.Label className="sr-only"> Choose a style </RadioGroup.Label>
-                  <div className="grid grid-cols-4 gap-4 sm:grid-cols-8 lg:grid-cols-4">
-                    {product.sizes.map((size) => (
-                      <RadioGroup.Option
-                        key={size.name}
-                        value={size}
-                        disabled={!size.inStock}
-                        className={({ active }) =>
-                          classNames(
-                            size.inStock
-                              ? 'bg-white shadow-sm text-gray-900 cursor-pointer'
-                              : 'bg-gray-50 text-gray-200 cursor-not-allowed',
-                            active ? 'ring-2 ring-indigo-500' : '',
-                            'group relative border rounded-md py-3 px-4 flex items-center justify-center text-sm font-medium uppercase hover:bg-gray-50 focus:outline-none sm:flex-1 sm:py-6'
-                          )
-                        }
-                      >
-                        {({ active, checked }) => (
-                          <>
-                            <RadioGroup.Label as="span" onClick={() => {
-                                setChooseStyle(size.code)
-                            }} value={size.name}>{size.name}</RadioGroup.Label>
-                            {size.inStock ? (
-                              <span
-                                className={classNames(
-                                  active ? 'border' : 'border-2',
-                                  checked ? 'border-indigo-500' : 'border-transparent',
-                                  'pointer-events-none absolute -inset-px rounded-md'
-                                )}
-                                aria-hidden="true"
-                              />
-                            ) : (
-                              <span
-                                aria-hidden="true"
-                                className="pointer-events-none absolute -inset-px rounded-md border-2 border-gray-200"
-                              >
-                                <svg
-                                  className="absolute inset-0 h-full w-full stroke-2 text-gray-200"
-                                  viewBox="0 0 100 100"
-                                  preserveAspectRatio="none"
-                                  stroke="currentColor"
-                                >
-                                  <line x1={0} y1={100} x2={100} y2={0} vectorEffect="non-scaling-stroke" />
-                                </svg>
-                              </span>
-                            )}
-                          </>
-                        )}
-                      </RadioGroup.Option>
-                    ))}
-                  </div>
-                </RadioGroup>
-              </div>
-
-              <button
-                type="submit"
-                className="mt-10 flex w-full items-center justify-center rounded-md border border-transparent bg-red-600 py-3 px-8 text-base font-medium text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2"
-              >
-                Select             
-                </button>
-            </form>
-          </div>
-
-          <div className="py-10 lg:col-span-2 lg:col-start-1 lg:border-r lg:border-gray-200 lg:pt-6 lg:pb-16 lg:pr-8">
-            {/* Description and details */}
-            <div>
-              <h3 className="sr-only">Description</h3>
-
-              <div className="space-y-6">
-                <p className="text-base text-gray-900">{product.description}</p>
-              </div>
+              <InboxOutlined />
             </div>
+          </Upload>
+          <label>Notes</label>
+           <Input
+            value={editingStudent?.notes}
+            onChange={(e) => {
+              setEditingStudent((pre) => {
+                return { ...pre, notes: e.target.value };
+              });
+            }}
+          />
 
-            {/* <div className="mt-10">
-              <h3 className="text-sm font-medium text-gray-900">Highlights</h3>
 
-              <div className="mt-4">
-                <ul role="list" className="list-disc space-y-2 pl-4 text-sm">
-                  {product.highlights.map((highlight) => (
-                    <li key={highlight} className="text-gray-400">
-                      <span className="text-gray-600">{highlight}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </div> */}
 
-            <div className="mt-10">
-              {/* <h2 className="text-sm font-medium text-gray-900">Details</h2> */}
+        </Modal>
 
-              {/* <div className="mt-4 space-y-6">
-                <p className="text-sm text-gray-600">{product.details}</p>
-              </div> */}
+        <Modal
+        title="Add a new contributor manually"
+        open={isModalVisible}
+        onOk={handleOk}
+        onCancel={handleCancel}
+      >
+       <label>Name</label> <Input placeholder="Name" value={name} onChange={(e) => setName(e.target.value)}/>
+       <label>Email</label> <Input placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)}/>
+       <label>Submitted</label> <Select
+          defaultValue="Yes"
+          style={{ width: 120 }}
+          onChange={(value) => setSubmitted(value)}
+          allowClear
+          options={[
+            {
+              value: 'yes',
+              label: 'Yes',
+            },
+            {
+              value: 'no',
+              label: 'No',
+            }
+          ]}
+        />
+        <label>Submission</label> <TextArea type='textarea' rows={10} maxLength={650} placeholder="Submission" value={submission} onChange={(e) => setSubmission(e.target.value)}/>
+        <label>Picture Upload</label>
+           <Upload
+              name="avatar"
+              listType="picture"
+              className="avatar-uploader"
+              showUploadList={false}
+              action='api/upload' // POST request to this api endpoint for picture
+              onChange={handleChangeUpload}
+            >
+              <div>
+              <InboxOutlined />
+            </div>
+          </Upload>
+       <label>Notes</label> <Input placeholder="Notes" value={notes} onChange={(e) => setNotes(e.target.value)} />
+      </Modal>
+      </header>
+    </div>
+
+    <form className="space-y-6" action="#" method="POST">
+
+    <div className="bg-white px-4 py-5 shadow sm:rounded-lg sm:p-6">
+      <div className="md:grid md:grid-cols-3 md:gap-6">
+        <div className="md:col-span-1">
+          {/* <h3 className="text-lg font-medium leading-6 text-gray-900">Upload</h3> */}
+          <p className="mt-1 text-lg text-gray-500">
+            Click to upload your CSV file with your contributors' information here:
+          </p>
+        </div>
+              <div className="mt-1 flex rounded-md">
+
+                <input
+                 type="file"
+                 name="file"
+                 accept=".csv"
+                 onChange={changeHandler}
+                 style={{ display: "block", margin: "10px auto" }}
+                />
+
+          </div>
+          <div>
+         
+  <Button
+    onClick={handleDownloadCSV}
+    onMouseEnter={handleHoverOn}
+    onMouseLeave={handleHoverOff}
+  >
+    Download CSV template
+  </Button>
+
+  {hover && <div><em>Note: after you downloading the template and fill it in, make sure to save the file as a csv file before you upload it here!</em></div>}
+  
+</div>
+         
+      </div>
+    </div>
+    <Button onClick={addtoList}>Save to above list</Button>
+
+    <div className="px-4 sm:px-6 lg:px-8">
+      <div className="sm:flex sm:items-center">
+
+      </div>
+      <div className="mt-8 flex flex-col">
+        <div className="-my-2 -mx-4 overflow-x-auto sm:-mx-6 lg:-mx-8">
+          <div className="inline-block min-w-full py-2 align-middle md:px-6 lg:px-8">
+            <div className="overflow-hidden shadow ring-1 ring-black ring-opacity-5 md:rounded-lg">
+              <table className="min-w-full divide-y divide-gray-300">
+                <thead className="bg-gray-50">
+                <tr>
+                    {tableRows.map((rows, index) => {
+                         return (
+                     <th key={index}>{rows}</th>
+                     )})}
+                </tr>
+                </thead>
+                <tbody className="divide-y divide-gray-200 bg-white">
+                {values.map((value, index) => {
+                    return (
+                   <tr key={index}>
+                     {value.map((val, i) => {
+                        
+                       return  <td key={i} className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{val}</td>
+                    })}
+                    </tr>
+                    );
+            })}
+                </tbody>
+              </table>
             </div>
           </div>
         </div>
       </div>
-    </div>
-  )
+    </div>   
+
+  </form>
+  </>
+
+    );
 }
+
+export default CSV;
