@@ -513,7 +513,7 @@ const handleHoverOff = () => {
          
       </div>
     </div>
-    <Button onClick={addtoList}>Save to above list</Button>
+    <Button onClick={addtoList}>Add to above list</Button>
 
     <div className="px-4 sm:px-6 lg:px-8">
       <div className="sm:flex sm:items-center">
