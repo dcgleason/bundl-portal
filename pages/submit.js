@@ -1,15 +1,24 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { RadioGroup } from '@headlessui/react'
 import { CheckCircleIcon, TrashIcon } from '@heroicons/react/20/solid'
+import allWhite from '../images/white.jpeg'
+import allRed from '../images/red.jpeg'
+import cream from '../images/cream.jpeg'
 import green from '../images/green.jpeg'
-import Image from 'next/image';
+import redWhite from '../images/redwhite.jpeg'
+import redWhiteSpine from '../images/redwhitespine.jpeg'
+import whiteCream from '../images/whitecream.jpeg'
+import whiteRedSpine from '../images/whiteredspine.jpeg'
+import allWhiteOpen from '../images/whitewhite.jpeg'
+import Image from 'next/image'
+
 
 const products = [
   {
     id: 1,
     title: 'Green Back Bundle',
     href: '#',
-    price: '$79.00 USD (paid)',
+    price: '$49.00 USD (paid)',
     color: 'Green and White',
     size: 'Large',
     imageSrc: 'https://tailwindui.com/img/ecommerce-images/checkout-page-02-product-01.jpg',
@@ -31,9 +40,22 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
 }
 
-export default function SubmitBOok() {
+export default function SubmitBook() {
+
+
   const [chosenStyle, setChosenStyle] = useState('')
   const [selectedDeliveryMethod, setSelectedDeliveryMethod] = useState(deliveryMethods[0])
+
+  // use useEffect to load the image from the database on each page load
+
+  // useEffect(() => {
+  //   // fetch the image code from the database
+  //   const imageCode = fetch('https://jsonplaceholder.typicode.com/posts') 
+  //   // set the image code to the state
+  //   setChosenStyle(imageCode)
+  // }, [])
+
+
 
   return (
     <div className="bg-gray-50">
@@ -389,7 +411,30 @@ export default function SubmitBOok() {
                 {products.map((product) => (
                   <li key={product.id} className="flex py-6 px-4 sm:px-6">
                     <div className="flex-shrink-0">
-                      <Image src={green} alt={product.imageAlt} height={50} width={50} className="w-20 rounded-md" />
+                      <Image   src={(() => {
+                        switch(chosenStyle) {
+                          case null:
+                            return allWhite;
+                          case 'classic-white':
+                            return allWhite;
+                          case 'red-white-spine':
+                            return redWhiteSpine;
+                          case 'white-red-spine':
+                            return whiteRedSpine;
+                          case 'white-cream-spine':
+                            return whiteCream;
+                          case 'all-red':
+                            return allRed;
+                          case 'all-cream':
+                            return cream;
+                          case 'red-back':
+                            return redWhite;
+                          case 'green-back':
+                            return green;
+                          default:
+                            return allWhite;
+                }
+              })()} alt={product.imageAlt} height={50} width={50} className="w-20 rounded-md" />
                     </div>
 
                     <div className="ml-6 flex flex-1 flex-col">
@@ -476,3 +521,4 @@ export default function SubmitBOok() {
     </div>
   )
 }
+

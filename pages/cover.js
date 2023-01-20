@@ -1,5 +1,4 @@
-import { useState, createContext } from 'react'
-import { StarIcon } from '@heroicons/react/20/solid'
+import { useState } from 'react'
 import { RadioGroup } from '@headlessui/react'
 import allWhite from '../images/white.jpeg'
 import allRed from '../images/red.jpeg'
@@ -12,7 +11,7 @@ import whiteRedSpine from '../images/whiteredspine.jpeg'
 import allWhiteOpen from '../images/whitewhite.jpeg'
 import Image from 'next/image'
 
-const imageContext = createContext(null);
+
 
 const product = {
   name: 'Choose your Bundle book style',
@@ -96,6 +95,23 @@ export default function ChooseBook() {
   const [chooseStyle, setChooseStyle] = useState(null);
 
 
+
+  const handleChosenStyle = (e) => {
+    e.preventDefault();
+    setValue(chooseStyle)
+    // make post request to backend storying the chosen style, if it already exists, update it
+    
+    const requestOptions = {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ chooseStyle })
+    };
+    fetch('http://localhost:3000/api/chooseStyle', requestOptions) // create route on the backend
+      .then(response => response.json())
+      .then(data => console.log(data));
+
+    }
+
   
 
   return (
@@ -135,7 +151,7 @@ export default function ChooseBook() {
         <div className="mx-auto mt-6 max-w-2xl">
             <Image
                src={(() => {
-                switch(chooseStyle) {
+                switch(chooseStyle) { // chosen style of book
                   case null:
                     return allWhite;
                   case 'classic-white':
@@ -267,6 +283,8 @@ export default function ChooseBook() {
                           <>
                             <RadioGroup.Label as="span" onClick={() => {
                                 setChooseStyle(size.code)
+                                
+                                console.log('value', value);
                             }} value={size.name}>{size.name}</RadioGroup.Label>
                             {size.inStock ? (
                               <span
@@ -302,6 +320,7 @@ export default function ChooseBook() {
 
               <button
                 type="submit"
+                onClick={handleChosenStyle}
                 className="mt-10 flex w-full items-center justify-center rounded-md border border-transparent bg-red-600 py-3 px-8 text-base font-medium text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2"
               >
                 Select             

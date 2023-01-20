@@ -26,6 +26,7 @@
     "next": "^13.0.7",
     "papa": "^0.0.0",
     "papaparse": "^5.3.2",
+    "passport-local": "^1.0.0",
     "postcss-100vh-fix": "^1.0.2",
     "postcss-flexbugs-fixes": "^5.0.2",
     "postcss-hover-media-feature": "^1.0.2",

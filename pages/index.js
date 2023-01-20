@@ -49,7 +49,7 @@ const CSV = () => {
       email: "david@gmail.com",
       submitted: "No",
       notes: "",
-      submission:  "Dear Person, I love you! You're awesome. Much love, Dan",
+      submission:  "",
       picture: false
     },
     {
@@ -185,7 +185,7 @@ const CSV = () => {
     return data ? data : "No message available";
   };
 
-  const handleViewPicture = (record) => { // dont need the dataSource record, just the pictureUrl
+  const handleViewPicture = (record) => { // dont need the dataSource record, just the pictureUrl --> where is the pictureUrl coming from?
    // get the public url of the image
    var pictureUrl;
     window.open(pictureUrl, '_blank');
