@@ -33,8 +33,12 @@ const onSubmit = async e => {
         credentials: 'include'
 });
   
-      console.log("res: ", res);
-      console.log('res.location' + res.location);
+      console.log("success res:" + res.status);
+      // If the request is successful, redirect the user to the /login route
+      if (res.status === 200) {
+        console.log("success");
+        window.location.href = '/';
+      }
     } catch (err) {
       console.error(err);
     }

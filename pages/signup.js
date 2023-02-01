@@ -40,6 +40,7 @@ const onSubmit = async e => {
       );
   
       console.log(await res.json());
+      console.log("success res:" + res.status);
     } catch (err) {
       console.error(err);
     }
@@ -91,7 +92,7 @@ const onSubmit = async e => {
                   id="firstname"
                   name="firstname"
                   type="text"
-                  value={username}
+                  value={firstName}
                   onChange={e => setFirstName(e.target.value)}
                   required
                  // autoComplete="email"
@@ -109,7 +110,7 @@ const onSubmit = async e => {
                   id="lastname"
                   name="lastname"
                   type="text"
-                  value={password}
+                  value={lastName}
                   onChange={e => setLastName(e.target.value)}
                   autoComplete="current-password"
                   required
