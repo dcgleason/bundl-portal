@@ -730,7 +730,7 @@ const handleHoverOff = () => {
         <div className="md:col-span-1">
           {/* <h3 className="text-lg font-medium leading-6 text-gray-900">Upload</h3> */}
           <p className="mt-1 text-lg text-gray-500">
-            Click to upload your vCard (.cvf file) of your iPhone contacts from iCloud:
+            Click to upload your vCard (.vcf file) of your iPhone contacts from iCloud:
           </p>
         </div>
               <div className="mt-1 flex rounded-md">
