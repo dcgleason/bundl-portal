@@ -202,8 +202,10 @@ const CSV = () => {
   }
 
   const handleSuccess = async (response) => {
-    const accessToken = response.credential;
-    console.log('resposne' + JSON.stringify(response));
+// Get the access token from the auth response
+const accessToken = response.getAuthResponse().access_token;
+console.log('resposne' + JSON.stringify(response));
+
   
     const contactsResponse = await fetch('https://yay-api.herokuapp.com/email/contacts', {
       method: 'GET',
