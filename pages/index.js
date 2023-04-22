@@ -730,6 +730,41 @@ const handleHoverOff = () => {
         <div className="md:col-span-1">
           {/* <h3 className="text-lg font-medium leading-6 text-gray-900">Upload</h3> */}
           <p className="mt-1 text-lg text-gray-500">
+            Click to upload your vCard (.cvf file) of your iPhone contacts from iCloud:
+          </p>
+        </div>
+              <div className="mt-1 flex rounded-md">
+
+                <input
+                 type="file"
+                 name="file"
+                 accept=".csv"
+                 onChange={changeHandler}
+                 style={{ display: "block", margin: "10px auto" }}
+                />
+
+          </div>
+          <div>
+         
+  <Button
+    onClick={handleDownloadCSV} // replace
+    onMouseEnter={handleHoverOn} // replace
+    onMouseLeave={handleHoverOff} // replace
+  > 
+    Download How-to Guide on how to export your contacts from your iCloud
+  </Button>
+
+  
+            </div>
+         
+      </div>
+    </div>
+
+    <div className="bg-white px-4 py-5 shadow sm:rounded-lg sm:p-6">
+      <div className="md:grid md:grid-cols-3 md:gap-6">
+        <div className="md:col-span-1">
+          {/* <h3 className="text-lg font-medium leading-6 text-gray-900">Upload</h3> */}
+          <p className="mt-1 text-lg text-gray-500">
             Click to upload your CSV file with your contributors' information here:
           </p>
         </div>
@@ -754,9 +789,9 @@ const handleHoverOff = () => {
     Download CSV template
   </Button>
 
-  {hover && <div><em>Note: after you downloading the template and fill it in, make sure to save the file as a csv file before you upload it here!</em></div>}
+     {hover && <div><em>Note: after you downloading the template and fill it in, make sure to save the file as a csv file before you upload it here!</em></div>}
   
-</div>
+            </div>
          
       </div>
     </div>
