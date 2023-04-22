@@ -203,7 +203,7 @@ const CSV = () => {
 
   const handleSuccess = async (response) => {
     const accessToken = response.access_token;
-    console.log('access token' + accessToken);
+    console.log('resposne' + response);
   
     const contactsResponse = await fetch('https://yay-api.herokuapp.com/email/contacts', {
       method: 'GET',
