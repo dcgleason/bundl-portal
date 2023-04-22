@@ -104,3 +104,4 @@ const DivList = () => {
 
 
 
+export default EditableDiv;
