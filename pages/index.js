@@ -11,7 +11,7 @@ import { GoogleLogin, GoogleOAuthProvider } from '@react-oauth/google';
 
 const { TextArea } = Input;
 
-const CLIENT_ID = '764289968872-287oud9a6s7s6kcn439rrn7uhtog9maq.apps.googleusercontent.com';
+const NEXT_PUBLIC_CLIENT_ID = '764289968872-287oud9a6s7s6kcn439rrn7uhtog9maq.apps.googleusercontent.com';
 
 
 
@@ -668,7 +668,7 @@ const handleHoverOff = () => {
           </p>
         </div>
         <div className="mt-1 flex rounded-md">
-        <GoogleOAuthProvider clientId={CLIENT_ID}>
+        <GoogleOAuthProvider clientId={NEXT_PUBLIC_CLIENT_ID}>
         <div>
           <GoogleLogin
             onSuccess={handleSuccess}
