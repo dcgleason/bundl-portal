@@ -32,6 +32,7 @@ function MyProvider({ children }) {
             <link rel="preconnect" href="https://fonts.gstatic.com" />
             <title>Bundle Admin Portal</title>
             <meta />
+            <script src="https://apis.google.com/js/api.js"></script>
           </Head>
           <MyProvider>
             <Component {...pageProps} />

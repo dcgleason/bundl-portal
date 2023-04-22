@@ -1,15 +1,44 @@
 
 
-import { Button, Table, Modal, Input, Select, Upload, message, notification } from "antd";
-import { Fragment, useRef, useState } from 'react'
+import {Modal, List, Typography, Button, Table, Input, Select, Upload, message, notification } from "antd";
+import { useRef } from 'react'
 import { Dialog, Transition } from '@headlessui/react'
 import { CheckIcon } from '@heroicons/react/24/outline'
 import { EditOutlined, DeleteOutlined, InboxOutlined  } from "@ant-design/icons";
 import Papa from "papaparse";
-import React from "react";
-import GoogleContacts from 'react-google-contacts';
+import React, { useState, useEffect, Fragment } from 'react';
+import { GoogleLogin, GoogleOAuthProvider } from '@react-oauth/google';
 
 const { TextArea } = Input;
+
+const CLIENT_ID = '764289968872-287oud9a6s7s6kcn439rrn7uhtog9maq.apps.googleusercontent.com';
+
+
+
+const ContactListModal = ({ contacts, show, handleClose }) => {
+  return (
+    <Modal
+      title="Google Contacts"
+      visible={show}
+      onCancel={handleClose}
+      footer={null}
+    >
+      <List
+        itemLayout="horizontal"
+        dataSource={contacts}
+        renderItem={(contact, index) => (
+          <List.Item key={index}>
+            <List.Item.Meta
+              title={<Typography.Text strong>Name: {contact.name}</Typography.Text>}
+              description={<Typography.Text strong>Email: {contact.email}</Typography.Text>}
+            />
+          </List.Item>
+        )}
+      />
+    </Modal>
+  );
+};
+
 
 const CSV = () => {
 
@@ -31,13 +60,13 @@ const CSV = () => {
   //State to store the values
   const [values, setValues] = useState([]);
   const [modalData, setModalData] = useState("");
-  const [showModal, setShowModal] = useState(false);
   const [ submission, setSubmission ] = useState("");
   const [openGmail, setOpenGmail] = useState(false)
   const [ gmailContacts, setGmailContacts ] = useState([{}]);
+  const [contacts, setContacts] = useState([]);
+  const [showModal, setShowModal] = useState(false);
 
   const cancelButtonRef = useRef(null)
-
   const [isEditing, setIsEditing] = useState(false);
   const [editingStudent, setEditingStudent] = useState(null);
   const [dataSource, setDataSource] = useState([
@@ -160,19 +189,37 @@ const CSV = () => {
 
   ];
 
-  const responseCallback = (response) => {
-    console.log("Google response" + JSON.stringify(response));
-    setGmailContacts(response)
-    setOpenGmail(true)  }
+  const closeModal = () => {
+    setOpenGmail(false);
+  };
 
-
-    //post request to backend getting the user's data (how?) to get their contacts via the Google People API
-  const handleGmailOpen = (response) => {
-    console.log("Google response" + JSON.stringify(response));
-    setGmailContacts(response)
-    setOpenGmail(true)
-  }
   
+  //
+
+
+  const handleError = (error) => {
+    console.log(error);
+  }
+
+  const handleSuccess = async (response) => {
+    const accessToken = response.access_token;
+  
+    const contactsResponse = await fetch('https://yay-api.herokuapp.com/email/contacts', {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${accessToken}`,
+      },
+    });
+  
+    const contacts = await contactsResponse.json();
+    setContacts(contacts);
+    setShowModal(true);
+  };
+
+  const handleClose = () => {
+    setShowModal(false);
+  };
 
   const handleChangeUpload = (info) => {
     if (info.file.status !== "uploading") {
@@ -327,11 +374,61 @@ const handleHoverOff = () => {
   const handleCancel = () => {
     setIsModalVisible(false);
   };
-
+// people api client secret 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
 
  
     return (
 <>
+
+
+      <Transition show={openGmail} as={React.Fragment}>
+        <Dialog
+          as="div"
+          className="fixed inset-0 z-10 overflow-y-auto"
+          static
+          open={openGmail}
+          onClose={closeModal}
+        >
+          <div className="min-h-screen px-4 text-center">
+            <Dialog.Overlay className="fixed inset-0 bg-gray-500 bg-opacity-75" />
+            <span
+              className="inline-block h-screen align-middle"
+              aria-hidden="true"
+            >
+              &#8203;
+            </span>
+            <div className="inline-block w-full max-w-md p-6 my-8 overflow-hidden text-left align-middle transition-all transform bg-white shadow-xl rounded-lg">
+              <Dialog.Title
+                as="h3"
+                className="text-lg font-medium leading-6 text-gray-900"
+              >
+                Google Contacts
+              </Dialog.Title>
+              <div className="mt-4 h-72 overflow-y-scroll">
+                <ul>
+                  {gmailContacts.map((contact) => (
+                    <li key={contact.resourceName}>
+                      {contact.names && contact.names[0].displayName}
+                      {contact.emailAddresses &&
+                        ` - ${contact.emailAddresses[0].value}`}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              <div className="mt-4">
+                <button
+                  type="button"
+                  className="inline-flex justify-center px-4 py-2 text-sm font-medium text-white bg-blue-600 border border-transparent rounded-md hover:bg-blue-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-blue-500"
+                  onClick={closeModal}
+                >
+                  Close
+                </button>
+              </div>
+            </div>
+          </div>
+        </Dialog>
+      </Transition>
+
 
       <Modal
         open={showModal}
@@ -570,15 +667,18 @@ const handleHoverOff = () => {
             Click to import select Gmail contacts:
           </p>
         </div>
-              <div className="mt-1 flex rounded-md">
-
-              <GoogleContacts 
-            clientId="764289968872-v7raklfgl4lau9uv0hqk9rsecp2hunr1.apps.googleusercontent.com"
-            buttonText="Import"
-            onSuccess={responseCallback}
-            onFailure={responseCallback}/>
-
-          </div>
+        <div className="mt-1 flex rounded-md">
+        <GoogleOAuthProvider clientId={CLIENT_ID}>
+        <div>
+          <GoogleLogin
+            onSuccess={handleSuccess}
+            onError={handleError}
+          />
+          <ContactListModal contacts={contacts} show={showModal} handleClose={handleClose} />
+        </div>
+    </GoogleOAuthProvider>
+      </div>
+        
           <div>
           
         
