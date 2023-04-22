@@ -7,7 +7,12 @@ import { CheckIcon } from '@heroicons/react/24/outline'
 import { EditOutlined, DeleteOutlined, InboxOutlined  } from "@ant-design/icons";
 import Papa from "papaparse";
 import React, { useState, useEffect, Fragment } from 'react';
-import { GoogleLogin, GoogleOAuthProvider } from '@react-oauth/google';
+import {
+  GoogleAuth,
+  GoogleButton,
+  GoogleAuthConsumer,
+  IOAuthState,
+} from "react-google-oauth2";
 
 const { TextArea } = Input;
 
@@ -197,6 +202,26 @@ const CSV = () => {
   //
 
 
+
+  const navigate = useNavigate();
+
+  const responseGoogle = (response) => {
+   //console.log(response);
+    const userObject = jwt_decode(response.credential);
+    //console.log(userObject);
+    localStorage.setItem('user', JSON.stringify(userObject));
+    const { name, sub, picture } = userObject;
+    const doc = {
+      _id: sub,
+      _type: 'user',
+      userName: name,
+      image: picture,
+    };
+    client.createIfNotExists(doc).then(() => {
+      navigate('/', { replace: true });
+    });
+
+  }
   const handleError = (error) => {
     console.log(error);
   }
@@ -348,6 +373,12 @@ const handleHoverOff = () => {
       },
     });
   };
+
+ const  handleSendEmail = (record) => {
+    console.log("email send") // this is working
+
+
+ }
   const onEditStudent = (record) => {
     setIsEditing(true);
     console.log("record", record)
@@ -450,6 +481,7 @@ const handleHoverOff = () => {
       <div className="App">
       <header className="App-header">
         <Button onClick={onAddStudent}>Add a new contributor</Button>
+        <Button onClick={handleSendEmail}>Send email to those who have not contributed yet</Button>
         <Table columns={columns} dataSource={dataSource}></Table>
         <Modal
           title="Add a contributor"
@@ -674,8 +706,8 @@ const handleHoverOff = () => {
         <GoogleOAuthProvider clientId={NEXT_PUBLIC_CLIENT_ID}>
         <div>
           <GoogleLogin
-            onSuccess={handleSuccess}
-            onError={handleError}
+            onSuccess={responseGoogle}
+            onError={responseGoogle}
           />
           <ContactListModal contacts={contacts} show={showModal} handleClose={handleClose} />
         </div>
