@@ -75,6 +75,14 @@ export default function MessagesPage() {
   return (
     <div className="flex flex-col items-center justify-center min-h-screen py-2">
       <div className="flex flex-col w-1/2 space-y-8">
+        <h2 className="text-center text-2xl font-bold underline">
+          Review{' '}
+          <span className="italic font-bold">
+            {messages.length}
+          </span>{' '}
+          number of submissions to {messages[0]?.recipient}'s Bundl
+        </h2>
+  
         <textarea
           className="resize-none border rounded-md"
           value={currentMessage}
@@ -82,11 +90,11 @@ export default function MessagesPage() {
           maxLength={3500}
           rows={10}
         />
-
+  
         {messages[currentMessageIndex]?.image && (
           <img src={messages[currentMessageIndex].image} alt="Message" />
         )}
-
+  
         <div className="flex justify-between">
           <button className="px-4 py-2 bg-blue-500 text-white rounded" onClick={handlePrev}>
             Previous
@@ -101,4 +109,5 @@ export default function MessagesPage() {
       </div>
     </div>
   );
+  
 }
