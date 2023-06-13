@@ -7,16 +7,13 @@ import { CheckIcon } from '@heroicons/react/24/outline'
 import { EditOutlined, DeleteOutlined, InboxOutlined  } from "@ant-design/icons";
 import Papa from "papaparse";
 import React, { useState, useEffect, Fragment } from 'react';
-import {
-  GoogleAuth,
-  GoogleButton,
-  GoogleAuthConsumer,
-  IOAuthState,
-} from "react-google-oauth2";
-
+//import the @react-oauth/google package
+import { GoogleAuth } from '@react-oauth/google';
 const { TextArea } = Input;
 
 const NEXT_PUBLIC_CLIENT_ID = '764289968872-287oud9a6s7s6kcn439rrn7uhtog9maq.apps.googleusercontent.com';
+
+// create a component that will be used as a wrapper for the GoogleAuth component
 
 
 
@@ -198,52 +195,19 @@ const CSV = () => {
     setOpenGmail(false);
   };
 
-  
-  //
-
-
-
-  const navigate = useNavigate();
-
-  const responseGoogle = (response) => {
-   //console.log(response);
-    const userObject = jwt_decode(response.credential);
-    //console.log(userObject);
-    localStorage.setItem('user', JSON.stringify(userObject));
-    const { name, sub, picture } = userObject;
-    const doc = {
-      _id: sub,
-      _type: 'user',
-      userName: name,
-      image: picture,
-    };
-    client.createIfNotExists(doc).then(() => {
-      navigate('/', { replace: true });
-    });
-
-  }
-  const handleError = (error) => {
-    console.log(error);
-  }
-
-  const handleSuccess = async (response) => {
-// Get the access token from the auth response
-const accessToken = response.getAuthResponse().access_token;
-console.log('resposne' + JSON.stringify(response));
 
   
-    const contactsResponse = await fetch('https://yay-api.herokuapp.com/email/contacts', {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${accessToken}`,
-      },
-    });
+    // const contactsResponse = await fetch('https://yay-api.herokuapp.com/email/contacts', {
+    //   method: 'GET',
+    //   headers: {
+    //     'Content-Type': 'application/json',
+    //     'Authorization': `Bearer ${accessToken}`,
+    //   },
+    // });
   
-    const contacts = await contactsResponse.json();
-    setContacts(contacts);
-    setShowModal(true);
-  };
+    // const contacts = await contactsResponse.json();
+    // setContacts(contacts);
+    // setShowModal(true);
 
   const handleClose = () => {
     setShowModal(false);
@@ -481,7 +445,7 @@ const handleHoverOff = () => {
       <div className="App">
       <header className="App-header">
         <Button onClick={onAddStudent}>Add a new contributor</Button>
-        <Button onClick={handleSendEmail}>Send email to those who have not contributed yet</Button>
+        {/* <Button onClick={handleSendEmail}>Send email to those who have not contributed yet</Button> */}
         <Table columns={columns} dataSource={dataSource}></Table>
         <Modal
           title="Add a contributor"
@@ -694,71 +658,9 @@ const handleHoverOff = () => {
       </Dialog>
     </Transition.Root>
 
-    <div className="bg-white px-4 py-5 shadow sm:rounded-lg sm:p-6">
-      <div className="md:grid md:grid-cols-3 md:gap-6">
-        <div className="md:col-span-1">
-          {/* <h3 className="text-lg font-medium leading-6 text-gray-900">Upload</h3> */}
-          <p className="mt-1 text-lg text-gray-500">
-            Click to import select Gmail contacts:
-          </p>
-        </div>
-        <div className="mt-1 flex rounded-md">
-        <GoogleOAuthProvider clientId={NEXT_PUBLIC_CLIENT_ID}>
-        <div>
-          <GoogleLogin
-            onSuccess={responseGoogle}
-            onError={responseGoogle}
-          />
-          <ContactListModal contacts={contacts} show={showModal} handleClose={handleClose} />
-        </div>
-    </GoogleOAuthProvider>
-      </div>
-        
-          <div>
-          
-        
-  
-        </div>
-         
-      </div>
-    </div>
 
     <form className="space-y-6 mt-10" action="#" method="POST">
 
-    <div className="bg-white px-4 py-5 shadow sm:rounded-lg sm:p-6">
-      <div className="md:grid md:grid-cols-3 md:gap-6">
-        <div className="md:col-span-1">
-          {/* <h3 className="text-lg font-medium leading-6 text-gray-900">Upload</h3> */}
-          <p className="mt-1 text-lg text-gray-500">
-            Click to upload your vCard (.vcf file) of your iPhone contacts from iCloud:
-          </p>
-        </div>
-              <div className="mt-1 flex rounded-md">
-
-                <input
-                 type="file"
-                 name="file"
-                 accept=".csv"
-                 onChange={changeHandler}
-                 style={{ display: "block", margin: "10px auto" }}
-                />
-
-          </div>
-          <div>
-         
-  <Button
-    onClick={handleDownloadCSV} // replace
-    onMouseEnter={handleHoverOn} // replace
-    onMouseLeave={handleHoverOff} // replace
-  > 
-    Download How-to Guide on how to export your contacts from your iCloud
-  </Button>
-
-  
-            </div>
-         
-      </div>
-    </div>
 
     <div className="bg-white px-4 py-5 shadow sm:rounded-lg sm:p-6">
       <div className="md:grid md:grid-cols-3 md:gap-6">
