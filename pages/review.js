@@ -1,7 +1,36 @@
 import { useState, useEffect } from 'react';
 
+
+var json = [
+  {
+    "id": 1,
+    "text": "This is the first message. It's a pretty short message, but it gets the point across.",
+    "image": "https://example.com/images/1.jpg"
+  },
+  {
+    "id": 2,
+    "text": "This is the second message. It's a bit longer than the first message. It has a bit more detail and provides a bit more information.",
+    "image": "https://example.com/images/2.jpg"
+  },
+  {
+    "id": 3,
+    "text": "This is the third message. It's the longest message so far. It has a lot of detail and provides a lot of information. It's a very informative message.",
+    "image": "https://example.com/images/3.jpg"
+  },
+  {
+    "id": 4,
+    "text": "This is the fourth message. It's a short message again, just like the first message.",
+    "image": "https://example.com/images/4.jpg"
+  },
+  {
+    "id": 5,
+    "text": "This is the fifth message. It's a medium-length message, not too short and not too long.",
+    "image": "https://example.com/images/5.jpg"
+  }
+]
+
 export default function MessagesPage() {
-  const [messages, setMessages] = useState([]);
+  const [messages, setMessages] = useState( []);
   const [currentMessageIndex, setCurrentMessageIndex] = useState(0);
   const [currentMessage, setCurrentMessage] = useState('');
 
