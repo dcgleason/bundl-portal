@@ -4,11 +4,12 @@ import Image from 'next/image';
 
 function LoginSignupForm() {
   const [username, setUsername] = useState("");
-const [password, setPassword] = useState("");
-
-
-
-const onSubmit = async e => {
+  const [password, setPassword] = useState("");
+  
+  // Add a state variable for the user data
+  const [user, setUser] = useState(null);
+  
+  const onSubmit = async e => {
     e.preventDefault();
   
     const config = {
@@ -24,25 +25,29 @@ const onSubmit = async e => {
   
     try {
       console.log("body: ", body);
-      // Use fetch to send a POST request to the /signup route
+      // Use fetch to send a POST request to the /signin route
       const res = await fetch('http://localhost:3001/login/signin', {
         method: 'POST',
         body: body,
         headers: config.headers,
-        redirect: 'follow',
         credentials: 'include'
-});
+      });
   
-      console.log("success res:" + res.status);
-      // If the request is successful, redirect the user to the /login route
-      if (res.status === 200) {
+      if (res.ok) {
+        const data = await res.json();
+        // Store the user data in your app's state
+        setUser(data);
         console.log("success");
-        window.location.href = '/';
+        // Redirect the user to the admin portal
+        window.location.href = `https://usebundl.com/?giftOwnerID=${data.giftOwnerID}`;
+      } else {
+        console.error("Login failed");
       }
     } catch (err) {
       console.error(err);
     }
   };
+  
   
 
   return (
