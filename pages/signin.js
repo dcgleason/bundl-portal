@@ -26,7 +26,7 @@ function LoginSignupForm() {
     try {
       console.log("body: ", body);
       // Use fetch to send a POST request to the /signin route
-      const res = await fetch('http://localhost:3001/login/signin', {
+      const res = await fetch(' https://yay-api.herokuapp.com/login/signin', {
         method: 'POST',
         body: body,
         headers: config.headers,

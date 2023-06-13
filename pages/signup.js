@@ -31,7 +31,7 @@ const onSubmit = async e => {
       console.log("body: ", body);
       // Use fetch to send a POST request to the /signup route
       const res = await fetch(
-        'http://localhost:3001/login/signup',
+        ' https://yay-api.herokuapp.com/login/signup',
         {
           method: 'POST',
           body: body,
