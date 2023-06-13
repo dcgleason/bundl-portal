@@ -124,7 +124,7 @@ export default function Home() {
                     <div className="px-7">
                         <div className="flex items-center justify-between">
                             <div className="w-32">
-                                <img className="w-full" src="https://cdn.tuk.dev/assets/templates/virtual-event-management/logo.png" alt="logo" />
+                            <Image className="w-full" src={bundleLogo} width="100" height="20" alt="logo" />
                             </div>
                             <div onClick={() => Setsidebar(!sidebar)} className="text-gray-700 ml-8 cursor-pointer">
                                 <svg xmlns="http://www.w3.org/2000/svg" width={20} height={20} viewBox="0 0 20 20" fill="none">
