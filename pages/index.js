@@ -212,7 +212,7 @@ const CSV = () => {
       console.log('transform data', Object.entries(data)[0][1].name);
       console.log('transform data second message', Object.entries(data)[1][1].name);
       // Transform the data into the format you need for your state
-      if (data && typeof data.messages === 'object') {
+      if (data && typeof data === 'object') {
         const transformedData = Object.entries(data).map(([key, value], index) => {
           const messageData = value[1]; // Access the second element of the value array
         
