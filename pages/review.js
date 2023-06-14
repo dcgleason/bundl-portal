@@ -41,7 +41,7 @@ export default function MessagesPage() {
 
   useEffect(() => {
     // Fetch messages from your API
-    fetch(`https://yay-api.herokuapp.com/book/${bookId}/messages`) // Replace {bookId} with the actual book ID
+    fetch(`https://yay-api.herokuapp.com/book/${bookID}/messages`) // Replace {bookId} with the actual book ID
       .then(response => response.json())
       .then(data => {
         setMessages(data);
