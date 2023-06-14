@@ -30,45 +30,46 @@ var json = [
 ]
 
 export default function MessagesPage() {
-  const [messages, setMessages] = useState( []);
+ 
+  const [messages, setMessages] = useState([]);
   const [currentMessageIndex, setCurrentMessageIndex] = useState(0);
   const [currentMessage, setCurrentMessage] = useState('');
 
   useEffect(() => {
     // Fetch messages from your API
-    fetch('https://yay-api.herokuapp.com/messages')
+    fetch('https://yay-api.herokuapp.com/book/{bookId}/messages') // Replace {bookId} with the actual book ID
       .then(response => response.json())
       .then(data => {
         setMessages(data);
-        setCurrentMessage(data[0]?.text || '');
+        setCurrentMessage(data[0]?.msg || '');
       });
   }, []);
 
   const handlePrev = () => {
     if (currentMessageIndex > 0) {
       setCurrentMessageIndex(currentMessageIndex - 1);
-      setCurrentMessage(messages[currentMessageIndex - 1].text);
+      setCurrentMessage(messages[currentMessageIndex - 1].msg);
     }
   };
 
   const handleNext = () => {
     if (currentMessageIndex < messages.length - 1) {
       setCurrentMessageIndex(currentMessageIndex + 1);
-      setCurrentMessage(messages[currentMessageIndex + 1].text);
+      setCurrentMessage(messages[currentMessageIndex + 1].msg);
     }
   };
 
   const handleSave = () => {
     // Save the edited message
     const newMessages = [...messages];
-    newMessages[currentMessageIndex].text = currentMessage;
+    newMessages[currentMessageIndex].msg = currentMessage;
     setMessages(newMessages);
 
     // Send a request to your API to update the message
-    fetch(`https://your-api-url/messages/${currentMessageIndex}`, {
+    fetch(`https://yay-api.herokuapp.com/book/{bookId}/message/${newMessages[currentMessageIndex]._id}`, { // Replace {bookId} with the actual book ID
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ text: currentMessage }),
+      body: JSON.stringify({ msg: currentMessage }),
     });
   };
 
