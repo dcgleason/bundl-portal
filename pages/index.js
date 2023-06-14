@@ -207,8 +207,10 @@ const CSV = () => {
     .then(response => response.json())
     .then(data => {
       console.log('Data:', data);
+      console.log('Data messages:', data.messages);
+      console.log('data.messages type of'+ typeof data.messages)
       // Transform the data into the format you need for your state
-      if (data && typeof data === 'object') {
+      if (data && typeof data.messages === 'object') {
       const transformedData = Object.entries(data.messages).map(([key, value], index) => ({
         id: index + 1,
         name: value.name,
