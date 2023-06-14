@@ -111,6 +111,7 @@ const CSV = () => {
       picture: false
     },
   ]);
+
   const columns = [
     {
       key: "1",
@@ -192,6 +193,8 @@ const CSV = () => {
     },
 
   ];
+
+
   useEffect(() => {
     // Get the user's ID from local storage
   const userID = localStorage.getItem('userID');
@@ -220,11 +223,7 @@ const CSV = () => {
       .catch(error => {
         console.error('Error:', error);
       });
-    })
-    .catch(error => {
-      console.error('Error:', error);
-    });
-  }, []); // Empty dependency array means this useEffect runs once when the component mounts
+    }, []); // Empty dependency array means this useEffect runs once when the component mounts
   
   const closeModal = () => {
     setOpenGmail(false);
