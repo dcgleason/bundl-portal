@@ -673,33 +673,36 @@ const handleHoverOff = () => {
 
         </Modal>
 
-        <Modal
-        title="Add a new contributor manually"
-        open={isModalVisible}
-        onOk={handleOk}
-        onCancel={handleCancel}
-      >
-       <label>Name</label> <Input placeholder="Name" value={name} onChange={(e) => setName(e.target.value)}/>
-       <label>Email</label> <Input placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)}/>
-       <label>Submitted</label> <Select
-          defaultValue="Yes"
-          style={{ width: 120 }}
-          onChange={(value) => setSubmitted(value)}
-          allowClear
-          options={[
-            {
-              value: 'yes',
-              label: 'Yes',
-            },
-            {
-              value: 'no',
-              label: 'No',
-            }
-          ]}
-        />
-        <label>Submission</label> <TextArea type='textarea' rows={10} maxLength={650} placeholder="Submission" value={submission} onChange={(e) => setMsg(e.target.value)}/>
-        <label>Picture Upload</label>
-           <Upload
+        // Your modal code
+          <Modal
+            title="Add a new contributor manually"
+            open={isModalVisible}
+            onOk={handleOk}
+            onCancel={handleCancel}
+          >
+            <label>Name</label> <Input placeholder="Name" value={name} onChange={(e) => setName(e.target.value)}/>
+            <label>Email</label> <Input placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)}/>
+            <label>Submitted</label> 
+            <Select
+              defaultValue="Yes"
+              style={{ width: 120 }}
+              onChange={(value) => setSubmitted(value)}
+              allowClear
+              options={[
+                {
+                  value: 'yes',
+                  label: 'Yes',
+                },
+                {
+                  value: 'no',
+                  label: 'No',
+                }
+              ]}
+            />
+            <label>Submission</label> 
+            <TextArea type='textarea' rows={10} maxLength={650} placeholder="Submission" value={submission} onChange={(e) => setSubmission(e.target.value)}/>
+            <label>Picture Upload</label>
+            <Upload
               name="avatar"
               listType="picture"
               className="avatar-uploader"
@@ -708,11 +711,12 @@ const handleHoverOff = () => {
               onChange={handleChangeUpload}
             >
               <div>
-              <InboxOutlined />
-            </div>
-          </Upload>
-       <label>Notes</label> <Input placeholder="Notes" value={notes} onChange={(e) => setNotes(e.target.value)} />
-      </Modal>
+                <InboxOutlined />
+              </div>
+            </Upload>
+            <label>Notes</label> 
+            <Input placeholder="Notes" value={notes} onChange={(e) => setNotes(e.target.value)} />
+          </Modal>
       </header>
     </div>
 
