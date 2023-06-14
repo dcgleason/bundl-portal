@@ -210,18 +210,25 @@ const CSV = () => {
       console.log('Data keys:' + Object.keys(data));
       console.log('Data values:' + JSON.stringify(Object.values(data)));
       console.log('transform data', Object.entries(data)[0][1].name);
-      console.log('transform data 2', Object.entries(data)[0].msg);
+      console.log('transform data second message', Object.entries(data)[1][1].name);
       // Transform the data into the format you need for your state
       if (data && typeof data.messages === 'object') {
-      const transformedData = Object.entries(data).map(([key, value], index) => ({ // add the data from the user -- their email and full name
-        id: index + 1,
-        name: value.name,
-        email: 'test@test.com', // Assuming the key of the map entry is the email
-        submitted: value.msg ? "Yes" : "No", // Assuming that if msg is present, the message has been submitted
-        notes: '', // Not sure where this data comes from
-        submission: value.msg,
-        picture: value.img_file ? true : false, // Assuming that if img_file is present, a picture was included
-      }));
+        const transformedData = Object.entries(data).flatMap(([key, value], index) => {
+          // Loop through the value array and transform each message into an object
+          return value.map((messageData, messageIndex) => {
+            return {
+              id: index + 1,
+              messageID: messageIndex + 1,
+              name: messageData.name,
+              email: 'test@test.com', // Assuming the key of the map entry is the email
+              submitted: messageData.msg ? "Yes" : "No", // Assuming that if msg is present, the message has been submitted
+              notes: '', // Not sure where this data comes from
+              submission: messageData.msg,
+              picture: messageData.img_file ? true : false, // Assuming that if img_file is present, a picture was included
+            };
+          });
+        });
+        
   
       setDataSource(transformedData);
       console.log('Transformed data:', transformedData);
