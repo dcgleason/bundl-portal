@@ -169,7 +169,7 @@ const CSV = () => {
     console.log('User ID data:', userID);
   
     // Now, fetch the book messages using the user's ID
-    fetch(`https://yay-api.herokuapp.com/book/${userID}/messages`, {
+    fetch(`https://yay-api.herokuapp.com/book/${localUserID}/messages`, {
       credentials: 'include'
     })
     .then(response => response.json())
