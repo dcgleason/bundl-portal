@@ -208,6 +208,7 @@ const CSV = () => {
     .then(data => {
       console.log('Data:', data);
       // Transform the data into the format you need for your state
+      if (data && typeof data === 'object') {
       const transformedData = Object.entries(data.messages).map(([key, value], index) => ({
         id: index + 1,
         name: value.name,
@@ -220,7 +221,13 @@ const CSV = () => {
   
       setDataSource(transformedData);
       console.log('Transformed data:', transformedData);
-    })
+    }
+    else {
+      console.log('No data returned');
+    } 
+  
+  }
+    )
     .catch(error => {
       console.error('Error:', error);
     });
