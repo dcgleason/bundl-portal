@@ -1,6 +1,7 @@
 import React,{useEffect, useState} from "react";
 import { MyContext } from '../pages/_app'; // replace '../pages/_app' with the actual path to your _app.js file
 import { useContext } from 'react';
+import Image from "next/image";
 export default function Header() {
     const [popup,Setpopup] = useState(false);
     const [dropdown,Setdropdown] = useState(true);
@@ -26,7 +27,7 @@ export default function Header() {
                     <div className="flex justify-between md:justify-start items-center">
                         <div className="flex items-center">
                             <div className="w-10 h-10 rounded-full">
-                                <img src="https://cdn.tuk.dev/assets/templates/virtual-event-management/profile.png" alt="profile" />
+                                <Image src="images/bundlelogo.png" width={40} height={40} className="rounded-full" />
                             </div>
                             <div className="ml-2">
                                 <p className="text-sm text-gray-700">{userName}</p>  { /* get the user name from the database    */}
