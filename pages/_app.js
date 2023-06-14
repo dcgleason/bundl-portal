@@ -19,6 +19,7 @@ function MyProvider({ children }) {
 
     useEffect(() => {
       const localUserID = localStorage.getItem('userID');
+      console.log('localUserID from my provider: ', localUserID);
       setUserID(localUserID);
     
       // Fetch the user's details from the server
