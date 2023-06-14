@@ -219,6 +219,7 @@ const CSV = () => {
       }));
   
       setDataSource(transformedData);
+      console.log('Transformed data:', transformedData);
     })
     .catch(error => {
       console.error('Error:', error);
