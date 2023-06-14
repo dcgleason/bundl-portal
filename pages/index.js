@@ -213,21 +213,20 @@ const CSV = () => {
       console.log('transform data second message', Object.entries(data)[1][1].name);
       // Transform the data into the format you need for your state
       if (data && typeof data.messages === 'object') {
-        const transformedData = Object.entries(data).flatMap(([key, value], index) => {
-          // Loop through the value array and transform each message into an object
-          return value.map((messageData, messageIndex) => {
-            return {
-              id: index + 1,
-              messageID: messageIndex + 1,
-              name: messageData.name,
-              email: 'test@test.com', // Assuming the key of the map entry is the email
-              submitted: messageData.msg ? "Yes" : "No", // Assuming that if msg is present, the message has been submitted
-              notes: '', // Not sure where this data comes from
-              submission: messageData.msg,
-              picture: messageData.img_file ? true : false, // Assuming that if img_file is present, a picture was included
-            };
-          });
+        const transformedData = Object.entries(data).map(([key, value], index) => {
+          const messageData = value[1]; // Access the second element of the value array
+        
+          return {
+            id: index + 1,
+            name: messageData.name,
+            email: 'test@test.com', // Assuming the key of the map entry is the email
+            submitted: messageData.msg ? "Yes" : "No", // Assuming that if msg is present, the message has been submitted
+            notes: '', // Not sure where this data comes from
+            submission: messageData.msg,
+            picture: messageData.img_file ? true : false, // Assuming that if img_file is present, a picture was included
+          };
         });
+        
         
   
       setDataSource(transformedData);
