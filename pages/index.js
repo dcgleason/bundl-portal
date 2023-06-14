@@ -197,33 +197,34 @@ const CSV = () => {
 
   useEffect(() => {
     // Get the user's ID from local storage
-  const userID = localStorage.getItem('userID');
-      console.log('User ID data:', userID);
+    const userID = localStorage.getItem('userID');
+    console.log('User ID data:', userID);
   
-      // Now, fetch the book messages using the user's ID
-      fetch(`https://yay-api.herokuapp.com/book/${userID}/messages`, {
-        credentials: 'include'
-      })
-      .then(response => response.json())
-      .then(data => {
-        console.log('Data:', data);
-        // Transform the data into the format you need for your state
-        const transformedData = Array.from(data).map(([key, value], index) => ({
-          id: index + 1,
-          name: value.name,
-          email: key, // Assuming the key of the map entry is the email
-          submitted: value.msg ? "Yes" : "No", // Assuming that if msg is present, the message has been submitted
-          notes: '', // Not sure where this data comes from
-          submission: value.msg,
-          picture: value.img_file ? true : false, // Assuming that if img_file is present, a picture was included
-        }));
+    // Now, fetch the book messages using the user's ID
+    fetch(`https://yay-api.herokuapp.com/book/${userID}/messages`, {
+      credentials: 'include'
+    })
+    .then(response => response.json())
+    .then(data => {
+      console.log('Data:', data);
+      // Transform the data into the format you need for your state
+      const transformedData = Object.entries(data.messages).map(([key, value], index) => ({
+        id: index + 1,
+        name: value.name,
+        email: key, // Assuming the key of the map entry is the email
+        submitted: value.msg ? "Yes" : "No", // Assuming that if msg is present, the message has been submitted
+        notes: '', // Not sure where this data comes from
+        submission: value.msg,
+        picture: value.img_file ? true : false, // Assuming that if img_file is present, a picture was included
+      }));
   
-        setDataSource(transformedData);
-      })
-      .catch(error => {
-        console.error('Error:', error);
-      });
-    }, []); // Empty dependency array means this useEffect runs once when the component mounts
+      setDataSource(transformedData);
+    })
+    .catch(error => {
+      console.error('Error:', error);
+    });
+  }, []); // Empty dependency array means this useEffect runs once when the component mounts
+  
   
   const closeModal = () => {
     setOpenGmail(false);
