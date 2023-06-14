@@ -210,10 +210,10 @@ const CSV = () => {
       console.log('Data keys:' + Object.keys(data));
       // Transform the data into the format you need for your state
       if (data && typeof data.messages === 'object') {
-      const transformedData = Object.entries(data.messages).map(([key, value], index) => ({
+      const transformedData = Object.entries(data).map(([key, value], index) => ({
         id: index + 1,
         name: value.name,
-        email: key, // Assuming the key of the map entry is the email
+        email: 'test@test.com', // Assuming the key of the map entry is the email
         submitted: value.msg ? "Yes" : "No", // Assuming that if msg is present, the message has been submitted
         notes: '', // Not sure where this data comes from
         submission: value.msg,
