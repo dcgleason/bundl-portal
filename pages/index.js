@@ -46,8 +46,6 @@ const CSV = () => {
 
 
   const [isModalVisible, setIsModalVisible] = useState(false);
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
   const [notes, setNotes] = useState("");
   const [submitted, setSubmitted] = useState("");
   const [newStudent, setNewStudent] = useState(null);
@@ -68,6 +66,10 @@ const CSV = () => {
   const [ gmailContacts, setGmailContacts ] = useState([{}]);
   const [contacts, setContacts] = useState([]);
   const [showModal, setShowModal] = useState(false);
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [layout, setLayout] = useState('');
+  const [msg, setMsg] = useState('');
 
   const cancelButtonRef = useRef(null)
   const [isEditing, setIsEditing] = useState(false);
@@ -364,18 +366,36 @@ const handleHoverOff = () => {
   
   const onAddStudent = () => {
     setIsModalVisible(true);
-
-    // const randomNumber = parseInt(Math.random() * 1000);
-    // const newStudent = {
-    //   id: dataSource[dataSource.length - 1].id + 1,
-    //   name: "Name " + randomNumber,
-    //   email: randomNumber + "@gmail.com",
-    //   address: "Address " + randomNumber,
-    // };
-    // setDataSource((pre) => {
-    //   return [...pre, newStudent];
-    // });
+  
+    const newStudent = {
+      id: dataSource[dataSource.length - 1].id + 1,
+      name: name,
+      email: email,
+      layout: layout,
+      msg: msg,
+    };
+  
+    // Make a POST request to your API endpoint
+    fetch(`https://yay-api.herokuapp.com/book/${userID}/message`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(newStudent),
+    })
+    .then(response => response.json())
+    .then(data => {
+      console.log('Success:', data);
+      // Update the local state only after the new student has been added to the database
+      setDataSource((pre) => {
+        return [...pre, newStudent];
+      });
+    })
+    .catch((error) => {
+      console.error('Error:', error);
+    });
   };
+
   const onDeleteStudent = (record) => {
     Modal.confirm({
       title: "Are you sure, you want to delete this student record?",
@@ -677,7 +697,7 @@ const handleHoverOff = () => {
             }
           ]}
         />
-        <label>Submission</label> <TextArea type='textarea' rows={10} maxLength={650} placeholder="Submission" value={submission} onChange={(e) => setSubmission(e.target.value)}/>
+        <label>Submission</label> <TextArea type='textarea' rows={10} maxLength={650} placeholder="Submission" value={submission} onChange={(e) => setMsg(e.target.value)}/>
         <label>Picture Upload</label>
            <Upload
               name="avatar"
