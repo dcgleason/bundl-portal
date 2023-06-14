@@ -160,7 +160,7 @@ const onSubmit = async e => {
               </div>
             </div>
 
-            <div className="flex items-center justify-between">
+            {/* <div className="flex items-center justify-between">
               <div className="flex items-center">
                 <input
                   id="remember-me"
@@ -178,7 +178,7 @@ const onSubmit = async e => {
                   Forgot your password?
                 </a>
               </div>
-            </div>
+            </div> */}
 
             <div>
               <button
