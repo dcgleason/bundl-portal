@@ -29,7 +29,8 @@ function MyProvider({ children }) {
       .then(response => response.json())
       .then(data => {
         // Assuming the response data contains the user's name
-        const userName = data.fullName;
+        const userName = data.name;
+        console.log('data from my provider: ', data);
         setUserName(userName);
       })
       .catch(error => {
