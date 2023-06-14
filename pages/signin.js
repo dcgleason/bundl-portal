@@ -45,7 +45,7 @@ function LoginSignupForm() {
       // Store the user's ID in local storage so it can be accessed in other components
       localStorage.setItem('userID', userID);
       // Redirect to the dashboard page
-      window.location.href = `https://www.usebundl.com/`;
+      window.location.href = `https://www.admin.givebundl.com/`;
     } else {
         console.error("Login failed");
       }
