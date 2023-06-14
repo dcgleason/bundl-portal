@@ -214,6 +214,7 @@ const CSV = () => {
       // Transform the data into the format you need for your state
       if (data && typeof data === 'object') {
         const transformedData = Object.entries(data).map(([key, value], index) => {
+          console.log('value' + value);
           const messageData = value[1]; // Access the second element of the value array
           if (messageData) { // Check that messageData is defined
           return {
