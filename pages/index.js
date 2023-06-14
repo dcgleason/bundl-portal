@@ -209,6 +209,8 @@ const CSV = () => {
       console.log('Data:', data);
       console.log('Data keys:' + Object.keys(data));
       console.log('Data values:' + JSON.stringify(Object.values(data)));
+      console.log('transform data', Object.entries(data)[0][1].name);
+      console.log('transform data 2', Object.entries(data)[0].msg);
       // Transform the data into the format you need for your state
       if (data && typeof data.messages === 'object') {
       const transformedData = Object.entries(data).map(([key, value], index) => ({ // add the data from the user -- their email and full name
