@@ -58,6 +58,7 @@ const CSV = () => {
   //State to store table Column name
   const [tableRows, setTableRows] = useState([]);
   const [hover, setHover] = useState(false);
+  const [userID, setUserID] = useState(null);
 
   //State to store the values
   const [values, setValues] = useState([]);
@@ -160,7 +161,11 @@ const CSV = () => {
 
   useEffect(() => {
     // Get the user's ID from local storage
-    const userID = localStorage.getItem('userID');
+
+      // Set the userID state
+
+    const localUserID = localStorage.getItem('userID');
+    setUserID(localUserID);
     console.log('User ID data:', userID);
   
     // Now, fetch the book messages using the user's ID
@@ -174,6 +179,7 @@ const CSV = () => {
       console.log('Data values:' + JSON.stringify(Object.values(data)));
       console.log('transform data', Object.entries(data)[0][1].name);
       console.log('transform data second message', Object.entries(data)[1][1].name);
+
       // Transform the data into the format you need for your state
       if (data && typeof data === 'object') {
         const transformedData = Object.entries(data).map(([key, value], index) => {
