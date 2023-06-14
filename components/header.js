@@ -9,6 +9,7 @@ export default function Header() {
     useEffect(() => {
         console.log("userid" + userID);
         console.log("username" + userName);
+    }, [userID, userName]);
 
 
     return (
