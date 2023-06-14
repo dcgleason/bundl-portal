@@ -1,10 +1,14 @@
-import React,{useState} from "react";
+import React,{useEffect, useState} from "react";
 import { MyContext } from '../pages/_app'; // replace '../pages/_app' with the actual path to your _app.js file
 import { useContext } from 'react';
 export default function Header() {
     const [popup,Setpopup] = useState(false);
     const [dropdown,Setdropdown] = useState(true);
     const { userID, userName } = useContext(MyContext);
+
+    useEffect(() => {
+        console.log("userid" + userID);
+        console.log("username" + userName);
 
 
     return (
