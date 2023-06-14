@@ -39,7 +39,7 @@ function LoginSignupForm() {
         setUser(data);
         console.log("success");
         // Redirect the user to the admin portal
-        window.location.href = `https://usebundl.com/?userIDD=${data.userID}`;
+        window.location.href = `https://usebundl.com/?userID=${data.userID}`;
       } else {
         console.error("Login failed");
       }

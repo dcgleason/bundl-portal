@@ -200,8 +200,8 @@ const CSV = () => {
     .then(response => response.json())
     .then(data => {
       // The user's ID is in data.userID
-      const userID = data.userID;
-      console.log('User ID:', userID);
+      const userID = data.userId;
+      console.log('User ID data:', data);
   
       // Now, fetch the book messages using the user's ID
       fetch(`https://yay-api.herokuapp.com/book/${userID}/messages`, {
