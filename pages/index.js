@@ -265,27 +265,56 @@ const CSV = () => {
    var pictureUrl;
     window.open(pictureUrl, '_blank');
   }
-  const addtoList = () => {
-
+  
+  const addtoList = async () => {
     console.log('values = '+ values);
-
+  
     let objects = [];
-
-     const firstValue = dataSource[dataSource.length - 1].id;
-      for (let i = 0; i < values.length; i ++) {
-        objects.push({
-          id: firstValue + 1 + i,
-          name: values[i][1],
-          email: values[i][2],
-          address: values[i][3]
+  
+    const firstValue = dataSource[dataSource.length - 1].id;
+    for (let i = 0; i < values.length; i ++) {
+      objects.push({
+        id: firstValue + 1 + i,
+        name: values[i][1],
+        email: values[i][2],
+        address: values[i][3]
+      });
+    }
+    console.log('objects = '+ JSON.stringify(objects))
+  
+    // Add the new contacts to the dataSource state
+    setDataSource([...dataSource, ...objects]);
+  
+    // Now, send the new contacts to the server
+    try {
+      for (let i = 0; i < objects.length; i++) {
+        const contact = objects[i];
+        const response = await fetch(`https://yay-api.herokuapp.com/book/${userID}/message`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            layout_id: 1, // Or whatever layout_id you want to use
+            name: contact.name,
+            msg: 'none',
+            img_file: 'none',
+            email: contact.email,
+          }),
         });
-       
+  
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
       }
-      console.log('objects = '+ JSON.stringify(objects))
-
-  setDataSource([...dataSource, ...objects]);
-
+  
+      console.log('Contacts added to the server successfully');
+    } catch (error) {
+      console.error('Failed to add contacts to the server:', error);
+    }
   }
+  
+  
 
   const changeHandler = (event) => {
     // Passing file data (event.target.files[0]) to parse using Papa.parse
