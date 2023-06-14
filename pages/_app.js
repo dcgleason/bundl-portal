@@ -23,7 +23,7 @@ function MyProvider({ children }) {
       setUserID(localUserID);
     
       // Fetch the user's details from the server
-      fetch(`https://yay-api.herokuapp.com/user/${localUserID}`, {
+      fetch(`https://yay-api.herokuapp.com/users/${localUserID}`, {
         credentials: 'include'
       })
       .then(response => response.json())
