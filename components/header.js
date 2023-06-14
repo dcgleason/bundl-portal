@@ -8,8 +8,8 @@ export default function Header() {
     const { userID, userName } = useContext(MyContext);
 
     useEffect(() => {
-        console.log("userid" + userID);
-        console.log("username" + userName);
+        console.log("userid from header" + userID);
+        console.log("username from header" + userName);
     }, [userID, userName]);
 
 
