@@ -672,8 +672,6 @@ const handleHoverOff = () => {
 
 
         </Modal>
-
-        // Your modal code
           <Modal
             title="Add a new contributor manually"
             open={isModalVisible}
