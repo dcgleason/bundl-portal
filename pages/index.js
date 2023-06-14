@@ -104,7 +104,7 @@ const CSV = () => {
         return (
           <>
           {record !== "" ?
-          <a className="underline" onClick={ () => handleModalOpen(record)}>View Submission</a>
+          <a className="underline" onClick={ () => handleModalOpen(record)}>Preview Submission</a>
           :
           "No Submission"
           }
