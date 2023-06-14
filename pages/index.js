@@ -554,6 +554,7 @@ const handleHoverOff = () => {
                       name: editingStudent.name,
                       msg: editingStudent.submission || 'none',
                       img_file: editingStudent.picture || 'none',
+                      email: editingStudent.email || 'none',
                     }),
                   });
 
