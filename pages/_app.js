@@ -37,6 +37,7 @@ function MyProvider({ children }) {
       // Assuming the response data contains the user's bookID
       const bookID = data.bookID; // Replace 'bookID' with the correct field name from your API response
       setBookID(bookID); // Add this line
+      console.log('userID from my provider: ', userID); // Add this line
     })
     .catch(error => {
       console.error('Error:', error);
