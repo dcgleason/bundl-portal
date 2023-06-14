@@ -198,6 +198,8 @@ const CSV = () => {
     })
       .then(response => response.json())
       .then(data => {
+
+        console.log("data" + data);
         // Transform the data into the format you need for your state
         const transformedData = Array.from(data).map(([key, value], index) => ({
           id: index + 1,
