@@ -73,44 +73,7 @@ const CSV = () => {
   const [editingStudent, setEditingStudent] = useState(null);
 
   
-  const [dataSource, setDataSource] = useState([
-    {
-      id: 1,
-      name: "John",
-      email: "john@gmail.com",
-      submitted: "Yes",
-      notes: "",
-      submission: "Dear Person, I love you! You're great. Much love, Dan",
-      picture: true
-    },
-    {
-      id: 2,
-      name: "David",
-      email: "david@gmail.com",
-      submitted: "No",
-      notes: "",
-      submission:  "",
-      picture: false
-    },
-    {
-      id: 3,
-      name: "James",
-      email: "james@gmail.com",
-      submitted: "No",
-      notes: "",
-      submission:  "",
-      picture: false
-    },
-    {
-      id: 4,
-      name: "Sam",
-      email: "sam@gmail.com",
-      submitted: "Yes",
-      notes: "",
-      submission:  "Dear Person, I love you! You're sweet. Much love, Dan",
-      picture: false
-    },
-  ]);
+  const [dataSource, setDataSource] = useState([]);
 
   const columns = [
     {
