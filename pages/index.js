@@ -182,7 +182,7 @@ const CSV = () => {
           return {
             id: index + 1,
             name: value.name,
-            email: 'test@test.com', // Assuming the key of the map entry is the email
+            email: value.email? value.email: "No email given", // Assuming the key of the map entry is the email
             submitted: value.msg ? "Yes" : "No", // Assuming that if msg is present, the message has been submitted
             notes: '', // Not sure where this data comes from
             submission: value.msg,
