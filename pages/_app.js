@@ -31,6 +31,7 @@ function MyProvider({ children }) {
             <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;500;700;900&display=swap" rel="stylesheet" />
             <link rel="preconnect" href="https://fonts.gstatic.com" />
             <title>Bundl Admin Portal</title>
+            <link rel="icon" href="/favicon.ico" />
             <meta />
             <script src="https://apis.google.com/js/api.js"></script>
           </Head>
