@@ -215,7 +215,7 @@ const CSV = () => {
       if (data && typeof data === 'object') {
         const transformedData = Object.entries(data).map(([key, value], index) => {
           const messageData = value[1]; // Access the second element of the value array
-        
+          if (messageData) { // Check that messageData is defined
           return {
             id: index + 1,
             name: messageData.name,
@@ -225,6 +225,7 @@ const CSV = () => {
             submission: messageData.msg,
             picture: messageData.img_file ? true : false, // Assuming that if img_file is present, a picture was included
           };
+        }
         });
         
         
