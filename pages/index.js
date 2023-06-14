@@ -294,32 +294,31 @@ const CSV = () => {
     setDataSource([...dataSource, ...objects]);
   
     // Now, send the new contacts to the server
-    try {
-      for (let i = 0; i < objects.length; i++) {
-        const contact = objects[i];
-        const response = await fetch(`https://yay-api.herokuapp.com/book/${userID}/message`, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            layout_id: 1, // Or whatever layout_id you want to use
-            name: contact.name,
-            msg: 'none',
-            img_file: 'none',
-            email: contact.email,
-          }),
-        });
+    const requests = objects.map(contact =>
+      fetch(`https://yay-api.herokuapp.com/book/${userID}/message`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          layout_id: 1, // Or whatever layout_id you want to use
+          name: contact.name,
+          msg: '',
+          img_file: '',
+          email: contact.email,
+          submitted: false,
+        }),
+      })
+    );
   
+    Promise.all(requests)
+      .then(responses => responses.forEach(response => {
         if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`);
+          throw new Error(`Failed to add contact: HTTP error! status: ${response.status}`);
         }
-      }
-  
-      console.log('Contacts added to the server successfully');
-    } catch (error) {
-      console.error('Failed to add contacts to the server:', error);
-    }
+      }))
+      .then(() => console.log('Contacts added to the server successfully'))
+      .catch(error => console.error('Failed to add contacts to the server:', error));
   }
   
   
