@@ -10,7 +10,7 @@ export default function Layout(props) {
             <div className="flex w-full">
                 {router.pathname !== '/signup' && router.pathname !== '/signin' && <Sidebar />}
                 <div className="w-full px-6 md:px-10 py-6">
-                    <Header />
+                {router.pathname !== '/signup' && router.pathname !== '/signin' && <Header />} 
                     <main>{props.children}</main>
                 </div>
             </div>
