@@ -14,35 +14,40 @@ export const MyContext = createContext({
 
 
 function MyProvider({ children }) {
-    const [userID, setUserID] = useState(null);
-    const [userName, setUserName] = useState(null);
+  const [userID, setUserID] = useState(null);
+  const [userName, setUserName] = useState(null);
+  const [bookID, setBookID] = useState(null); // Add this line
 
-    useEffect(() => {
-      const localUserID = localStorage.getItem('userID');
-      console.log('localUserID from my provider: ', localUserID);
-      setUserID(localUserID);
-    
-      // Fetch the user's details from the server
-      fetch(`https://yay-api.herokuapp.com/users/${localUserID}`, {
-        credentials: 'include'
-      })
-      .then(response => response.json())
-      .then(data => {
-        // Assuming the response data contains the user's name
-        const userName = data.name;
-        console.log('data from my provider: ', data);
-        setUserName(userName);
-      })
-      .catch(error => {
-        console.error('Error:', error);
-      });
-    }, []);
+  useEffect(() => {
+    const localUserID = localStorage.getItem('userID');
+    console.log('localUserID from my provider: ', localUserID);
+    setUserID(localUserID);
+  
+    // Fetch the user's details from the server
+    fetch(`https://yay-api.herokuapp.com/users/${localUserID}`, {
+      credentials: 'include'
+    })
+    .then(response => response.json())
+    .then(data => {
+      // Assuming the response data contains the user's name
+      const userName = data.name;
+      console.log('data from my provider: ', data);
+      setUserName(userName);
 
-    return (
-      <MyContext.Provider value={{ userID: userID, userName: userName}}>
-        {children}
-      </MyContext.Provider>
-    );
+      // Assuming the response data contains the user's bookID
+      const bookID = data.bookID; // Replace 'bookID' with the correct field name from your API response
+      setBookID(bookID); // Add this line
+    })
+    .catch(error => {
+      console.error('Error:', error);
+    });
+  }, []);
+
+  return (
+    <MyContext.Provider value={{ userID: userID, userName: userName, bookID: bookID }}> // Add bookID here
+      {children}
+    </MyContext.Provider>
+  );
 }
 
 function MyApp({ Component, pageProps }) {

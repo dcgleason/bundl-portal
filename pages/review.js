@@ -1,4 +1,6 @@
 import { useState, useEffect } from 'react';
+import { useContext } from 'react';
+import { MyContext } from '../_app';
 
 
 var json = [
@@ -34,10 +36,12 @@ export default function MessagesPage() {
   const [messages, setMessages] = useState([]);
   const [currentMessageIndex, setCurrentMessageIndex] = useState(0);
   const [currentMessage, setCurrentMessage] = useState('');
+ 
+  const { bookID } = useContext(MyContext);
 
   useEffect(() => {
     // Fetch messages from your API
-    fetch('https://yay-api.herokuapp.com/book/{bookId}/messages') // Replace {bookId} with the actual book ID
+    fetch(`https://yay-api.herokuapp.com/book/${bookId}/messages`) // Replace {bookId} with the actual book ID
       .then(response => response.json())
       .then(data => {
         setMessages(data);
