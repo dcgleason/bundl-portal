@@ -193,13 +193,23 @@ const CSV = () => {
 
   ];
   useEffect(() => {
-    fetch(`https://yay-api.herokuapp.com/book/${userID}/messages`, {
-      credentials: 'include'
+    // First, fetch the user's ID
+    fetch('https://yay-api.herokuapp.com/login/success', {
+      credentials: 'include' // Include credentials in the request
     })
+    .then(response => response.json())
+    .then(data => {
+      // The user's ID is in data.userID
+      const userID = data.userID;
+      console.log('User ID:', userID);
+  
+      // Now, fetch the book messages using the user's ID
+      fetch(`https://yay-api.herokuapp.com/book/${userID}/messages`, {
+        credentials: 'include'
+      })
       .then(response => response.json())
       .then(data => {
-
-        console.log("data" + data);
+        console.log('Data:', data);
         // Transform the data into the format you need for your state
         const transformedData = Array.from(data).map(([key, value], index) => ({
           id: index + 1,
@@ -216,7 +226,12 @@ const CSV = () => {
       .catch(error => {
         console.error('Error:', error);
       });
-  }, []); 
+    })
+    .catch(error => {
+      console.error('Error:', error);
+    });
+  }, []); // Empty dependency array means this useEffect runs once when the component mounts
+  
   const closeModal = () => {
     setOpenGmail(false);
   };
