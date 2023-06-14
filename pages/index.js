@@ -71,6 +71,8 @@ const CSV = () => {
   const cancelButtonRef = useRef(null)
   const [isEditing, setIsEditing] = useState(false);
   const [editingStudent, setEditingStudent] = useState(null);
+
+  
   const [dataSource, setDataSource] = useState([
     {
       id: 1,
@@ -190,7 +192,29 @@ const CSV = () => {
     },
 
   ];
-
+  useEffect(() => {
+    fetch(`https://yay-api.herokuapp.com/book/${userID}/messages`, {
+      credentials: 'include'
+    })
+      .then(response => response.json())
+      .then(data => {
+        // Transform the data into the format you need for your state
+        const transformedData = Array.from(data).map(([key, value], index) => ({
+          id: index + 1,
+          name: value.name,
+          email: key, // Assuming the key of the map entry is the email
+          submitted: value.msg ? "Yes" : "No", // Assuming that if msg is present, the message has been submitted
+          notes: '', // Not sure where this data comes from
+          submission: value.msg,
+          picture: value.img_file ? true : false, // Assuming that if img_file is present, a picture was included
+        }));
+  
+        setDataSource(transformedData);
+      })
+      .catch(error => {
+        console.error('Error:', error);
+      });
+  }, []); 
   const closeModal = () => {
     setOpenGmail(false);
   };
