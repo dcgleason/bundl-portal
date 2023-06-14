@@ -214,19 +214,17 @@ const CSV = () => {
       // Transform the data into the format you need for your state
       if (data && typeof data === 'object') {
         const transformedData = Object.entries(data).map(([key, value], index) => {
-          console.log('value' + JSON.stringify(value));
-          const messageData = value[1]; // Access the second element of the value array
-          if (messageData) { // Check that messageData is defined
+          // Since value is an object representing a single message, you can directly access its properties
+          console.log('Value:', JSON.stringify(value));
           return {
             id: index + 1,
-            name: messageData.name,
+            name: value.name,
             email: 'test@test.com', // Assuming the key of the map entry is the email
-            submitted: messageData.msg ? "Yes" : "No", // Assuming that if msg is present, the message has been submitted
+            submitted: value.msg ? "Yes" : "No", // Assuming that if msg is present, the message has been submitted
             notes: '', // Not sure where this data comes from
-            submission: messageData.msg,
-            picture: messageData.img_file ? true : false, // Assuming that if img_file is present, a picture was included
+            submission: value.msg,
+            picture: value.img_file ? true : false, // Assuming that if img_file is present, a picture was included
           };
-        }
         });
         
         
