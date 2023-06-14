@@ -47,7 +47,7 @@ function MyProvider({ children }) {
   }, []);
 
   return (
-    <MyContext.Provider value={{ userID, userName, bookID, isLoading }}> // Add isLoading here
+    <MyContext.Provider value={{ userID, userName, bookID, isLoading }}> 
       {children}
     </MyContext.Provider>
   );
