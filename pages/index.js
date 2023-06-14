@@ -519,25 +519,51 @@ const handleHoverOff = () => {
         {/* <Button onClick={handleSendEmail}>Send email to those who have not contributed yet</Button> */}
         <Table columns={columns} dataSource={dataSource}></Table>
         <Modal
-          title="Add a contributor"
-          open={isEditing}
-          okText="Save"
-          onCancel={() => {
-            resetEditing();
-          }}
-          onOk={() => {
-            setDataSource((pre) => {
-              return pre.map((student) => {
-                if (student.id === editingStudent.id) {
-                  return editingStudent;
-                } else {
-                  return student;
+              title="Add a contributor"
+              open={isEditing}
+              okText="Save"
+              onCancel={() => {
+                resetEditing();
+              }}
+              onOk={async () => {
+                setDataSource((pre) => {
+                  return pre.map((student) => {
+                    if (student.id === editingStudent.id) {
+                      return editingStudent;
+                    } else {
+                      return student;
+                    }
+                  });
+                });
+
+                // Now, send the updated student to the server
+                try {
+                  const response = await fetch(`https://yay-api.herokuapp.com/book/${userID}/message/${editingStudent.id}`, {
+                    method: 'PUT',
+                    headers: {
+                      'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                      layout_id: 1, // Or whatever layout_id you want to use
+                      name: editingStudent.name,
+                      msg: editingStudent.submission || 'none',
+                      img_file: editingStudent.picture || 'none',
+                    }),
+                  });
+
+                  if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                  }
+
+                  console.log('Student updated on the server successfully');
+                } catch (error) {
+                  console.error('Failed to update student on the server:', error);
                 }
-              });
-            });
-            resetEditing();
-          }}
-        >
+
+                resetEditing();
+              }}
+            >
+
           <label>Name</label>
           <Input
             value={editingStudent?.name}
