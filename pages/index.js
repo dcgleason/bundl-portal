@@ -371,7 +371,7 @@ const handleHoverOff = () => {
       id: dataSource[dataSource.length - 1].id + 1,
       name: name,
       email: email,
-      layout: layout,
+      layout: layout? layout : 1,
       msg: msg,
     };
   
