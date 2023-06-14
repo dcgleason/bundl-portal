@@ -6,17 +6,20 @@ import "pure-react-carousel/dist/react-carousel.es.css";
 import { useState, createContext, useContext, useEffect } from "react";
 
 export const MyContext = createContext({
-    userID: null,
-    setUserID: () => {},
-    userName: null,
-    setUserName: () => {},
+  userID: null,
+  setUserID: () => {},
+  userName: null,
+  setUserName: () => {},
+  bookID: null,
+  setBookID: () => {},
+  isLoading: true, // Add this line
 });
-
 
 function MyProvider({ children }) {
   const [userID, setUserID] = useState(null);
   const [userName, setUserName] = useState(null);
-  const [bookID, setBookID] = useState(null); // Add this line
+  const [bookID, setBookID] = useState(null);
+  const [isLoading, setIsLoading] = useState(true); // Add this line
 
   useEffect(() => {
     const localUserID = localStorage.getItem('userID');
@@ -29,15 +32,14 @@ function MyProvider({ children }) {
     })
     .then(response => response.json())
     .then(data => {
-      // Assuming the response data contains the user's name
       const userName = data.name;
       console.log('data from my provider: ', data);
       setUserName(userName);
 
-      // Assuming the response data contains the user's bookID
-      const bookID = data.bookID; // Replace 'bookID' with the correct field name from your API response
-      setBookID(bookID); // Add this line
-      console.log('userID from my provider: ', userID); // Add this line
+      const bookID = data.bookID;
+      setBookID(bookID);
+
+      setIsLoading(false); // Set loading to false after the data is fetched
     })
     .catch(error => {
       console.error('Error:', error);
@@ -45,12 +47,11 @@ function MyProvider({ children }) {
   }, []);
 
   return (
-    <MyContext.Provider value={{ userID: userID, userName: userName, bookID: bookID }}>
+    <MyContext.Provider value={{ userID, userName, bookID, isLoading }}> // Add isLoading here
       {children}
     </MyContext.Provider>
   );
 }
-
 function MyApp({ Component, pageProps }) {
     return (
       <Layout>
