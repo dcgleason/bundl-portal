@@ -12,8 +12,10 @@ export const MyContext = createContext({
     setUserName: () => {},
 });
 
+
 function MyProvider({ children }) {
     const [userID, setUserID] = useState(null);
+    const [userName, setUserName] = useState(null);
 
     useEffect(() => {
       const localUserID = localStorage.getItem('userID');
@@ -26,7 +28,7 @@ function MyProvider({ children }) {
       .then(response => response.json())
       .then(data => {
         // Assuming the response data contains the user's name
-        const userName = data.name;
+        const userName = data.fullName;
         setUserName(userName);
       })
       .catch(error => {
@@ -35,7 +37,7 @@ function MyProvider({ children }) {
     }, []);
 
     return (
-      <MyContext.Provider value={{value, setValue, userID, setUserID}}>
+      <MyContext.Provider value={{userID, setUserID, userName, setUserName}}>
         {children}
       </MyContext.Provider>
     );
