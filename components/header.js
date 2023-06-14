@@ -1,7 +1,12 @@
 import React,{useState} from "react";
+import { MyContext } from '../pages/_app'; // replace '../pages/_app' with the actual path to your _app.js file
+import { useContext } from 'react';
 export default function Header() {
     const [popup,Setpopup] = useState(false);
     const [dropdown,Setdropdown] = useState(true);
+    const { userID, userName } = useContext(MyContext);
+
+
     return (
         <>
             <div className="w-full mt-8 md:mt-0">
@@ -19,7 +24,7 @@ export default function Header() {
                                 <img src="https://cdn.tuk.dev/assets/templates/virtual-event-management/profile.png" alt="profile" />
                             </div>
                             <div className="ml-2">
-                                <p className="text-sm text-gray-700">Dan Gleason</p>  { /* get the user name from the database    */}
+                                <p className="text-sm text-gray-700">{userName}</p>  { /* get the user name from the database    */}
                                 <p className="text-xs  text-gray-600">Bundle Owner</p>
                             </div>
                             <div className="ml-3 -mt-2 relative">
