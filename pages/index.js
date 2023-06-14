@@ -302,7 +302,7 @@ const CSV = () => {
             'Content-Type': 'application/json',
           },
           body: JSON.stringify({
-            layout_id: contact.id, // Or whatever layout_id you want to use
+            layout_id: 1, // Or whatever layout_id you want to use // need a way to figure out the layout ---> on the backend I think
             name: contact.name,
             msg: contact.submission,
             img_file: contact.picture,
