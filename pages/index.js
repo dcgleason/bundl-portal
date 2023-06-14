@@ -275,8 +275,6 @@ const CSV = () => {
   }
   
   const addtoList = async () => {
-    console.log('values = '+ values);
-  
     let objects = [];
   
     const firstValue = dataSource[dataSource.length - 1].id;
@@ -285,41 +283,47 @@ const CSV = () => {
         id: firstValue + 1 + i,
         name: values[i][1],
         email: values[i][2],
-        address: values[i][3]
+        address: values[i][3],
+        submitted: false,
+        submission: 'none',
+        picture: 'none',
       });
     }
-    console.log('objects = '+ JSON.stringify(objects))
   
     // Add the new contacts to the dataSource state
     setDataSource([...dataSource, ...objects]);
   
     // Now, send the new contacts to the server
-    const requests = objects.map(contact =>
-      fetch(`https://yay-api.herokuapp.com/book/${userID}/message`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          layout_id: 1, // Or whatever layout_id you want to use
-          name: contact.name,
-          msg: '',
-          img_file: '',
-          email: contact.email,
-          submitted: false,
-        }),
-      })
-    );
+    try {
+      const promises = objects.map((contact) => {
+        return fetch(`https://yay-api.herokuapp.com/book/${userID}/message`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            layout_id: contact.id, // Or whatever layout_id you want to use
+            name: contact.name,
+            msg: contact.submission,
+            img_file: contact.picture,
+            email: contact.email,
+          }),
+        });
+      });
   
-    Promise.all(requests)
-      .then(responses => responses.forEach(response => {
+      const responses = await Promise.all(promises);
+  
+      responses.forEach((response, index) => {
         if (!response.ok) {
-          throw new Error(`Failed to add contact: HTTP error! status: ${response.status}`);
+          throw new Error(`HTTP error! status: ${response.status} for contact ${objects[index].name}`);
         }
-      }))
-      .then(() => console.log('Contacts added to the server successfully'))
-      .catch(error => console.error('Failed to add contacts to the server:', error));
-  }
+      });
+  
+      console.log('Contacts added to the server successfully');
+    } catch (error) {
+      console.error('Failed to add contacts to the server:', error);
+    }
+  };
   
   
 
