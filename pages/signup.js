@@ -201,7 +201,7 @@ const onSubmit = async e => {
               </div>
             </div>
 
-            <div className="mt-6 grid grid-cols-3 gap-3">
+            <div className="mt-6">
             <div>
               <a href="https://usebundle.com/signin">
                 <button
