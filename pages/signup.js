@@ -12,40 +12,51 @@ const [lastName, setLastName] = useState("");
 
 
 const onSubmit = async e => {
-    e.preventDefault();
-  
-    const config = {
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    };
-  
-    const body = JSON.stringify({ 
-        username: username,
-        password: password,
-        firstName: firstName,
-        lastName: lastName
-    });
-  
-    try {
-      console.log("body: ", body);
-      // Use fetch to send a POST request to the /signup route
-      const res = await fetch(
-        ' https://yay-api.herokuapp.com/login/signup',
-        {
-          method: 'POST',
-          body: body,
-          headers: config.headers,
-        }
-      );
-  
-      console.log(await res.json());
-      console.log("success res:" + res.status);
-    } catch (err) {
-      console.error(err);
-    }
+  e.preventDefault();
+
+  const config = {
+    headers: {
+      'Content-Type': 'application/json',
+    },
   };
-  
+
+  const body = JSON.stringify({ 
+      username: username,
+      password: password,
+      firstName: firstName,
+      lastName: lastName
+  });
+
+  try {
+    console.log("body: ", body);
+    // Use fetch to send a POST request to the /signup route
+    const res = await fetch(
+      'https://yay-api.herokuapp.com/login/signup',
+      {
+        method: 'POST',
+        body: body,
+        headers: config.headers,
+      }
+    );
+
+    const data = await res.json();
+    console.log(data);
+    console.log("success res:" + res.status);
+
+    // If the signup was successful, redirect to the next page
+  // After successful login
+if (res.status === 200) {
+  // Assuming the response data contains the user's ID
+  const userID = data.userId;
+  // Store the user's ID in local storage so it can be accessed in other components
+  localStorage.setItem('userID', userID);
+  // Redirect to the dashboard page
+  window.location.href = `https://www.usebundl.com/`;
+}
+  } catch (err) {
+    console.error(err);
+  }
+};
 
   return (
     <>

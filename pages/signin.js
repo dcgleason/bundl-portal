@@ -33,14 +33,20 @@ function LoginSignupForm() {
         credentials: 'include'
       });
   
-      if (res.ok) {
-        const data = await res.json();
-        // Store the user data in your app's state
-        setUser(data);
-        console.log("success");
-        // Redirect the user to the admin portal
-        window.location.href = `https://usebundl.com/?userID=${data.userID}`;
-      } else {
+      const data = await res.json();
+    console.log(data);
+    console.log("success res:" + res.status);
+
+        // If the signup was successful, redirect to the next page
+      // After successful login
+    if (res.status === 200) {
+      // Assuming the response data contains the user's ID
+      const userID = data.userId;
+      // Store the user's ID in local storage so it can be accessed in other components
+      localStorage.setItem('userID', userID);
+      // Redirect to the dashboard page
+      window.location.href = `https://www.usebundl.com/`;
+    } else {
         console.error("Login failed");
       }
     } catch (err) {

@@ -193,15 +193,9 @@ const CSV = () => {
 
   ];
   useEffect(() => {
-    // First, fetch the user's ID
-    fetch('https://yay-api.herokuapp.com/login/success', {
-      credentials: 'include' // Include credentials in the request
-    })
-    .then(response => response.json())
-    .then(data => {
-      // The user's ID is in data.userID
-      const userID = data.userId;
-      console.log('User ID data:', data);
+    // Get the user's ID from local storage
+  const userID = localStorage.getItem('userID');
+      console.log('User ID data:', userID);
   
       // Now, fetch the book messages using the user's ID
       fetch(`https://yay-api.herokuapp.com/book/${userID}/messages`, {
