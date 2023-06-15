@@ -5,19 +5,19 @@ import Layout from "../components/layout";
 import "pure-react-carousel/dist/react-carousel.es.css";
 import { useState, createContext, useContext, useEffect } from "react";
 
-export const MyContext = createContext();
+export const MyContext = createContext({});
+
 
 function MyProvider({ children }) {
+   
 
-
-
- 
-  return (
-    <MyContext.Provider> 
-      {children}
-    </MyContext.Provider>
-  );
+    return (
+      <MyContext.Provider>
+        {children}
+      </MyContext.Provider>
+    );
 }
+
 function MyApp({ Component, pageProps }) {
     return (
       <Layout>
