@@ -223,11 +223,41 @@ const CSV = () => {
     setEmailModalVisible(true);
   };
   
-  const handleEmailModalOk = () => {
+  const handleEmailModalOk = async () => {
     // Here you would handle sending the email
     console.log(emailBody, emailSubject, emailRecipients);
+  
+    // Prepare the data to send
+    const emailData = {
+      body: emailBody,
+      subject: emailSubject,
+      recipients: emailRecipients.split(', '), // Assuming recipients are separated by a comma and a space
+    };
+  
+    try {
+      // Send a POST request to your backend
+      const response = await fetch('https://yay-api.herokuapp.com/email/send', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(emailData),
+      });
+  
+      // Check if the request was successful
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+  
+      console.log('Email sent successfully');
+    } catch (error) {
+      console.error('Failed to send email:', error);
+    }
+  
     setEmailModalVisible(false);
   };
+ 
+  
   
   const handleEmailModalCancel = () => {
     setEmailModalVisible(false);
