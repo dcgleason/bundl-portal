@@ -109,7 +109,7 @@ export default function MessagesPage() {
           <span className="italic font-bold">
             {messages.length}
           </span>{' '}
-          submissions to {messages[0]?.recipient}'s Bundl
+          submissions to {recipient}'s Bundl
         </h2>
   
         <textarea
