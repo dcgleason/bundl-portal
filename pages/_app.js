@@ -3,10 +3,14 @@ import "../css/index.css";
 import Head from "next/head";
 import Layout from "../components/layout";
 import "pure-react-carousel/dist/react-carousel.es.css";
+import { MyContext } from "../components/context";
 
 
 
 function MyProvider({ children }) {
+
+
+
  
   return (
     <MyContext.Provider> 
@@ -14,8 +18,6 @@ function MyProvider({ children }) {
     </MyContext.Provider>
   );
 }
-
-
 function MyApp({ Component, pageProps }) {
     return (
       <Layout>
