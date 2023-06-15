@@ -136,9 +136,12 @@ export default function MessagesPage() {
           </button>
         </div>
   
-        {/* Add this line to display the counter */}
+        {/* Add these lines to display the counter and author's name */}
         <p className="text-center mt-4">
           Message {currentMessageIndex + 1} of {messages.length}
+        </p>
+        <p className="text-center mt-2">
+          Author: {messages[currentMessageIndex]?.name}
         </p>
       </div>
     </div>
