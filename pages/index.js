@@ -1,6 +1,6 @@
 
 
-import {Modal, List, Typography, Button, Table, Input, Select, Upload, message, notification } from "antd";
+import {Modal, List, Typography, Button, Table, Input, Select, Upload, message, notification, Form } from "antd";
 import { useRef } from 'react'
 import { Dialog, Transition } from '@headlessui/react'
 import { CheckIcon } from '@heroicons/react/24/outline'
@@ -57,6 +57,10 @@ const CSV = () => {
   const [tableRows, setTableRows] = useState([]);
   const [hover, setHover] = useState(false);
   const [userID, setUserID] = useState(null);
+  const [emailModalVisible, setEmailModalVisible] = useState(false);
+  const [emailBody, setEmailBody] = useState("We'd love you to contribute to this bundle");
+  const [emailSubject, setEmailSubject] = useState("Contribute please - 3 days left!");
+  const [emailRecipients, setEmailRecipients] = useState([]);
 
   //State to store the values
   const [values, setValues] = useState([]);
@@ -212,6 +216,24 @@ const CSV = () => {
   }, []); // Empty dependency array means this useEffect runs once when the component mounts
   
   
+  const openEmailModal = () => {
+    // Get the emails of people who have not yet contributed
+    const nonContributors = dataSource.filter(student => student.submitted === "No").map(student => student.email);
+    setEmailRecipients(nonContributors.join(', '));
+    setEmailModalVisible(true);
+  };
+  
+  const handleEmailModalOk = () => {
+    // Here you would handle sending the email
+    console.log(emailBody, emailSubject, emailRecipients);
+    setEmailModalVisible(false);
+  };
+  
+  const handleEmailModalCancel = () => {
+    setEmailModalVisible(false);
+  };
+  
+
   const closeModal = () => {
     setOpenGmail(false);
   };
@@ -547,9 +569,28 @@ const handleHoverOff = () => {
 
       <div className="App">
       <header className="App-header">
-        <Button onClick={onAddStudent}>Add a new contributor</Button>
+      <Button onClick={onAddStudent}>Add a new contributor</Button>
+      <Button onClick={openEmailModal}>Send email to those who haven't yet contributed</Button>
         {/* <Button onClick={handleSendEmail}>Send email to those who have not contributed yet</Button> */}
         <Table columns={columns} dataSource={dataSource}></Table>
+            <Modal
+              title="Send Email"
+              open={emailModalVisible}
+              onOk={handleEmailModalOk}
+              onCancel={handleEmailModalCancel}
+            >
+              <Form layout="vertical">
+                <Form.Item label="To">
+                  <Input.TextArea value={emailRecipients} readOnly />
+                </Form.Item>
+                <Form.Item label="Subject">
+                  <Input value={emailSubject} onChange={e => setEmailSubject(e.target.value)} />
+                </Form.Item>
+                <Form.Item label="Body">
+                  <Input.TextArea value={emailBody} onChange={e => setEmailBody(e.target.value)} />
+                </Form.Item>
+              </Form>
+            </Modal>
         <Modal
               title="Add a contributor"
               open={isEditing}
