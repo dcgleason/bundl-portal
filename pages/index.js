@@ -7,6 +7,7 @@ import { CheckIcon } from '@heroicons/react/24/outline'
 import { EditOutlined, DeleteOutlined, InboxOutlined  } from "@ant-design/icons";
 import Papa from "papaparse";
 import React, { useState, useEffect, Fragment } from 'react';
+import { signIn, useSession } from 'next-auth/client';
 //import the @react-oauth/google package
 import { GoogleAuth } from '@react-oauth/google';
 const { TextArea } = Input;
@@ -80,6 +81,7 @@ const CSV = () => {
   const [editingStudent, setEditingStudent] = useState(null);
   const [pictureUrl, setPictureUrl] = useState(null);
   const [viewPicture, setViewPicture] = useState(false);
+  const [session, loading] = useSession();
 
 
   
@@ -216,6 +218,8 @@ const CSV = () => {
   }, []); // Empty dependency array means this useEffect runs once when the component mounts
   
   
+
+
   const openEmailModal = () => {
     // Get the emails of people who have not yet contributed
     const nonContributors = dataSource.filter(student => student.submitted === "No").map(student => student.email);
@@ -467,11 +471,36 @@ const handleHoverOff = () => {
     });
   };
 
- const  handleSendEmail = (record) => {
-    console.log("email send") // this is working
+  const handleSendEmail = async () => {
+    if (!session) {
+      // If the user is not signed in, prompt them to do so
+      signIn('google');
+    } else {
+      // If the user is signed in, send the email
+      const recipientEmails = dataSource
+        .filter((student) => student.submitted === "No")
+        .map((student) => student.email);
 
+      const response = await fetch('/api/send-email', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          senderEmail: session.user.email,
+          emailSubject: 'Contribute please - 3 days left!',
+          emailBody: 'We\'d love you to contribute to this bundle',
+          recipientEmails,
+        }),
+      });
 
- }
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
+      console.log('Email sent successfully');
+    }
+  };
   const onEditStudent = (record) => {
     setIsEditing(true);
     console.log("record", record)
@@ -606,7 +635,7 @@ const handleHoverOff = () => {
             <Modal
               title="Send Email"
               open={emailModalVisible}
-              onOk={handleEmailModalOk}
+              onOk={handleSendEmail}
               onCancel={handleEmailModalCancel}
             >
               <Form layout="vertical">
