@@ -244,8 +244,18 @@ const CSV = () => {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+          'Authorization': `Bearer ${session.accessToken}`,
         },
-        body: JSON.stringify(emailData),
+        body: JSON.stringify({
+          subject: 'Contribute please - 3 days left!',
+          body: 'We would love you to contribute to this bundle',
+          recipients: emailRecipients.split(', ')
+        }),
+      })
+      .then(response => response.json())
+      .then(data => console.log(data))
+      .catch((error) => {
+        console.error('Error:', error);
       });
   
       // Check if the request was successful
