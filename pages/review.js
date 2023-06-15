@@ -36,19 +36,40 @@ export default function MessagesPage() {
   const [messages, setMessages] = useState([]);
   const [currentMessageIndex, setCurrentMessageIndex] = useState(0);
   const [currentMessage, setCurrentMessage] = useState('');
+  const [bookID, setBookID] = useState(null);
  
-  const { bookID } = useContext(MyContext); 
-
 
   useEffect(() => {
-    // Fetch messages from your API
-    fetch(`https://yay-api.herokuapp.com/book/${bookID}/messages`) // Replace {bookId} with the actual book ID
-      .then(response => response.json())
-      .then(data => {
-        setMessages(data);
-        setCurrentMessage(data[0]?.msg || '');
-      });
+    const localUserID = localStorage.getItem('userID');
+    console.log('localUserID from my provider: ', localUserID);
+  
+    fetch(`https://yay-api.herokuapp.com/book/${localUserID}/messages`, {
+      credentials: 'include'
+    })
+    .then(response => response.json())
+    .then(data => {
+      console.log('Data book id:', data.bookId);
+      console.log('Data messages:', data.message);
+  
+      // Convert the Map object to an array
+      const messagesArray = Array.from(data.message.values());
+  
+      // Set the messages to the state
+      setMessages(messagesArray);
+      setBookID(data.bookId);
+  
+      // Set the initial current message
+      if (messagesArray.length > 0) {
+        setCurrentMessage(messagesArray[0].msg);
+      }
+    })
+    .catch(error => {
+      console.error('Error:', error);
+    });
   }, []);
+
+
+
 
   const handlePrev = () => {
     if (currentMessageIndex > 0) {
@@ -71,7 +92,7 @@ export default function MessagesPage() {
     setMessages(newMessages);
 
     // Send a request to your API to update the message
-    fetch(`https://yay-api.herokuapp.com/book/{bookId}/message/${newMessages[currentMessageIndex]._id}`, { // Replace {bookId} with the actual book ID
+    fetch(`https://yay-api.herokuapp.com/book/${bookID}/message/${newMessages[currentMessageIndex]._id}`, { // Replace {bookId} with the actual book ID
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ msg: currentMessage }),

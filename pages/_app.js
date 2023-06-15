@@ -3,54 +3,19 @@ import "../css/index.css";
 import Head from "next/head";
 import Layout from "../components/layout";
 import "pure-react-carousel/dist/react-carousel.es.css";
-import { useState, createContext, useContext, useEffect } from "react";
 
-export const MyContext = createContext({
-  userID: null,
-  setUserID: () => {},
-  userName: null,
-  setUserName: () => {},
-  bookID: null,
-  setBookID: () => {}
-});
+
 
 function MyProvider({ children }) {
-  const [userID, setUserID] = useState(null);
-  const [userName, setUserName] = useState(null);
-  const [bookID, setBookID] = useState(null);
-
-
-  useEffect(() => {
-    const localUserID = localStorage.getItem('userID');
-    console.log('localUserID from my provider: ', localUserID);
-    setUserID(localUserID);
-  
-    // Fetch the user's details from the server
-    fetch(`https://yay-api.herokuapp.com/users/${localUserID}`, {
-      credentials: 'include'
-    })
-    .then(response => response.json())
-    .then(data => {
-      const userName = data.name;
-      console.log('data from my provider: ', data);
-      setUserName(userName);
-
-      const bookID = data.bookID;
-      setBookID(bookID);
-
-  
-    })
-    .catch(error => {
-      console.error('Error:', error);
-    });
-  }, []);
-
+ 
   return (
-    <MyContext.Provider value={{ userID, userName, bookID}}> 
+    <MyContext.Provider> 
       {children}
     </MyContext.Provider>
   );
 }
+
+
 function MyApp({ Component, pageProps }) {
     return (
       <Layout>
