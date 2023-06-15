@@ -112,19 +112,32 @@ export default function MessagesPage() {
           submissions to {recipient}'s Bundl
         </h2>
   
-        <textarea
-          className="resize-none border rounded-md"
-          value={currentMessage}
-          onChange={e => setCurrentMessage(e.target.value)}
-          maxLength={3500}
-          rows={10}
-        />
-  
-        {messages[currentMessageIndex]?.image && (
-          <img src={messages[currentMessageIndex].image} alt="Message" />
-        )}
-  
         <div className="flex justify-between">
+          <textarea
+            className="resize-none border rounded-md"
+            value={currentMessage}
+            onChange={e => setCurrentMessage(e.target.value)}
+            maxLength={3500}
+            rows={10}
+          />
+  
+          {/* Add these lines to display the author's picture */}
+          {currentMessage.length <= 1750 ? (
+            messages[currentMessageIndex]?.img_file ? (
+              <img src={messages[currentMessageIndex].img_file} alt="Author's submission" />
+            ) : (
+              <div className="border border-gray-300 rounded-md p-4 text-center">
+                No picture attached
+              </div>
+            )
+          ) : (
+            <div className="border border-gray-300 rounded-md p-4 text-center">
+              The message is too long to fit a picture. It must be less than 1750 to fit a picture in the book.
+            </div>
+          )}
+        </div>
+  
+        <div className="flex justify-between mt-4">
           <button className="px-4 py-2 bg-blue-500 text-white rounded" onClick={handlePrev}>
             Previous
           </button>
