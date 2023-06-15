@@ -3,9 +3,9 @@ import "../css/index.css";
 import Head from "next/head";
 import Layout from "../components/layout";
 import "pure-react-carousel/dist/react-carousel.es.css";
-import { MyContext } from "../components/context";
+import { useState, createContext, useContext, useEffect } from "react";
 
-
+export const MyContext = createContext();
 
 function MyProvider({ children }) {
 
