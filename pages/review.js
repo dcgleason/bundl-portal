@@ -52,7 +52,7 @@ export default function MessagesPage() {
       console.log('Data messages:', data.messages);
   
       // Convert the Map object to an array
-      const messagesArray = Array.from(data.messages.values());
+      const messagesArray = Object.values(data.messages);
   
       // Set the messages to the state
       setMessages(messagesArray);
