@@ -272,7 +272,6 @@ const CSV = () => {
   };
  
   
-  
   const handleEmailModalCancel = () => {
     setEmailModalVisible(false);
   };
