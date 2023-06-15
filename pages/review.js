@@ -37,11 +37,8 @@ export default function MessagesPage() {
   const [currentMessageIndex, setCurrentMessageIndex] = useState(0);
   const [currentMessage, setCurrentMessage] = useState('');
  
-  const { bookID, isLoading } = useContext(MyContext); // Get isLoading from the context
+  const { bookID } = useContext(MyContext); 
 
-  if (isLoading) {
-    return <div>Loading...</div>; // Render a loading state
-  }
 
   useEffect(() => {
     // Fetch messages from your API
