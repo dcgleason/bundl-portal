@@ -1,9 +1,10 @@
 import NextAuth from 'next-auth'
-import GoogleProvider from "next-auth/providers/google";
+import { Providers } from 'next-auth/react'
+
 
 export default NextAuth({
     providers: [
-        GoogleProvider({
+      Providers.Google({
         clientId: process.env.GOOGLE_ID,
         clientSecret: process.env.GOOGLE_SECRET,
       }),
