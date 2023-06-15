@@ -74,6 +74,8 @@ const CSV = () => {
   const cancelButtonRef = useRef(null)
   const [isEditing, setIsEditing] = useState(false);
   const [editingStudent, setEditingStudent] = useState(null);
+  const [viewPictureUrl, setViewPictureUrl] = useState(null);
+
 
   
   const [dataSource, setDataSource] = useState([]);
@@ -262,11 +264,15 @@ const CSV = () => {
     return data ? data : "No message available";
   };
 
-  const handleViewPicture = (record) => { // dont need the dataSource record, just the pictureUrl --> where is the pictureUrl coming from?
-   // get the public url of the image
-   var pictureUrl;
-    window.open(pictureUrl, '_blank');
-  }
+
+  const handleViewPicture = (record) => {
+    setViewPictureUrl(record.img_file);
+  };
+  
+  const handleClosePictureModal = () => {
+    setViewPictureUrl(null);
+  };
+  
   
   const addtoList = async () => {
     let objects = [];
@@ -712,6 +718,14 @@ const handleHoverOff = () => {
             <label>Notes</label> 
             <Input placeholder="Notes" value={notes} onChange={(e) => setNotes(e.target.value)} />
           </Modal>
+                <Modal
+                title="View Picture"
+                visible={!!viewPictureUrl}
+                onCancel={handleClosePictureModal}
+                footer={null}
+              >
+                <img src={viewPictureUrl} alt="Submission" style={{ maxWidth: '100%' }} />
+              </Modal>
       </header>
     </div>
 
