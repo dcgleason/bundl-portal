@@ -135,6 +135,11 @@ export default function MessagesPage() {
             Next
           </button>
         </div>
+  
+        {/* Add this line to display the counter */}
+        <p className="text-center mt-4">
+          Message {currentMessageIndex + 1} of {messages.length}
+        </p>
       </div>
     </div>
   );
