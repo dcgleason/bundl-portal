@@ -5,7 +5,27 @@ import Image from "next/image";
 export default function Header() {
     const [popup,Setpopup] = useState(false);
     const [dropdown,Setdropdown] = useState(true);
-    const { userID, userName } = useContext(MyContext);
+    const [user, setUser] = useState({});
+
+    useEffect(() => {
+        const localUserID = localStorage.getItem('userID');
+        console.log('localUserID from my provider: ', localUserID);
+      
+        fetch(`https://yay-api.herokuapp.com/user/${localUserID}`, {
+          credentials: 'include'
+        })
+        .then(response => response.json())
+        .then(data => {
+         
+            // Set the messages to the state
+            setUser(data.name);
+            console.log("data name", data.name);
+
+        })
+        .catch(error => {
+          console.error('Error:', error);
+        });
+      }, []);
 
     return (
         <>
@@ -24,7 +44,7 @@ export default function Header() {
                                 <Image src="/images/bundlelogo.png" width={40} height={40} className="rounded-full" />
                             </div>
                             <div className="ml-2">
-                                <p className="text-sm text-gray-700">{userName}</p>  { /* get the user name from the database    */}
+                                <p className="text-sm text-gray-700">{user}</p>  { /* get the user name from the database    */}
                                 <p className="text-xs  text-gray-600">Bundle Owner</p>
                             </div>
                             <div className="ml-3 -mt-2 relative">

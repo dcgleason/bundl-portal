@@ -37,6 +37,7 @@ export default function MessagesPage() {
   const [currentMessageIndex, setCurrentMessageIndex] = useState(0);
   const [currentMessage, setCurrentMessage] = useState('');
   const [bookID, setBookID] = useState(null);
+  const [recipient, setRecipient] = useState(null);
  
 
   useEffect(() => {
@@ -57,6 +58,7 @@ export default function MessagesPage() {
       // Set the messages to the state
       setMessages(messagesArray);
       setBookID(data.bookId);
+      setRecipient(data.recipient);
   
       // Set the initial current message
       if (messagesArray.length > 0) {
@@ -107,7 +109,7 @@ export default function MessagesPage() {
           <span className="italic font-bold">
             {messages.length}
           </span>{' '}
-          number of submissions to {messages[0]?.recipient}'s Bundl
+          submissions to {messages[0]?.recipient}'s Bundl
         </h2>
   
         <textarea
