@@ -2,30 +2,10 @@ import React,{useEffect, useState} from "react";
 import { MyContext } from '../pages/_app'; // replace '../pages/_app' with the actual path to your _app.js file
 import { useContext } from 'react';
 import Image from "next/image";
-export default function Header() {
+export default function Header({user}) {
     const [popup,Setpopup] = useState(false);
     const [dropdown,Setdropdown] = useState(true);
-    const [user, setUser] = useState({});
 
-    useEffect(() => {
-        const localUserID = localStorage.getItem('userID');
-        console.log('localUserID from my provider: ', localUserID);
-      
-        fetch(`https://yay-api.herokuapp.com/user/${localUserID}`, {
-          credentials: 'include'
-        })
-        .then(response => response.json())
-        .then(data => {
-         
-            // Set the messages to the state
-            setUser(data.name);
-            console.log("data name", data.name);
-
-        })
-        .catch(error => {
-          console.error('Error:', error);
-        });
-      }, []);
 
     return (
         <>
