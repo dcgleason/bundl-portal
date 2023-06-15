@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useContext } from 'react';
 import { MyContext } from './_app';
+import Image from 'next/image';
 
 
 var json = [
@@ -125,7 +126,7 @@ export default function MessagesPage() {
           {/* Add these lines to display the author's picture */}
           {currentMessage.length <= 1750 ? (
             messages[currentMessageIndex]?.img_file ? (
-              <img src={messages[currentMessageIndex].img_file} alt="Author's submission" style={{ maxWidth: '100%', maxHeight: '300px' }} /> // Add this line to increase the size of the picture
+              <Image src={messages[currentMessageIndex].img_file} alt="Author's submission" style={{ maxWidth: '100%', maxHeight: '300px' }} /> // Add this line to increase the size of the picture
             ) : (
               <div className="border border-gray-300 rounded-md p-4 text-center" style={{ width: '100%', height: '300px' }}> // Add this line to increase the size of the box
                 No picture attached
