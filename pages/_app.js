@@ -11,15 +11,14 @@ export const MyContext = createContext({
   userName: null,
   setUserName: () => {},
   bookID: null,
-  setBookID: () => {},
-  isLoading: true, // Add this line
+  setBookID: () => {}
 });
 
 function MyProvider({ children }) {
   const [userID, setUserID] = useState(null);
   const [userName, setUserName] = useState(null);
   const [bookID, setBookID] = useState(null);
-  const [isLoading, setIsLoading] = useState(true); // Add this line
+
 
   useEffect(() => {
     const localUserID = localStorage.getItem('userID');
@@ -39,7 +38,7 @@ function MyProvider({ children }) {
       const bookID = data.bookID;
       setBookID(bookID);
 
-      setIsLoading(false); // Set loading to false after the data is fetched
+  
     })
     .catch(error => {
       console.error('Error:', error);

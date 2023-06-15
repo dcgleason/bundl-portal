@@ -7,8 +7,6 @@ export default function Header() {
     const [dropdown,Setdropdown] = useState(true);
     const { userID, userName } = useContext(MyContext);
 
-
-
     return (
         <>
             <div className="w-full mt-8 md:mt-0">
