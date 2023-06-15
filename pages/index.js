@@ -720,7 +720,7 @@ const handleHoverOff = () => {
           </Modal>
                 <Modal
                 title="View Picture"
-                visible={!!viewPictureUrl}
+                open={!!viewPictureUrl}
                 onCancel={handleClosePictureModal}
                 footer={null}
               >
