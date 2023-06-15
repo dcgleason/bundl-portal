@@ -41,7 +41,7 @@ export default function Header() {
                     <div className="flex justify-between md:justify-start items-center">
                         <div className="flex items-center">
                             <div className="w-10 h-10 rounded-full">
-                                <Image src="/images/bundlelogo.png" width={40} height={40} className="rounded-full" />
+                                <Image src="/images/bundlelogowhite.png" width={40} height={40} className="rounded-full" />
                             </div>
                             <div className="ml-2">
                                 <p className="text-sm text-gray-700">{user}</p>  { /* get the user name from the database    */}
