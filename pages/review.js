@@ -118,20 +118,21 @@ export default function MessagesPage() {
             value={currentMessage}
             onChange={e => setCurrentMessage(e.target.value)}
             maxLength={3500}
-            rows={10}
+            rows={20} // Increase the number of rows
+            style={{ width: '100%', height: '300px' }} // Add this line to increase the size of the text box
           />
   
           {/* Add these lines to display the author's picture */}
           {currentMessage.length <= 1750 ? (
             messages[currentMessageIndex]?.img_file ? (
-              <img src={messages[currentMessageIndex].img_file} alt="Author's submission" />
+              <img src={messages[currentMessageIndex].img_file} alt="Author's submission" style={{ maxWidth: '100%', maxHeight: '300px' }} /> // Add this line to increase the size of the picture
             ) : (
-              <div className="border border-gray-300 rounded-md p-4 text-center">
+              <div className="border border-gray-300 rounded-md p-4 text-center" style={{ width: '100%', height: '300px' }}> // Add this line to increase the size of the box
                 No picture attached
               </div>
             )
           ) : (
-            <div className="border border-gray-300 rounded-md p-4 text-center">
+            <div className="border border-gray-300 rounded-md p-4 text-center" style={{ width: '100%', height: '300px' }}> // Add this line to increase the size of the box
               The message is too long to fit a picture. It must be less than 1750 to fit a picture in the book.
             </div>
           )}
