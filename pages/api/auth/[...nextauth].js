@@ -1,13 +1,13 @@
 import NextAuth from 'next-auth'
-import { Providers } from 'next-auth/react'
+import GoogleProvider from "next-auth/providers/google";
 
 
 export default NextAuth({
     providers: [
-      Providers.Google({
-        clientId: process.env.GOOGLE_ID,
-        clientSecret: process.env.GOOGLE_SECRET,
-      }),
+        GoogleProvider({
+            clientId: process.env.GOOGLE_CLIENT_ID,
+            clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+          }),
   ],
   callbacks: {
     async jwt(token, user) {
