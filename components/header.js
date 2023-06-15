@@ -7,10 +7,6 @@ export default function Header() {
     const [dropdown,Setdropdown] = useState(true);
     const { userID, userName } = useContext(MyContext);
 
-    useEffect(() => {
-        console.log("userid from header" + userID);
-        console.log("username from header" + userName);
-    }, []);
 
 
     return (
