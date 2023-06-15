@@ -16,7 +16,6 @@ function MyProvider({ children }) {
         {children}
       </MyContext.Provider>
     );
-    
 }
 
 function MyApp({ Component, pageProps }) {
