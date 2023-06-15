@@ -103,8 +103,8 @@ export default function MessagesPage() {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen py-2">
-      <div className="flex flex-col w-1/2 space-y-8">
+    <div className="flex flex-col items-center justify-center min-h-screen py-2 px-4 md:px-0">
+      <div className="flex flex-col w-full md:w-1/2 space-y-8">
         <h2 className="text-center text-2xl font-bold underline">
           Review{' '}
           <span className="italic font-bold">
@@ -113,40 +113,40 @@ export default function MessagesPage() {
           submissions to {recipient}'s Bundl
         </h2>
   
-        <div className="flex justify-between">
+        <div className="flex flex-col md:flex-row justify-between space-y-4 md:space-y-0">
           <textarea
             className="resize-none border rounded-md"
             value={currentMessage}
             onChange={e => setCurrentMessage(e.target.value)}
             maxLength={3500}
-            rows={20} // Increase the number of rows
-            style={{ width: '100%', height: '500px' }} 
+            rows={20}
+            style={{ width: '100%', height: '600px' }}
           />
   
           {/* Add these lines to display the author's picture */}
           {currentMessage.length <= 1750 ? (
             messages[currentMessageIndex]?.img_file ? (
-              <Image src={messages[currentMessageIndex].img_file} alt="Author's submission" style={{ maxWidth: '100%', maxHeight: '300px' }} /> 
+              <Image src={messages[currentMessageIndex].img_file} alt="Author's submission" style={{ maxWidth: '100%', maxHeight: '600px' }} />
             ) : (
-              <div className="border border-gray-300 rounded-md p-4 text-center" style={{ width: '100%', height: '300px' }}> 
+              <div className="border border-gray-300 rounded-md p-4 text-center" style={{ width: '100%', height: '600px' }}>
                 No picture attached
               </div>
             )
           ) : (
-            <div className="border border-gray-300 rounded-md p-4 text-center" style={{ width: '100%', height: '300px' }}> 
+            <div className="border border-gray-300 rounded-md p-4 text-center" style={{ width: '100%', height: '600px' }}>
               The message is too long to fit a picture. It must be less than 1750 to fit a picture in the book.
             </div>
           )}
         </div>
   
-        <div className="flex justify-between mt-4">
-          <button className="px-4 py-2 bg-blue-500 text-white rounded" onClick={handlePrev}>
+        <div className="flex justify-between mt-4 space-x-2 md:space-x-0">
+          <button className="px-4 py-2 bg-blue-500 text-white rounded w-full md:w-auto" onClick={handlePrev}>
             Previous
           </button>
-          <button className="px-4 py-2 bg-green-500 text-white rounded" onClick={handleSave}>
+          <button className="px-4 py-2 bg-green-500 text-white rounded w-full md:w-auto" onClick={handleSave}>
             Save
           </button>
-          <button className="px-4 py-2 bg-blue-500 text-white rounded" onClick={handleNext}>
+          <button className="px-4 py-2 bg-blue-500 text-white rounded w-full md:w-auto" onClick={handleNext}>
             Next
           </button>
         </div>
@@ -161,5 +161,6 @@ export default function MessagesPage() {
       </div>
     </div>
   );
+  
   
 }
