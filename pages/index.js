@@ -600,7 +600,7 @@ const handleHoverOff = () => {
       <div className="App">
       <header className="App-header">
       <Button onClick={onAddStudent}>Add a new contributor</Button>
-      <Button onClick={openEmailModal}>Send email to those who haven't yet contributed</Button>
+      <Button onClick={openEmailModal}>Send email</Button>
         {/* <Button onClick={handleSendEmail}>Send email to those who have not contributed yet</Button> */}
         <Table columns={columns} dataSource={dataSource}></Table>
             <Modal
