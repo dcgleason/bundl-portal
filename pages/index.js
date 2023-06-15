@@ -177,8 +177,8 @@ const CSV = () => {
     .then(response => response.json())
     .then(data => {
       // Transform the data into the format you need for your state
-      if (data && typeof data === 'object') {
-        const transformedData = Object.entries(data.message).map(([key, value], index) => {
+      if (data && typeof data.messages === 'object') {
+        const transformedData = Object.entries(data.messages).map(([key, value], index) => {
           // Since value is an object representing a single message, you can directly access its properties
           console.log('Value:', JSON.stringify(value));
           return {
