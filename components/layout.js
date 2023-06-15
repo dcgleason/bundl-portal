@@ -1,6 +1,7 @@
 import { useRouter } from 'next/router';
 import Sidebar from "./sidebar";
 import Header from "./header"
+import { useEffect, useState } from 'react';
 
 export default function Layout(props) {
     const router = useRouter();
