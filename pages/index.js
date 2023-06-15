@@ -727,7 +727,7 @@ const handleHoverOff = () => {
                 onCancel={handleClosePictureModal}
                 footer={null}
               >
-                <img src={viewPictureUrl} alt="Submission" style={{ maxWidth: '100%' }} />
+                <img src={pictureUrl} alt="Submission" style={{ maxWidth: '100%' }} />
               </Modal>
       </header>
     </div>
