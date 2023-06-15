@@ -3,7 +3,7 @@ import "../css/index.css";
 import Head from "next/head";
 import Layout from "../components/layout";
 import "pure-react-carousel/dist/react-carousel.es.css";
-import { useState, createContext, useContext, useEffect } from "react";
+import {  createContext } from "react";
 
 export const MyContext = createContext({});
 
