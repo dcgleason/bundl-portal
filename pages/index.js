@@ -74,7 +74,8 @@ const CSV = () => {
   const cancelButtonRef = useRef(null)
   const [isEditing, setIsEditing] = useState(false);
   const [editingStudent, setEditingStudent] = useState(null);
-  const [viewPictureUrl, setViewPictureUrl] = useState(null);
+  const [pictureUrl, setPictureUrl] = useState(null);
+  const [viewPicture, setViewPicture] = useState(false);
 
 
   
@@ -266,11 +267,13 @@ const CSV = () => {
 
 
   const handleViewPicture = (record) => {
-    setViewPictureUrl(record.img_file);
+    setPictureUrl(record.img_file);
+    setViewPicture(true)
   };
   
   const handleClosePictureModal = () => {
-    setViewPictureUrl(null);
+    setPictureUrl(null);
+    setViewPicture(false);
   };
   
   
@@ -720,7 +723,7 @@ const handleHoverOff = () => {
           </Modal>
                 <Modal
                 title="View Picture"
-                open={!!viewPictureUrl}
+                open={viewPicture}
                 onCancel={handleClosePictureModal}
                 footer={null}
               >
