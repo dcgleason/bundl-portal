@@ -49,10 +49,10 @@ export default function MessagesPage() {
     .then(response => response.json())
     .then(data => {
       console.log('Data book id:', data.bookId);
-      console.log('Data messages:', data.message);
+      console.log('Data messages:', data.messages);
   
       // Convert the Map object to an array
-      const messagesArray = Array.from(data.message.values());
+      const messagesArray = Array.from(data.messages.values());
   
       // Set the messages to the state
       setMessages(messagesArray);
