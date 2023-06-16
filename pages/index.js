@@ -551,47 +551,6 @@ const handleHoverOff = () => {
  
     return (
       <>
-      <Transition show={openGmail} as={React.Fragment}>
-        <Dialog
-          as="div"
-          className="fixed inset-0 z-10 overflow-y-auto"
-          static
-          open={openGmail}
-          onClose={closeModal}
-        >
-          <div className="min-h-screen px-4 text-center">
-            <Dialog.Overlay className="fixed inset-0 bg-gray-500 bg-opacity-75" />
-            <span className="inline-block h-screen align-middle" aria-hidden="true">
-              &#8203;
-            </span>
-            <div className="inline-block w-full max-w-2xl p-4 my-4 overflow-hidden text-left align-middle transition-all transform bg-white shadow-xl rounded-lg sm:p-6 md:max-w-md">
-
-              <Dialog.Title as="h3" className="text-lg font-medium leading-6 text-gray-900">
-                Google Contacts
-              </Dialog.Title>
-              <div className="mt-4 h-72 overflow-y-scroll">
-                <ul>
-                  {gmailContacts.map((contact) => (
-                    <li key={contact.resourceName}>
-                      {contact.names && contact.names[0].displayName}
-                      {contact.emailAddresses && ` - ${contact.emailAddresses[0].value}`}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-              <div className="mt-4">
-                <button
-                  type="button"
-                  className="inline-flex justify-center w-full px-4 py-2 text-sm font-medium text-white bg-blue-600 border border-transparent rounded-md hover:bg-blue-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-blue-500 sm:w-auto"
-                  onClick={closeModal}
-                >
-                  Close
-                </button>
-              </div>
-            </div>
-          </div>
-        </Dialog>
-      </Transition>
       
       <Modal
         open={showModal}
