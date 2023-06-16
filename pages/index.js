@@ -159,16 +159,16 @@ const CSV = () => {
     fetch(`https://yay-api.herokuapp.com/book/${localUserID}/messages`, {
       credentials: 'include',
     })
-      .then(response => {
-        if (!response.ok) {
-          throw new Error('Network response was not ok');
-        }
-        return response.json();
-      })
-      .then(data => {
-        // Check if data.messages is an object before proceeding
-        if (data && typeof data.messages === 'object') {
-          const transformedData = Object.entries(data.messages).map(([key, value], index) => {
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      return response.json();
+    })
+    .then(data => {
+      // Check if data.messages is an object before proceeding
+      if (data && typeof data.messages === 'object') {
+        const transformedData = Object.entries(data.messages).map(([key, value], index) => {
             return {
               id: index + 1,
               name: value.name || "Name not available",
