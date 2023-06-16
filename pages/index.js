@@ -559,7 +559,8 @@ const handleHoverOff = () => {
             <span className="inline-block h-screen align-middle" aria-hidden="true">
               &#8203;
             </span>
-            <div className="inline-block w-full max-w-md p-6 my-8 overflow-hidden text-left align-middle transition-all transform bg-white shadow-xl rounded-lg sm:px-2">
+            <div className="inline-block w-full max-w-2xl p-4 my-4 overflow-hidden text-left align-middle transition-all transform bg-white shadow-xl rounded-lg sm:p-6 md:max-w-md">
+
               <Dialog.Title as="h3" className="text-lg font-medium leading-6 text-gray-900">
                 Google Contacts
               </Dialog.Title>
@@ -576,7 +577,7 @@ const handleHoverOff = () => {
               <div className="mt-4">
                 <button
                   type="button"
-                  className="inline-flex justify-center px-4 py-2 text-sm font-medium text-white bg-blue-600 border border-transparent rounded-md hover:bg-blue-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-blue-500"
+                  className="inline-flex justify-center w-full px-4 py-2 text-sm font-medium text-white bg-blue-600 border border-transparent rounded-md hover:bg-blue-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-blue-500 sm:w-auto"
                   onClick={closeModal}
                 >
                   Close
@@ -835,7 +836,7 @@ const handleHoverOff = () => {
               leaveFrom="opacity-100 translate-y-0 sm:scale-100"
               leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
             >
-              <Dialog.Panel className="relative transform overflow-hidden rounded-lg bg-white px-4 pt-5 pb-4 text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg sm:p-6">
+            <Dialog.Panel className="relative transform overflow-hidden rounded-lg bg-white p-4 text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg sm:p-6">
                 <div>
                   <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-green-100">
                     <CheckIcon className="h-6 w-6 text-green-600" aria-hidden="true" />
