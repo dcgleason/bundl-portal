@@ -18,30 +18,6 @@ const NEXT_PUBLIC_CLIENT_ID = '764289968872-287oud9a6s7s6kcn439rrn7uhtog9maq.app
 
 
 
-const ContactListModal = ({ contacts, show, handleClose }) => {
-  return (
-    <Modal
-      title="Google Contacts"
-      visible={show}
-      onCancel={handleClose}
-      footer={null}
-    >
-      <List
-        itemLayout="horizontal"
-        dataSource={contacts}
-        renderItem={(contact, index) => (
-          <List.Item key={index}>
-            <List.Item.Meta
-              title={<Typography.Text strong>Name: {contact.name}</Typography.Text>}
-              description={<Typography.Text strong>Email: {contact.email}</Typography.Text>}
-            />
-          </List.Item>
-        )}
-      />
-    </Modal>
-  );
-};
-
 
 const CSV = () => {
 
@@ -569,9 +545,7 @@ const handleHoverOff = () => {
 
  
     return (
-<>
-
-
+      <>
       <Transition show={openGmail} as={React.Fragment}>
         <Dialog
           as="div"
@@ -582,17 +556,11 @@ const handleHoverOff = () => {
         >
           <div className="min-h-screen px-4 text-center">
             <Dialog.Overlay className="fixed inset-0 bg-gray-500 bg-opacity-75" />
-            <span
-              className="inline-block h-screen align-middle"
-              aria-hidden="true"
-            >
+            <span className="inline-block h-screen align-middle" aria-hidden="true">
               &#8203;
             </span>
-            <div className="inline-block w-full max-w-md p-6 my-8 overflow-hidden text-left align-middle transition-all transform bg-white shadow-xl rounded-lg">
-              <Dialog.Title
-                as="h3"
-                className="text-lg font-medium leading-6 text-gray-900"
-              >
+            <div className="inline-block w-full max-w-md p-6 my-8 overflow-hidden text-left align-middle transition-all transform bg-white shadow-xl rounded-lg sm:px-2">
+              <Dialog.Title as="h3" className="text-lg font-medium leading-6 text-gray-900">
                 Google Contacts
               </Dialog.Title>
               <div className="mt-4 h-72 overflow-y-scroll">
@@ -600,8 +568,7 @@ const handleHoverOff = () => {
                   {gmailContacts.map((contact) => (
                     <li key={contact.resourceName}>
                       {contact.names && contact.names[0].displayName}
-                      {contact.emailAddresses &&
-                        ` - ${contact.emailAddresses[0].value}`}
+                      {contact.emailAddresses && ` - ${contact.emailAddresses[0].value}`}
                     </li>
                   ))}
                 </ul>
@@ -619,8 +586,7 @@ const handleHoverOff = () => {
           </div>
         </Dialog>
       </Transition>
-
-
+      
       <Modal
         open={showModal}
         onCancel={handleModalClose}
@@ -632,15 +598,18 @@ const handleHoverOff = () => {
           </Button>,
         ]}
       >
-       { displaySubmission( modalData)}
+        {displaySubmission(modalData)}
       </Modal>
-
+      
       <div className="App">
-      <header className="App-header">
-      <Button onClick={onAddStudent}>Add a new contributor</Button>
-      <Button onClick={openEmailModal}>Send email</Button>
-        {/* <Button onClick={handleSendEmail}>Send email to those who have not contributed yet</Button> */}
-        <Table columns={columns} dataSource={dataSource}></Table>
+        <header className="App-header px-4 sm:px-6 md:px-8">
+          <div className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
+            <Button onClick={onAddStudent}>Add a new contributor</Button>
+            <Button onClick={openEmailModal}>Send email</Button>
+          </div>
+          <div className="mt-4">
+            <Table columns={columns} dataSource={dataSource}></Table>
+          </div>
             <Modal
               title="Send Email"
               open={emailModalVisible}
@@ -908,10 +877,9 @@ const handleHoverOff = () => {
     </Transition.Root>
 
 
-    <form className="space-y-6 mt-10" action="#" method="POST">
+    <form className="space-y-6 mt-10 px-4 sm:px-6 md:px-8" action="#" method="POST">
 
-
-    <div className="bg-white px-4 py-5 shadow sm:rounded-lg sm:p-6">
+    <div className="px-4 py-5 bg-white shadow sm:rounded-lg sm:p-6 md:grid md:grid-cols-3 md:gap-6">
       <div className="md:grid md:grid-cols-3 md:gap-6">
         <div className="md:col-span-1">
           {/* <h3 className="text-lg font-medium leading-6 text-gray-900">Upload</h3> */}
@@ -932,19 +900,19 @@ const handleHoverOff = () => {
           </div>
           <div>
          
-  <Button
-    onClick={handleDownloadCSV}
-    onMouseEnter={handleHoverOn}
-    onMouseLeave={handleHoverOff}
-  >
-    Download CSV template
-  </Button>
+          <Button
+            onClick={handleDownloadCSV}
+            onMouseEnter={handleHoverOn}
+            onMouseLeave={handleHoverOff}
+          >
+            Download CSV template
+          </Button>
 
-     {hover && <div><em>Note: after you downloading the template and fill it in, make sure to save the file as a csv file before you upload it here!</em></div>}
-  
-            </div>
-         
-      </div>
+            {hover && <div><em>Note: after you downloading the template and fill it in, make sure to save the file as a csv file before you upload it here!</em></div>}
+          
+                    </div>
+                
+              </div>
     </div>
     <Button onClick={addtoList}>Add to above list</Button>
 
