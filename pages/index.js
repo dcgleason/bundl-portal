@@ -1,5 +1,4 @@
 
-
 import {Modal, List, Typography, Button, Table, Input, Select, Upload, message, notification, Form } from "antd";
 import { useRef } from 'react'
 import { Dialog, Transition } from '@headlessui/react'
@@ -148,56 +147,57 @@ const CSV = () => {
 
   useEffect(() => {
     // Get the user's ID from local storage
-
-      // Set the userID state
-
     const localUserID = localStorage.getItem('userID');
-    setUserID(localUserID);
-    console.log('User ID data:', userID);
-  
-    // Now, fetch the book messages using the user's ID
-    fetch(`https://yay-api.herokuapp.com/book/${localUserID}/messages`, {
-      credentials: 'include'
-    })
-    .then(response => response.json())
-    .then(data => {
-      // Transform the data into the format you need for your state
-      if (data && typeof data.messages === 'object') {
-        const transformedData = Object.entries(data.messages).map(([key, value], index) => {
-          // Since value is an object representing a single message, you can directly access its properties
-          console.log('Value:', JSON.stringify(value));
-          return {
-            id: index + 1,
-            name: value.name,
-            email: value.email? value.email: "No email given", // Assuming the key of the map entry is the email
-            submitted: value.msg ? "Yes" : "No", // Assuming that if msg is present, the message has been submitted
-            notes: '', // Not sure where this data comes from
-            submission: value.msg,
-            picture: value.img_file ? true : false, // Assuming that if img_file is present, a picture was included
-          };
-        });
-        
-        
-  
-      setDataSource(transformedData);
-      console.log('Transformed data:', transformedData);
+    if (!localUserID) {
+      console.error('User ID is not available in local storage');
+      return;
     }
-    else {
-      console.log('No data returned');
-    } 
+    
+    setUserID(localUserID);
+    
+    // Fetch the book messages using the user's ID
+    fetch(`https://yay-api.herokuapp.com/book/${localUserID}/messages`, {
+      credentials: 'include',
+    })
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        return response.json();
+      })
+      .then(data => {
+        // Check if data.messages is an object before proceeding
+        if (data && typeof data.messages === 'object') {
+          const transformedData = Object.entries(data.messages).map(([key, value], index) => {
+            return {
+              id: index + 1,
+              name: value.name || "Name not available",
+              email: value.email || "No email given",
+              submitted: value.msg ? "Yes" : "No",
+              notes: '', // Not sure where this data comes from
+              submission: value.msg || "No submission",
+              picture: !!value.img_file, // Convert to boolean; true if exists, false otherwise
+            };
+          });
   
-  }
-    )
-    .catch(error => {
-      console.error('Error:', error);
-    });
+          setDataSource(transformedData);
+          console.log('Transformed data:', transformedData);
+        } else {
+          console.log('Data is not in the expected format');
+        }
+      })
+      .catch(error => {
+        console.error('Failed to fetch:', error);
+      });
   }, []); // Empty dependency array means this useEffect runs once when the component mounts
+  
   
   
 
 
   const openEmailModal = () => {
     // Get the emails of people who have not yet contributed
+    console.log('Data source:', dataSource)
     const nonContributors = dataSource.filter(student => student.submitted === "No").map(student => student.email);
     setEmailRecipients(nonContributors.join(', '));
     setEmailModalVisible(true);
@@ -338,7 +338,9 @@ const CSV = () => {
     setDataSource([...dataSource, ...objects]);
   
     // Now, send the new contacts to the server
+  
     try {
+     
       const promises = objects.map((contact) => {
         return fetch(`https://yay-api.herokuapp.com/book/${userID}/message`, {
           method: 'POST',
@@ -354,6 +356,8 @@ const CSV = () => {
           }),
         });
       });
+
+      console.log('promises', promises);
   
       const responses = await Promise.all(promises);
   
@@ -385,6 +389,7 @@ const CSV = () => {
           rowsArray.push(Object.keys(d));
           valuesArray.push(Object.values(d));
         });
+
 
         // Parsed Data Response in array format
         setParsedData(results.data);
