@@ -1,6 +1,4 @@
 import { useState, useEffect } from 'react';
-import { useContext } from 'react';
-import { MyContext } from './_app';
 import Image from 'next/image';
 
 
