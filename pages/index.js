@@ -547,7 +547,6 @@ const handleHoverOff = () => {
     setIsModalVisible(false);
   };
 // people api client secret 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
-
  
     return (
       <>
