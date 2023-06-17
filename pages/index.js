@@ -7,8 +7,7 @@ import { EditOutlined, DeleteOutlined, InboxOutlined  } from "@ant-design/icons"
 import Papa from "papaparse";
 import React, { useState, useEffect, Fragment } from 'react';
 import { signIn, useSession } from 'next-auth/react'
-//import the @react-oauth/google package
-import { GoogleAuth } from '@react-oauth/google';
+
 const { TextArea } = Input;
 
 const NEXT_PUBLIC_CLIENT_ID = '764289968872-287oud9a6s7s6kcn439rrn7uhtog9maq.apps.googleusercontent.com';
@@ -203,49 +202,49 @@ const CSV = () => {
     setEmailModalVisible(true);
   };
   
-  const handleEmailModalOk = async () => {
-    // Here you would handle sending the email
-    console.log(emailBody, emailSubject, emailRecipients);
+  // const handleEmailModalOk = async () => {
+  //   // Here you would handle sending the email
+  //   console.log(emailBody, emailSubject, emailRecipients);
   
-    // Prepare the data to send
-    const emailData = {
-      body: emailBody,
-      subject: emailSubject,
-      recipients: emailRecipients.split(', '), // Assuming recipients are separated by a comma and a space
-    };
+  //   // Prepare the data to send
+  //   const emailData = {
+  //     body: emailBody,
+  //     subject: emailSubject,
+  //     recipients: emailRecipients.split(', '), // Assuming recipients are separated by a comma and a space
+  //   };
   
-    try {
-      // Send a POST request to your backend
-      const response = await fetch('https://yay-api.herokuapp.com/email/send', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${session.accessToken}`,
-        },
-        body: JSON.stringify({
-          subject: 'Contribute please - 3 days left!',
-          body: 'We would love you to contribute to this bundle',
-          recipients: emailRecipients.split(', ')
-        }),
-      })
-      .then(response => response.json())
-      .then(data => console.log(data))
-      .catch((error) => {
-        console.error('Error:', error);
-      });
+  //   try {
+  //     // Send a POST request to your backend
+  //     const response = await fetch('https://yay-api.herokuapp.com/email/send', {
+  //       method: 'POST',
+  //       headers: {
+  //         'Content-Type': 'application/json',
+  //         'Authorization': `Bearer ${session.accessToken}`,
+  //       },
+  //       body: JSON.stringify({
+  //         subject: 'Contribute please - 3 days left!',
+  //         body: 'We would love you to contribute to this bundle',
+  //         recipients: emailRecipients.split(', ')
+  //       }),
+  //     })
+  //     .then(response => response.json())
+  //     .then(data => console.log(data))
+  //     .catch((error) => {
+  //       console.error('Error:', error);
+  //     });
   
-      // Check if the request was successful
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
+  //     // Check if the request was successful
+  //     if (!response.ok) {
+  //       throw new Error(`HTTP error! status: ${response.status}`);
+  //     }
   
-      console.log('Email sent successfully');
-    } catch (error) {
-      console.error('Failed to send email:', error);
-    }
+  //     console.log('Email sent successfully');
+  //   } catch (error) {
+  //     console.error('Failed to send email:', error);
+  //   }
   
-    setEmailModalVisible(false);
-  };
+  //   setEmailModalVisible(false);
+  // };
  
   
   const handleEmailModalCancel = () => {
