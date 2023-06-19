@@ -506,6 +506,7 @@ const handleHoverOff = () => {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`, // Use the token from local storage
         },
         body: JSON.stringify({
           senderName,
