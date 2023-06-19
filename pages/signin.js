@@ -43,6 +43,7 @@ function LoginSignupForm() {
       // Assuming the response data contains the user's ID
       const userID = data.userId;
       console.log("userID: ", userID);
+      console.log("data: ", data);
       // Store the user's ID in local storage so it can be accessed in other components
       localStorage.setItem('userID', userID);
       // Redirect to the dashboard page
