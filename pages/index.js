@@ -6,6 +6,7 @@ import { CheckIcon } from '@heroicons/react/24/outline'
 import { EditOutlined, DeleteOutlined, InboxOutlined  } from "@ant-design/icons";
 import Papa from "papaparse";
 import React, { useState, useEffect, Fragment } from 'react';
+import jwt_decode from 'jwt-decode';
 
 const { TextArea } = Input;
 
@@ -144,19 +145,22 @@ const CSV = () => {
 
 
   useEffect(() => {
-    // Check if we're in a browser environment
     if (typeof window !== 'undefined') {
-      // Get the user's ID from local storage
-      const localUserID = localStorage.getItem('userID');
-      console.log('localStorage contents:', localStorage);
-
-      if (!localUserID) {
-        console.error('User ID is not available in local storage');
-        console.log('localsorage:', localStorage);
+      const jwtToken = localStorage.getItem('token');
+      if (!jwtToken) {
+        console.error('JWT token is not available in local storage');
         return;
       }
-      
-      setUserID(localUserID);
+  
+      // Decode the JWT token to get the user's ID
+      const decodedToken = jwt_decode(jwtToken);
+      const userID = decodedToken.userID;
+      if (!userID) {
+        console.error('User ID is not available in the decoded JWT token');
+        return;
+      }
+  
+      setUserID(userID);
       
       // Fetch the book messages using the user's ID
       fetch(`https://yay-api.herokuapp.com/book/${localUserID}/messages`, {
@@ -473,8 +477,8 @@ const handleHoverOff = () => {
 
   const handleSendEmail = async () => {
     console.log('email sent')
-    const user = JSON.parse(localStorage.getItem('user'));
-    if (!user) {
+    const token = localStorage.getItem('token');
+    if (!token) {
       // If the user is not signed in, prompt them to do so
       // You would need to implement this part based on how your sign-in system works
     } else {
@@ -482,9 +486,14 @@ const handleHoverOff = () => {
       const recipientEmails = dataSource
         .filter((student) => student.submitted === "No")
         .map((student) => student.email);
-
-      const senderName = user.name; // Assuming the sender's name is stored in the user object
-
+  
+      // Decode the JWT
+      const decoded = jwt_decode(token);
+  
+      // Extract the sender's name and username from the decoded JWT
+      const senderName = decoded.name;
+      const senderEmail = decoded.username;
+  
       const response = await fetch('https://yay-api.herokuapp.com/email/send', {
         method: 'POST',
         headers: {
@@ -492,17 +501,17 @@ const handleHoverOff = () => {
         },
         body: JSON.stringify({
           senderName,
-          senderEmail: user.email,
+          senderEmail,
           emailSubject: 'Contribute please - 3 days left!',
           emailBody: 'We\'d love you to contribute to this bundle',
           recipientEmails,
         }),
       });
-
+  
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
-
+  
       console.log('Email sent successfully');
     }
   };

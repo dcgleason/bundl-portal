@@ -24,8 +24,6 @@ function LoginSignupForm() {
     });
   
     try {
-      console.log("body: ", body);
-      // Use fetch to send a POST request to the /signin route
       const res = await fetch(' https://yay-api.herokuapp.com/login/signin', {
         method: 'POST',
         body: body,
@@ -34,23 +32,15 @@ function LoginSignupForm() {
       });
   
       const data = await res.json();
-    console.log(data);
-    console.log("success res:" + res.status);
 
-        // If the signup was successful, redirect to the next page
-      // After successful login
-    if (res.status === 200) {
-      // Assuming the response data contains the user's ID
-      const userID = data.userId;
-      console.log("userID: ", userID);
-      console.log("data: ", data);
-      // Store the user's ID in local storage so it can be accessed in other components
-      localStorage.setItem('userID', userID);
-      localStorage.setItem('name', data.name);
-      localStorage.setItem('username', data.username);
-      // Redirect to the dashboard page
-     window.location.href = `https://www.console.givebundl.com/`;
-    } else {
+      if (res.status === 200) {
+        // Assuming the response data contains the JWT token
+        const token = data.token;
+        // Store the JWT token in local storage so it can be accessed in other components
+        localStorage.setItem('token', token);
+        // Redirect to the dashboard page
+        window.location.href = `https://www.console.givebundl.com/`;
+      } else {
         console.error("Login failed");
       }
     } catch (err) {
