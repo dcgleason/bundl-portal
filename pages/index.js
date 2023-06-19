@@ -6,7 +6,6 @@ import { CheckIcon } from '@heroicons/react/24/outline'
 import { EditOutlined, DeleteOutlined, InboxOutlined  } from "@ant-design/icons";
 import Papa from "papaparse";
 import React, { useState, useEffect, Fragment } from 'react';
-import { signIn, useSession } from 'next-auth/react'
 
 const { TextArea } = Input;
 
@@ -53,7 +52,6 @@ const CSV = () => {
   const [editingStudent, setEditingStudent] = useState(null);
   const [pictureUrl, setPictureUrl] = useState(null);
   const [viewPicture, setViewPicture] = useState(false);
-  // const [session, loading] = useSession();
 
 
   
@@ -475,35 +473,41 @@ const handleHoverOff = () => {
 
   const handleSendEmail = async () => {
     console.log('email sent')
-    // if (!session) {
-    //   // If the user is not signed in, prompt them to do so
-    //   signIn('google');
-    // } else {
-    //   // If the user is signed in, send the email
-    //   const recipientEmails = dataSource
-    //     .filter((student) => student.submitted === "No")
-    //     .map((student) => student.email);
+    const user = JSON.parse(localStorage.getItem('user'));
+    if (!user) {
+      // If the user is not signed in, prompt them to do so
+      // You would need to implement this part based on how your sign-in system works
+    } else {
+      // If the user is signed in, send the email
+      const recipientEmails = dataSource
+        .filter((student) => student.submitted === "No")
+        .map((student) => student.email);
 
-    //   const response = await fetch('https://yay-api.herokuapp.com/email/send', {
-    //     method: 'POST',
-    //     headers: {
-    //       'Content-Type': 'application/json',
-    //     },
-    //     body: JSON.stringify({
-    //       senderEmail: session.user.email,
-    //       emailSubject: 'Contribute please - 3 days left!',
-    //       emailBody: 'We\'d love you to contribute to this bundle',
-    //       recipientEmails,
-    //     }),
-    //   });
+      const senderName = user.name; // Assuming the sender's name is stored in the user object
 
-    //   if (!response.ok) {
-    //     throw new Error(`HTTP error! status: ${response.status}`);
-    //   }
+      const response = await fetch('https://yay-api.herokuapp.com/email/send', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          senderName,
+          senderEmail: user.email,
+          emailSubject: 'Contribute please - 3 days left!',
+          emailBody: 'We\'d love you to contribute to this bundle',
+          recipientEmails,
+        }),
+      });
 
-    //   console.log('Email sent successfully');
-    // }
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
+      console.log('Email sent successfully');
+    }
   };
+
+
   const onEditStudent = (record) => {
     setIsEditing(true);
     console.log("record", record)

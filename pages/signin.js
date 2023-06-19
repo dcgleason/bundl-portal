@@ -46,6 +46,8 @@ function LoginSignupForm() {
       console.log("data: ", data);
       // Store the user's ID in local storage so it can be accessed in other components
       localStorage.setItem('userID', userID);
+      localStorage.setItem('name', data.name);
+      localStorage.setItem('username', data.username);
       // Redirect to the dashboard page
      window.location.href = `https://www.console.givebundl.com/`;
     } else {
