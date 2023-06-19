@@ -87,7 +87,7 @@ const CSV = () => {
       render: (record) => { 
         return (
           <>
-          {record !== "" ?
+          {record && record !== "" ?
           <a className="underline" onClick={ () => handleModalOpen(record)}>Preview Submission</a>
           :
           "No Submission"
@@ -103,7 +103,7 @@ const CSV = () => {
       render: (record) => { 
         return (
           <>
-          {record !== false ?
+          {record && record !== "" ?
           <a className="underline" onClick={ () => handleViewPicture(record)}>View Picture</a>
           :
           "No Picture Uploaded"
