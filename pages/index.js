@@ -79,6 +79,9 @@ const CSV = () => {
       key: "4",
       title: "Submitted",
       dataIndex: "submitted",
+      render: (_, record) => {
+        return record.submitted || (!record.msg) ? "No" : "Yes";
+      },
     },
     {
       key: "5",
@@ -336,8 +339,8 @@ const CSV = () => {
         email: values[i][2],
         address: values[i][3],
         submitted: false,
-        submission: 'none',
-        picture: 'none',
+        submission: '',
+        picture: '',
       });
     }
   
