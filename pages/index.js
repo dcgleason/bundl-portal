@@ -502,7 +502,7 @@ const handleHoverOff = () => {
       const senderName = decoded.name;
       const senderEmail = decoded.username;
   
-      const response = await fetch('https://yay-api.herokuapp.com/email/send', {
+      const response = await fetch('/api/sendEmail', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
