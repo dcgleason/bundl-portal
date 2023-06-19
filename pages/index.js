@@ -151,6 +151,7 @@ const CSV = () => {
 
       if (!localUserID) {
         console.error('User ID is not available in local storage');
+        console.log('localsorage:', localStorage);
         return;
       }
       
