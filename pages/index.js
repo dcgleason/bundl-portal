@@ -154,7 +154,7 @@ const CSV = () => {
       }
   
       // Decode the JWT token to get the user's ID
-      const decodedToken = jwt_decode(jwtToken);
+      const decodedToken = jwt_decode(token);
       const userID = decodedToken.userID;
       if (!userID) {
         console.error('User ID is not available in the decoded JWT token');
