@@ -324,6 +324,7 @@ const CSV = () => {
   
   const addtoList = async () => {
     let objects = [];
+    console.log('values', values)
   
     const firstValue = dataSource[dataSource.length - 1].id;
     for (let i = 0; i < values.length; i ++) {
@@ -381,6 +382,7 @@ const CSV = () => {
 
   const changeHandler = (event) => {
     // Passing file data (event.target.files[0]) to parse using Papa.parse
+    console.log('event.target.files[0]', event.target.files[0])
     Papa.parse(event.target.files[0], {
       header: true,
       skipEmptyLines: true,
@@ -404,6 +406,7 @@ const CSV = () => {
         // Filtered Values
         setValues(valuesArray);
         console.log('values = '+ values)
+        console.log('parsedData = '+ parsedData)
       },
     });
   };
