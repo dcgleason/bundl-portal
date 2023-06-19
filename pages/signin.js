@@ -38,8 +38,9 @@ function LoginSignupForm() {
         const token = data.token;
         // Store the JWT token in local storage so it can be accessed in other components
         localStorage.setItem('token', token);
+        console.log('token' + token)
         // Redirect to the dashboard page
-        window.location.href = `https://www.console.givebundl.com/`;
+       // window.location.href = `https://www.console.givebundl.com/`;
       } else {
         console.error("Login failed");
       }
