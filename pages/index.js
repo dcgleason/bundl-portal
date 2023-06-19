@@ -7,6 +7,7 @@ import { EditOutlined, DeleteOutlined, InboxOutlined  } from "@ant-design/icons"
 import Papa from "papaparse";
 import React, { useState, useEffect, Fragment } from 'react';
 import jwt_decode from 'jwt-decode';
+import { google } from 'googleapis';
 
 const { TextArea } = Input;
 
@@ -149,6 +150,26 @@ const CSV = () => {
       const jwtToken = localStorage.getItem('token');
       if (!jwtToken) {
         console.error('JWT token is not available in local storage');
+        
+        // Redirect to Google's authorization URL
+        const getAuthUrl = () => {
+          const oauth2Client = new google.auth.OAuth2(
+            process.env.GMAIL_CLIENT_ID,
+            process.env.GMAIL_CLIENT_SECRET,
+            'http://localhost:3000/api/oauth2callback' // This should be your actual server address
+          );
+
+          const authUrl = oauth2Client.generateAuthUrl({
+            access_type: 'offline',
+            scope: ['https://www.googleapis.com/auth/gmail.send'],
+          });
+
+          return authUrl;
+        }
+
+        const authUrl = getAuthUrl();
+        window.location.href = authUrl;
+
         return;
       }
   
@@ -201,7 +222,14 @@ const CSV = () => {
 
   
   
-  
+  function signInWithGoogle() {
+    const clientId = process.env.REACT_APP_GOOGLE_CLIENT_ID;
+    const redirectUri = 'YOUR_REDIRECT_URI';
+    const scope = 'https://www.googleapis.com/auth/gmail.send';
+    const responseType = 'code';
+    const url = `https://accounts.google.com/o/oauth2/v2/auth?client_id=${clientId}&redirect_uri=${redirectUri}&scope=${scope}&response_type=${responseType}`;
+    window.location.href = url;
+  }
 
 
   const openEmailModal = () => {
@@ -602,6 +630,9 @@ const handleHoverOff = () => {
             </Col>
             <Col xs={24} sm={12} md={8} lg={6}>
               <Button onClick={openEmailModal}>Send email</Button>
+            </Col>
+            <Col xs={24} sm={12} md={8} lg={6}>
+              <Button onClick={signInWithGoogle}>Sign in with Google</Button>
             </Col>
           </Row>
           <Row gutter={[16, 16]} justify="center">
