@@ -7,7 +7,6 @@ import { EditOutlined, DeleteOutlined, InboxOutlined  } from "@ant-design/icons"
 import Papa from "papaparse";
 import React, { useState, useEffect, Fragment } from 'react';
 import jwt_decode from 'jwt-decode';
-import { google } from 'googleapis';
 
 const { TextArea } = Input;
 
