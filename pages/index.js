@@ -417,7 +417,7 @@ const CSV = () => {
   };
 
   const handleDownloadCSV = () => {
-    window.location = 'https://drive.google.com/file/d/1tmguV7yzHlKNc7vULFBrfKvkK6Tmw8WU/view?usp=sharing';
+    window.open('https://drive.google.com/file/d/1tmguV7yzHlKNc7vULFBrfKvkK6Tmw8WU/view?usp=sharing', '_blank');
   }
 
   const handleHoverOn = () => {
