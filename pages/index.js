@@ -53,7 +53,7 @@ const CSV = () => {
   const [editingStudent, setEditingStudent] = useState(null);
   const [pictureUrl, setPictureUrl] = useState(null);
   const [viewPicture, setViewPicture] = useState(false);
-  const [session, loading] = useSession();
+  // const [session, loading] = useSession();
 
 
   
@@ -475,34 +475,34 @@ const handleHoverOff = () => {
 
   const handleSendEmail = async () => {
     console.log('email sent')
-    if (!session) {
-      // If the user is not signed in, prompt them to do so
-      signIn('google');
-    } else {
-      // If the user is signed in, send the email
-      const recipientEmails = dataSource
-        .filter((student) => student.submitted === "No")
-        .map((student) => student.email);
+    // if (!session) {
+    //   // If the user is not signed in, prompt them to do so
+    //   signIn('google');
+    // } else {
+    //   // If the user is signed in, send the email
+    //   const recipientEmails = dataSource
+    //     .filter((student) => student.submitted === "No")
+    //     .map((student) => student.email);
 
-      const response = await fetch('https://yay-api.herokuapp.com/email/send', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          senderEmail: session.user.email,
-          emailSubject: 'Contribute please - 3 days left!',
-          emailBody: 'We\'d love you to contribute to this bundle',
-          recipientEmails,
-        }),
-      });
+    //   const response = await fetch('https://yay-api.herokuapp.com/email/send', {
+    //     method: 'POST',
+    //     headers: {
+    //       'Content-Type': 'application/json',
+    //     },
+    //     body: JSON.stringify({
+    //       senderEmail: session.user.email,
+    //       emailSubject: 'Contribute please - 3 days left!',
+    //       emailBody: 'We\'d love you to contribute to this bundle',
+    //       recipientEmails,
+    //     }),
+    //   });
 
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
+    //   if (!response.ok) {
+    //     throw new Error(`HTTP error! status: ${response.status}`);
+    //   }
 
-      console.log('Email sent successfully');
-    }
+    //   console.log('Email sent successfully');
+    // }
   };
   const onEditStudent = (record) => {
     setIsEditing(true);
