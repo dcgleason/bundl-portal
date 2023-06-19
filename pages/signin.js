@@ -40,7 +40,7 @@ function LoginSignupForm() {
         localStorage.setItem('token', token);
         console.log('token' + token)
         // Redirect to the dashboard page
-       // window.location.href = `https://www.console.givebundl.com/`;
+        window.location.href = `https://www.console.givebundl.com/`;
       } else {
         console.error("Login failed");
       }
