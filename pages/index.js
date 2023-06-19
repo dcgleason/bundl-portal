@@ -143,50 +143,56 @@ const CSV = () => {
 
 
   useEffect(() => {
-    // Get the user's ID from local storage
-    const localUserID = localStorage.getItem('userID');
-    if (!localUserID) {
-      console.error('User ID is not available in local storage');
-      return;
-    }
-    
-    setUserID(localUserID);
-    
-    // Fetch the book messages using the user's ID
-    fetch(`https://yay-api.herokuapp.com/book/${localUserID}/messages`, {
-      credentials: 'include',
-    })
-    .then(response => {
-      if (!response.ok) {
-        throw new Error('Network response was not ok');
+    // Check if we're in a browser environment
+    if (typeof window !== 'undefined') {
+      // Get the user's ID from local storage
+      const localUserID = localStorage.getItem('userID');
+      console.log('localStorage contents:', localStorage);
+
+      if (!localUserID) {
+        console.error('User ID is not available in local storage');
+        return;
       }
-      return response.json();
-    })
-    .then(data => {
-      // Check if data.messages is an object before proceeding
-      if (data && typeof data.messages === 'object') {
-        const transformedData = Object.entries(data.messages).map(([key, value], index) => {
-            return {
-              id: index + 1,
-              name: value.name || "Name not available",
-              email: value.email || "No email given",
-              submitted: value.msg ? "Yes" : "No",
-              notes: '', // Not sure where this data comes from
-              submission: value.msg || "No submission",
-              picture: !!value.img_file, // Convert to boolean; true if exists, false otherwise
-            };
-          });
-  
-          setDataSource(transformedData);
-          console.log('Transformed data:', transformedData);
-        } else {
-          console.log('Data is not in the expected format');
-        }
+      
+      setUserID(localUserID);
+      
+      // Fetch the book messages using the user's ID
+      fetch(`https://yay-api.herokuapp.com/book/${localUserID}/messages`, {
+        credentials: 'include',
       })
-      .catch(error => {
-        console.error('Failed to fetch:', error);
-      });
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        return response.json();
+      })
+      .then(data => {
+        // Check if data.messages is an object before proceeding
+        if (data && typeof data.messages === 'object') {
+          const transformedData = Object.entries(data.messages).map(([key, value], index) => {
+              return {
+                id: index + 1,
+                name: value.name || "Name not available",
+                email: value.email || "No email given",
+                submitted: value.msg ? "Yes" : "No",
+                notes: '', // Not sure where this data comes from
+                submission: value.msg || "No submission",
+                picture: !!value.img_file, // Convert to boolean; true if exists, false otherwise
+              };
+            });
+
+            setDataSource(transformedData);
+            console.log('Transformed data:', transformedData);
+          } else {
+            console.log('Data is not in the expected format');
+          }
+        })
+        .catch(error => {
+          console.error('Failed to fetch:', error);
+        });
+    }
   }, []); // Empty dependency array means this useEffect runs once when the component mounts
+
   
   
   
