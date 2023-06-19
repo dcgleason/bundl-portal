@@ -325,8 +325,10 @@ const CSV = () => {
   const addtoList = async () => {
     let objects = [];
     console.log('values', values)
+
   
     const firstValue = dataSource[dataSource.length - 1].id;
+    console.log('firstValue', firstValue);
     for (let i = 0; i < values.length; i ++) {
       objects.push({
         id: firstValue + 1 + i,
