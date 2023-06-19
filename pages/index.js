@@ -860,12 +860,12 @@ const handleHoverOff = () => {
     <Col xs={24} sm={22} md={20} lg={18} xl={16}>
       <div className="px-4 py-5 bg-white shadow sm:rounded-lg sm:p-6">
         <Row gutter={[16, 16]}>
-          <Col xs={24} sm={12} md={8}>
+          <Col xs={24}>
             <p className="text-lg text-gray-500">
               Click to upload your CSV file with your contributors' information here:
             </p>
           </Col>
-          <Col xs={24} sm={12} md={8}>
+          <Col xs={24} sm={12} md={8} className="mx-auto">
             <input
               type="file"
               name="file"
@@ -873,21 +873,21 @@ const handleHoverOff = () => {
               onChange={changeHandler}
             />
           </Col>
-          <Col xs={24} sm={12} md={8}>
-            <Space direction="vertical">
-              <Button
-                onClick={handleDownloadCSV}
-                onMouseEnter={handleHoverOn}
-                onMouseLeave={handleHoverOff}
-              >
-                Download CSV template
-              </Button>
-              {hover && <div><em>Note: after you downloading the template and fill it in, make sure to save the file as a csv file before you upload it here!</em></div>}
-            </Space>
-          </Col>
         </Row>
       </div>
-      <Button onClick={addtoList}>Add to above list</Button>
+      <Row justify="space-between" align="middle">
+        <Button onClick={addtoList}>Add to above list</Button>
+        <Space direction="vertical">
+          <Button
+            onClick={handleDownloadCSV}
+            onMouseEnter={handleHoverOn}
+            onMouseLeave={handleHoverOff}
+          >
+            Download CSV template
+          </Button>
+          {hover && <div><em>Note: after you downloading the template and fill it in, make sure to save the file as a csv file before you upload it here!</em></div>}
+        </Space>
+      </Row>
       <div className="mt-8">
         <div className="overflow-hidden shadow ring-1 ring-black ring-opacity-5 md:rounded-lg">
           <table className="min-w-full divide-y divide-gray-300">
