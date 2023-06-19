@@ -1,5 +1,5 @@
 
-import {Modal, List, Typography, Button, Table, Input, Select, Upload, message, notification, Form } from "antd";
+import {Modal, List, Typography, Button, Table, Input, Select, Upload, message, notification, Form, Row, Col } from "antd";
 import { useRef } from 'react'
 import { Dialog, Transition } from '@headlessui/react'
 import { CheckIcon } from '@heroicons/react/24/outline'
@@ -555,6 +555,9 @@ const handleHoverOff = () => {
  
     return (
       <>
+
+
+
       
       <Modal
         open={showModal}
@@ -572,13 +575,19 @@ const handleHoverOff = () => {
       
       <div className="App">
         <header className="App-header px-4 sm:px-6 md:px-8">
-          <div className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
-            <Button onClick={onAddStudent}>Add a new contributor</Button>
-            <Button onClick={openEmailModal}>Send email</Button>
-          </div>
-          <div className="mt-4">
-            <Table columns={columns} dataSource={dataSource}></Table>
-          </div>
+          <Row gutter={[16, 16]} justify="center">
+            <Col xs={24} sm={12} md={8} lg={6}>
+              <Button onClick={onAddStudent}>Add a new contributor</Button>
+            </Col>
+            <Col xs={24} sm={12} md={8} lg={6}>
+              <Button onClick={openEmailModal}>Send email</Button>
+            </Col>
+          </Row>
+          <Row gutter={[16, 16]} justify="center">
+            <Col xs={24}>
+              <Table columns={columns} dataSource={dataSource}></Table>
+            </Col>
+          </Row>
             <Modal
               title="Send Email"
               open={emailModalVisible}
@@ -597,7 +606,7 @@ const handleHoverOff = () => {
                 </Form.Item>
               </Form>
             </Modal>
-        <Modal
+             <Modal
               title="Add a contributor"
               open={isEditing}
               okText="Save"
@@ -724,13 +733,13 @@ const handleHoverOff = () => {
 
 
 
-        </Modal>
+            </Modal>
           <Modal
             title="Add a new contributor manually"
             open={isModalVisible}
             onOk={handleOk}
             onCancel={handleCancel}
-          >
+           >
             <label>Name</label> <Input placeholder="Name" value={name} onChange={(e) => setName(e.target.value)}/>
             <label>Email</label> <Input placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)}/>
             <label>Submitted</label> 
