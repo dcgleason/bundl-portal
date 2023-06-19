@@ -6,7 +6,7 @@ import { CheckIcon } from '@heroicons/react/24/outline'
 import { EditOutlined, DeleteOutlined, InboxOutlined  } from "@ant-design/icons";
 import Papa from "papaparse";
 import React, { useState, useEffect, Fragment } from 'react';
-import { signIn, useSession } from 'next-auth/react'
+//import { signIn, useSession } from 'next-auth/react'
 
 const { TextArea } = Input;
 
@@ -52,7 +52,7 @@ const CSV = () => {
   const [editingStudent, setEditingStudent] = useState(null);
   const [pictureUrl, setPictureUrl] = useState(null);
   const [viewPicture, setViewPicture] = useState(false);
-  const [session, loading] = useSession();
+  //const [session, loading] = useSession();
 
 
   
