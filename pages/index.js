@@ -164,7 +164,7 @@ const CSV = () => {
       setUserID(userID);
       
       // Fetch the book messages using the user's ID
-      fetch(`https://yay-api.herokuapp.com/book/${localUserID}/messages`, {
+      fetch(`https://yay-api.herokuapp.com/book/${userID}/messages`, {
         credentials: 'include',
       })
       .then(response => {
@@ -187,7 +187,7 @@ const CSV = () => {
                 picture: !!value.img_file, // Convert to boolean; true if exists, false otherwise
               };
             });
-
+  
             setDataSource(transformedData);
             console.log('Transformed data:', transformedData);
           } else {
@@ -199,7 +199,7 @@ const CSV = () => {
         });
     }
   }, []); // Empty dependency array means this useEffect runs once when the component mounts
-
+  
   
   
   function signInWithGoogle() {
