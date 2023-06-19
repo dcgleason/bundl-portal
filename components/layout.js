@@ -8,10 +8,10 @@ export default function Layout(props) {
     const [userName, setUser] = useState('');
 
     return (
-        <div>
-            <div className="flex w-full">
+        <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
+            <div className="flex flex-col md:flex-row w-full">
                 {router.pathname !== '/signup' && router.pathname !== '/signin' && <Sidebar />}
-                <div className="w-full px-6 md:px-10 py-6">
+                <div className="w-full px-6 md:px-10 py-6 flex-grow">
                 {router.pathname !== '/signup' && router.pathname !== '/signin' && <Header user={userName} />} 
                     <main>{props.children}</main>
                 </div>
