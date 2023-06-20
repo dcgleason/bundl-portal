@@ -47,6 +47,8 @@ const CSV = () => {
   const [email, setEmail] = useState('');
   const [layout, setLayout] = useState('');
   const [msg, setMsg] = useState('');
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+
 
   const cancelButtonRef = useRef(null)
   const [isEditing, setIsEditing] = useState(false);
@@ -209,6 +211,7 @@ const CSV = () => {
     const responseType = 'code';
     const url = `https://accounts.google.com/o/oauth2/v2/auth?client_id=${clientId}&redirect_uri=${redirectUri}&scope=${scope}&response_type=${responseType}`;
     window.location.href = url;
+    setIsAuthenticated(true); // Set isAuthenticated to true after the user signs in
   }
 
   const openEmailModal = () => {
@@ -609,10 +612,11 @@ const handleHoverOff = () => {
               <Button onClick={onAddStudent}>Add a new contributor</Button>
             </Col>
             <Col xs={24} sm={12} md={8} lg={6}>
-              <Button onClick={openEmailModal}>Send email</Button>
-            </Col>
-            <Col xs={24} sm={12} md={8} lg={6}>
-              <Button onClick={signInWithGoogle}>Sign in with Google</Button>
+              {isAuthenticated ? (
+                <Button onClick={openEmailModal}>Send Email</Button>
+              ) : (
+                <Button onClick={signInWithGoogle}>Sign in with Google</Button>
+              )}
             </Col>
           </Row>
           <Row gutter={[16, 16]} justify="center">
