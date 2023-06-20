@@ -203,7 +203,7 @@ const CSV = () => {
   
   
   function signInWithGoogle() {
-    const clientId = process.env.GOOGLE_ID;
+    const clientId = '764289968872-3rstr2akvdot7cfjk9ektjeaghe2pghr.apps.googleusercontent.com';
     const redirectUri = 'https://www.console.givebundl.com/api/oauth2callback'; // Update this to your actual server address
     const scope = 'https://www.googleapis.com/auth/gmail.send';
     const responseType = 'code';
