@@ -204,7 +204,7 @@ const CSV = () => {
   
   function signInWithGoogle() {
     const clientId = process.env.GOOGLE_ID;
-    const redirectUri = 'https://wwww.console.givebundl.com/api/oauth2callback'; // Update this to your actual server address
+    const redirectUri = 'https://www.console.givebundl.com/api/oauth2callback'; // Update this to your actual server address
     const scope = 'https://www.googleapis.com/auth/gmail.send';
     const responseType = 'code';
     const url = `https://accounts.google.com/o/oauth2/v2/auth?client_id=${clientId}&redirect_uri=${redirectUri}&scope=${scope}&response_type=${responseType}`;
