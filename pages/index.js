@@ -160,6 +160,7 @@ const CSV = () => {
     // If the authentication tokens are present, set isAuthenticated to true
     if (auth) {
       setIsAuthenticated(true);
+      res.redirect('https://www.console.givebundl.com'); // Redirect the user back to your site
     }
   
     // Decode the JWT token to get the user's ID
