@@ -149,10 +149,17 @@ const CSV = () => {
   useEffect(() => {
     if (typeof window !== 'undefined') {
       const token = localStorage.getItem('token');
+      const auth = localStorage.getItem('auth'); // Get the authentication tokens from local storage
+  
       if (!token) {
         console.error('Token is not available in local storage');
         signInWithGoogle(); // Redirect to Google's authorization URL
         return;
+      }
+  
+      // If the authentication tokens are present, set isAuthenticated to true
+      if (auth) {
+        setIsAuthenticated(true);
       }
   
       // Decode the JWT token to get the user's ID
@@ -200,7 +207,7 @@ const CSV = () => {
           console.error('Failed to fetch:', error);
         });
     }
-  }, []); // Empty dependency array means this useEffect runs once when the component mounts
+  }, []);
   
   
   
@@ -211,7 +218,6 @@ const CSV = () => {
     const responseType = 'code';
     const url = `https://accounts.google.com/o/oauth2/v2/auth?client_id=${clientId}&redirect_uri=${redirectUri}&scope=${scope}&response_type=${responseType}`;
     window.location.href = url;
-    setIsAuthenticated(true); // Set isAuthenticated to true after the user signs in
   }
 
   const openEmailModal = () => {

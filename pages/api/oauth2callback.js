@@ -20,12 +20,13 @@ export default async function handler(req, res) {
       const { tokens } = await oauth2Client.getToken(code);
       oauth2Client.setCredentials(tokens);
   
-      // Here you should save the tokens to your database associated with the user
-      // For simplicity, we're just sending them back to the client
-      // res.status(200).json(tokens);
+      // Save the tokens in local storage
+      localStorage.setItem('auth', JSON.stringify(tokens));
+  
       res.redirect('https://www.console.givebundl.com'); // Redirect the user back to your site
     } catch (error) {
       console.error('Error exchanging authorization code for tokens:', error);
       res.status(500).send('Error exchanging authorization code for tokens');
     }
   }
+  
