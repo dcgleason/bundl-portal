@@ -23,7 +23,7 @@ export default async function handler(req, res) {
       // Here you should save the tokens to your database associated with the user
       // For simplicity, we're just sending them back to the client
       // res.status(200).json(tokens);
-      res.redirect('https://www.console.bundl.com'); // Redirect the user back to your site
+      res.redirect('https://www.console.givebundl.com'); // Redirect the user back to your site
     } catch (error) {
       console.error('Error exchanging authorization code for tokens:', error);
       res.status(500).send('Error exchanging authorization code for tokens');
