@@ -7,6 +7,7 @@ import { EditOutlined, DeleteOutlined, InboxOutlined  } from "@ant-design/icons"
 import Papa from "papaparse";
 import React, { useState, useEffect, Fragment } from 'react';
 import jwt_decode from 'jwt-decode';
+import Cookies from 'js-cookie';
 
 const { TextArea } = Input;
 
@@ -147,20 +148,19 @@ const CSV = () => {
 
 
   useEffect(() => {
-    if (typeof window !== 'undefined') {
-      const token = localStorage.getItem('token');
-      const auth = localStorage.getItem('auth'); // Get the authentication tokens from local storage
+    const token = localStorage.getItem('token');
+    const auth = Cookies.get('auth'); // Get the authentication tokens from the cookie
   
-      if (!token) {
-        console.error('Token is not available in local storage');
-        signInWithGoogle(); // Redirect to Google's authorization URL
-        return;
-      }
+    if (!token) {
+      console.error('Token is not available in local storage');
+      signInWithGoogle(); // Redirect to Google's authorization URL
+      return;
+    }
   
-      // If the authentication tokens are present, set isAuthenticated to true
-      if (auth) {
-        setIsAuthenticated(true);
-      }
+    // If the authentication tokens are present, set isAuthenticated to true
+    if (auth) {
+      setIsAuthenticated(true);
+    }
   
       // Decode the JWT token to get the user's ID
       const decodedToken = jwt_decode(token);
