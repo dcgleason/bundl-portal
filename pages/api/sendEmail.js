@@ -22,7 +22,7 @@ export default async function handler(req, res) {
     }
 
     const OAuth2 = google.auth.OAuth2;
-    const OAuth2_client = new OAuth2(process.env.GMAIL_CLIENT_ID, process.env.GMAIL_CLIENT_SECRET);
+    const OAuth2_client = new OAuth2(process.env.GOOGLE_ID, process.env.GOOGLE_SECRET);
     OAuth2_client.setCredentials({ refresh_token: process.env.GMAIL_REFRESH_TOKEN });
 
     const accessToken = OAuth2_client.getAccessToken();
@@ -32,8 +32,8 @@ export default async function handler(req, res) {
       auth: {
         type: 'OAuth2',
         user: senderEmail,
-        clientId: process.env.GMAIL_CLIENT_ID,
-        clientSecret: process.env.GMAIL_CLIENT_SECRET,
+        clientId: process.env.GOOGLE_ID,
+        clientSecret: process.env.GOOGLE_SECRET,
         refreshToken: process.env.GMAIL_REFRESH_TOKEN,
         accessToken: accessToken
       }
