@@ -162,51 +162,51 @@ const CSV = () => {
       setIsAuthenticated(true);
     }
   
-      // Decode the JWT token to get the user's ID
-      const decodedToken = jwt_decode(token);
-      const userID = decodedToken.userId; // Changed from 'userID' to 'userId'
-      if (!userID) {
-        console.error('User ID is not available in the decoded JWT token');
-        return;
-      }
-  
-      setUserID(userID);
-      
-      // Fetch the book messages using the user's ID
-      fetch(`https://yay-api.herokuapp.com/book/${userID}/messages`, {
-        credentials: 'include',
-      })
-      .then(response => {
-        if (!response.ok) {
-          throw new Error('Network response was not ok');
-        }
-        return response.json();
-      })
-      .then(data => {
-        // Check if data.messages is an object before proceeding
-        if (data && typeof data.messages === 'object') {
-          const transformedData = Object.entries(data.messages).map(([key, value], index) => {
-              return {
-                id: index + 1,
-                name: value.name || "Name not available",
-                email: value.email || "No email given",
-                submitted: value.msg ? "Yes" : "No",
-                notes: '', // Not sure where this data comes from
-                submission: value.msg || "No submission",
-                picture: !!value.img_file, // Convert to boolean; true if exists, false otherwise
-              };
-            });
-  
-            setDataSource(transformedData);
-            console.log('Transformed data:', transformedData);
-          } else {
-            console.log('Data is not in the expected format');
-          }
-        })
-        .catch(error => {
-          console.error('Failed to fetch:', error);
-        });
+    // Decode the JWT token to get the user's ID
+    const decodedToken = jwt_decode(token);
+    const userID = decodedToken.userId; // Changed from 'userID' to 'userId'
+    if (!userID) {
+      console.error('User ID is not available in the decoded JWT token');
+      return;
     }
+  
+    setUserID(userID);
+    
+    // Fetch the book messages using the user's ID
+    fetch(`https://yay-api.herokuapp.com/book/${userID}/messages`, {
+      credentials: 'include',
+    })
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      return response.json();
+    })
+    .then(data => {
+      // Check if data.messages is an object before proceeding
+      if (data && typeof data.messages === 'object') {
+        const transformedData = Object.entries(data.messages).map(([key, value], index) => {
+            return {
+              id: index + 1,
+              name: value.name || "Name not available",
+              email: value.email || "No email given",
+              submitted: value.msg ? "Yes" : "No",
+              notes: '', // Not sure where this data comes from
+              submission: value.msg || "No submission",
+              picture: !!value.img_file, // Convert to boolean; true if exists, false otherwise
+            };
+          });
+  
+          setDataSource(transformedData);
+          console.log('Transformed data:', transformedData);
+        } else {
+          console.log('Data is not in the expected format');
+        }
+      })
+      .catch(error => {
+        console.error('Failed to fetch:', error);
+      });
+    // Removed extra closing brace here
   }, []);
   
   
