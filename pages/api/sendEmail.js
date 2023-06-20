@@ -1,29 +1,24 @@
 import { google } from 'googleapis';
 import nodemailer from 'nodemailer';
 import jwt_decode from 'jwt-decode';
+import cookie from 'cookie';
 
 export default async function handler(req, res) {
   if (req.method === 'POST') {
     const { senderName, senderEmail, emailSubject, emailBody, recipientEmails } = req.body;
 
-    // Extract the Bearer token from the Authorization header
-    const authHeader = req.headers.authorization;
-    const token = authHeader && authHeader.split(' ')[1];
 
-    if (!token) {
-      return res.status(401).json({ error: 'Authorization token missing' });
-    }
+    const cookies = cookie.parse(req.headers.cookie || '');
+    const auth = JSON.parse(cookies.auth || '{}');
+    const refreshToken = auth.refresh_token;
 
-    // Decode the JWT token to get the user's ID
-    const decodedToken = jwt_decode(token);
-    const userID = decodedToken.userID;
-    if (!userID) {
-      return res.status(401).json({ error: 'User ID is not available in the decoded JWT token' });
+    if (!refreshToken) {
+      return res.status(401).json({ error: 'Refresh token missing' });
     }
 
     const OAuth2 = google.auth.OAuth2;
-    const OAuth2_client = new OAuth2(process.env.GOOGLE_ID, process.env.GOOGLE_SECRET);
-    OAuth2_client.setCredentials({ refresh_token: process.env.GMAIL_REFRESH_TOKEN });
+    const OAuth2_client =new OAuth2(process.env.GOOGLE_ID, process.env.GOOGLE_SECRET);
+    OAuth2_client.setCredentials({ refresh_token: refreshToken });
 
     const accessToken = OAuth2_client.getAccessToken();
 
