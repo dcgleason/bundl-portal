@@ -92,7 +92,7 @@ const CSV = () => {
       render: (record) => { 
         return (
           <>
-          {record && record !== "" ?
+          {record.msg && (record.msg !== "" ||record.msg !== "No submission" ) ?
           <a className="underline" onClick={ () => handleModalOpen(record)}>Preview Submission</a>
           :
           "No Submission"
@@ -108,7 +108,7 @@ const CSV = () => {
       render: (record) => { 
         return (
           <>
-          {record && record !== "" ?
+          {record.img_file && record.img_file !== "" ?
           <a className="underline" onClick={ () => handleViewPicture(record)}>View Picture</a>
           :
           "No Picture Uploaded"
@@ -201,9 +201,9 @@ const CSV = () => {
               id: index + 1,
               name: value.name || "Name not available",
               email: value.email || "No email given",
-              submitted: value.msg ? "Yes" : "No",
+              submitted: value.msg && value.msg !== "No submission" ? "Yes" : "No",
               notes: '', // Not sure where this data comes from
-              submission: value.msg ? value.msg : "No submission",
+              submission: value.msg && value.msg !== "No submission" ? value.msg : "No submission",
               picture: !!value.img_file, // Convert to boolean; true if exists, false otherwise
             };
             
