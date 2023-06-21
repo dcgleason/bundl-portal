@@ -16,20 +16,9 @@ const NEXT_PUBLIC_CLIENT_ID = '764289968872-287oud9a6s7s6kcn439rrn7uhtog9maq.app
 
 // create a component that will be used as a wrapper for the GoogleAuth component
 
-export async function getServerSideProps(context) {
-  const cookies = context.req.headers.cookie;
-  const auth = cookies && cookie.parse(cookies).auth;
-
-  return {
-    props: {
-      isAuthenticated: !!auth,
-    },
-  };
-}
 
 
-
-const CSV = ({ isAuthenticated: initialIsAuthenticated }) => {
+const CSV = () => {
 
 
   const [isModalVisible, setIsModalVisible] = useState(false);
@@ -61,7 +50,7 @@ const CSV = ({ isAuthenticated: initialIsAuthenticated }) => {
   const [email, setEmail] = useState('');
   const [layout, setLayout] = useState('');
   const [msg, setMsg] = useState('');
-  const [isAuthenticated, setIsAuthenticated] = useState(initialIsAuthenticated);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
 
 
   const cancelButtonRef = useRef(null)
@@ -170,10 +159,20 @@ const CSV = ({ isAuthenticated: initialIsAuthenticated }) => {
       return;
     }
   
+//wait 5 seconds via a set timeout so that the cookie can be set
+    setTimeout(() => {
+
+
+
     // If the authentication tokens are present, set isAuthenticated to true
     if (auth) {
       setIsAuthenticated(true);
+      res.redirect('https://www.console.givebundl.com'); // Redirect the user back to your site
     }
+    else {
+      setIsAuthenticated(false);
+    }
+  }, 5000);
   
     // Decode the JWT token to get the user's ID
     const decodedToken = jwt_decode(token);
@@ -219,7 +218,9 @@ const CSV = ({ isAuthenticated: initialIsAuthenticated }) => {
       .catch(error => {
         console.error('Failed to fetch:', error);
       });
+    // Removed extra closing brace here
   }, []);
+  
   
   
   function signInWithGoogle() {
