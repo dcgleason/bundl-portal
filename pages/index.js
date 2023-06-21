@@ -92,7 +92,7 @@ const CSV = () => {
       render: (record) => { 
         return (
           <>
-          {record.submission !== "No submission" ?
+          {record.submission != "No submission"  || record.submission != "" ?
           <a className="underline" onClick={ () => handleModalOpen(record)}>Preview Submission</a>
           :
           "No Submission"
@@ -507,7 +507,7 @@ const handleHoverOff = () => {
 
   const handleSendEmail = async () => {
     console.log('email sent')
-    const token = localStorage.getItem('token');
+    let token = localStorage.getItem('token');
     if (!token) {
       // If the user is not signed in, prompt them to do so
       // You would need to implement this part based on how your sign-in system works
@@ -518,19 +518,23 @@ const handleHoverOff = () => {
       // Decode the JWT
       const decoded = jwt_decode(token);
   
+      // Check if the token is expired
+      if (decoded.exp < Date.now() / 1000) {
+        // If the token is expired, use the refresh token to get a new access token
+        // You would need to implement this part based on how your OAuth2 provider works
+        token = await refreshToken();
+      }
+  
       // Extract the sender's name and username from the decoded JWT
       const senderName = decoded.name;
-      console.log('senderName', senderName)
       const senderEmail = decoded.username;
-      console.log('senderEmail', senderEmail)
       const userID = decoded.userId;
-      console.log( 'userID', userID)
   
       const response = await fetch('/api/sendEmail', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${token}`, // Use the token from local storage
+          'Authorization': `Bearer ${token}`, // Use the new token
         },
         body: JSON.stringify({
           senderName,
