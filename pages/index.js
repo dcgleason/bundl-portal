@@ -525,8 +525,8 @@ const handleHoverOff = () => {
         body: JSON.stringify({
           senderName,
           senderEmail,
-          emailSubject: 'Contribute please - 3 days left!',
-          emailBody: 'We\'d love you to contribute to this bundle',
+          emailSubject, // Use the emailSubject state variable
+          emailBody, // Use the emailBody state variable
           recipientEmails,
         }),
       });
@@ -538,6 +538,7 @@ const handleHoverOff = () => {
       console.log('Email sent successfully');
     }
   };
+  
 
 
   const onEditStudent = (record) => {
@@ -636,24 +637,24 @@ const handleHoverOff = () => {
               <Table columns={columns} dataSource={dataSource}></Table>
             </Col>
           </Row>
-            <Modal
-              title="Send Email"
-              open={emailModalVisible}
-              onOk={handleSendEmail}
-              onCancel={handleEmailModalCancel}
-            >
-              <Form layout="vertical">
-                <Form.Item label="To">
-                  <Input.TextArea value={emailRecipients} />
-                </Form.Item>
-                <Form.Item label="Subject">
-                  <Input value={emailSubject} onChange={e => setEmailSubject(e.target.value)} />
-                </Form.Item>
-                <Form.Item label="Body">
-                  <Input.TextArea value={emailBody} onChange={e => setEmailBody(e.target.value)} />
-                </Form.Item>
-              </Form>
-            </Modal>
+          <Modal
+            title="Send Email"
+            open={emailModalVisible}
+            onOk={handleSendEmail}
+            onCancel={handleEmailModalCancel}
+          >
+            <Form layout="vertical">
+              <Form.Item label="To">
+                <Input.TextArea value={emailRecipients} onChange={e => setEmailRecipients(e.target.value)} />
+              </Form.Item>
+              <Form.Item label="Subject">
+                <Input value={emailSubject} onChange={e => setEmailSubject(e.target.value)} />
+              </Form.Item>
+              <Form.Item label="Body">
+                <Input.TextArea value={emailBody} onChange={e => setEmailBody(e.target.value)} />
+              </Form.Item>
+            </Form>
+          </Modal>
              <Modal
               title="Add a contributor"
               open={isEditing}
