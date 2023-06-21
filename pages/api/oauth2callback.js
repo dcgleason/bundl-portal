@@ -41,7 +41,9 @@ export default async function handler(req, res) {
 
     // Get the user's email address
     const userGoogleId = me.data.resourceName;
+    console.log('userGoogleId' + userGoogleId)
     const userGoogleEmail = me.data.emailAddresses && me.data.emailAddresses.length && me.data.emailAddresses[0].value;
+    console.log('userGoogleEmail' + userGoogleEmail)
 
     // Make a request to your API to save the refresh token
     const apiResponse = await fetch('https://yay-api.herokuapp.com/login/saveRefreshToken', {

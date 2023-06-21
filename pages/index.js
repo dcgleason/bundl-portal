@@ -196,7 +196,6 @@ const CSV = () => {
       // Check if data.messages is an object before proceeding
       if (data && typeof data.messages === 'object') {
         const transformedData = Object.entries(data.messages).map(([key, value], index) => {
-          console.log("value.msg", value.msg);
             return {
               id: index + 1,
               name: value.name || "Name not available",
