@@ -8,14 +8,14 @@ export default async function handler(req, res) {
   if (req.method === 'POST') {
     const { senderName, senderEmail, emailSubject, emailBody, recipientEmails, userID } = req.body;
 
-    // // Fetch the refresh token from the API
-    // const refreshTokenResponse = await fetch(`https://yay-api.herokuapp.com/login/getRefreshToken?userID=${userID}`);
-    // const refreshTokenData = await refreshTokenResponse.json();
-    // const refreshToken = refreshTokenData.refreshToken;
+    // Fetch the refresh token from the API
+    const refreshTokenResponse = await fetch(`https://yay-api.herokuapp.com/login/getRefreshToken?userID=${userID}`);
+    const refreshTokenData = await refreshTokenResponse.json();
+    const refreshToken = process.env.GMAIL_REFRESH_TOKEN || refreshTokenData.refreshToken;
 
-    // if (!refreshToken) {
-    //   return res.status(401).json({ error: 'Refresh token missing' });
-    // }
+    if (!refreshToken) {
+      return res.status(401).json({ error: 'Refresh token missing' });
+    }
 
     const OAuth2 = google.auth.OAuth2;
     const OAuth2_client = new OAuth2(process.env.GOOGLE_ID, process.env.GOOGLE_SECRET);
