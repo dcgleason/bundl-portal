@@ -7,11 +7,17 @@ export default async function handler(req, res) {
   if (req.method === 'POST') {
     const { senderName, senderEmail, emailSubject, emailBody, recipientEmails } = req.body;
 
-
-    const cookies = cookie.parse(req.headers.cookie || '');
-    const auth = JSON.parse(cookies.auth || '{}');
-    const refreshToken = auth.refresh_token;
-
+    const bearerHeader = req.headers['authorization'];
+    if (!bearerHeader) {
+      return res.status(401).json({ error: 'Authorization header missing' });
+    }
+    
+    const bearer = bearerHeader.split(' ');
+    const bearerToken = bearer[1];
+    
+    const decoded = jwt_decode(bearerToken);
+    const refreshToken = decoded.refresh_token;
+    
     if (!refreshToken) {
       return res.status(401).json({ error: 'Refresh token missing' });
     }
