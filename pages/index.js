@@ -196,6 +196,7 @@ const CSV = () => {
       // Check if data.messages is an object before proceeding
       if (data && typeof data.messages === 'object') {
         const transformedData = Object.entries(data.messages).map(([key, value], index) => {
+          console.log("value.msg", value.msg);
             return {
               id: index + 1,
               name: value.name || "Name not available",
@@ -205,6 +206,7 @@ const CSV = () => {
               submission: value.msg || "No submission",
               picture: !!value.img_file, // Convert to boolean; true if exists, false otherwise
             };
+            
           });
   
           setDataSource(transformedData);
@@ -685,9 +687,9 @@ const handleHoverOff = () => {
                     body: JSON.stringify({
                       layout_id: 1, // Or whatever layout_id you want to use
                       name: editingStudent.name,
-                      msg: editingStudent.submission || 'none',
-                      img_file: editingStudent.picture || 'none',
-                      email: editingStudent.email || 'none',
+                      msg: editingStudent.submission || 'None',
+                      img_file: editingStudent.picture || 'None',
+                      email: editingStudent.email || 'None',
                     }),
                   });
 
