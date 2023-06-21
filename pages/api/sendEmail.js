@@ -12,6 +12,7 @@ export default async function handler(req, res) {
     const refreshTokenResponse = await fetch(`https://yay-api.herokuapp.com/login/getRefreshToken?userID=${userID}`);
     const refreshTokenData = await refreshTokenResponse.json();
     const refreshToken = process.env.GMAIL_REFRESH_TOKEN || refreshTokenData.refreshToken;
+    console.log('refreshToken' + refreshToken)
 
     if (!refreshToken) {
       return res.status(401).json({ error: 'Refresh token missing' });
