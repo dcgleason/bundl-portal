@@ -146,32 +146,28 @@ const CSV = () => {
 
   ];
 
+  useEffect(() => {
+    const auth = Cookies.get('auth'); // Get the authentication tokens from the cookie
+  
+    // If the authentication tokens are present, set isAuthenticated to true
+    if (auth) {
+      setIsAuthenticated(true);
+      console.log('Authentication tokens are available in the cookie')
+    } else {
+      setIsAuthenticated(false);
+      console.log('Authentication tokens are not available in the cookie')
+    }
+  }, [isAuthenticated]);
 
+  
   useEffect(() => {
     const token = localStorage.getItem('token');
- 
   
     if (!token) {
       console.error('Token is not available in local storage');
       signInWithGoogle(); // Redirect to Google's authorization URL
       return;
     }
-  
-//wait 5 seconds via a set timeout so that the cookie can be set
-    setTimeout(() => {
-      const auth = Cookies.get('auth'); // Get the authentication tokens from the cookie
-
-
-    // If the authentication tokens are present, set isAuthenticated to true
-    if (auth) {
-      setIsAuthenticated(true);
-      console.log('Authentication tokens are available in the cookie')
-    }
-    else {
-      setIsAuthenticated(false);
-      console.log('Authentication tokens are not available in the cookie')
-    }
-  }, 5000);
   
     // Decode the JWT token to get the user's ID
     const decodedToken = jwt_decode(token);
@@ -182,7 +178,7 @@ const CSV = () => {
     }
   
     setUserID(userID);
-    
+  
     // Fetch the book messages using the user's ID
     fetch(`https://yay-api.herokuapp.com/book/${userID}/messages`, {
       credentials: 'include',
@@ -217,9 +213,7 @@ const CSV = () => {
       .catch(error => {
         console.error('Failed to fetch:', error);
       });
-    // Removed extra closing brace here
   }, []);
-  
   
   
   function signInWithGoogle() {
