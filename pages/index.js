@@ -24,10 +24,7 @@ const CSV = () => {
   const [submitted, setSubmitted] = useState("");
   const [newStudent, setNewStudent] = useState(null);
   const [pictureSubmitted, setPictureSubmitted ] = useState(false);
-       // State to store parsed data
   const [parsedData, setParsedData] = useState([]);
-
-  //State to store table Column name
   const [tableRows, setTableRows] = useState([]);
   const [hover, setHover] = useState(false);
   const [userID, setUserID] = useState(null);
@@ -35,8 +32,6 @@ const CSV = () => {
   const [emailBody, setEmailBody] = useState("We'd love you to contribute to this bundle");
   const [emailSubject, setEmailSubject] = useState("Contribute please - 3 days left!");
   const [emailRecipients, setEmailRecipients] = useState([]);
-
-  //State to store the values
   const [values, setValues] = useState([]);
   const [modalData, setModalData] = useState("");
   const [ submission, setSubmission ] = useState("");
@@ -49,16 +44,13 @@ const CSV = () => {
   const [layout, setLayout] = useState('');
   const [msg, setMsg] = useState('');
   const [isAuthenticated, setIsAuthenticated] = useState(false);
-
-
+  const [lastEmailSent, setLastEmailSent] = useState(null);
+  const [showSuccessModal, setShowSuccessModal] = useState(false);
   const cancelButtonRef = useRef(null)
   const [isEditing, setIsEditing] = useState(false);
   const [editingStudent, setEditingStudent] = useState(null);
   const [pictureUrl, setPictureUrl] = useState(null);
   const [viewPicture, setViewPicture] = useState(false);
-
-
-  
   const [dataSource, setDataSource] = useState([]);
 
   const columns = [
@@ -92,7 +84,7 @@ const CSV = () => {
       render: (record) => { 
         return (
           <>
-          {record.submission ?
+          {record.submission && record.submission !== "No submission" ?
           <a className="underline" onClick={ () => handleModalOpen(record)}>Preview Submission</a>
           :
           "No Submission"
@@ -100,7 +92,7 @@ const CSV = () => {
           </>
         )
       }
-    },
+    },    
     {
       key: "6",
       title: "Picture",
@@ -544,6 +536,9 @@ const handleHoverOff = () => {
       }
   
       console.log('Email sent successfully');
+      setEmailModalVisible(false);
+      setShowSuccessModal(true);
+      setLastEmailSent(moment().format('YYYY-MM-DD HH:mm:ss Z'));
     }
   };
   
@@ -639,6 +634,9 @@ const handleHoverOff = () => {
                 <Button onClick={signInWithGoogle}>Sign in with Google</Button>
               )}
             </Col>
+            <Col xs={24} sm={12} md={8} lg={6}>
+             <p>Time your last email was sent: {lastEmailSent}</p>
+            </Col>   
           </Row>
           <Row gutter={[16, 16]} justify="center">
             <Col xs={24}>
@@ -663,6 +661,14 @@ const handleHoverOff = () => {
               </Form.Item>
             </Form>
           </Modal>
+              <Modal
+                title="Success"
+                visible={showSuccessModal}
+                onCancel={() => setShowSuccessModal(false)}
+                footer={null}
+              >
+                <p>Email has been sent.</p>
+              </Modal>
              <Modal
               title="Add a contributor"
               open={isEditing}
