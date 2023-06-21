@@ -201,9 +201,9 @@ const CSV = () => {
               id: index + 1,
               name: value.name || "Name not available",
               email: value.email || "No email given",
-              submitted: value.msg || value.msg !== "" ? "Yes" : "No",
+              submitted: value.msg ? "Yes" : "No",
               notes: '', // Not sure where this data comes from
-              submission: value.msg || "No submission",
+              submission: value.msg ? value.msg : "No submission",
               picture: !!value.img_file, // Convert to boolean; true if exists, false otherwise
             };
             
