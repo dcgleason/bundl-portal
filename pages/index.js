@@ -521,8 +521,11 @@ const handleHoverOff = () => {
   
       // Extract the sender's name and username from the decoded JWT
       const senderName = decoded.name;
+      console.log('senderName', senderName)
       const senderEmail = decoded.username;
+      console.log('senderEmail', senderEmail)
       const userID = userID;
+      console.log( 'userID', userID)
   
       const response = await fetch('/api/sendEmail', {
         method: 'POST',
