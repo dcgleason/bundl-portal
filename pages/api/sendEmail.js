@@ -1,4 +1,3 @@
-Copy code
 import { google } from 'googleapis';
 import nodemailer from 'nodemailer';
 import jwt_decode from 'jwt-decode';
