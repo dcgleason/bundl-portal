@@ -524,7 +524,7 @@ const handleHoverOff = () => {
       console.log('senderName', senderName)
       const senderEmail = decoded.username;
       console.log('senderEmail', senderEmail)
-      const userID = localStorage.getItem('userID');
+      const userID = decoded.userId;
       console.log( 'userID', userID)
   
       const response = await fetch('/api/sendEmail', {
