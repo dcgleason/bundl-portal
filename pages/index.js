@@ -154,7 +154,6 @@ const CSV = () => {
     if (auth) {
       setIsAuthenticated(true);
       console.log('Authentication tokens are available in the cookie')
-      window.location.reload();
     } else {
       setIsAuthenticated(false);
       console.log('Authentication tokens are not available in the cookie')
