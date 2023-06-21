@@ -354,9 +354,22 @@ const CSV = () => {
   
   
   const addtoList = async () => {
+    // Define the expected headers
+    const expectedHeaders = ["ID", "Name", "Email", "Submitted", "Submission", "Picture", "Notes"];
+  
+    // Convert the tableRows to match the format of expectedHeaders
+    const csvHeaders = tableRows.map(header => header.replace(/_/g, " ").toUpperCase());
+  
+    // Check if the headers match
+    if (!_.isEqual(expectedHeaders, csvHeaders)) {
+      // If they don't match, show an error message and return
+      message.error("The columns of the uploaded CSV file do not match the Table headers.");
+      return;
+    }
+  
+    // If they do match, proceed with adding the data to the Table
     let objects = [];
     console.log('values', values)
-
   
     const firstValue = dataSource[dataSource.length - 1].id;
     console.log('firstValue', firstValue);
