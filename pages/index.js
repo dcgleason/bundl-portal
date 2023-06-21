@@ -82,7 +82,7 @@ const CSV = () => {
       title: "Submitted",
       dataIndex: "submitted",
       render: (_, record) => {
-        return record.submitted || (!record.msg) ? "No" : "Yes";
+        return record.submitted ? "Yes" : "No";
       },
     },
     {
@@ -201,7 +201,7 @@ const CSV = () => {
               id: index + 1,
               name: value.name || "Name not available",
               email: value.email || "No email given",
-              submitted: value.msg != '' ? "Yes" : "No",
+              submitted: value.msg ? "Yes" : "No",
               notes: '', // Not sure where this data comes from
               submission: value.msg || "No submission",
               picture: !!value.img_file, // Convert to boolean; true if exists, false otherwise
