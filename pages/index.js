@@ -356,7 +356,6 @@ const CSV = () => {
   const addtoList = async () => {
     let objects = [];
     console.log('values', values)
-
   
     const firstValue = dataSource[dataSource.length - 1].id;
     console.log('firstValue', firstValue);
@@ -376,9 +375,7 @@ const CSV = () => {
     setDataSource([...dataSource, ...objects]);
   
     // Now, send the new contacts to the server
-  
     try {
-     
       const promises = objects.map((contact) => {
         return fetch(`https://yay-api.herokuapp.com/book/${userID}/message`, {
           method: 'POST',
@@ -386,7 +383,7 @@ const CSV = () => {
             'Content-Type': 'application/json',
           },
           body: JSON.stringify({
-            layout_id: 1, // Or whatever layout_id you want to use // need a way to figure out the layout ---> on the backend I think
+            layout_id: 1, // Or whatever layout_id you want to use
             name: contact.name,
             msg: contact.submission,
             img_file: contact.picture,
@@ -394,7 +391,7 @@ const CSV = () => {
           }),
         });
       });
-
+  
       console.log('promises', promises);
   
       const responses = await Promise.all(promises);
@@ -402,6 +399,14 @@ const CSV = () => {
       responses.forEach((response, index) => {
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status} for contact ${objects[index].name}`);
+        }
+      });
+  
+      const data = await Promise.all(responses.map(response => response.json()));
+  
+      data.forEach((item, index) => {
+        if (!item.success) { // Check if the server actually saved the new contributor
+          throw new Error(`Server failed to save contact ${objects[index].name}`);
         }
       });
   
