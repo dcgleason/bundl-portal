@@ -517,14 +517,7 @@ const handleHoverOff = () => {
   
       // Decode the JWT
       const decoded = jwt_decode(token);
-  
-      // Check if the token is expired
-      if (decoded.exp < Date.now() / 1000) {
-        // If the token is expired, use the refresh token to get a new access token
-        // You would need to implement this part based on how your OAuth2 provider works
-        token = await refreshToken();
-      }
-  
+
       // Extract the sender's name and username from the decoded JWT
       const senderName = decoded.name;
       const senderEmail = decoded.username;
