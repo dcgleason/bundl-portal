@@ -23,13 +23,13 @@ export default async function handler(req, res) {
 
     // Set the tokens in a cookie
     res.setHeader('Set-Cookie', cookie.serialize('auth', JSON.stringify(tokens), {
-      httpOnly: true,
-      secure: process.env.NODE_ENV !== 'development', // Use HTTPS in production
-      maxAge: 60 * 60 * 24 * 7, // 1 week
-      sameSite: 'strict',
-      path: '/',
-    }));
-
+        httpOnly: true,
+        secure: process.env.NODE_ENV !== 'development', // Use HTTPS in production
+        maxAge: 60 * 60 * 24 * 7, // 1 week
+        sameSite: 'lax', // Changed from 'strict' to 'lax'
+        path: '/',
+      }));
+      
     res.redirect('https://www.console.givebundl.com'); // Redirect the user back to your site
   } catch (error) {
     console.error('Error exchanging authorization code for tokens:', error);
