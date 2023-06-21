@@ -663,7 +663,7 @@ const handleHoverOff = () => {
           </Modal>
               <Modal
                 title="Success"
-                visible={showSuccessModal}
+                open={showSuccessModal}
                 onCancel={() => setShowSuccessModal(false)}
                 footer={null}
               >
