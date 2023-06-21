@@ -30,6 +30,7 @@
     "jwt-decode": "^3.1.2",
     "next": "^13.0.7",
     "next-auth": "^4.22.1",
+    "node-fetch": "^3.3.1",
     "nodemailer": "^6.9.3",
     "papaparse": "^5.3.2",
     "postcss-100vh-fix": "^1.0.2",

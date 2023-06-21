@@ -2,6 +2,7 @@
 
 import { google } from 'googleapis';
 import cookie from 'cookie';
+import fetch from 'node-fetch'; // You might need to install this with npm
 
 export default async function handler(req, res) {
   const code = req.query.code;
@@ -29,10 +30,38 @@ export default async function handler(req, res) {
         sameSite: 'lax', // Changed from 'strict' to 'lax'
         path: '/',
       }));
-      
+
+    // Get the user's profile
+    const people = google.people({ version: 'v1', auth: oauth2Client });
+    const me = await people.people.get({
+      resourceName: 'people/me',
+      personFields: 'emailAddresses,names',
+    });
+
+    // Get the user's email address
+    const userGoogleId = me.data.resourceName;
+    const userGoogleEmail = me.data.emailAddresses && me.data.emailAddresses.length && me.data.emailAddresses[0].value;
+
+    // Make a request to your API to save the refresh token
+    const apiResponse = await fetch('https://your-api.com/saveRefreshToken', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        googleId: userGoogleId,
+        email: userGoogleEmail,
+        refreshToken: tokens.refresh_token,
+      }),
+    });
+
+    if (!apiResponse.ok) {
+      throw new Error(`API response status: ${apiResponse.status}`);
+    }
+
     res.redirect('https://www.console.givebundl.com'); // Redirect the user back to your site
   } catch (error) {
-    console.error('Error exchanging authorization code for tokens:', error);
-    res.status(500).send('Error exchanging authorization code for tokens');
+    console.error('Error:', error);
+    res.status(500).send('Error');
   }
 }
