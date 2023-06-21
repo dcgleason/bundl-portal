@@ -863,7 +863,6 @@ const handleHoverOff = () => {
       </div>
       <Row justify="space-between" align="middle">
         <Button onClick={addtoList}>Add to above list</Button>
-        <Space direction="vertical">
           <Button
             onClick={handleDownloadCSV}
             onMouseEnter={handleHoverOn}
@@ -871,8 +870,6 @@ const handleHoverOff = () => {
           >
             Download CSV template
           </Button>
-          {hover && <div><em>Note: after you downloading the template and fill it in, make sure to save the file as a csv file before you upload it here!</em></div>}
-        </Space>
       </Row>
       <div className="mt-8">
         <div className="overflow-hidden shadow ring-1 ring-black ring-opacity-5 md:rounded-lg">
