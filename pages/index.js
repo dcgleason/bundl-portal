@@ -149,7 +149,7 @@ const CSV = () => {
 
   useEffect(() => {
     const auth = Cookies.get('auth'); // Get the authentication tokens from the cookie
-  
+    console.log("auth", auth);
     // If the authentication tokens are present, set isAuthenticated to true
     if (auth) {
       setIsAuthenticated(true);
@@ -160,6 +160,8 @@ const CSV = () => {
       console.log('Authentication tokens are not available in the cookie')
     }
   }, [isAuthenticated]);
+
+  console.log("isAuthenticated", isAuthenticated);
 
 
   useEffect(() => {
