@@ -2,22 +2,17 @@ import { google } from 'googleapis';
 import nodemailer from 'nodemailer';
 import jwt_decode from 'jwt-decode';
 import cookie from 'cookie';
+import fetch from 'node-fetch'; // You might need to install this with npm
 
 export default async function handler(req, res) {
   if (req.method === 'POST') {
-    const { senderName, senderEmail, emailSubject, emailBody, recipientEmails } = req.body;
+    const { senderName, senderEmail, emailSubject, emailBody, recipientEmails, userID } = req.body;
 
-    const bearerHeader = req.headers['authorization'];
-    if (!bearerHeader) {
-      return res.status(401).json({ error: 'Authorization header missing' });
-    }
-    
-    const bearer = bearerHeader.split(' ');
-    const bearerToken = bearer[1];
-    
-    const decoded = jwt_decode(bearerToken);
-    const refreshToken = decoded.refresh_token;
-    
+    // Fetch the refresh token from the API
+    const refreshTokenResponse = await fetch(`https://yay-api.herokuapp.com/login/getRefreshToken?userID=${userID}`);
+    const refreshTokenData = await refreshTokenResponse.json();
+    const refreshToken = refreshTokenData.refreshToken;
+
     if (!refreshToken) {
       return res.status(401).json({ error: 'Refresh token missing' });
     }
@@ -35,7 +30,7 @@ export default async function handler(req, res) {
         user: senderEmail,
         clientId: process.env.GOOGLE_ID,
         clientSecret: process.env.GOOGLE_SECRET,
-        refreshToken: process.env.GMAIL_REFRESH_TOKEN,
+        refreshToken: refreshToken,
         accessToken: accessToken
       }
     });
