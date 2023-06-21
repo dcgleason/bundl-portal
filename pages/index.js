@@ -230,9 +230,9 @@ const CSV = () => {
 
   const openEmailModal = () => {
     // Get the emails of people who have not yet contributed
-    console.log('Data source:', dataSource)
     const nonContributors = dataSource.filter(student => student.submitted === "No").map(student => student.email);
     setEmailRecipients(nonContributors.join(', '));
+    console.log('Non-contributors:', nonContributors);
     setEmailModalVisible(true);
   };
   
