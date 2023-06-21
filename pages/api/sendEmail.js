@@ -1,3 +1,4 @@
+Copy code
 import { google } from 'googleapis';
 import nodemailer from 'nodemailer';
 import jwt_decode from 'jwt-decode';
@@ -18,10 +19,10 @@ export default async function handler(req, res) {
     }
 
     const OAuth2 = google.auth.OAuth2;
-    const OAuth2_client =new OAuth2(process.env.GOOGLE_ID, process.env.GOOGLE_SECRET);
+    const OAuth2_client = new OAuth2(process.env.GOOGLE_ID, process.env.GOOGLE_SECRET);
     OAuth2_client.setCredentials({ refresh_token: refreshToken });
 
-    const accessToken = OAuth2_client.getAccessToken();
+    const accessToken = await OAuth2_client.getAccessToken();
 
     const transport = nodemailer.createTransport({
       service: 'gmail',
@@ -42,16 +43,16 @@ export default async function handler(req, res) {
       html: emailBody
     };
 
-    transport.sendMail(mail_options, (error, result) => {
-      if (error) {
-        console.error('Error:', error);
-        res.status(500).json({ error: 'Failed to send email' });
-      } else {
-        console.log("Email sent successfully:", result);
-        res.status(200).json({ message: 'Email sent successfully' });
-      }
+    try {
+      const result = await transport.sendMail(mail_options);
+      console.log("Email sent successfully:", result);
+      res.status(200).json({ message: 'Email sent successfully' });
+    } catch (error) {
+      console.error('Error:', error);
+      res.status(500).json({ error: 'Failed to send email' });
+    } finally {
       transport.close();
-    });
+    }
   } else {
     res.status(405).json({ error: 'Method not allowed' });
   }
