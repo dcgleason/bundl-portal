@@ -11,8 +11,6 @@ import Cookies from 'js-cookie';
 
 const { TextArea } = Input;
 
-const NEXT_PUBLIC_CLIENT_ID = '764289968872-287oud9a6s7s6kcn439rrn7uhtog9maq.apps.googleusercontent.com';
-
 
 // create a component that will be used as a wrapper for the GoogleAuth component
 
@@ -151,7 +149,7 @@ const CSV = () => {
 
   useEffect(() => {
     const token = localStorage.getItem('token');
-    const auth = Cookies.get('auth'); // Get the authentication tokens from the cookie
+ 
   
     if (!token) {
       console.error('Token is not available in local storage');
@@ -161,7 +159,7 @@ const CSV = () => {
   
 //wait 5 seconds via a set timeout so that the cookie can be set
     setTimeout(() => {
-
+      const auth = Cookies.get('auth'); // Get the authentication tokens from the cookie
 
 
     // If the authentication tokens are present, set isAuthenticated to true
