@@ -356,7 +356,7 @@ const CSV = () => {
     let objects = [];
     console.log('values', values)
   
-    const firstValue = dataSource[dataSource.length - 1].id;
+    const firstValue = dataSource.length > 0 ? dataSource[dataSource.length - 1].id : 0;
     console.log('firstValue', firstValue);
     for (let i = 0; i < values.length; i ++) {
       objects.push({
