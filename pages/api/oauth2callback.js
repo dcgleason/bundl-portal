@@ -20,6 +20,7 @@ export default async function handler(req, res) {
 
   try {
     const { tokens } = await oauth2Client.getToken(code);
+    console.log('refresh token' + tokens.refresh_token)
     oauth2Client.setCredentials(tokens);
 
     // Set the tokens in a cookie
