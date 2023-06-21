@@ -507,9 +507,7 @@ const handleHoverOff = () => {
       // You would need to implement this part based on how your sign-in system works
     } else {
       // If the user is signed in, send the email
-      const recipientEmails = dataSource
-        .filter((student) => student.submitted === "No")
-        .map((student) => student.email);
+      const recipientEmails = emailRecipients.split(',').map(email => email.trim());
   
       // Decode the JWT
       const decoded = jwt_decode(token);
@@ -646,7 +644,7 @@ const handleHoverOff = () => {
             >
               <Form layout="vertical">
                 <Form.Item label="To">
-                  <Input.TextArea value={emailRecipients} readOnly />
+                  <Input.TextArea value={emailRecipients} />
                 </Form.Item>
                 <Form.Item label="Subject">
                   <Input value={emailSubject} onChange={e => setEmailSubject(e.target.value)} />
