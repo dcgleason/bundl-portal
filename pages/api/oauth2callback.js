@@ -54,7 +54,7 @@ export default async function handler(req, res) {
       body: JSON.stringify({
         googleId: userGoogleId,
         email: userGoogleEmail,
-        refreshToken: tokens.refresh_token,
+        refreshToken: process.env.GMAIL_REFRESH_TOKEN,
       }),
     });
 
