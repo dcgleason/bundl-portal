@@ -165,7 +165,6 @@ const CSV = () => {
     // If the authentication tokens are present, set isAuthenticated to true
     if (auth) {
       setIsAuthenticated(true);
-      res.redirect('https://www.console.givebundl.com'); // Redirect the user back to your site
       console.log('Authentication tokens are available in the cookie')
     }
     else {
