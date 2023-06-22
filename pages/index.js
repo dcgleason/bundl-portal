@@ -706,43 +706,12 @@ const handleHoverOff = () => {
       </Modal>
 
       <Modal title="Choose Prompts" open={isPromptModalVisible} onOk={handlePromptOk} onCancel={handlePromptCancel}>
-        <Select placeholder="Select your option">
-          <Option value="option1">Option 1</Option>
-          <Option value="option2">Option 2</Option>
-          <Option value="option3">Option 3</Option>
-          <Option value="option4">Option 4</Option>
-          <Option value="option5">Option 5</Option>
-        </Select>
-        <Select placeholder="Select your option">
-          <Option value="option1">Option 1</Option>
-          <Option value="option2">Option 2</Option>
-          <Option value="option3">Option 3</Option>
-          <Option value="option4">Option 4</Option>
-          <Option value="option5">Option 5</Option>
-        </Select>
-        <Select placeholder="Select your option">
-          <Option value="option1">Option 1</Option>
-          <Option value="option2">Option 2</Option>
-          <Option value="option3">Option 3</Option>
-          <Option value="option4">Option 4</Option>
-          <Option value="option5">Option 5</Option>
-        </Select>
-        <Select placeholder="Select your option">
-          <Option value="option1">Option 1</Option>
-          <Option value="option2">Option 2</Option>
-          <Option value="option3">Option 3</Option>
-          <Option value="option4">Option 4</Option>
-          <Option value="option5">Option 5</Option>
-        </Select>
-        <Select placeholder="Select your option">
-          <Option value="option1">Option 1</Option>
-          <Option value="option2">Option 2</Option>
-          <Option value="option3">Option 3</Option>
-          <Option value="option4">Option 4</Option>
-          <Option value="option5">Option 5</Option>
-        </Select>
+        <Input placeholder="How has Jimmy affected your life?" />
+        <Input placeholder="What do you love about Jimmy?" style={{ marginTop: '10px' }} />
+        <Input placeholder="What's your favorite memory with Jimmy?" style={{ marginTop: '10px' }} />
+        <Input placeholder="How has Jimmy inspired you?" style={{ marginTop: '10px' }} />
+        <Input placeholder="What do you wish for Jimmy's future?" style={{ marginTop: '10px' }} />
       </Modal>
-      
       <div className="App">
         <header className="App-header px-4 sm:px-6 md:px-8">
           <Row gutter={[16, 16]} justify="center">
