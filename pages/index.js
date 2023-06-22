@@ -502,7 +502,7 @@ const CSV = () => {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ prompts }),
+        body: JSON.stringify({ prompts, longMessage }),
       });
   
       if (!response.ok) {
