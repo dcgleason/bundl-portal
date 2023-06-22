@@ -1,4 +1,4 @@
-import {Modal, List, Typography, Button, Table, Input, Select, Upload, message, notification, Form, Row, Col, Space} from 'antd';
+import {Modal, List, Typography, Button, Table, Input, Select, Upload, message, notification, Form, Row, Col, Space, Spin} from 'antd';
 import { use, useRef } from 'react'
 import { Dialog, Transition } from '@headlessui/react'
 import { CheckIcon } from '@heroicons/react/24/outline'
@@ -48,6 +48,8 @@ const CSV = () => {
   const [pictureUrl, setPictureUrl] = useState(null);
   const [viewPicture, setViewPicture] = useState(false);
   const [dataSource, setDataSource] = useState([]);
+  const [isSendingEmail, setIsSendingEmail] = useState(false);
+
 
   const columns = [
     {
@@ -494,6 +496,7 @@ const handleHoverOff = () => {
   };
 
   const handleSendEmail = async () => {
+    setIsSendingEmail(true);
     console.log('email sent')
     let token = localStorage.getItem('token');
     if (!token) {
@@ -532,6 +535,7 @@ const handleHoverOff = () => {
       }
   
       console.log('Email sent successfully');
+      setIsSendingEmail(false);
       setEmailModalVisible(false);
       setShowSuccessModal(true);
       setLastEmailSent(moment().format('YYYY-MM-DD HH:mm:ss Z'));
@@ -657,6 +661,13 @@ const handleHoverOff = () => {
                 <Input.TextArea value={emailBody} onChange={e => setEmailBody(e.target.value)} />
               </Form.Item>
             </Form>
+            {isSendingEmail ? (
+              <Spin />
+            ) : (
+              <Button key="ok" type="primary" onClick={handleSendEmail}>
+                Send it
+              </Button>
+            )}
           </Modal>
               <Modal
                 title="Success"
