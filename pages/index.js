@@ -27,7 +27,8 @@ const CSV = () => {
   const [hover, setHover] = useState(false);
   const [userID, setUserID] = useState(null);
   const [emailModalVisible, setEmailModalVisible] = useState(false);
-  const [emailBody, setEmailBody] = useState(`We'd love you to contribute to this bundle -- link here: <a href="https://www.givebundl.com/contribute/${jwt_decode(token).userId}">https://www.givebundl.com/contribute/${jwt_decode(localStorage.getItem('token')).userId}</a>`);
+  const token = localStorage.getItem('token')
+  const [emailBody, setEmailBody] = useState(`We'd love you to contribute to this bundle -- link here: <a href="https://www.givebundl.com/contribute/${jwt_decode(token).userId}">https://www.givebundl.com/contribute/${jwt_decode(token).userId}</a>`);
   const [emailSubject, setEmailSubject] = useState("Contribute please - 3 days left!");
   const [emailRecipients, setEmailRecipients] = useState([]);
   const [values, setValues] = useState([]);
