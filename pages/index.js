@@ -79,7 +79,7 @@ const CSV = () => {
       key: "5",
       title: "Submission",
       dataIndex: "submission",
-      render: (record) => { 
+      render: (_, record) => { 
         return (
           <>
           {record.submission && record.submission !== "No submission" ?
@@ -90,12 +90,12 @@ const CSV = () => {
           </>
         )
       }
-    },    
+    },   
     {
       key: "6",
       title: "Picture",
       dataIndex: "picture",
-      render: (record) => { 
+      render: (_,record) => { 
         return (
           <>
           {record.img_file && record.img_file !== "" ?
