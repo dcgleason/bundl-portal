@@ -646,7 +646,7 @@ const handleHoverOff = () => {
       formData.append('name', newStudent.name);
       formData.append('msg', newStudent.submission || 'none');
       formData.append('imageAddress', newStudent.picture || 'none'); // Assuming newStudent.picture is a File object
-      formData.append('messageId', newStudent.id); // Add the messageId
+      formData.append('email', newStudent.email || 'none');
   
       const response = await fetch(`https://yay-api.herokuapp.com/book/${userID}/message`, {
         method: 'POST',
@@ -662,7 +662,6 @@ const handleHoverOff = () => {
       console.error('Failed to add student to the server:', error);
     }
   }
-  
   
 
   const handleCancel = () => {
@@ -804,6 +803,8 @@ const handleHoverOff = () => {
                 value={editingStudent?.email}
                 onChange={(e) => {
                   setEditingStudent((pre) => {
+                    const updatedStudent = { ...pre, email: e.target.value };
+                    console.log('Updated student:', updatedStudent);  // Log the updated student
                     return { ...pre, email: e.target.value };
                   });
                 }}
