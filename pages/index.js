@@ -758,7 +758,7 @@ const handleHoverOff = () => {
 
                 // Now, send the updated student to the server
                 try {
-                  const response = await fetch(`https://yay-api.herokuapp.com/book/${userID}/message/${editingStudent.id}`, {
+                  const response = await fetch(`https://yay-api.herokuapp.com/book/${userID}/message/${editingStudent.uuid}`, {
                     method: 'PUT',
                     headers: {
                       'Content-Type': 'application/json',
