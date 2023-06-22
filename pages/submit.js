@@ -13,11 +13,12 @@ import allWhiteOpen from '../images/whitewhite.jpeg'
 import Image from 'next/image'
 import {
   PaymentElement,
-  Elements,
   CardElement, 
   useStripe,
   useElements
 } from '@stripe/react-stripe-js';
+import {Elements} from '@stripe/react-stripe-js';
+import {loadStripe} from '@stripe/stripe-js';
 
 
 const products = [
@@ -45,9 +46,13 @@ const paymentMethods = [
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
+  
 }
 
-export default function SubmitBook() {
+// Put your own Stripe publishable key here
+const stripePromise = loadStripe('pk_test_51KtCf1LVDYVdzLHCzEQuGuw08kKelgXO7AgN6VDN874gIPxfr7dl7PvcNgUZUSnypEOxqJcMCu4G119l0MQixCkj00Rr1fOuls');
+
+const SubmitBook = () => {
   const stripe = useStripe();
   const elements = useElements();
 
@@ -545,3 +550,11 @@ export default function SubmitBook() {
   )
 }
 
+
+export default function WrappedSubmitBook() {
+  return (
+    <Elements stripe={stripePromise}>
+      <SubmitBook />
+    </Elements>
+  );
+}
