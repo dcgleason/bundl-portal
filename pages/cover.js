@@ -300,8 +300,7 @@ export default function ChooseBook() {
                           <>
                             <RadioGroup.Label as="span" onClick={() => {
                                 setChooseStyle(size.code)
-                                
-                                console.log('value', value);
+                        
                             }} value={size.name}>{size.name}</RadioGroup.Label>
                             {size.inStock ? (
                               <span
