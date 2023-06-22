@@ -149,7 +149,7 @@ const CSV = () => {
     if (userID) {
       fetchUser();
     }
-  }, [userID]);
+  }, []);
 
 
   useEffect(() => {
