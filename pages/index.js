@@ -152,10 +152,10 @@ const CSV = () => {
       const user = await response.json();
       if (user.lastEmailed) {
         setLastEmailSent(moment(user.lastEmailed).format('MMMM Do, YYYY @ h:mm A'));
-        console.log("lastEmailSent", lastEmailSent);
+        console.log("lastEmailSent", user.lastEmailed);
       }
       console.log("user", user);
-      console.log("lastEmailSent", lastEmailSent);
+      console.log("lastEmailSent", user.lastEmailed);
     };
   if(userID){
     fetchUser();
