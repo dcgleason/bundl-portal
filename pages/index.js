@@ -202,17 +202,17 @@ const CSV = () => {
       // Check if data.messages is an object before proceeding
       if (data && typeof data.messages === 'object') {
         const transformedData = Object.entries(data.messages).map(([key, value], index) => {
-            return {
-              id: index + 1,
-              name: value.name || "Name not available",
-              email: value.email || "No email given",
-              submitted: value.msg == ""? "No": "Yes",
-              notes: '', // Not sure where this data comes from
-              submission: value.msg == ""?  "No submission": value.msg,
-              picture: !!value.img_file, // Convert to boolean; true if exists, false otherwise
-            };
-            
-          });
+          return {
+            id: index + 1, // This is the index in the table
+            uuid: key, // This is the UUID of the message
+            name: value.name || "Name not available",
+            email: value.email || "No email given",
+            submitted: value.msg == ""? "No": "Yes",
+            notes: '', // Not sure where this data comes from
+            submission: value.msg == ""?  "No submission": value.msg,
+            picture: !!value.img_file, // Convert to boolean; true if exists, false otherwise
+          };
+        });
   
           setDataSource(transformedData);
           console.log('Transformed data:', transformedData);
@@ -498,18 +498,6 @@ const handleHoverOff = () => {
     });
   };
 
-  const onDeleteStudent = (record) => {
-    Modal.confirm({
-      title: "Are you sure, you want to delete this student record?",
-      okText: "Yes",
-      okType: "danger",
-      onOk: () => {
-        setDataSource((pre) => {
-          return pre.filter((student) => student.id !== record.id);
-        });
-      },
-    });
-  };
 
   const handleSendEmail = async () => {
     setIsSendingEmail(true);
@@ -577,10 +565,49 @@ const handleHoverOff = () => {
   
 
 
-  const onEditStudent = (record) => {
+  const onEditStudent = async (record) => {
     setIsEditing(true);
     console.log("record", record)
     setEditingStudent({ ...record });
+  
+    // Send a PUT request to your server to update the student
+    const response = await fetch(`https://yay-api.herokuapp.com/book/${userID}/message/${record.id}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(record),
+    });
+  
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+  
+    console.log('Student updated on the server successfully');
+  };
+  
+  const onDeleteStudent = (record) => {
+    Modal.confirm({
+      title: "Are you sure, you want to delete this student record?",
+      okText: "Yes",
+      okType: "danger",
+      onOk: async () => {
+        setDataSource((pre) => {
+          return pre.filter((student) => student.id !== record.id);
+        });
+  
+        // Send a DELETE request to your server to delete the student
+        const response = await fetch(`https://yay-api.herokuapp.com/book/${userID}/message/${record.id}`, {
+          method: 'DELETE',
+        });
+  
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+  
+        console.log('Student deleted from the server successfully');
+      },
+    });
   };
   const resetEditing = () => {
     setIsEditing(false);
