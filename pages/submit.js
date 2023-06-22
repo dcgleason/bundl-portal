@@ -38,11 +38,7 @@ const deliveryMethods = [
   { id: 1, title: 'Standard', turnaround: '4–10 business days', price: '$5.00' },
   { id: 2, title: 'Express', turnaround: '2–5 business days', price: '$16.00' },
 ]
-const paymentMethods = [
-  { id: 'credit-card', title: 'Credit card' },
-  { id: 'paypal', title: 'PayPal' },
-  { id: 'etransfer', title: 'eTransfer' },
-]
+
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
@@ -60,6 +56,7 @@ const SubmitBook = () => {
   const [selectedDeliveryMethod, setSelectedDeliveryMethod] = useState(deliveryMethods[0])
   const [ownerEmail, setOwnerEmail] = useState('') // Add this line if you want to store the email in the state
   const [ownerName, setOwnerName] = useState('') // Add this line if you want to store the name in the state
+  const [showBillingInfo, setShowBillingInfo] = useState(false)
 
   // ... other code ...
 
