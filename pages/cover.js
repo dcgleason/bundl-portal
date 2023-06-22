@@ -94,25 +94,23 @@ export default function ChooseBook() {
   const [selectedSize, setSelectedSize] = useState(product.sizes[2])
   const [chooseStyle, setChooseStyle] = useState(null);
 
-
-
   const handleChosenStyle = (e) => {
     e.preventDefault();
-    setValue(chooseStyle)
-    // make post request to backend storying the chosen style, if it already exists, update it
-    
+  
+    // Get the userID. This will depend on how you're storing the userID.
+    // For example, if you're storing it in local storage, you can do this:
+    const userID = localStorage.getItem('userID');
+  
+    // Make a PUT request to your backend server
     const requestOptions = {
-      method: 'POST',
+      method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ chooseStyle })
     };
-    fetch('http://localhost:3000/api/chooseStyle', requestOptions) // create route on the backend
+    fetch(`https://yay-api.herokuapp.com/book/${userID}/updateBook`, requestOptions)
       .then(response => response.json())
       .then(data => console.log(data));
-
-    }
-
-  
+  }
 
   return (
     <div className="bg-white">
