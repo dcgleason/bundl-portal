@@ -10,6 +10,8 @@ import whiteCream from '../images/whitecream.jpeg'
 import whiteRedSpine from '../images/whiteredspine.jpeg'
 import allWhiteOpen from '../images/whitewhite.jpeg'
 import Image from 'next/image'
+import jwt_decode from 'jwt-decode';
+
 
 
 
