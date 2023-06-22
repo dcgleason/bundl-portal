@@ -136,6 +136,18 @@ const CSV = () => {
 
   ];
 
+  useEffect(() => {
+    const fetchUser = async () => {
+      const response = await fetch(`https://yay-api.herokuapp.com/user/${userID}`);
+      const user = await response.json();
+      setLastEmailSent(user.lastEmailed);
+    };
+  
+    if (userID) {
+      fetchUser();
+    }
+  }, [userID]);
+
 
   useEffect(() => {
     const auth = Cookies.get('auth'); // Get the authentication tokens from the cookie
@@ -539,6 +551,16 @@ const handleHoverOff = () => {
       setEmailModalVisible(false);
       setShowSuccessModal(true);
       setLastEmailSent(moment().format('YYYY-MM-DD HH:mm:ss Z'));
+      // Update lastEmailed attribute in the backend
+          await fetch(`https://yay-api.herokuapp.com/user/${userID}/lastEmailed`, {
+            method: 'PUT',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+              lastEmailed: lastEmailSentTime,
+            }),
+          });
     }
   };
   
