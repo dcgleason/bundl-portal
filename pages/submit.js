@@ -326,6 +326,191 @@ const SubmitBook = () => {
               </div>
             </div>
 
+            <div className="mt-4">
+              <label htmlFor="use-different-billing-info" className="block text-sm font-medium text-gray-700">
+                Use different billing information
+              </label>
+              <input
+                type="checkbox"
+                id="use-different-billing-info"
+                name="use-different-billing-info"
+                className="mt-1"
+                onChange={(e) => setShowBillingInfo(e.target.checked)}
+              />
+            </div>
+
+
+            {showBillingInfo && (
+            <div className="mt-10 border-t border-gray-200 pt-10">
+              <h2 className="text-lg font-medium text-gray-900">Billing information</h2>
+
+              <div className="mt-4 grid grid-cols-1 gap-y-6 sm:grid-cols-2 sm:gap-x-4">
+                <div>
+                  <label htmlFor="first-name" className="block text-sm font-medium text-gray-700">
+                    First name
+                  </label>
+                  <div className="mt-1">
+                    <input
+                      type="text"
+                      style={{ height: '36px' }}
+                      id="first-name"
+                      name="first-name"
+                      autoComplete="given-name"
+                      className="block w-full rounded-md border-gray-300 shadow-sm focus:border-red-500 focus:ring-red-500 sm:text-sm"
+                    />
+                  </div>
+                </div>
+
+                <div>
+                  <label htmlFor="last-name" className="block text-sm font-medium text-gray-700">
+                    Last name
+                  </label>
+                  <div className="mt-1">
+                    <input
+                      type="text"
+                      id="last-name"
+                      style={{ height: '36px' }}
+                      name="last-name"
+                      autoComplete="family-name"
+                      className="block w-full rounded-md border-gray-300 shadow-sm focus:border-red-500 focus:ring-red-500 sm:text-sm"
+                    />
+                  </div>
+                </div>
+
+                <div className="sm:col-span-2">
+                  <label htmlFor="company" className="block text-sm font-medium text-gray-700">
+                    Company
+                  </label>
+                  <div className="mt-1">
+                    <input
+                      type="text"
+                      name="company"
+                      style={{ height: '36px' }}
+                      id="company"
+                      className="block w-full rounded-md border-gray-300 shadow-sm focus:border-red-500 focus:ring-red-500 sm:text-sm"
+                    />
+                  </div>
+                </div>
+
+                <div className="sm:col-span-2">
+                  <label htmlFor="address" className="block text-sm font-medium text-gray-700">
+                    Address
+                  </label>
+                  <div className="mt-1">
+                    <input
+                      type="text"
+                      name="address"
+                      style={{ height: '36px' }}
+                      id="address"
+                      autoComplete="street-address"
+                      className="block w-full rounded-md border-gray-300 shadow-sm focus:border-red-500 focus:ring-red-500 sm:text-sm"
+                    />
+                  </div>
+                </div>
+
+                <div className="sm:col-span-2">
+                  <label htmlFor="apartment" className="block text-sm font-medium text-gray-700">
+                    Apartment, suite, etc.
+                  </label>
+                  <div className="mt-1">
+                    <input
+                      type="text"
+                      name="apartment"
+                      style={{ height: '36px' }}
+                      id="apartment"
+                      className="block w-full rounded-md border-gray-300 shadow-sm focus:border-red-500 focus:ring-red-500 sm:text-sm"
+                    />
+                  </div>
+                </div>
+
+                <div>
+                  <label htmlFor="city" className="block text-sm font-medium text-gray-700">
+                    City
+                  </label>
+                  <div className="mt-1">
+                    <input
+                      type="text"
+                      name="city"
+                      style={{ height: '36px' }}
+                      id="city"
+                      autoComplete="address-level2"
+                      className="block w-full rounded-md border-gray-300 shadow-sm focus:border-red-500 focus:ring-red-500 sm:text-sm"
+                    />
+                  </div>
+                </div>
+
+                <div>
+                  <label htmlFor="country" className="block text-sm font-medium text-gray-700">
+                    Country
+                  </label>
+                  <div className="mt-1">
+                    <select
+                      id="country"
+                      name="country"
+                      style={{ height: '36px' }}
+                      autoComplete="country-name"
+                      className="block w-full rounded-md border-gray-300 shadow-sm focus:border-red-500 focus:ring-red-500 sm:text-sm"
+                    >
+                      <option>United States</option>
+                      <option>Canada</option>
+                      <option>Mexico</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div>
+                  <label htmlFor="region" className="block text-sm font-medium text-gray-700">
+                    State / Province
+                  </label>
+                  <div className="mt-1">
+                    <input
+                      type="text"
+                      name="region"
+                      id="region"
+                      style={{ height: '36px' }}
+                      autoComplete="address-level1"
+                      className="block w-full rounded-md border-gray-300 shadow-sm focus:border-red-500 focus:ring-red-500 sm:text-sm"
+                    />
+                  </div>
+                </div>
+
+                <div>
+                  <label htmlFor="postal-code" className="block text-sm font-medium text-gray-700">
+                    Postal code
+                  </label>
+                  <div className="mt-1">
+                    <input
+                      type="text"
+                      name="postal-code"
+                      id="postal-code"
+                      style={{ height: '36px' }}
+                      autoComplete="postal-code"
+                      className="block w-full rounded-md border-gray-300 shadow-sm focus:border-red-500 focus:ring-red-500 sm:text-sm"
+                    />
+                  </div>
+                </div>
+
+                <div className="sm:col-span-2">
+                  <label htmlFor="phone" className="block text-sm font-medium text-gray-700">
+                    Phone
+                  </label>
+                  <div className="mt-1">
+                    <input
+                      type="text"
+                      name="phone"
+                      id="phone"
+                      style={{ height: '36px' }}
+                      autoComplete="tel"
+                      className="block w-full rounded-md border-gray-300 shadow-sm focus:border-red-500 focus:ring-red-500 sm:text-sm"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+
+  {/* End of Payment */} )}
+
+  
             <div className="mt-10 border-t border-gray-200 pt-10">
               <RadioGroup value={selectedDeliveryMethod} onChange={setSelectedDeliveryMethod}>
                 <RadioGroup.Label className="text-lg font-medium text-gray-900">Delivery method</RadioGroup.Label>
@@ -397,7 +582,9 @@ const SubmitBook = () => {
               
             </div>
           </div> 
+        
 
+          
           {/* Order summary */}
           <div className="mt-10 lg:mt-0">
             <h2 className="text-lg font-medium text-gray-900">Order summary</h2>
