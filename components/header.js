@@ -6,6 +6,18 @@ export default function Header({user}) {
     const [popup,Setpopup] = useState(false);
     const [dropdown,Setdropdown] = useState(true);
 
+    const handleLogout = () => {
+        // Logout request to server
+        axios.get('/logout')
+        .then(res => {
+            // Remove user info from state/localStorage/etc. here
+            // Redirect user to sign in page
+        })
+        .catch(err => {
+            // Handle error here
+        });
+    };
+
 
     return (
         <>
