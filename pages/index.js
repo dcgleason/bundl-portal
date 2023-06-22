@@ -207,9 +207,9 @@ const CSV = () => {
             uuid: key, // This is the UUID of the message
             name: value.name || "Name not available",
             email: value.email || "No email given",
-            submitted: value.msg == ""? "No": "Yes",
+            submitted: value.msg ? "Yes" : "No",
             notes: '', // Not sure where this data comes from
-            submission: value.msg == ""?  "No submission": value.msg,
+            submission: value.msg || "No submission",
             picture: !!value.img_file, // Convert to boolean; true if exists, false otherwise
           };
         });
