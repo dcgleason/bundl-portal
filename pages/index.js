@@ -555,22 +555,23 @@ const handleHoverOff = () => {
       setEmailModalVisible(false);
       setShowSuccessModal(true);
   
-      // Create a new date and convert it to a JavaScript Date object
-      const newDate = moment().toDate();
+      // Create a new date only if lastEmailSent is null
+      let newDate;
+      newDate = moment().toDate();
   
-      // Update lastEmailed attribute in the backend
-      await fetch(`https://yay-api.herokuapp.com/user/${userID}/lastEmailed`, {
-        method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          lastEmailed: newDate,
-        }),
-      });
+        // Update lastEmailed attribute in the backend
+        await fetch(`https://yay-api.herokuapp.com/user/${userID}/lastEmailed`, {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            lastEmailed: newDate,
+          }),
+        });
   
-      // Format the new date and update the lastEmailSent state variable
-      setLastEmailSent(moment(newDate).format('MMMM Do, YYYY @ h:mm A'));
+        // Format the new date and update the lastEmailSent state variable
+        setLastEmailSent(moment(newDate).format('MMMM Do, YYYY @ h:mm A'));
     }
   };
   
