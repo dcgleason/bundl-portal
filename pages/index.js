@@ -151,8 +151,13 @@ const CSV = () => {
       const response = await fetch(`https://yay-api.herokuapp.com/users/${userID}`);
       const user = await response.json();
       if (user.lastEmailed) {
-        setLastEmailSent(moment(user.lastEmailed).format('MMMM Do, YYYY @ h:mm A'));
-        console.log("lastEmailSent", user.lastEmailed);
+        let localEmailDate = localStorage.getItem('lastEmailSent');
+        let emailDate = moment(user.lastEmailed);
+        if (localEmailDate && moment(localEmailDate).isAfter(emailDate)) {
+          emailDate = moment(localEmailDate);
+        }
+        setLastEmailSent(emailDate.format('MMMM Do, YYYY @ h:mm A'));
+        console.log("lastEmailSent", emailDate.format());
       }
       console.log("user", user);
       console.log("lastEmailSent", user.lastEmailed);
@@ -563,6 +568,7 @@ const handleHoverOff = () => {
       // Create a new date only if lastEmailSent is null
       let newDate;
       newDate = moment().toDate();
+      localStorage.setItem('lastEmailSent', newDate);
   
         // Update lastEmailed attribute in the backend
         await fetch(`https://yay-api.herokuapp.com/user/${userID}/lastEmailed`, {
