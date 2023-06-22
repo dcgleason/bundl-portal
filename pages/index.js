@@ -136,6 +136,17 @@ const CSV = () => {
   ];
 
   useEffect(() => {
+    const token = localStorage.getItem('token');
+  
+    if (!token) {
+      console.error('Token is not available in local storage');
+      signInWithGoogle(); // Redirect to Google's authorization URL
+      return;
+    }
+  
+    // Decode the JWT token to get the user's ID
+    const decodedToken = jwt_decode(token);
+    const userID = decodedToken.userId; // Changed from 'userID' to 'userId'
     const fetchUser = async () => {
       const response = await fetch(`https://yay-api.herokuapp.com/users/${userID}`);
       const user = await response.json();
@@ -146,9 +157,10 @@ const CSV = () => {
       console.log("user", user);
       console.log("lastEmailSent", lastEmailSent);
     };
-  
+  if(userID){
     fetchUser();
-  }, []);
+  }
+  }, [lastEmailSent]);
 
 
   useEffect(() => {
