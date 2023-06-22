@@ -714,29 +714,29 @@ const handleHoverOff = () => {
             </Col>
           </Row>
           <Modal
-            title="Send Email"
-            open={emailModalVisible}
-            onCancel={handleEmailModalCancel}
-          >
-            <Form layout="vertical">
-              <Form.Item label="To">
-                <Input.TextArea value={emailRecipients} onChange={e => setEmailRecipients(e.target.value)} />
-              </Form.Item>
-              <Form.Item label="Subject">
-                <Input value={emailSubject} onChange={e => setEmailSubject(e.target.value)} />
-              </Form.Item>
-              <Form.Item label="Body">
-                <Input.TextArea value={emailBody} onChange={e => setEmailBody(e.target.value)} />
-              </Form.Item>
-            </Form>
-            {isSendingEmail ? (
-              <Spin />
-            ) : (
-              <Button key="ok" type="primary" onClick={handleSendEmail}>
-                Send it
-              </Button>
-            )}
-          </Modal>
+              title="Send Email"
+              open={emailModalVisible}
+              onCancel={handleEmailModalCancel}
+            >
+              <Form layout="vertical">
+                <Form.Item label="To">
+                  <Input.TextArea value={emailRecipients} onChange={e => setEmailRecipients(e.target.value)} />
+                </Form.Item>
+                <Form.Item label="Subject">
+                  <Input value={emailSubject} onChange={e => setEmailSubject(e.target.value)} />
+                </Form.Item>
+                <Form.Item label="Body">
+                  <Input.TextArea value={emailBody} onChange={e => setEmailBody(e.target.value)} />
+                </Form.Item>
+              </Form>
+              {isSendingEmail ? (
+                <Spin />
+              ) : (
+                <Button key="ok" type="primary" onClick={handleSendEmail}>
+                  Send it
+                </Button>
+              )}
+            </Modal>
          <Modal
                 title="Success"
                 open={showSuccessModal}
