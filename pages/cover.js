@@ -98,7 +98,8 @@ export default function ChooseBook() {
 
   //useEffect for getting userID from local storage
   useEffect(() => {
-    const userID = localStorage.getItem('userID');
+    const decodedToken = jwt_decode(token);
+    const userID = decodedToken.userId; 
     setUserID(userID);
     console.log('userID conver', userID);
   }, []);
