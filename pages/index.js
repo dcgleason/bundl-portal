@@ -661,7 +661,7 @@ const handleHoverOff = () => {
   };
 
   const openPrompts = () => {
-    setIsModalVisible(true);
+    setIsPromptModalVisible(true);
   };
 
 
