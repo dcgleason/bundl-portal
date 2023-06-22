@@ -569,12 +569,6 @@ const handleHoverOff = () => {
     setEditingStudent({ ...record });
   };
   
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
-    }
-  
-    console.log('Student updated on the server successfully');
-  };
   
   const onDeleteStudent = (record) => {
     Modal.confirm({
