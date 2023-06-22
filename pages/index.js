@@ -138,7 +138,7 @@ const CSV = () => {
 
   useEffect(() => {
     const fetchUser = async () => {
-      const response = await fetch(`https://yay-api.herokuapp.com/user/${userID}`);
+      const response = await fetch(`https://yay-api.herokuapp.com/users/${userID}`);
       const user = await response.json();
       if (user.lastEmailed) {
         setLastEmailSent(moment(user.lastEmailed).format('MMMM Do, YYYY @ h:mm A'));
