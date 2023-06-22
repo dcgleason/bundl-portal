@@ -624,15 +624,13 @@ const handleHoverOff = () => {
               <Button onClick={onAddStudent}>Add a new contributor</Button>
             </Col>
             <Col xs={24} sm={12} md={8} lg={6}>
-              {isAuthenticated ? (
-                <Button onClick={openEmailModal}>Send Email</Button>
-              ) : (
-                <Button onClick={signInWithGoogle}>Sign in with Google</Button>
-              )}
-            </Col>
-            <Col xs={24} sm={12} md={8} lg={6}>
-             <p>Time your last email was sent: {lastEmailSent}</p>
-            </Col>   
+                {isAuthenticated ? (
+                  <Button onClick={openEmailModal}>Send Email</Button>
+                ) : (
+                  <Button onClick={signInWithGoogle}>Sign in with Google</Button>
+                )}
+                {lastEmailSent && <p>Last email sent: {lastEmailSent}</p>}
+              </Col>
           </Row>
           <Row gutter={[16, 16]} justify="center">
             <Col xs={24}>
