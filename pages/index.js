@@ -814,6 +814,17 @@ const handleHoverOff = () => {
                   });
                 }}
               />
+            
+              <label>Notes</label>
+              <Input
+                value={editingStudent?.notes}
+                onChange={(e) => {
+                  setEditingStudent((pre) => {
+                    return { ...pre, notes: e.target.value };
+                  });
+                }}
+              />
+
               <label>Picture Upload</label>
               <Upload
                 name="avatar"
@@ -827,15 +838,6 @@ const handleHoverOff = () => {
                   <InboxOutlined />
                 </div>
               </Upload>
-              <label>Notes</label>
-              <Input
-                value={editingStudent?.notes}
-                onChange={(e) => {
-                  setEditingStudent((pre) => {
-                    return { ...pre, notes: e.target.value };
-                  });
-                }}
-              />
             </Modal>
           <Modal
             title="Add a new contributor manually"
