@@ -647,7 +647,6 @@ const handleHoverOff = () => {
           <Modal
             title="Send Email"
             open={emailModalVisible}
-            onOk={handleSendEmail}
             onCancel={handleEmailModalCancel}
           >
             <Form layout="vertical">
