@@ -9,6 +9,8 @@ import jwt_decode from 'jwt-decode';
 import Cookies from 'js-cookie';
 import moment from 'moment';
 
+const { Option } = Select;
+
 const { TextArea } = Input;
 
 
