@@ -93,13 +93,18 @@ export default function ChooseBook() {
   const [selectedColor, setSelectedColor] = useState(product.colors[0])
   const [selectedSize, setSelectedSize] = useState(product.sizes[2])
   const [chooseStyle, setChooseStyle] = useState(null);
+  const [userID, setUserID] = useState(null);
+
+  //useEffect for getting userID from local storage
+  useEffect(() => {
+    const userID = localStorage.getItem('userID');
+    setUserID(userID);
+    console.log('userID conver', userID);
+  }, []);
+
 
   const handleChosenStyle = (e) => {
     e.preventDefault();
-  
-    // Get the userID. This will depend on how you're storing the userID.
-    // For example, if you're storing it in local storage, you can do this:
-    const userID = localStorage.getItem('userID');
   
     // Make a PUT request to your backend server
     const requestOptions = {
