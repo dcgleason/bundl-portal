@@ -60,6 +60,8 @@ const CSV = () => {
     "How has Jimmy inspired you?",
     "What do you wish for Jimmy's future?"
   ]);
+  const [longMessage, setLongMessage] = useState('');
+
   
 
 
@@ -735,7 +737,7 @@ const handleHoverOff = () => {
       >
         {displaySubmission(modalData)}
       </Modal>
-      <Modal title="Choose Prompts" open={isPromptModalVisible} onOk={handlePromptOk} onCancel={handlePromptCancel}>
+      <Modal title="Choose Prompts and Note" open={isPromptModalVisible} onOk={handlePromptOk} onCancel={handlePromptCancel}>
       {prompts.map((prompt, index) => (
         <Input
           key={index}
@@ -749,6 +751,12 @@ const handleHoverOff = () => {
           style={index > 0 ? { marginTop: '10px' } : {}}
         />
       ))}
+       <TextArea
+          placeholder="Longer message"
+          value={longMessage}
+          onChange={(e) => setLongMessage(e.target.value)}
+          style={{ marginTop: '10px' }}
+        />
     </Modal>
       <div className="App">
         <header className="App-header px-4 sm:px-6 md:px-8">
