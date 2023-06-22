@@ -51,8 +51,8 @@ export default function MessagesPage() {
       console.log('Data book id:', data.bookId);
       console.log('Data messages:', data.messages);
   
-      // Convert the Map object to an array
-      const messagesArray = Object.values(data.messages);
+
+      const messagesArray = Object.values(data.messages).filter(message => message.msg !== "");
   
       // Set the messages to the state
       setMessages(messagesArray);
@@ -121,14 +121,16 @@ export default function MessagesPage() {
             style={{ width: '100%', height: '600px' }}
           />
   
-          {/* Add these lines to display the author's picture */}
           {currentMessage.length <= 1750 ? (
             messages[currentMessageIndex]?.img_file ? (
               <Image src={messages[currentMessageIndex].img_file} alt="Author's submission" style={{ maxWidth: '100%', maxHeight: '600px' }} />
             ) : (
-              <div className="border border-gray-300 rounded-md p-4 text-center" style={{ width: '100%', height: '600px' }}>
-                No picture attached
-              </div>
+              <textarea
+                className="resize-none border rounded-md"
+                placeholder="Enter a quote here..."
+                rows={20}
+                style={{ width: '100%', height: '600px' }}
+              />
             )
           ) : (
             <div className="border border-gray-300 rounded-md p-4 text-center" style={{ width: '100%', height: '600px' }}>
