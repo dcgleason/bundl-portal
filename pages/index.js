@@ -595,6 +595,7 @@ const handleHoverOff = () => {
   
   
   const onDeleteStudent = (record) => {
+    console.log('delete record.uuid = '+ record.uuid)
     Modal.confirm({
       title: "Are you sure, you want to delete this student record?",
       okText: "Yes",
