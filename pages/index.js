@@ -524,7 +524,7 @@ const handleHoverOff = () => {
   
       // Decode the JWT
       const decoded = jwt_decode(token);
-
+  
       // Extract the sender's name and username from the decoded JWT
       const senderName = decoded.name;
       const senderEmail = decoded.username;
@@ -554,17 +554,23 @@ const handleHoverOff = () => {
       setIsSendingEmail(false);
       setEmailModalVisible(false);
       setShowSuccessModal(true);
-      setLastEmailSent(moment().format('YYYY-MM-DD HH:mm:ss Z'));
+  
+      // Create a new date and convert it to a JavaScript Date object
+      const newDate = moment().toDate();
+  
       // Update lastEmailed attribute in the backend
-          await fetch(`https://yay-api.herokuapp.com/user/${userID}/lastEmailed`, {
-            method: 'PUT',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-              lastEmailed: lastEmailSentTime,
-            }),
-          });
+      await fetch(`https://yay-api.herokuapp.com/user/${userID}/lastEmailed`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          lastEmailed: newDate,
+        }),
+      });
+  
+      // Format the new date and update the lastEmailSent state variable
+      setLastEmailSent(moment(newDate).format('MMMM Do, YYYY @ h:mm A'));
     }
   };
   
