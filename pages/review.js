@@ -35,7 +35,7 @@ export default function MessagesPage() {
   const [messages, setMessages] = useState([]);
   const [currentMessageIndex, setCurrentMessageIndex] = useState(0);
   const [currentMessage, setCurrentMessage] = useState('');
-  const [bookID, setBookID] = useState(null);
+  const [userID, setUserID] = useState(null);
   const [recipient, setRecipient] = useState(null);
  
 
@@ -48,7 +48,7 @@ export default function MessagesPage() {
     })
     .then(response => response.json())
     .then(data => {
-      console.log('Data book id:', data.bookId);
+      console.log('Data user id:', data.userID);
       console.log('Data messages:', data.messages);
   
 
@@ -56,7 +56,7 @@ export default function MessagesPage() {
   
       // Set the messages to the state
       setMessages(messagesArray);
-      setBookID(data.bookId);
+      setUserID(data.userID);
       setRecipient(data.recipient);
   
       // Set the initial current message
@@ -93,7 +93,7 @@ export default function MessagesPage() {
     setMessages(newMessages);
 
     // Send a request to your API to update the message
-    fetch(`https://yay-api.herokuapp.com/book/${bookID}/message/${newMessages[currentMessageIndex]._id}`, { // Replace {bookId} with the actual book ID
+    fetch(`https://yay-api.herokuapp.com/book/${userID}/message/${newMessages[currentMessageIndex]._id}`, { 
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ msg: currentMessage }),
