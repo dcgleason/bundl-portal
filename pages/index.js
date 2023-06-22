@@ -140,7 +140,9 @@ const CSV = () => {
     const fetchUser = async () => {
       const response = await fetch(`https://yay-api.herokuapp.com/user/${userID}`);
       const user = await response.json();
-      setLastEmailSent(user.lastEmailed);
+      if (user.lastEmailed) {
+        setLastEmailSent(moment(user.lastEmailed).format('MMMM Do, YYYY @ h:mm A'));
+      }
       console.log("user", user);
       console.log("lastEmailSent", lastEmailSent);
     };
