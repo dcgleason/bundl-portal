@@ -629,8 +629,11 @@ const handleHoverOff = () => {
                 ) : (
                   <Button onClick={signInWithGoogle}>Sign in with Google</Button>
                 )}
-                {lastEmailSent && <p>Last email sent: {lastEmailSent}</p>}
+               
               </Col>
+              <Col xs={24} sm={12} md={8} lg={6}>
+              {lastEmailSent && <p className='text-sm'>Last email sent: {lastEmailSent}</p>}
+             </Col>
           </Row>
           <Row gutter={[16, 16]} justify="center">
             <Col xs={24}>
