@@ -11,6 +11,13 @@ import whiteCream from '../images/whitecream.jpeg'
 import whiteRedSpine from '../images/whiteredspine.jpeg'
 import allWhiteOpen from '../images/whitewhite.jpeg'
 import Image from 'next/image'
+import {
+  PaymentElement,
+  Elements,
+  CardElement, 
+  useStripe,
+  useElements
+} from '@stripe/react-stripe-js';
 
 
 const products = [
@@ -41,19 +48,60 @@ function classNames(...classes) {
 }
 
 export default function SubmitBook() {
-
+  const stripe = useStripe();
+  const elements = useElements();
 
   const [chosenStyle, setChosenStyle] = useState('')
   const [selectedDeliveryMethod, setSelectedDeliveryMethod] = useState(deliveryMethods[0])
+  const [ownerEmail, setOwnerEmail] = useState('') // Add this line if you want to store the email in the state
 
-  // use useEffect to load the image from the database on each page load
+  // ... other code ...
 
-  // useEffect(() => {
-  //   // fetch the image code from the database
-  //   const imageCode = fetch('https://jsonplaceholder.typicode.com/posts') 
-  //   // set the image code to the state
-  //   setChosenStyle(imageCode)
-  // }, [])
+  const getClientSecret = async (customerEmail) => {
+    const response = await fetch('https://yay-api.herokuapp.com/stripe/secret', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ email: customerEmail }),
+    }).then((res) => res.json());
+  
+    const { client_secret } = response;
+    var secret = client_secret;
+    return secret;
+  };
+
+  const submitPayment = async (e) => {
+    e.preventDefault();
+    const clientSecret = await getClientSecret(ownerEmail); // Get the client secret directly from the server
+    const cardElement = elements.getElement(CardElement);
+    const { error, paymentMethod } = await stripe.createPaymentMethod({
+      type: 'card',
+      card: cardElement,
+    });
+
+    if (error) {
+      console.log('There was an error:', error);
+    } else {
+      console.log('PaymentMethod:', paymentMethod);
+    }
+  };
+
+
+  
+
+    
+  // Confirm the card payment
+  const { paymentIntent, error } = await stripe.confirmCardPayment(clientSecret, {
+    payment_method: {
+      type: 'card',
+      card: elements.getElement(CardElement),
+      billing_details: {
+        name: ownerName,
+        email: ownerEmail,
+      },
+    },
+  });
 
 
 
@@ -505,6 +553,51 @@ export default function SubmitBook() {
                   <dd className="text-base font-medium text-gray-900">$21.52</dd>
                 </div>
               </dl>
+
+              <div className="mt-10 border-t border-gray-200 pt-10">
+  <h2 className="text-lg font-medium text-gray-900">Payment</h2>
+
+          <fieldset className="mt-4">
+            <legend className="sr-only">Payment type</legend>
+            <div className="space-y-4 sm:flex sm:items-center sm:space-y-0 sm:space-x-10">
+              {paymentMethods.map((paymentMethod, paymentMethodIdx) => (
+                <div key={paymentMethod.id} className="flex items-center">
+                  {paymentMethodIdx === 0 ? (
+                    <input
+                      id={paymentMethod.id}
+                      name="payment-type"
+                      type="radio"
+                      defaultChecked
+                      className="h-4 w-4 border-gray-300 text-red-600 focus:ring-red-500"
+                    />
+                  ) : (
+                    <input
+                      id={paymentMethod.id}
+                      name="payment-type"
+                      type="radio"
+                      className="h-4 w-4 border-gray-300 text-red-600 focus:ring-red-500"
+                    />
+                  )}
+
+                  <label htmlFor={paymentMethod.id} className="ml-3 block text-sm font-medium text-gray-700">
+                    {paymentMethod.title}
+                  </label>
+                </div>
+              ))}
+            </div>
+          </fieldset>
+
+          <div className="mt-6 grid grid-cols-4 gap-y-6 gap-x-4">
+            <div className="col-span-4">
+              <label htmlFor="card-element" className="block text-sm font-medium text-gray-700">
+                Card details
+              </label>
+              <div className="mt-1">
+                <CardElement className="shadow appearance-none border rounded w-full my-2 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"/>
+              </div>
+            </div>
+          </div>
+        </div>
 
               <div className="border-t border-gray-200 py-6 px-4 sm:px-6">
                 <button
