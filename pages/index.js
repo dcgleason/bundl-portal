@@ -52,6 +52,15 @@ const CSV = () => {
   const [dataSource, setDataSource] = useState([]);
   const [isSendingEmail, setIsSendingEmail] = useState(false);
   const [isPromptModalVisible, setIsPromptModalVisible] = useState(false);
+  const [prompts, setPrompts] = useState([
+    "How has Jimmy affected your life?",
+    "What do you love about Jimmy?",
+    "What's your favorite memory with Jimmy?",
+    "How has Jimmy inspired you?",
+    "What do you wish for Jimmy's future?"
+  ]);
+  
+
 
 
   const columns = [
@@ -479,6 +488,31 @@ const CSV = () => {
     });
   };
 
+  const handlePromptOk = async () => {
+    const token = localStorage.getItem('token');
+    const userID = jwt_decode(token).userId;
+    const url = `https://yay-api.herokuapp.com/user/${userID}/prompts`;
+  
+    try {
+      const response = await fetch(url, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ prompts }),
+      });
+  
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+  
+      console.log('Prompts updated on the server successfully');
+      setIsPromptModalVisible(false);
+    } catch (error) {
+      console.error('Failed to update prompts on the server:', error);
+    }
+  };
+
   const handleDownloadCSV = () => {
     window.open('https://docs.google.com/spreadsheets/d/1_fXj2aWK8dXI-GgjzuObLC0crXYx7HpVGTTaQZmdj7g/edit?usp=sharing', '_blank');
   }
@@ -630,10 +664,6 @@ const handleHoverOff = () => {
     setIsModalVisible(true);
   };
 
-  const handlePromptOk = () => {
-    setIsPromptModalVisible(false);
-    // Here you can handle the save action
-  };
 
   const handlePromptCancel = () => {
     setIsPromptModalVisible(false);
@@ -704,14 +734,21 @@ const handleHoverOff = () => {
       >
         {displaySubmission(modalData)}
       </Modal>
-
       <Modal title="Choose Prompts" open={isPromptModalVisible} onOk={handlePromptOk} onCancel={handlePromptCancel}>
-        <Input placeholder="How has Jimmy affected your life?" />
-        <Input placeholder="What do you love about Jimmy?" style={{ marginTop: '10px' }} />
-        <Input placeholder="What's your favorite memory with Jimmy?" style={{ marginTop: '10px' }} />
-        <Input placeholder="How has Jimmy inspired you?" style={{ marginTop: '10px' }} />
-        <Input placeholder="What do you wish for Jimmy's future?" style={{ marginTop: '10px' }} />
-      </Modal>
+      {prompts.map((prompt, index) => (
+        <Input
+          key={index}
+          placeholder={`Prompt ${index + 1}`}
+          value={prompt}
+          onChange={(e) => {
+            const newPrompts = [...prompts];
+            newPrompts[index] = e.target.value;
+            setPrompts(newPrompts);
+          }}
+          style={index > 0 ? { marginTop: '10px' } : {}}
+        />
+      ))}
+    </Modal>
       <div className="App">
         <header className="App-header px-4 sm:px-6 md:px-8">
           <Row gutter={[16, 16]} justify="center">
