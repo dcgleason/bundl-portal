@@ -745,7 +745,7 @@ const handleHoverOff = () => {
                 <p>Email has been sent.</p>
               </Modal>
               <Modal
-              title="Add a contributor"
+              title="Edit Contributor"
               open={isEditing}
               okText="Save"
               onCancel={() => {
@@ -773,7 +773,7 @@ const handleHoverOff = () => {
                       name: editingStudent.name,
                       msg: editingStudent.submission || 'None',
                       img_file: editingStudent.picture || 'None',
-                      email: editingStudent.email || 'None',
+                      email: editingStudent.email || 'None', 
                     }),
                   });
 
@@ -803,8 +803,7 @@ const handleHoverOff = () => {
                 value={editingStudent?.email}
                 onChange={(e) => {
                   setEditingStudent((pre) => {
-                    const updatedStudent = { ...pre, email: e.target.value };
-                    console.log('Updated student:', updatedStudent);  // Log the updated student
+                 
                     return { ...pre, email: e.target.value };
                   });
                 }}
