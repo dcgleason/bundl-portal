@@ -342,9 +342,16 @@ const CSV = () => {
   };
 
   const displaySubmission = (data) => {
-    return data ? data : "No message available";
+    if (!data || !data.submission) {
+      return "No submission available";
+    }
+  
+    return (
+      <div>
+        <p>{data.submission}</p>
+      </div>
+    );
   };
-
 
   const handleViewPicture = (record) => {
     setPictureUrl(record.img_file);
