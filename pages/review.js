@@ -40,7 +40,12 @@ export default function MessagesPage() {
  
 
   useEffect(() => {
-    const localUserID = localStorage.getItem('userID');
+    const token = localStorage.getItem('token');
+    const decodedToken = jwt_decode(token);
+    const localUserID = decodedToken.userId; 
+    setUserID(localUserID);
+
+   
     console.log('localUserID from my provider: ', localUserID);
   
     fetch(`https://yay-api.herokuapp.com/book/${localUserID}/messages`, {
@@ -48,7 +53,6 @@ export default function MessagesPage() {
     })
     .then(response => response.json())
     .then(data => {
-      console.log('Data user id:', data.userID);
       console.log('Data messages:', data.messages);
   
 
@@ -56,7 +60,7 @@ export default function MessagesPage() {
   
       // Set the messages to the state
       setMessages(messagesArray);
-      setUserID(data.userID);
+    
       setRecipient(data.recipient);
   
       // Set the initial current message
@@ -93,7 +97,7 @@ export default function MessagesPage() {
     setMessages(newMessages);
 
     // Send a request to your API to update the message
-    fetch(`https://yay-api.herokuapp.com/book/${userID}/message/${newMessages[currentMessageIndex]._id}`, { 
+    fetch(`https://yay-api.herokuapp.com/book/${userID}/message/${newMessages[currentMessageIndex].uuid}`, { 
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ msg: currentMessage }),
