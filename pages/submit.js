@@ -57,6 +57,25 @@ export default function SubmitBook() {
 
   // ... other code ...
 
+  //useEffect to get the owner email
+  useEffect(() => {
+    const localUserID = localStorage.getItem('userID');
+    console.log('localUserID from my provider: ', localUserID);
+    const getOwnerEmail = async () => {
+      const response = await fetch('https://yay-api.herokuapp.com/users/' + localUserID, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      }).then((res) => res.json());
+      const { email } = response;
+      setOwnerEmail(email);
+    };
+    getOwnerEmail();
+  }, []);
+
+
+
   const getClientSecret = async (customerEmail) => {
     const response = await fetch('https://yay-api.herokuapp.com/stripe/secret', {
       method: 'POST',
@@ -72,30 +91,25 @@ export default function SubmitBook() {
   };
 
   const submitPayment = async (e) => {
-    e.preventDefault();
-    const clientSecret = await getClientSecret(ownerEmail); // Get the client secret directly from the server
-    const cardElement = elements.getElement(CardElement);
-    const { error, paymentMethod } = await stripe.createPaymentMethod({
-      type: 'card',
-      card: cardElement,
-    });
+  e.preventDefault();
+  const clientSecret = await getClientSecret(ownerEmail); // Get the client secret directly from the server
+  const cardElement = elements.getElement(CardElement);
+  const { error: errorCreatePayment, paymentMethod } = await stripe.createPaymentMethod({
+    type: 'card',
+    card: cardElement,
+  });
 
-    if (error) {
-      console.log('There was an error:', error);
-    } else {
-      console.log('PaymentMethod:', paymentMethod);
-    }
-  };
+  if (errorCreatePayment) {
+    console.log('There was an error:', errorCreatePayment);
+    return;
+  } else {
+    console.log('PaymentMethod:', paymentMethod);
+  }
 
-
-  
-
-    
   // Confirm the card payment
-  const { paymentIntent, error } = await stripe.confirmCardPayment(clientSecret, {
+  const { paymentIntent, error: errorConfirmPayment } = await stripe.confirmCardPayment(clientSecret, {
     payment_method: {
-      type: 'card',
-      card: elements.getElement(CardElement),
+      card: cardElement,
       billing_details: {
         name: ownerName,
         email: ownerEmail,
@@ -103,7 +117,12 @@ export default function SubmitBook() {
     },
   });
 
-
+  if (errorConfirmPayment) {
+    console.log('There was an error:', errorConfirmPayment);
+  } else {
+    console.log('PaymentIntent:', paymentIntent);
+  }
+};
 
   return (
     <div className="bg-gray-50">
