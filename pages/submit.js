@@ -378,15 +378,14 @@ const SubmitBook = () => {
               </RadioGroup>
             </div>
 
-            Payment
             <div className="mt-10 border-t border-gray-200 pt-10">
               <h2 className="text-lg font-medium text-gray-900">Payment</h2>
 
 
 
-              <div className="mt-6 grid grid-cols-4 gap-y-6 gap-x-4">
-              <div className="mt-6 grid grid-cols-4 gap-y-6 gap-x-4">
-                      <div className="col-span-4">
+    
+              <div className="mt-6 grid grid-cols-1 gap-y-6">
+                      <div className="col-span-1">
                         <label htmlFor="card-element" className="block text-sm font-medium text-gray-700">
                           Card details
                         </label>
@@ -395,8 +394,7 @@ const SubmitBook = () => {
                         </div>
                       </div>
                  </div>
-                
-              </div>
+              
             </div>
           </div> 
 
