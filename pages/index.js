@@ -779,6 +779,7 @@ const handleHoverOff = () => {
           title="Send Email"
           open={emailModalVisible}
           onCancel={handleEmailModalCancel}
+          footer={null} 
         >
           <Form layout="vertical">
             <Form.Item label="To">
