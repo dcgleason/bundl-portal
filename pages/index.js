@@ -49,6 +49,7 @@ const CSV = () => {
   const [viewPicture, setViewPicture] = useState(false);
   const [dataSource, setDataSource] = useState([]);
   const [isSendingEmail, setIsSendingEmail] = useState(false);
+  const [isPromptModalVisible, setIsPromptModalVisible] = useState(false);
 
 
   const columns = [
@@ -623,6 +624,19 @@ const handleHoverOff = () => {
     setEditingStudent(null);
   };
 
+  const openPrompts = () => {
+    setIsModalVisible(true);
+  };
+
+  const handlePromptOk = () => {
+    setIsPromptModalVisible(false);
+    // Here you can handle the save action
+  };
+
+  const handlePromptCancel = () => {
+    setIsPromptModalVisible(false);
+  };
+
   const handleOk = async () => {
     setIsModalVisible(false);
   
@@ -688,10 +702,51 @@ const handleHoverOff = () => {
       >
         {displaySubmission(modalData)}
       </Modal>
+
+      <Modal title="Choose Prompts" open={isPromptModalVisible} onOk={handlePromptOk} onCancel={handlePromptCancel}>
+        <Select placeholder="Select your option">
+          <Option value="option1">Option 1</Option>
+          <Option value="option2">Option 2</Option>
+          <Option value="option3">Option 3</Option>
+          <Option value="option4">Option 4</Option>
+          <Option value="option5">Option 5</Option>
+        </Select>
+        <Select placeholder="Select your option">
+          <Option value="option1">Option 1</Option>
+          <Option value="option2">Option 2</Option>
+          <Option value="option3">Option 3</Option>
+          <Option value="option4">Option 4</Option>
+          <Option value="option5">Option 5</Option>
+        </Select>
+        <Select placeholder="Select your option">
+          <Option value="option1">Option 1</Option>
+          <Option value="option2">Option 2</Option>
+          <Option value="option3">Option 3</Option>
+          <Option value="option4">Option 4</Option>
+          <Option value="option5">Option 5</Option>
+        </Select>
+        <Select placeholder="Select your option">
+          <Option value="option1">Option 1</Option>
+          <Option value="option2">Option 2</Option>
+          <Option value="option3">Option 3</Option>
+          <Option value="option4">Option 4</Option>
+          <Option value="option5">Option 5</Option>
+        </Select>
+        <Select placeholder="Select your option">
+          <Option value="option1">Option 1</Option>
+          <Option value="option2">Option 2</Option>
+          <Option value="option3">Option 3</Option>
+          <Option value="option4">Option 4</Option>
+          <Option value="option5">Option 5</Option>
+        </Select>
+      </Modal>
       
       <div className="App">
         <header className="App-header px-4 sm:px-6 md:px-8">
           <Row gutter={[16, 16]} justify="center">
+          <Col xs={24} sm={12} md={8} lg={6}>
+              <Button onClick={openPrompts}>Choose Prompts</Button>
+            </Col>
             <Col xs={24} sm={12} md={8} lg={6}>
               <Button onClick={onAddStudent}>Add a new contributor</Button>
             </Col>
