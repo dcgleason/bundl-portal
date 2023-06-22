@@ -737,140 +737,123 @@ const handleHoverOff = () => {
               >
                 <p>Email has been sent.</p>
               </Modal>
-        <Modal
-              title="Add a contributor"
-              open={isEditing}
-              okText="Save"
-              onCancel={() => {
-                resetEditing();
-              }}
-              onOk={async () => {
-                setDataSource((pre) => {
-                  return pre.map((student) => {
-                    if (student.id === editingStudent.id) {
-                      return editingStudent;
-                    } else {
-                      return student;
+              <Modal
+                title="Add a contributor"
+                open={isEditing}
+                okText="Save"
+                onCancel={() => {
+                  resetEditing();
+                }}
+                onOk={async () => {
+                  setDataSource((pre) => {
+                    return pre.map((student) => {
+                      if (student.id === editingStudent.id) {
+                        return editingStudent;
+                      } else {
+                        return student;
+                      }
+                    });
+                  });
+
+                  try {
+                    const response = await fetch(`https://yay-api.herokuapp.com/book/${userID}/message/${editingStudent.uuid}`, {
+                      method: 'PUT',
+                      headers: {
+                        'Content-Type': 'application/json',
+                      },
+                      body: JSON.stringify({
+                        layout_id: 1,
+                        name: editingStudent.name,
+                        msg: editingStudent.submission || 'None',
+                        img_file: editingStudent.picture || 'None',
+                        email: editingStudent.email || 'None',
+                      }),
+                    });
+
+                    if (!response.ok) {
+                      throw new Error(`HTTP error! status: ${response.status}`);
                     }
-                  });
-                });
 
-                // Now, send the updated student to the server
-                try {
-                  const response = await fetch(`https://yay-api.herokuapp.com/book/${userID}/message/${editingStudent.uuid}`, {
-                    method: 'PUT',
-                    headers: {
-                      'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({
-                      layout_id: 1, // Or whatever layout_id you want to use
-                      name: editingStudent.name,
-                      msg: editingStudent.submission || 'None',
-                      img_file: editingStudent.picture || 'None',
-                      email: editingStudent.email || 'None',
-                    }),
-                  });
-
-                  if (!response.ok) {
-                    throw new Error(`HTTP error! status: ${response.status}`);
+                    console.log('Student updated on the server successfully');
+                  } catch (error) {
+                    console.error('Failed to update student on the server:', error);
                   }
 
-                  console.log('Student updated on the server successfully');
-                } catch (error) {
-                  console.error('Failed to update student on the server:', error);
-                }
-
-                resetEditing();
-              }}
-            >
-
-          <label>Name</label>
-          <Input
-            value={editingStudent?.name}
-            onChange={(e) => {
-              setEditingStudent((pre) => {
-                setName(e.target.value)
-                return { ...pre, name: e.target.value };
-                
-              });
-            }}
-          />
-          <label>Email</label>
-          <Input
-            value={editingStudent?.email}
-            onChange={(e) => {
-              setEditingStudent((pre) => {
-                setEmail(e.target.value)
-                return { ...pre, email: e.target.value };
-              });
-            }}
-          />
-          <label>Submitted</label>
-          <Select
-            value={editingStudent?.submitted}
-            onChange={(value) => {
-              console.log("editingStudent", editingStudent);
-              setEditingStudent((pre) => {
-                setSubmitted(value);
-                return { ...pre, submitted: value };
-                
-              });
-            }}
-            options={[
-              {
-                value: 'Yes',
-                label: 'Yes',
-              },
-              {
-                value: 'No',
-                label: 'No',
-              }
-            ]}
-          />
-           <label>Submission</label>
-          <TextArea
-            rows={10}
-            type="textarea"
-            maxLength={650}
-            value={editingStudent?.submission}
-            onChange={(e) => {
-              setEditingStudent((pre) => {
-                setSubmission(e.target.value)
-                return { ...pre, submission: e.target.value };
-              });
-            }}
-          />
-           <label>Picture Upload</label>
-           <Upload
-              name="avatar"
-              listType="picture"
-              className="avatar-uploader"
-              showUploadList={false}
-              action='api/upload'  // POST request to this api endpoint for picture upload --> need to make pictureSubmitted == true in the new record created 
-              /* via --> 
-              setEditingStudent((pre) => {
-                return { ...pre, picture: true };
-              });
-              */
-              onChange={handleChangeUpload}
-            >
-              <div>
-              <InboxOutlined />
-            </div>
-          </Upload>
-          <label>Notes</label>
-           <Input
-            value={editingStudent?.notes}
-            onChange={(e) => {
-              setEditingStudent((pre) => {
-                return { ...pre, notes: e.target.value };
-              });
-            }}
-          />
-
-
-
-      </Modal>
+                  resetEditing();
+                }}
+              >
+                <label>Name</label>
+                <Input
+                  value={editingStudent?.name}
+                  onChange={(e) => {
+                    setEditingStudent((pre) => {
+                      return { ...pre, name: e.target.value };
+                    });
+                  }}
+                />
+                <label>Email</label>
+                <Input
+                  value={editingStudent?.email}
+                  onChange={(e) => {
+                    setEditingStudent((pre) => {
+                      return { ...pre, email: e.target.value };
+                    });
+                  }}
+                />
+                <label>Submitted</label>
+                <Select
+                  value={editingStudent?.submitted}
+                  onChange={(value) => {
+                    setEditingStudent((pre) => {
+                      return { ...pre, submitted: value };
+                    });
+                  }}
+                  options={[
+                    {
+                      value: 'Yes',
+                      label: 'Yes',
+                    },
+                    {
+                      value: 'No',
+                      label: 'No',
+                    },
+                  ]}
+                />
+                <label>Submission</label>
+                <TextArea
+                  rows={10}
+                  type="textarea"
+                  maxLength={3500}
+                  value={editingStudent?.submission}
+                  onChange={(e) => {
+                    setEditingStudent((pre) => {
+                      return { ...pre, submission: e.target.value };
+                    });
+                  }}
+                />
+                <label>Picture Upload</label>
+                <Upload
+                  name="avatar"
+                  listType="picture"
+                  className="avatar-uploader"
+                  showUploadList={false}
+                  action='api/upload'
+                  onChange={handleChangeUpload}
+                >
+                  <div>
+                    <InboxOutlined />
+                  </div>
+                </Upload>
+                <label>Notes</label>
+                <Input
+                  value={editingStudent?.notes}
+                  onChange={(e) => {
+                    setEditingStudent((pre) => {
+                      return { ...pre, notes: e.target.value };
+                    });
+                  }}
+                />
+              </Modal>
           <Modal
             title="Add a new contributor manually"
             open={isModalVisible}
