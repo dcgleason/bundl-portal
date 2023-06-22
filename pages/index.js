@@ -27,7 +27,7 @@ const CSV = () => {
   const [hover, setHover] = useState(false);
   const [userID, setUserID] = useState(null);
   const [emailModalVisible, setEmailModalVisible] = useState(false);
-  const [emailBody, setEmailBody] = useState(`We'd love you to contribute to this bundle -- link here: <a href="https://www.givebundl.com/contribute/${jwt_decode(token).userId}">https://www.givebundl.com/contribute/${jwt_decode(token).userId}</a>`);
+  const [emailBody, setEmailBody] = useState('');
   const [emailSubject, setEmailSubject] = useState("Contribute please - 3 days left!");
   const [emailRecipients, setEmailRecipients] = useState([]);
   const [values, setValues] = useState([]);
@@ -160,6 +160,8 @@ const CSV = () => {
       return;
     }
   
+    setEmailBody(`We'd love you to contribute to this bundle -- link here: <a href="https://www.givebundl.com/contribute/${jwt_decode(token).userId}">https://www.givebundl.com/contribute/${jwt_decode(token).userId}</a>`)
+
     // Decode the JWT token to get the user's ID
     const decodedToken = jwt_decode(token);
     const userID = decodedToken.userId; // Changed from 'userID' to 'userId'
