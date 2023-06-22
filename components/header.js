@@ -30,9 +30,12 @@ export default function Header({user}) {
                             <div className="ml-3 -mt-2 relative">
                                 <div className={dropdown ? "hidden" : "mt-10 absolute right-0  shadow-md z-30 w-40"}>
                                     <ul className="bg-white shadow rounded py-1">
-                                        <li className="cursor-pointer text-gray-600 leading-3 tracking-normal py-3 hover:bg-indigo-700 hover:text-white px-3 font-normal">Edit profile</li>
-                                        <li className="cursor-pointer text-gray-600 leading-3 tracking-normal py-3 hover:bg-indigo-700 hover:text-white px-3 font-normal">Change Password</li>
-                                    </ul>
+                                             <li 
+                                            className="cursor-pointer text-gray-600 leading-3 tracking-normal py-3 hover:bg-indigo-700 hover:text-white px-3 font-normal"
+                                            onClick={handleLogout}
+                                        >   Logout  
+                                        </li>
+                                       </ul>
                                 </div>
                                 <button className="focus:outline-none">
                                     <svg onClick={() => Setdropdown(!dropdown)} className={dropdown ? "block" : "hidden"} xmlns="http://www.w3.org/2000/svg" width={20} height={20} viewBox="0 0 24 24" strokeWidth="1.5" stroke="#718096" fill="none" strokeLinecap="round" strokeLinejoin="round">
