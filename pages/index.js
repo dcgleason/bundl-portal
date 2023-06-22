@@ -569,8 +569,7 @@ const handleHoverOff = () => {
     setIsEditing(true);
     console.log("record", record)
     setEditingStudent({ ...record });
-    setSubmission(record.submission);
-    setSubmitted(record.submitted);
+
   
     // Send a PUT request to your server to update the student
     const response = await fetch(`https://yay-api.herokuapp.com/book/${userID}/message/${record.uuid}`, {
@@ -790,7 +789,9 @@ const handleHoverOff = () => {
             value={editingStudent?.name}
             onChange={(e) => {
               setEditingStudent((pre) => {
+                setName(e.target.value)
                 return { ...pre, name: e.target.value };
+                
               });
             }}
           />
@@ -799,6 +800,7 @@ const handleHoverOff = () => {
             value={editingStudent?.email}
             onChange={(e) => {
               setEditingStudent((pre) => {
+                setEmail(e.target.value)
                 return { ...pre, email: e.target.value };
               });
             }}
@@ -809,7 +811,9 @@ const handleHoverOff = () => {
             onChange={(value) => {
               console.log("editingStudent", editingStudent);
               setEditingStudent((pre) => {
+                setSubmitted(value);
                 return { ...pre, submitted: value };
+                
               });
             }}
             options={[
@@ -831,6 +835,7 @@ const handleHoverOff = () => {
             value={editingStudent?.submission}
             onChange={(e) => {
               setEditingStudent((pre) => {
+                setSubmission(e.target.value)
                 return { ...pre, submission: e.target.value };
               });
             }}
