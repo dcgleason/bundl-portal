@@ -6,17 +6,26 @@ export default function Header({user}) {
     const [popup,Setpopup] = useState(false);
     const [dropdown,Setdropdown] = useState(true);
 
+
+
     const handleLogout = () => {
         // Logout request to server
-        axios.get('/logout')
+        fetch('https://yay-api.herokuapp.com/login/logout')
         .then(res => {
-            // Remove user info from state/localStorage/etc. here
-            // Redirect user to sign in page
+          if (!res.ok) {
+            throw new Error(res.status);
+          }
+          // If logout is successful, remove user info from localStorage
+          localStorage.removeItem('userID');
+          localStorage.removeItem('token');
+          // Redirect user to sign in page. This depends on how you handle routing in your app. 
+          // If you're using react-router you can use history.push('/signin');
         })
         .catch(err => {
-            // Handle error here
+          // Handle error here
+          console.error('Error logging out: ', err);
         });
-    };
+      };
 
 
     return (
