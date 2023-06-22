@@ -54,6 +54,7 @@ export default function SubmitBook() {
   const [chosenStyle, setChosenStyle] = useState('')
   const [selectedDeliveryMethod, setSelectedDeliveryMethod] = useState(deliveryMethods[0])
   const [ownerEmail, setOwnerEmail] = useState('') // Add this line if you want to store the email in the state
+  const [ownerName, setOwnerName] = useState('') // Add this line if you want to store the name in the state
 
   // ... other code ...
 
@@ -68,8 +69,10 @@ export default function SubmitBook() {
           'Content-Type': 'application/json',
         },
       }).then((res) => res.json());
-      const { email } = response;
+      const { email, name } = response;
       setOwnerEmail(email);
+      setOwnerName(name);
+      
     };
     getOwnerEmail();
   }, []);
@@ -574,54 +577,55 @@ export default function SubmitBook() {
               </dl>
 
               <div className="mt-10 border-t border-gray-200 pt-10">
-  <h2 className="text-lg font-medium text-gray-900">Payment</h2>
+            <h2 className="text-lg font-medium text-gray-900">Payment</h2>
 
-          <fieldset className="mt-4">
-            <legend className="sr-only">Payment type</legend>
-            <div className="space-y-4 sm:flex sm:items-center sm:space-y-0 sm:space-x-10">
-              {paymentMethods.map((paymentMethod, paymentMethodIdx) => (
-                <div key={paymentMethod.id} className="flex items-center">
-                  {paymentMethodIdx === 0 ? (
-                    <input
-                      id={paymentMethod.id}
-                      name="payment-type"
-                      type="radio"
-                      defaultChecked
-                      className="h-4 w-4 border-gray-300 text-red-600 focus:ring-red-500"
-                    />
-                  ) : (
-                    <input
-                      id={paymentMethod.id}
-                      name="payment-type"
-                      type="radio"
-                      className="h-4 w-4 border-gray-300 text-red-600 focus:ring-red-500"
-                    />
-                  )}
+                    <fieldset className="mt-4">
+                      <legend className="sr-only">Payment type</legend>
+                      <div className="space-y-4 sm:flex sm:items-center sm:space-y-0 sm:space-x-10">
+                        {paymentMethods.map((paymentMethod, paymentMethodIdx) => (
+                          <div key={paymentMethod.id} className="flex items-center">
+                            {paymentMethodIdx === 0 ? (
+                              <input
+                                id={paymentMethod.id}
+                                name="payment-type"
+                                type="radio"
+                                defaultChecked
+                                className="h-4 w-4 border-gray-300 text-red-600 focus:ring-red-500"
+                              />
+                            ) : (
+                              <input
+                                id={paymentMethod.id}
+                                name="payment-type"
+                                type="radio"
+                                className="h-4 w-4 border-gray-300 text-red-600 focus:ring-red-500"
+                              />
+                            )}
 
-                  <label htmlFor={paymentMethod.id} className="ml-3 block text-sm font-medium text-gray-700">
-                    {paymentMethod.title}
-                  </label>
-                </div>
-              ))}
-            </div>
-          </fieldset>
+                            <label htmlFor={paymentMethod.id} className="ml-3 block text-sm font-medium text-gray-700">
+                              {paymentMethod.title}
+                            </label>
+                          </div>
+                        ))}
+                      </div>
+                    </fieldset>
 
-          <div className="mt-6 grid grid-cols-4 gap-y-6 gap-x-4">
-            <div className="col-span-4">
-              <label htmlFor="card-element" className="block text-sm font-medium text-gray-700">
-                Card details
-              </label>
-              <div className="mt-1">
-                <CardElement className="shadow appearance-none border rounded w-full my-2 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"/>
-              </div>
-            </div>
-          </div>
-        </div>
+                    <div className="mt-6 grid grid-cols-4 gap-y-6 gap-x-4">
+                      <div className="col-span-4">
+                        <label htmlFor="card-element" className="block text-sm font-medium text-gray-700">
+                          Card details
+                        </label>
+                        <div className="mt-1">
+                          <CardElement className="shadow appearance-none border rounded w-full my-2 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"/>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
 
               <div className="border-t border-gray-200 py-6 px-4 sm:px-6">
                 <button
                   type="submit"
                   className="w-full rounded-md border border-transparent bg-red-600 py-3 px-4 text-base font-medium text-white shadow-sm hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 focus:ring-offset-gray-50"
+                  onClick={submitPayment}
                 >
                   Submit Your Bundle 
                 </button>
