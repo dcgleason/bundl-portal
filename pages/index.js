@@ -27,7 +27,6 @@ const CSV = () => {
   const [hover, setHover] = useState(false);
   const [userID, setUserID] = useState(null);
   const [emailModalVisible, setEmailModalVisible] = useState(false);
-  const token = localStorage.getItem('token')
   const [emailBody, setEmailBody] = useState(`We'd love you to contribute to this bundle -- link here: <a href="https://www.givebundl.com/contribute/${jwt_decode(token).userId}">https://www.givebundl.com/contribute/${jwt_decode(token).userId}</a>`);
   const [emailSubject, setEmailSubject] = useState("Contribute please - 3 days left!");
   const [emailRecipients, setEmailRecipients] = useState([]);
@@ -61,6 +60,7 @@ const CSV = () => {
     "What do you wish for Jimmy's future?"
   ]);
   const [longMessage, setLongMessage] = useState('');
+  const [token, setToken] = useState(null);
 
   
 
@@ -152,6 +152,7 @@ const CSV = () => {
 
   useEffect(() => {
     const token = localStorage.getItem('token');
+    setToken(token);
   
     if (!token) {
       console.error('Token is not available in local storage');
