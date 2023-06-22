@@ -507,10 +507,9 @@ const SubmitBook = () => {
                 </div>
               </div>
             </div>
+ )}
 
-  {/* End of Payment */} )}
 
-  
             <div className="mt-10 border-t border-gray-200 pt-10">
               <RadioGroup value={selectedDeliveryMethod} onChange={setSelectedDeliveryMethod}>
                 <RadioGroup.Label className="text-lg font-medium text-gray-900">Delivery method</RadioGroup.Label>
