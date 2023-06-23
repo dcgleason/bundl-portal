@@ -160,7 +160,7 @@ const CSV = () => {
 
 
     const fetchUser = async () => {
-      const response = await fetch(`/user/${userID}`);
+      const response = await fetch(`https://yay-api.herokuapp.com/users/${userID}`);
       const data = await response.json();
 
       if (data) {
@@ -520,7 +520,7 @@ const CSV = () => {
   const handlePromptOk = async () => {
     const token = localStorage.getItem('token');
     const userID = jwt_decode(token).userId;
-    const url = `https://yay-api.herokuapp.com/user/${userID}/prompts`;
+    const url = `https://yay-api.herokuapp.com/users/${userID}/prompts`;
   
     try {
       const response = await fetch(url, {
@@ -637,7 +637,7 @@ const handleHoverOff = () => {
       localStorage.setItem('lastEmailSent', newDate);
   
         // Update lastEmailed attribute in the backend
-        await fetch(`https://yay-api.herokuapp.com/user/${userID}/lastEmailed`, {
+        await fetch(`https://yay-api.herokuapp.com/users/${userID}/lastEmailed`, {
           method: 'PUT',
           headers: {
             'Content-Type': 'application/json',
