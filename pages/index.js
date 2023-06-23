@@ -818,11 +818,11 @@ const handleHoverOff = () => {
         />
     </Modal>
       <div className="App">
-        <header className="App-header px-4 sm:px-6 md:px-8">
-          <Row gutter={[16, 16]} justify="center">
-          <Col xs={24} sm={12} md={8} lg={6}>
-              <Button onClick={openPrompts}>Write Prompts and Note</Button>
-            </Col>
+      <header className="App-header px-4 sm:px-6 md:px-8 mb-4">
+        <Row gutter={[16, 16]} justify="center">
+        <Col xs={24} sm={12} md={8} lg={6}>
+            <Button onClick={openPrompts}>Write Prompts and Note</Button>
+          </Col>
             <Col xs={24} sm={12} md={8} lg={6}>
               <Button onClick={onAddStudent}>Add a new contributor manually</Button>
             </Col>
