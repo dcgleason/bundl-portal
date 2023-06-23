@@ -128,7 +128,7 @@ export default function MessagesPage() {
   
           {currentMessage.length <= 1750 ? (
             messages[currentMessageIndex]?.img_file ? (
-              <Image src={messages[currentMessageIndex].img_file} alt="Author's submission" style={{ maxWidth: '100%', maxHeight: '600px' }} />
+              <Image src={messages[currentMessageIndex].img_file} alt="Author's submission" width={400} height={600} />
             ) : (
               <textarea
                 className="resize-none border rounded-md"
