@@ -1,7 +1,10 @@
 import { useState, useEffect } from 'react';
 import Image from 'next/image';
+import placeholder from '../images/placeholder.png'
 import jwt_decode from 'jwt-decode';
 
+
+//messages[currentMessageIndex].img_file  --> source for image
 
 var json = [
   {
@@ -128,7 +131,7 @@ export default function MessagesPage() {
   
           {currentMessage.length <= 1750 ? (
             messages[currentMessageIndex]?.img_file ? (
-              <Image src={messages[currentMessageIndex].img_file} alt="Author's submission" width={400} height={600} />
+              <Image src={placeholder} alt="Author's submission" width={400} height={600} />
             ) : (
               <textarea
                 className="resize-none border rounded-md"
