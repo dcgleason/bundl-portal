@@ -1,16 +1,6 @@
 // next.config.js
 module.exports = {
-    images: {
-      remotePatterns: [
-        {
-          protocol: 'https',
-          hostname: 'ibb.co',
-          port: '',
-          pathname: '/bNZ9ms6',
-        },
-      ],
-      domains: ['placehold.co'],
-    },
-  }
-
- 
+  images: {
+    domains: ['placehold.co'],
+  },
+}
