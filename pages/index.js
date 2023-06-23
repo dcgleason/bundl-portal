@@ -184,7 +184,7 @@ const CSV = () => {
       return;
     }
   
-    setEmailBody(`We'd love you to contribute to this bundle -- link here: <a href="https://www.givebundl.com/contribute/${jwt_decode(token).userId}">https://www.givebundl.com/contribute/${jwt_decode(token).userId}</a>`)
+    setEmailBody(`We'd love you to contribute to this bundle -- link here: <a href="https://www.givebundl.com/contribute/${jwt_decode(token).userId}">Link to Contribution Page</a>`)
 
     // Decode the JWT token to get the user's ID
     const decodedToken = jwt_decode(token);
