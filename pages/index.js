@@ -163,10 +163,9 @@ const CSV = () => {
       const response = await fetch(`/user/${userID}`);
       const data = await response.json();
 
-      if (data.userFound) {
-        setUser(data);
+      if (data) {
         if (data.recipient === "") {
-          setModalIsOpen(true);
+          setRecipientModalIsOpen(true);
         }
       }
     };
