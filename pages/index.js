@@ -61,6 +61,9 @@ const CSV = () => {
   ]);
   const [longMessage, setLongMessage] = useState('');
   const [token, setToken] = useState(null);
+  const [modalIsOpen, setModalIsOpen] = useState(false);
+  const [recipientFirstName, setRecipientFirstName] = useState("");
+  const [recipientlastName, setRecipientLastName] = useState("");
 
   
 
@@ -149,6 +152,27 @@ const CSV = () => {
       },
     },
   ];
+
+  useEffect(() => {
+
+    const token = localStorage.getItem('token');
+    const userID = jwt_decode(token).userId;
+
+
+    const fetchUser = async () => {
+      const response = await fetch(`/user/${userID}`);
+      const data = await response.json();
+
+      if (data.userFound) {
+        setUser(data);
+        if (data.recipient === "") {
+          setModalIsOpen(true);
+        }
+      }
+    };
+
+    fetchUser();
+  }, []);
 
   useEffect(() => {
     const token = localStorage.getItem('token');
@@ -675,6 +699,25 @@ const handleHoverOff = () => {
     setIsPromptModalVisible(false);
   };
 
+  const handleRecipientOk = async () => {
+    const response = await fetch(`https://yay-api.herokuapp.com/users/${userID}/recipient`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        recipientFullName: `${firstName} ${lastName}`,
+        recipientFirstName: firstName,
+      }),
+    });
+
+    if (response.ok) {
+      setModalIsOpen(false);
+    } else {
+      console.error('Failed to update recipient');
+    }
+  };
+
   const handleOk = async () => {
     setIsModalVisible(false);
   
@@ -724,7 +767,15 @@ const handleHoverOff = () => {
     return (
       <>
 
-
+        <Modal
+        title="Who is this bundl for?"
+        open={modalIsOpen}
+        onOk={handleRecipientOk}
+        onCancel={() => setModalIsOpen(false)}
+      >
+        <Input placeholder="First Name" onChange={e => setRecipientFirstName(e.target.value)} />
+        <Input placeholder="Last Name" onChange={e => setRecipientLastName(e.target.value)} />
+      </Modal>
 
       
       <Modal
