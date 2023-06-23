@@ -164,7 +164,9 @@ const CSV = () => {
       const data = await response.json();
 
       if (data) {
+        console.log('User data inside fetch user: ', data);
         if (data.recipient === "") {
+          console.log('Recipient is empty');
           setRecipientModalIsOpen(true);
         }
       }
