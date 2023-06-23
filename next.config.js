@@ -9,5 +9,8 @@ module.exports = {
           pathname: '/bNZ9ms6',
         },
       ],
+      domains: ['placehold.co'],
     },
   }
+
+ 
