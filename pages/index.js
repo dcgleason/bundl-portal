@@ -64,6 +64,7 @@ const CSV = () => {
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [recipientFirstName, setRecipientFirstName] = useState("");
   const [recipientlastName, setRecipientLastName] = useState("");
+  const [userData, setUserData] = useState(null);
 
   
 
@@ -164,6 +165,7 @@ const CSV = () => {
       const data = await response.json();
 
       if (data) {
+        setUserData(data);
         console.log('User data inside fetch user: ', data);
         if (data.recipient === "") {
           console.log('Recipient is empty');
@@ -767,6 +769,8 @@ const handleHoverOff = () => {
  
     return (
       <>
+      {userData !== null && <h1 className="text-3xl font-bold">Bundl for {userData.recipient}</h1>}
+
 
         <Modal
         title="Who is this bundl for?"
