@@ -769,7 +769,7 @@ const handleHoverOff = () => {
  
     return (
       <>
-      {userData !== null && <h1 className="text-3xl font-bold">Bundl for {userData.recipient}</h1>}
+         {userData !== null && <h1 style={{ marginBottom: '20px', textAlign: 'center' }} className="text-3xl font-bold">Bundl for {userData.recipient}</h1>}
 
 
         <Modal
