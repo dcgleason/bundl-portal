@@ -88,6 +88,11 @@ const CSV = () => {
     },
     {
       key: "4",
+      title: "SMS",
+      dataIndex: "sms",
+    },
+    {
+      key: "5",
       title: "Submitted",
       dataIndex: "submitted",
       render: (_, record) => {
@@ -95,7 +100,7 @@ const CSV = () => {
       },
     },
     {
-      key: "5",
+      key: "6",
       title: "Submission",
       dataIndex: "submission",
       render: (_, record) => { 
@@ -111,7 +116,7 @@ const CSV = () => {
       }
     },   
     {
-      key: "6",
+      key: "7",
       title: "Picture",
       dataIndex: "picture",
       render: (_,record) => { 
@@ -127,12 +132,12 @@ const CSV = () => {
       }
     },
     {
-      key: "7",
+      key: "8",
       title: "Notes",
       dataIndex: "notes",
     },
     {
-      key: "7",
+      key: "9",
       title: "Actions",
       render: (record) => {
         return (
@@ -834,6 +839,9 @@ const handleHoverOff = () => {
                 )}
                
               </Col>
+              <Col xs={24} sm={12} md={8} lg={6}>
+              <Button onClick={onSendSMS}>Send SMS</Button>
+            </Col>
               <Col xs={24} sm={12} md={8} lg={6}>
               {lastEmailSent && <p className='text-sm'>Last email sent: {lastEmailSent}</p>}
              </Col>
