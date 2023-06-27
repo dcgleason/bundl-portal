@@ -300,6 +300,29 @@ const CSV = () => {
     window.location.href = url;
   }
 
+  function onSendSMS(time, recipient, gifter, to) {
+    const url = '/sms/sendSMS';
+    const data = {
+      time: time,
+      recipient: recipient,
+      gifter: gifter,
+      to: to
+    };
+  
+    fetch(url, {
+      method: 'POST', 
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data), 
+    })
+    .then(response => response.json())
+    .then(data => console.log(data))
+    .catch((error) => {
+      console.error('Error:', error);
+    });
+  }
+  
   const openEmailModal = () => {
     // Get the emails of people who have not yet contributed
     const nonContributors = dataSource.filter(student => student.submitted === "No").map(student => student.email);
