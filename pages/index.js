@@ -852,7 +852,7 @@ const handleHoverOff = () => {
             <Button onClick={openPrompts}>Write Prompts and Note</Button>
           </Col>
           <Col xs={24} sm={12} md={6} lg={4}>
-            <Button onClick={onAddStudent}>Add a new contributor manually</Button>
+            <Button onClick={onAddStudent}>Add contributor manually</Button>
           </Col>
           <Col xs={24} sm={12} md={6} lg={4}>
             {isAuthenticated ? (
