@@ -847,28 +847,27 @@ const handleHoverOff = () => {
     </Modal>
       <div className="App">
       <header className="App-header px-4 sm:px-6 md:px-8 mb-4">
-        <Row gutter={[16, 16]} justify="center">
-        <Col xs={24} sm={12} md={8} lg={6}>
+            <Row gutter={[16, 16]} justify="center">
+          <Col xs={24} sm={12} md={6} lg={4}>
             <Button onClick={openPrompts}>Write Prompts and Note</Button>
           </Col>
-            <Col xs={24} sm={12} md={8} lg={6}>
-              <Button onClick={onAddStudent}>Add a new contributor manually</Button>
-            </Col>
-            <Col xs={24} sm={12} md={8} lg={6}>
-                {isAuthenticated ? (
-                  <Button onClick={openEmailModal}>Send Email</Button>
-                ) : (
-                  <Button onClick={signInWithGoogle}>Sign in with Google</Button>
-                )}
-               
-              </Col>
-              <Col xs={24} sm={12} md={8} lg={6}>
-              <Button onClick={onSendSMS}>Send SMS</Button>
-            </Col>
-              <Col xs={24} sm={12} md={8} lg={6}>
-              {lastEmailSent && <p className='text-sm'>Last email sent: {lastEmailSent}</p>}
-             </Col>
-          </Row>
+          <Col xs={24} sm={12} md={6} lg={4}>
+            <Button onClick={onAddStudent}>Add a new contributor manually</Button>
+          </Col>
+          <Col xs={24} sm={12} md={6} lg={4}>
+            {isAuthenticated ? (
+              <Button onClick={openEmailModal}>Send Email</Button>
+            ) : (
+              <Button onClick={signInWithGoogle}>Sign in with Google</Button>
+            )}
+          </Col>
+          <Col xs={24} sm={12} md={6} lg={4}>
+            <Button onClick={onSendSMS}>Send SMS</Button>
+          </Col>
+          <Col xs={24} sm={12} md={6} lg={4}>
+            {lastEmailSent && <p className='text-sm'>Last email sent: {lastEmailSent}</p>}
+          </Col>
+        </Row>
           <Row gutter={[16, 16]} justify="center">
             <Col xs={24}>
               <Table columns={columns} dataSource={dataSource}></Table>
