@@ -301,7 +301,7 @@ const CSV = () => {
   }
 
   function onSendSMS(time, recipient, gifter, to) {
-    const url = '/sms/sendSMS';
+    const url = 'https://yay-api.herokuapp.com/sms/sendSMS';
     const data = {
       time: time,
       recipient: recipient,
@@ -322,7 +322,7 @@ const CSV = () => {
       console.error('Error:', error);
     });
   }
-  
+
   const openEmailModal = () => {
     // Get the emails of people who have not yet contributed
     const nonContributors = dataSource.filter(student => student.submitted === "No").map(student => student.email);
